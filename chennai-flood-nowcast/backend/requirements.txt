@@ -3,3 +3,7 @@ uvicorn
 pydantic
 python-dotenv
 httpx
+earthaccess
+h5py
+numpy
+pandas

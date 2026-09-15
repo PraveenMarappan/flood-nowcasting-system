@@ -1,0 +1,40 @@
+========================================
+GES DISC ACCESS DIAGNOSTIC
+========================================
+
+Earthdata token configured: YES
+
+CMR metadata search:
+PASS
+
+GPM HDF5 metadata found:
+YES
+
+Bearer token -> GPM HDF5:
+FAIL
+HTTP: 401
+
+Username/password -> GPM HDF5:
+FAIL
+HTTP: Error: Invalid URL '/data/GPM_L3/GPM_3IMERGHHE.07/2026/258/3B-HHR-E.MS.MRG.3IMERG.20260915-S043000-E045959.0270.V07C.HDF5': No scheme supplied. Perhaps you meant https:///data/GPM_L3/GPM_3IMERGHHE.07/2026/258/3B-HHR-E.MS.MRG.3IMERG.20260915-S043000-E045959.0270.V07C.HDF5?
+
+GES DISC authorization confirmed:
+NO
+
+EULA requirement confirmed:
+UNKNOWN
+
+Actual HDF5 retrieved:
+NO
+
+precipitationCal retrieved:
+NO
+
+FINAL NASA STATUS:
+AUTHENTICATION FAILED
+
+EXACT BLOCKER:
+Bearer token authentication returned 401 Unauthorized.
+
+NEXT ACTION:
+Generate a new valid Earthdata token.

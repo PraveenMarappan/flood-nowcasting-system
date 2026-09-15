@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.endpoints import router as api_router
 import time
+from dotenv import load_dotenv
 
+# Load .env explicitly
+load_dotenv()
+
+from app.api.endpoints import router as api_router
 
 app = FastAPI(title="Chennai Flood Nowcast API")
 

@@ -1,0 +1,11 @@
+﻿Earthdata token configured: YES
+CMR metadata search: PASS
+GPM HDF5 metadata found: YES
+Bearer token -> GPM HDF5: FAIL
+HTTP: 403
+Username/password -> GPM HDF5: FAIL
+HTTP: 401
+GES DISC authorization confirmed: DENIED
+EULA requirement confirmed: LIKELY NOT ACCEPTED or BAD CREDENTIALS
+Actual HDF5 retrieved: NO
+precipitationCal retrieved: NO

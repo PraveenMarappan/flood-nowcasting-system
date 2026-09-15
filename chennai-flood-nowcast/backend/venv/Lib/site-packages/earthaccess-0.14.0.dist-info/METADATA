@@ -1,0 +1,199 @@
+Metadata-Version: 2.4
+Name: earthaccess
+Version: 0.14.0
+Summary: Client library for NASA Earthdata APIs
+Project-URL: Repository, https://github.com/nsidc/earthaccess
+Project-URL: Documentation, https://earthaccess.readthedocs.io
+Project-URL: Bug Tracker, https://github.com/nsidc/earthaccess/issues
+Project-URL: Changelog, https://github.com/nsidc/earthaccess/blob/main/CHANGELOG.md
+Author: earthaccess contributors
+Maintainer-email: Luis Lopez <betolin@gmail.com>, "Joseph H. Kennedy" <jhkennedy@alaska.edu>, James Bourbeau <james@coiled.io>, Matt Fisher <mfisher87@gmail.com>, Chuck Daniels <chuck@developmentseed.org>
+License-Expression: MIT
+License-File: LICENSE.txt
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Framework :: IPython
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries
+Requires-Python: >=3.10
+Requires-Dist: fsspec>=2022.11
+Requires-Dist: importlib-resources>=6.3.2
+Requires-Dist: multimethod>=1.8
+Requires-Dist: pqdm>=0.1
+Requires-Dist: python-cmr>=0.10.0
+Requires-Dist: requests>=2.26
+Requires-Dist: s3fs>=2022.11
+Requires-Dist: tinynetrc>=1.3.1
+Requires-Dist: typing-extensions>=4.10.0
+Provides-Extra: dev
+Requires-Dist: bump-my-version>=0.10.0; extra == 'dev'
+Requires-Dist: nox; extra == 'dev'
+Requires-Dist: pre-commit>=2.4; extra == 'dev'
+Requires-Dist: ruff>=0.6.3; extra == 'dev'
+Requires-Dist: uv>=0.4.7; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: cftime>=1.6.4; extra == 'docs'
+Requires-Dist: dask; extra == 'docs'
+Requires-Dist: dask>=2024.8.0; extra == 'docs'
+Requires-Dist: h5netcdf>=0.11; extra == 'docs'
+Requires-Dist: h5py>=3.6.0; extra == 'docs'
+Requires-Dist: ipywidgets>=7.7.0; extra == 'docs'
+Requires-Dist: jupyterlab>=3; extra == 'docs'
+Requires-Dist: lxml-html-clean>=0.1.1; extra == 'docs'
+Requires-Dist: markdown-callouts>=0.2.0; extra == 'docs'
+Requires-Dist: markdown-include>=0.6; extra == 'docs'
+Requires-Dist: matplotlib>=3.3; extra == 'docs'
+Requires-Dist: mkdocs!=1.6.0,>=1.2; extra == 'docs'
+Requires-Dist: mkdocs-jupyter>=0.19.0; extra == 'docs'
+Requires-Dist: mkdocs-material<10.0,>=7.1; extra == 'docs'
+Requires-Dist: mkdocs-redirects>=1.2.1; extra == 'docs'
+Requires-Dist: mkdocstrings[python]>=0.19.0; extra == 'docs'
+Requires-Dist: numpy>=1.26.4; extra == 'docs'
+Requires-Dist: pygments>=2.11.1; extra == 'docs'
+Requires-Dist: pymdown-extensions>=9.2; extra == 'docs'
+Requires-Dist: pyproj>=3.5.0; (python_version < '3.12') and extra == 'docs'
+Requires-Dist: pyproj>=3.6.1; (python_version >= '3.12') and extra == 'docs'
+Requires-Dist: virtualizarr>=1.2.0; extra == 'docs'
+Requires-Dist: widgetsnbextension>=3.6.0; extra == 'docs'
+Requires-Dist: xarray>=2023.01; extra == 'docs'
+Requires-Dist: zarr<3.0.0a,>=2.12.0; extra == 'docs'
+Provides-Extra: kerchunk
+Requires-Dist: dask; extra == 'kerchunk'
+Requires-Dist: h5netcdf; extra == 'kerchunk'
+Requires-Dist: h5py>=3.6.0; extra == 'kerchunk'
+Requires-Dist: kerchunk; extra == 'kerchunk'
+Requires-Dist: xarray; extra == 'kerchunk'
+Requires-Dist: zarr<3.0.0a,>=2.12.0; extra == 'kerchunk'
+Provides-Extra: test
+Requires-Dist: dask; extra == 'test'
+Requires-Dist: h5netcdf; extra == 'test'
+Requires-Dist: h5py>=3.6.0; extra == 'test'
+Requires-Dist: kerchunk; extra == 'test'
+Requires-Dist: mypy>=1.11.2; extra == 'test'
+Requires-Dist: numpy>=1.26.4; extra == 'test'
+Requires-Dist: pytest-cov>=5.0; extra == 'test'
+Requires-Dist: pytest-watch>=4.2; extra == 'test'
+Requires-Dist: pytest>=8.3; extra == 'test'
+Requires-Dist: python-magic>=0.4; extra == 'test'
+Requires-Dist: responses>=0.14; extra == 'test'
+Requires-Dist: types-requests>=0.1; extra == 'test'
+Requires-Dist: types-setuptools>=0.1; extra == 'test'
+Requires-Dist: vcrpy>=7.0.0; extra == 'test'
+Requires-Dist: virtualizarr>=1.2.0; extra == 'test'
+Requires-Dist: xarray; extra == 'test'
+Requires-Dist: zarr<3.0.0a,>=2.12.0; extra == 'test'
+Provides-Extra: virtualizarr
+Requires-Dist: dask; extra == 'virtualizarr'
+Requires-Dist: h5py>=3.6.0; extra == 'virtualizarr'
+Requires-Dist: numpy>=1.26.4; extra == 'virtualizarr'
+Requires-Dist: virtualizarr>=1.2.0; extra == 'virtualizarr'
+Requires-Dist: zarr<3.0.0a,>=2.12.0; extra == 'virtualizarr'
+Description-Content-Type: text/markdown
+
+# _earthaccess_
+
+<p align="center">
+<img alt="earthaccess, a python library to search, download or stream NASA Earth science data with just a few lines of code" src="https://user-images.githubusercontent.com/717735/205517116-7a5d0f41-7acc-441e-94ba-2e541bfb7fc8.png" width="70%" align="center" />
+</p>
+
+<p align="center">
+
+<a href="https://zenodo.org/badge/latestdoi/399867529" target="_blank">
+    <img src="https://zenodo.org/badge/399867529.svg" alt="DOI" />
+</a>
+
+<a href="https://twitter.com/allison_horst" target="_blank">
+    <img src="https://img.shields.io/badge/Art%20By-Allison%20Horst-blue" alt="Art Designer: Allison Horst">
+</a>
+
+<a href="https://pypi.org/project/earthaccess" target="_blank">
+    <img src="https://img.shields.io/pypi/v/earthaccess?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+
+<a href="https://anaconda.org/conda-forge/earthaccess" target="_blank">
+    <img src="https://img.shields.io/conda/vn/conda-forge/earthaccess.svg" alt="Conda Versions">
+</a>
+
+<a href="https://pypi.org/project/earthaccess/" target="_blank">
+    <img src="https://img.shields.io/pypi/pyversions/earthaccess.svg" alt="Python Versions">
+</a>
+
+<a href='https://earthaccess.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://readthedocs.org/projects/earthaccess/badge/?version=latest' alt='Documentation Status' />
+</a>
+
+</p>
+
+
+`earthaccess` is a python library to **search for**, and **download** or **stream** NASA Earth science data with just a few lines of code.
+
+Visit [our documentation](https://earthaccess.readthedocs.io/en/latest) to learn more!
+
+Try it in your browser without installing anything! [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nsidc/earthaccess/main)
+
+## Why `earthaccess`
+
+During several workshops organized by NASA Openscapes, the need to provide easy-to-use tools to our users became evident. Open science is a collaborative effort; it involves people from different technical backgrounds, and the data analysis to solve the pressing problems we face cannot be limited by the complexity of the underlying systems. Therefore, providing easy access to NASA Earthdata regardless of the data storage location (hosted within or outside of the cloud) is the main motivation behind this Python library.
+
+
+## How to Get Started with `earthaccess`
+
+### How to install
+
+To install `earthaccess` go to your terminal and install it using `pip`:
+
+```
+python -m pip install earthaccess
+```
+
+
+### How to access NASA Earth Science data
+
+With _earthaccess_, data is 3 steps away!
+
+```python
+import earthaccess
+
+# 1. Login
+earthaccess.login()
+
+# 2. Search
+results = earthaccess.search_data(
+    short_name='ATL06',  # ATLAS/ICESat-2 L3A Land Ice Height
+    bounding_box=(-10, 20, 10, 50),  # Only include files in area of interest...
+    temporal=("1999-02", "2019-03"),  # ...and time period of interest.
+    count=10
+)
+
+# 3. Access
+files = earthaccess.download(results, "/tmp/my-download-folder")
+```
+
+Visit [our quick start guide](https://earthaccess.readthedocs.io/en/latest/quick-start/) for more details.
+
+
+## Compatibility
+
+The _minimum_ supported Python version is **3.10**.
+
+
+## How to Contribute to `earthaccess`
+
+If you want to contribute to `earthaccess` checkout the [Contributing Guide](https://earthaccess.readthedocs.io/en/latest/contributing/).
+
+
+### Contributors
+
+[![Contributors](https://contrib.rocks/image?repo=nsidc/earthaccess)](https://github.com/nsidc/earthaccess/graphs/contributors)
+
+
+### [Project Board](https://github.com/nsidc/earthdata/discussions).

@@ -1,18 +1,89 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 import time
+import csv
+import os
+from pathlib import Path
+from datetime import datetime
+from app.services.nasa_gpm import NasaGpmService
 
 router = APIRouter()
 
-# Base model examples for mock responses
 class ForecastQuery(BaseModel):
     rainfall: int = 0
 
+@router.get("/rainfall/current")
+async def get_current_rainfall():
+    service = NasaGpmService()
+    result = await service.fetch_latest_precipitation()
+    
+    base_dir = Path(__file__).parent.parent.parent.parent / "data"
+    raw_dir = base_dir / "raw"
+    csv_file = raw_dir / "rainfall_history.csv"
+    
+    if result.get("status") == "LIVE":
+        val = result.get("rainfall_rate", 0)
+        source = result.get("source", "NASA GPM IMERG Early Run")
+        status = result.get("status", "LIVE")
+        
+        raw_dir.mkdir(parents=True, exist_ok=True)
+        file_exists = csv_file.exists()
+        try:
+            with open(csv_file, mode="a", newline="") as f:
+                writer = csv.writer(f)
+                if not file_exists:
+                    writer.writerow(["timestamp", "rainfall_rate_mm_hr", "source", "status", "data_timestamp"])
+                writer.writerow([datetime.utcnow().isoformat() + "Z", val, source, status, result.get("data_timestamp", "")])
+        except Exception as e:
+            print("Error saving history", e)
+    elif result.get("status") == "UNAVAILABLE":
+        # Fallback to STALE if history exists
+        if csv_file.exists():
+            try:
+                with open(csv_file, mode="r") as f:
+                    reader = csv.DictReader(f)
+                    rows = list(reader)
+                    if rows:
+                        last_row = rows[-1]
+                        result = {
+                            "status": "STALE",
+                            "source": last_row["source"],
+                            "rainfall_rate": float(last_row["rainfall_rate_mm_hr"]),
+                            "data_timestamp": last_row.get("data_timestamp", last_row["timestamp"]),
+                            "retrieved_at": last_row["timestamp"],
+                            "error": result.get("error", "NASA DATA UNAVAILABLE")
+                        }
+            except Exception as e:
+                print("Error reading history", e)
+            
+    return result
+
+@router.get("/rainfall/history")
+async def get_rainfall_history():
+    base_dir = Path(__file__).parent.parent.parent.parent / "data"
+    csv_file = base_dir / "raw" / "rainfall_history.csv"
+    
+    if not csv_file.exists():
+        return {"history": []}
+        
+    history = []
+    try:
+        with open(csv_file, mode="r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                history.append({
+                    "timestamp": row["timestamp"],
+                    "rainfall_rate": float(row["rainfall_rate_mm_hr"]),
+                    "source": row["source"],
+                    "status": row["status"]
+                })
+    except Exception as e:
+        return {"error": str(e), "history": []}
+        
+    return {"history": history[-50:]}
+
 @router.get("/flood/forecast")
-def get_flood_forecast(rainfall: int = 0):
-    # Rule based simple logical mapping
-    # Assuming baseline data if rainfall is provided via simulation
-    # 0 = NORMAL, >20 WATCH, >50 FLOOD, >100 CRITICAL
+def get_flood_forecast(rainfall: float = 0, is_simulated: bool = True):
     status = "NORMAL"
     water_depth = 0
     if rainfall > 100:
@@ -26,15 +97,16 @@ def get_flood_forecast(rainfall: int = 0):
         water_depth = rainfall * 0.1
     elif rainfall == 0:
         status = "RECOVERY"
-        water_depth = 5 # simulated gradual recession
+        water_depth = 5 
         
-    if rainfall == 0 and water_depth == 0:
+    if rainfall == 0 and water_depth <= 5:
         status = "NORMAL"
+        water_depth = 0
 
     return {
         "status": status,
         "water_depth_cm": water_depth,
-        "is_simulated": True,
+        "is_simulated": is_simulated,
         "rainfall_input_mm": rainfall,
         "forecast": [
             {"time": "+30m", "status": status, "depth": water_depth * 0.9 if rainfall ==0 else water_depth + (rainfall*0.1)},
@@ -44,6 +116,35 @@ def get_flood_forecast(rainfall: int = 0):
             {"time": "+150m", "status": "NORMAL" if rainfall == 0 else status, "depth": 0 if rainfall == 0 else max(water_depth, 10)},
             {"time": "+180m", "status": "NORMAL" if rainfall == 0 else status, "depth": 0 if rainfall == 0 else max(water_depth, 10)},
         ]
+    }
+
+@router.get("/data-status")
+def get_data_status():
+    rainfall_status = "UNAVAILABLE"
+    
+    base_dir = Path(__file__).parent.parent.parent.parent / "data"
+    csv_file = base_dir / "raw" / "rainfall_history.csv"
+    if csv_file.exists():
+        try:
+            with open(csv_file, mode="r") as f:
+                reader = list(csv.DictReader(f))
+                if reader:
+                    last_status = reader[-1].get("status", "UNAVAILABLE")
+                    if last_status == "LIVE":
+                        rainfall_status = "REAL"
+                    elif last_status == "STALE":
+                        rainfall_status = "STALE"
+        except Exception:
+            pass
+
+    return {
+        "overall_health": "OK",
+        "sources": {
+            "rainfall": {"status": rainfall_status, "source": "NASA GPM IMERG"},
+            "flood_depth": {"status": "MODELLED", "source": "Hydrological Model"},
+            "dem_terrain": {"status": "ESTIMATED", "source": "Static Baseline"},
+            "drainage": {"status": "SIMULATED", "source": "Rule-based mock"},
+        }
     }
 
 @router.get("/roads/risk")

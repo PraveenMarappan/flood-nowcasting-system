@@ -1,0 +1,12 @@
+{
+  "cmr_pass": "PASS",
+  "imerg_pass": "PASS",
+  "url_valid": "VALID",
+  "bearer_pass": "PASS",
+  "hdf5_status": "206",
+  "content_type": "application/x-troff-ms",
+  "redirect": "YES",
+  "final_host": "d2b3c3wh8s6en5.cloudfront.net",
+  "server_error": "None",
+  "actual_hdf5": "YES"
+}

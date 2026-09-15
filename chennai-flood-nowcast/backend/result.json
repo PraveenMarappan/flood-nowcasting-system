@@ -1,0 +1,14 @@
+{
+  "Earthdata token configured": "YES",
+  "CMR metadata search": "PASS",
+  "GPM HDF5 metadata found": "NO",
+  "Bearer token \u2192 GPM HDF5": "NOT TESTED\\nHTTP: UNKNOWN",
+  "Username/password \u2192 GPM HDF5": "NOT TESTED\\nHTTP: UNKNOWN",
+  "GES DISC authorization confirmed": "UNKNOWN",
+  "EULA requirement confirmed": "UNKNOWN",
+  "Actual HDF5 retrieved": "NO",
+  "precipitationCal retrieved": "NO",
+  "FINAL NASA STATUS": "UNKNOWN",
+  "EXACT BLOCKER": "An unknown error prevented access to the file or metadata.",
+  "NEXT ACTION": "Review the HTTP status codes and investigate network or endpoint validity."
+}
