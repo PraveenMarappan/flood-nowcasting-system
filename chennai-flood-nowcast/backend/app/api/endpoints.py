@@ -7,9 +7,11 @@ from pathlib import Path
 from datetime import datetime
 from app.services.nasa_gpm import NasaGpmService
 from app.services.terrain_service import TerrainService
+from app.services.drainage_coupling_service import DrainageCouplingService
 
 router = APIRouter()
 terrain_service = TerrainService()
+drainage_service = DrainageCouplingService()
 
 class ForecastQuery(BaseModel):
     rainfall: int = 0
@@ -84,6 +86,75 @@ async def get_rainfall_history():
         
     return {"history": history[-50:]}
 
+@router.get("/flood/current")
+async def get_current_flood(latitude: float = 13.0827, longitude: float = 80.2707):
+    # Fetch real rainfall
+    rainfall_data = await get_current_rainfall()
+    
+    if rainfall_data.get("status") not in ["LIVE", "STALE"]:
+        return {
+            "status": "UNAVAILABLE",
+            "source": "Hydrological Model",
+            "error": "Rainfall data unavailable",
+            "location": {"latitude": latitude, "longitude": longitude}
+        }
+        
+    actual_rainfall = rainfall_data.get("rainfall_rate", 0.0)
+    
+    # Fetch real elevation
+    elev_data = terrain_service.get_elevation(latitude, longitude)
+    
+    elevation_val = elev_data.get("elevation_m")
+    has_real_terrain = (elevation_val is not None and elev_data.get("status") == "REAL")
+    
+    risk_level = "NORMAL"
+    water_depth = 0
+    
+    # Very basic prototype hydrological/rule-based model integration 
+    # using REAL DEM if available.
+    terrain_factor = 1.0 # Default multiplier
+    if has_real_terrain:
+        if elevation_val < 5:
+            terrain_factor = 1.8 # Low-lying area
+        elif elevation_val < 15:
+            terrain_factor = 1.2
+        else:
+            terrain_factor = 0.5 # Higher ground, less depth gathering
+            
+    if actual_rainfall > 100:
+        risk_level = "CRITICAL"
+        water_depth = actual_rainfall * 0.8 * terrain_factor
+    elif actual_rainfall > 50:
+        risk_level = "FLOOD"
+        water_depth = actual_rainfall * 0.5 * terrain_factor
+    elif actual_rainfall > 20:
+        risk_level = "WATCH"
+        water_depth = actual_rainfall * 0.1 * terrain_factor
+    elif actual_rainfall == 0:
+        risk_level = "RECOVERY"
+        water_depth = 5 * terrain_factor
+        
+    if actual_rainfall == 0 and water_depth <= 5:
+        risk_level = "NORMAL"
+        water_depth = 0
+
+    drainage_evaluation = drainage_service.evaluate_drainage_influence(latitude, longitude, water_depth)
+
+    return {
+        "status": "MODELLED",
+        "source": "Hydrological Model",
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "location": {
+            "latitude": latitude,
+            "longitude": longitude
+        },
+        "water_depth_cm": round(water_depth, 2),
+        "risk_level": risk_level,
+        "rainfall_rate_mm_hr": actual_rainfall,
+        "terrain_elevation_m": elevation_val if has_real_terrain else None,
+        "drainage": drainage_evaluation
+    }
+
 @router.get("/flood/forecast")
 def get_flood_forecast(rainfall: float = 0, is_simulated: bool = True, latitude: float = 13.0827, longitude: float = 80.2707):
     # Fetch real elevation if available
@@ -124,18 +195,51 @@ def get_flood_forecast(rainfall: float = 0, is_simulated: bool = True, latitude:
         status = "NORMAL"
         water_depth = 0
 
+    drainage_evaluation = drainage_service.evaluate_drainage_influence(latitude, longitude, water_depth)
+
     return {
         "status": status,
         "water_depth_cm": water_depth,
         "is_simulated": is_simulated,
         "rainfall_input_mm": rainfall,
+        "drainage": drainage_evaluation,
         "forecast": [
-            {"time": "+30m", "status": status, "depth": water_depth * 0.9 if rainfall ==0 else water_depth + (rainfall*0.1)},
-            {"time": "+60m", "status": status, "depth": water_depth * 0.7 if rainfall ==0 else water_depth + (rainfall*0.2)},
-            {"time": "+90m", "status": "RECOVERY" if rainfall == 0 else status, "depth": water_depth * 0.5 if rainfall ==0 else max(water_depth, 10)},
-            {"time": "+120m", "status": "RECOVERY" if rainfall == 0 else status, "depth": max(0, water_depth*0.2) if rainfall ==0 else max(water_depth, 10)},
-            {"time": "+150m", "status": "NORMAL" if rainfall == 0 else status, "depth": 0 if rainfall == 0 else max(water_depth, 10)},
-            {"time": "+180m", "status": "NORMAL" if rainfall == 0 else status, "depth": 0 if rainfall == 0 else max(water_depth, 10)},
+            {
+                "time": "+30m", 
+                "status": status, 
+                "depth": water_depth * 0.9 if rainfall ==0 else water_depth + (rainfall*0.1),
+                "drainage_influence": drainage_evaluation["numerical_influence"]
+            },
+            {
+                "time": "+60m", 
+                "status": status, 
+                "depth": water_depth * 0.7 if rainfall ==0 else water_depth + (rainfall*0.2),
+                "drainage_influence": drainage_evaluation["numerical_influence"]
+            },
+            {
+                "time": "+90m", 
+                "status": "RECOVERY" if rainfall == 0 else status, 
+                "depth": water_depth * 0.5 if rainfall ==0 else max(water_depth, 10),
+                "drainage_influence": drainage_evaluation["numerical_influence"]
+            },
+            {
+                "time": "+120m", 
+                "status": "RECOVERY" if rainfall == 0 else status, 
+                "depth": max(0, water_depth*0.2) if rainfall ==0 else max(water_depth, 10),
+                "drainage_influence": drainage_evaluation["numerical_influence"]
+            },
+            {
+                "time": "+150m", 
+                "status": "NORMAL" if rainfall == 0 else status, 
+                "depth": 0 if rainfall == 0 else max(water_depth, 10),
+                "drainage_influence": drainage_evaluation["numerical_influence"]
+            },
+            {
+                "time": "+180m", 
+                "status": "NORMAL" if rainfall == 0 else status, 
+                "depth": 0 if rainfall == 0 else max(water_depth, 10),
+                "drainage_influence": drainage_evaluation["numerical_influence"]
+            },
         ]
     }
 
@@ -165,12 +269,9 @@ def get_data_status():
     else:
         dem_status_label = "REAL"
 
-    drainage_status = "SIMULATED"
-    drainage_source = "Rule-based mock"
-    drainage_file = base_dir / "drainage" / "chennai_drainage.geojson"
-    if drainage_file.exists():
-        drainage_status = "PARTIAL/ESTIMATED"
-        drainage_source = "Chennai Drainage GeoJSON"
+    drainage_info = drainage_service.get_status()
+    drainage_status = "PARTIAL / ESTIMATED" if drainage_info.get("status") == "PARTIAL" else "UNAVAILABLE"
+    drainage_source = drainage_info.get("source", "Chennai Drainage GeoJSON")
 
     return {
         "overall_health": "OK",
@@ -221,19 +322,7 @@ def get_critical_locations():
 
 @router.get("/drainage/status")
 def get_drainage_status():
-    base_dir = Path(__file__).parent.parent.parent.parent / "data"
-    drainage_file = base_dir / "drainage" / "chennai_drainage.geojson"
-    has_real = drainage_file.exists()
-    
-    return {
-        "is_simulated": not has_real,
-        "drainage": {
-            "load_percentage": 75,
-            "capacity": "Stressed" if not has_real else "UNAVAILABLE",
-            "overflow_risk": "High",
-            "choke_points": 3
-        }
-    }
+    return drainage_service.get_status()
 
 @router.get("/route/safer")
 def get_safer_route():

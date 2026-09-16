@@ -1,0 +1,195 @@
+
+--- /api/health ---
+{
+  "status": "Running",
+  "uptime_seconds": 13,
+  "service": "Chennai Flood Nowcast API"
+}
+
+--- /api/terrain/status ---
+{
+  "status": "REAL",
+  "source": "SRTM DEM",
+  "details": {
+    "source": "SRTM DEM",
+    "status": "REAL",
+    "file": "data\\dem\\chennai_dem.tif",
+    "resolution": [
+      0.0002777777777777778,
+      0.0002777777777777778
+    ],
+    "crs": "EPSG:4326",
+    "width": 3601,
+    "height": 3601,
+    "bounds": {
+      "left": 79.99986111111112,
+      "bottom": 12.999861111111109,
+      "right": 81.0001388888889,
+      "top": 14.000138888888888
+    },
+    "nodata": -32767.0,
+    "python_executable": "C:\\Users\\HP\\OneDrive\\Desktop\\flood nowcasting\\chennai-flood-nowcast\\backend\\venv\\Scripts\\python.exe",
+    "rasterio_version": "1.4.4"
+  }
+}
+
+--- /api/terrain/elevation?latitude=13.0827&longitude=80.2707 ---
+{
+  "latitude": 13.0827,
+  "longitude": 80.2707,
+  "elevation_m": 8.0,
+  "source": "SRTM DEM",
+  "status": "REAL"
+}
+
+--- /api/terrain/elevation?latitude=13.10&longitude=80.25 ---
+{
+  "latitude": 13.1,
+  "longitude": 80.25,
+  "elevation_m": 8.0,
+  "source": "SRTM DEM",
+  "status": "REAL"
+}
+
+--- /api/terrain/elevation?latitude=12.5&longitude=80.25 ---
+{
+  "latitude": 12.5,
+  "longitude": 80.25,
+  "elevation_m": null,
+  "source": "SRTM DEM",
+  "status": "UNAVAILABLE",
+  "error": "location_outside_dem"
+}
+
+--- /api/rainfall/current ---
+{
+  "status": "LIVE",
+  "source": "NASA GPM IMERG Early Run",
+  "dataset": "GPM_3IMERGHHE",
+  "rainfall_rate": 0.0,
+  "unit": "mm/hr",
+  "latitude": 13.0827,
+  "longitude": 80.2707,
+  "data_timestamp": "2026-09-16T07:30:00.000Z",
+  "retrieved_at": "2026-09-16T13:21:26.854667Z"
+}
+
+--- /api/data-status ---
+{
+  "overall_health": "OK",
+  "sources": {
+    "rainfall": {
+      "status": "REAL",
+      "source": "NASA GPM IMERG"
+    },
+    "flood_depth": {
+      "status": "MODELLED",
+      "source": "Hydrological Model"
+    },
+    "dem_terrain": {
+      "status": "REAL",
+      "source": "SRTM DEM"
+    },
+    "drainage": {
+      "status": "PARTIAL / ESTIMATED",
+      "source": "Chennai Drainage GeoJSON"
+    }
+  }
+}
+
+--- /api/flood/current ---
+{
+  "status": "MODELLED",
+  "source": "Hydrological Model",
+  "timestamp": "2026-09-16T13:21:35.425822Z",
+  "location": {
+    "latitude": 13.0827,
+    "longitude": 80.2707
+  },
+  "water_depth_cm": 6.0,
+  "risk_level": "RECOVERY",
+  "rainfall_rate_mm_hr": 0.0,
+  "terrain_elevation_m": 8.0,
+  "drainage": {
+    "status": "PARTIAL",
+    "capacity_status": "UNAVAILABLE",
+    "engineering_parameters_available": false,
+    "numerical_influence": "NOT_COMPUTABLE",
+    "proxy_mode_enabled": false
+  }
+}
+
+--- /api/flood/forecast ---
+{
+  "status": "RECOVERY",
+  "water_depth_cm": 6.0,
+  "is_simulated": true,
+  "rainfall_input_mm": 0.0,
+  "drainage": {
+    "status": "PARTIAL",
+    "capacity_status": "UNAVAILABLE",
+    "engineering_parameters_available": false,
+    "numerical_influence": "NOT_COMPUTABLE",
+    "proxy_mode_enabled": false
+  },
+  "forecast": [
+    {
+      "time": "+30m",
+      "status": "RECOVERY",
+      "depth": 5.4,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+60m",
+      "status": "RECOVERY",
+      "depth": 4.199999999999999,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+90m",
+      "status": "RECOVERY",
+      "depth": 3.0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+120m",
+      "status": "RECOVERY",
+      "depth": 1.2000000000000002,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+150m",
+      "status": "NORMAL",
+      "depth": 0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+180m",
+      "status": "NORMAL",
+      "depth": 0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    }
+  ]
+}
+
+--- /api/drainage/status ---
+{
+  "status": "PARTIAL",
+  "source": "Chennai Drainage GeoJSON",
+  "feature_count": 2,
+  "feature_types": [
+    "canal",
+    "river"
+  ],
+  "crs": "EPSG:4326",
+  "engineering_parameters": {
+    "diameter": "UNAVAILABLE",
+    "slope": "UNAVAILABLE",
+    "capacity": "UNAVAILABLE",
+    "condition": "UNAVAILABLE",
+    "flow_direction": "UNAVAILABLE",
+    "depth": "UNAVAILABLE"
+  },
+  "capacity_availability": "UNAVAILABLE",
+  "flood_model_integration": "NOT_COMPUTABLE"
+}
