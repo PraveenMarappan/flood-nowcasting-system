@@ -184,3 +184,33 @@ class TerrainService:
                 "status": "UNAVAILABLE",
                 "error": str(e)
             }
+
+    def get_derivatives(self, latitude: float, longitude: float) -> dict:
+        elevation_data = self.get_elevation(latitude, longitude)
+        if elevation_data["status"] != "REAL":
+            return {
+                "status": "UNAVAILABLE",
+                "source": "Terrain Derivatives",
+                "error": "Cannot calculate derivatives without REAL elevation.",
+                "derivatives": None
+            }
+            
+        elevation = elevation_data["elevation_m"]
+        
+        # Prototype topological derivation based purely on absolute altitude logic for now
+        # until full neighborhood kernel operations are robustly implemented.
+        low_lying_score = 1.0
+        if elevation < 5: low_lying_score = 0.9
+        elif elevation < 10: low_lying_score = 0.6
+        else: low_lying_score = 0.2
+        
+        return {
+            "status": "MODELLED / DERIVED FROM REAL SRTM DEM",
+            "source": "Terrain Processing Service",
+            "derivatives": {
+                "elevation_m": elevation,
+                "relative_low_lying_score": low_lying_score,
+                "slope_available": False, # Placeholder for future neighborhood gradient computation
+                "flow_accumulation_proxy": "UNAVAILABLE", 
+            }
+        }

@@ -271,8 +271,17 @@ function App() {
 
           {dataStatus && (
             <div className="card">
-              <div className="card-title">Data Status Panel</div>
+              <div className="card-title">DATA QUALITY PANEL</div>
               <div style={{display: 'flex', flexDirection: 'column', gap: 8}}>
+                <div style={{background: '#1e293b', padding: 8, borderRadius: 6}}>
+                     <div style={{textTransform: 'capitalize', fontWeight: 'bold', fontSize: '0.9rem'}}>Data Confidence</div>
+                     <div style={{display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.8rem', marginTop: 4}}>
+                        <span style={{
+                          background: dataStatus.data_confidence === 'HIGH' ? '#047857' : (dataStatus.data_confidence === 'MEDIUM' ? '#d97706' : '#be123c'), 
+                          color: 'white', padding: '2px 6px', borderRadius: 4, fontWeight: 'bold'
+                        }}>{dataStatus.data_confidence}</span> 
+                     </div>
+                </div>
                 {Object.entries(dataStatus.sources).map(([key, info]) => (
                   <div key={key} style={{background: '#1e293b', padding: 8, borderRadius: 6}}>
                     <div style={{textTransform: 'capitalize', fontWeight: 'bold', fontSize: '0.9rem'}}>{key.replace('_', ' ')}</div>
@@ -283,8 +292,22 @@ function App() {
                        }}>{info.status}</span> 
                        <span style={{color: '#94a3b8'}}>{info.source}</span>
                     </div>
+                    {info.calibration_status && (
+                       <div style={{fontSize: '0.75rem', color: '#94a3b8', marginTop: 4}}>
+                          Calibration: {info.calibration_status}
+                       </div>
+                    )}
                   </div>
                 ))}
+                
+                <div style={{background: '#1e293b', padding: 8, borderRadius: 6}}>
+                    <div style={{textTransform: 'capitalize', fontWeight: 'bold', fontSize: '0.9rem'}}>Validation</div>
+                    <div style={{display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.8rem', marginTop: 4}}>
+                       <span style={{background: '#475569', color: 'white', padding: '2px 6px', borderRadius: 4, fontWeight: 'bold'}}>
+                         NOT AVAILABLE
+                       </span>
+                    </div>
+                </div>
               </div>
             </div>
           )}
@@ -343,17 +366,18 @@ function App() {
                     )}
                     
                     <div style={{marginTop: 5}}><strong>Type:</strong> {loc.type}</div>
-                    <div><strong>Risk Level:</strong> <span style={{color: loc.risk === 'CRITICAL' ? '#ef4444' : (loc.risk === 'HIGH' ? '#f97316' : '#3b82f6'), fontWeight: 'bold'}}>{loc.risk}</span></div>
-                    <div><strong>Flood Depth:</strong> {loc.depth_cm} cm</div>
+                    <div><strong>Modelled Risk Level:</strong> <span style={{color: loc.risk === 'CRITICAL' ? '#ef4444' : (loc.risk === 'HIGH' ? '#f97316' : '#3b82f6'), fontWeight: 'bold'}}>{loc.risk}</span></div>
+                    <div><strong>Modelled Flood Depth:</strong> {loc.depth_cm} cm</div>
                     
                     <div style={{marginTop: 5, paddingBottom: 5, borderBottom: '1px solid #ccc'}}>
-                      <div><strong>Rainfall:</strong> {rainfall.toFixed(1)} mm/hr</div>
-                      <div style={{fontSize: '0.8rem'}}><strong>Rainfall:</strong> {isSimulated ? 'SIMULATED' : `REAL — ${liveRainfallData?.source || 'NASA GPM'}`}</div>
+                      <div><strong>Rainfall Input:</strong> {rainfall.toFixed(1)} mm/hr</div>
+                      <div style={{fontSize: '0.8rem'}}><strong>Rainfall Source:</strong> {isSimulated ? 'SIMULATED' : `REAL — ${liveRainfallData?.source || 'NASA GPM'}`}</div>
                     </div>
                     
                     <div style={{marginTop: 5, fontSize: '0.8rem', color: '#64748b'}}>
-                      <strong>Flood Model:</strong> MODELLED <br/>
-                      <strong>Drainage:</strong> SIMULATED
+                      <strong>Flood Model:</strong> MODELLED (baseline-v1) <br/>
+                      <strong>Calibration:</strong> NOT CALIBRATED <br/>
+                      <strong>Drainage Coupling:</strong> UNAVAILABLE
                     </div>
                   </div>
                 </Popup>
@@ -382,18 +406,18 @@ function App() {
                          </div>
                       )}
                       
-                      <div style={{marginTop: 5}}><strong>Risk Level:</strong> <span style={{color: road.risk === 'CRITICAL' ? '#ef4444' : (road.risk === 'HIGH' ? '#f97316' : (road.risk === 'MODERATE' ? '#eab308' : '#22c55e')), fontWeight: 'bold'}}>{road.risk}</span></div>
-                      <div><strong>Flood Depth:</strong> {road.depth_cm} cm</div>
-                      {drainage && <div><strong>Drainage Stress:</strong> {drainage.load_percentage}%</div>}
+                      <div style={{marginTop: 5}}><strong>Model-based Road Risk:</strong> <span style={{color: road.risk === 'CRITICAL' ? '#ef4444' : (road.risk === 'HIGH' ? '#f97316' : (road.risk === 'MODERATE' ? '#eab308' : '#22c55e')), fontWeight: 'bold'}}>{road.risk}</span></div>
+                      <div><strong>Modelled Flood Depth:</strong> {road.depth_cm} cm</div>
                       
                       <div style={{marginTop: 5, paddingBottom: 5, borderBottom: '1px solid #ccc'}}>
-                        <div><strong>Rainfall:</strong> {rainfall.toFixed(1)} mm/hr</div>
-                        <div style={{fontSize: '0.8rem'}}><strong>Rainfall:</strong> {isSimulated ? 'SIMULATED' : `REAL — ${liveRainfallData?.source || 'NASA GPM'}`}</div>
+                        <div><strong>Rainfall Input:</strong> {rainfall.toFixed(1)} mm/hr</div>
+                        <div style={{fontSize: '0.8rem'}}><strong>Rainfall Source:</strong> {isSimulated ? 'SIMULATED' : `REAL — ${liveRainfallData?.source || 'NASA GPM'}`}</div>
                       </div>
                       
                       <div style={{marginTop: 5, fontSize: '0.8rem', color: '#64748b'}}>
-                        <strong>Flood Model:</strong> MODELLED <br/>
-                        <strong>Drainage:</strong> SIMULATED
+                        <strong>Flood Model:</strong> MODELLED (baseline-v1) <br/>
+                        <strong>Calibration:</strong> NOT CALIBRATED <br/>
+                        <strong>Drainage Coupling:</strong> UNAVAILABLE
                       </div>
                     </div>
                   </Popup>

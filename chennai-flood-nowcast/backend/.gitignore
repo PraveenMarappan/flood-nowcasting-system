@@ -1,0 +1,18 @@
+# Environments
+.env
+.env.local
+.venv
+venv/
+ENV/
+env/
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+
+# Data and Logs
+*.log
+data/raw/*
+!data/raw/.gitkeep

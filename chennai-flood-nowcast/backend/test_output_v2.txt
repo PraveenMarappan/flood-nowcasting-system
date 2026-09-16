@@ -1,0 +1,311 @@
+Testing all new architecture endpoints...
+\n--- http://127.0.0.1:8000/api/health ---
+Status Code: 200
+{
+  "status": "Running",
+  "uptime_seconds": 280,
+  "service": "Chennai Flood Nowcast API"
+}
+\n--- http://127.0.0.1:8000/api/rainfall/current ---
+FAILED: HTTPConnectionPool(host='127.0.0.1', port=8000): Read timed out. (read timeout=10)
+\n--- http://127.0.0.1:8000/api/terrain/status ---
+Status Code: 200
+{
+  "status": "REAL",
+  "source": "SRTM DEM",
+  "details": {
+    "source": "SRTM DEM",
+    "status": "REAL",
+    "file": "data\\dem\\chennai_dem.tif",
+    "resolution": [
+      0.0002777777777777778,
+      0.0002777777777777778
+    ],
+    "crs": "EPSG:4326",
+    "width": 3601,
+    "height": 3601,
+    "bounds": {
+      "left": 79.99986111111112,
+      "bottom": 12.999861111111109,
+      "right": 81.0001388888889,
+      "top": 14.000138888888888
+    },
+    "nodata": -32767.0,
+    "python_executable": "C:\\Users\\HP\\OneDrive\\Desktop\\flood nowcasting\\chennai-flood-nowcast\\backend\\venv\\Scripts\\python.exe",
+    "rasterio_version": "1.4.4"
+  }
+}
+\n--- http://127.0.0.1:8000/api/terrain/elevation?latitude=13.0827&longitude=80.2707 ---
+Status Code: 200
+{
+  "latitude": 13.0827,
+  "longitude": 80.2707,
+  "elevation_m": 8.0,
+  "source": "SRTM DEM",
+  "status": "REAL"
+}
+\n--- http://127.0.0.1:8000/api/drainage/status ---
+Status Code: 200
+{
+  "status": "PARTIAL",
+  "source": "Chennai Drainage GeoJSON",
+  "feature_count": 2,
+  "feature_types": [
+    "canal",
+    "river"
+  ],
+  "crs": "EPSG:4326",
+  "engineering_parameters": {
+    "diameter": "UNAVAILABLE",
+    "slope": "UNAVAILABLE",
+    "capacity": "UNAVAILABLE",
+    "condition": "UNAVAILABLE",
+    "flow_direction": "UNAVAILABLE",
+    "depth": "UNAVAILABLE"
+  },
+  "capacity_availability": "UNAVAILABLE",
+  "flood_model_integration": "NOT_COMPUTABLE"
+}
+\n--- http://127.0.0.1:8000/api/flood/current ---
+FAILED: HTTPConnectionPool(host='127.0.0.1', port=8000): Read timed out. (read timeout=10)
+\n--- http://127.0.0.1:8000/api/flood/forecast ---
+Status Code: 200
+{
+  "model_version": "baseline-v1",
+  "calibration_status": "NOT_CALIBRATED",
+  "status": "MODELLED",
+  "source": "Baseline Hydrological Forecast",
+  "forecast": [
+    {
+      "time": "+30m",
+      "status": "RECOVERY",
+      "depth": 5.4,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+60m",
+      "status": "RECOVERY",
+      "depth": 4.199999999999999,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+90m",
+      "status": "RECOVERY",
+      "depth": 3.0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+120m",
+      "status": "RECOVERY",
+      "depth": 1.2000000000000002,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+150m",
+      "status": "NORMAL",
+      "depth": 0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+180m",
+      "status": "NORMAL",
+      "depth": 0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    }
+  ],
+  "water_depth_cm": 6.0,
+  "is_simulated": true,
+  "rainfall_input_mm": 0.0,
+  "drainage": {
+    "status": "PARTIAL",
+    "capacity_status": "UNAVAILABLE",
+    "engineering_parameters_available": false,
+    "numerical_influence": "NOT_COMPUTABLE",
+    "proxy_mode_enabled": false
+  }
+}
+\n--- http://127.0.0.1:8000/api/flood/zones ---
+Status Code: 200
+{
+  "status": "MODELLED",
+  "model_version": "baseline-v1",
+  "zones": []
+}
+\n--- http://127.0.0.1:8000/api/roads/risk ---
+Status Code: 200
+{
+  "model_version": "baseline-v1",
+  "risk_type": "Modelled road risk",
+  "roads": [
+    {
+      "id": 1,
+      "name": "Mount Road",
+      "risk": "MODERATE",
+      "depth_cm": 15,
+      "coords": [
+        [
+          13.0658,
+          80.2642
+        ],
+        [
+          13.045,
+          80.245
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "name": "OMR IT Expressway",
+      "risk": "LOW",
+      "depth_cm": 5,
+      "coords": [
+        [
+          12.98,
+          80.245
+        ],
+        [
+          12.9,
+          80.225
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Velachery Main Road",
+      "risk": "HIGH",
+      "depth_cm": 45,
+      "coords": [
+        [
+          12.985,
+          80.22
+        ],
+        [
+          12.97,
+          80.215
+        ]
+      ]
+    },
+    {
+      "id": 4,
+      "name": "GST Road",
+      "risk": "NORMAL",
+      "depth_cm": 0,
+      "coords": [
+        [
+          13.01,
+          80.2
+        ],
+        [
+          12.95,
+          80.14
+        ]
+      ]
+    },
+    {
+      "id": 5,
+      "name": "ECR",
+      "risk": "CRITICAL",
+      "depth_cm": 70,
+      "coords": [
+        [
+          12.985,
+          80.26
+        ],
+        [
+          12.92,
+          80.24
+        ]
+      ]
+    }
+  ]
+}
+\n--- http://127.0.0.1:8000/api/locations/critical ---
+Status Code: 200
+{
+  "model_version": "baseline-v1",
+  "risk_type": "Modelled risk based on baseline model",
+  "locations": [
+    {
+      "id": 1,
+      "name": "Apollo Hospital",
+      "type": "Hospital",
+      "risk": "MODERATE",
+      "status": "MODELLED",
+      "depth_cm": 10,
+      "lat": 13.0604,
+      "lng": 80.2496
+    },
+    {
+      "id": 2,
+      "name": "Chennai Central",
+      "type": "Transport Hub",
+      "risk": "HIGH",
+      "status": "MODELLED",
+      "depth_cm": 35,
+      "lat": 13.0827,
+      "lng": 80.2757
+    },
+    {
+      "id": 3,
+      "name": "Velachery Fire Station",
+      "type": "Fire Station",
+      "risk": "CRITICAL",
+      "status": "MODELLED",
+      "depth_cm": 60,
+      "lat": 12.9774,
+      "lng": 80.2223
+    }
+  ]
+}
+\n--- http://127.0.0.1:8000/api/route/safer ---
+Status Code: 200
+{
+  "model_version": "baseline-v1",
+  "route_type": "Model-based safer route",
+  "message": "Routing via safe corridors (avoiding modelled high-risk sectors)",
+  "waypoints": [
+    [
+      13.0827,
+      80.2757
+    ],
+    [
+      13.0604,
+      80.2496
+    ],
+    [
+      13.04,
+      80.22
+    ]
+  ]
+}
+\n--- http://127.0.0.1:8000/api/data-status ---
+Status Code: 200
+{
+  "overall_health": "OK",
+  "data_confidence": "MEDIUM",
+  "sources": {
+    "rainfall": {
+      "status": "REAL",
+      "source": "NASA GPM IMERG"
+    },
+    "dem_terrain": {
+      "status": "REAL",
+      "source": "USGS SRTM 1 Arc-Second Global"
+    },
+    "drainage": {
+      "status": "PARTIAL / NOT VERIFIED",
+      "geometry_available": true,
+      "hydraulic_data_available": false,
+      "used_in_flood_model": false
+    },
+    "flood_depth": {
+      "status": "MODELLED",
+      "source": "Baseline Hydrological Model",
+      "calibration_status": "NOT_CALIBRATED"
+    },
+    "forecast": {
+      "status": "MODELLED",
+      "source": "Baseline Hydrological Forecast"
+    }
+  }
+}

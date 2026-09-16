@@ -1,17 +1,26 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-import time
 import csv
-import os
 from pathlib import Path
 from datetime import datetime
+
 from app.services.nasa_gpm import NasaGpmService
 from app.services.terrain_service import TerrainService
 from app.services.drainage_coupling_service import DrainageCouplingService
+from app.services.flood_model_service import FloodModelService
+from app.services.forecast_service import ForecastService
+from app.services.route_service import RouteService
+from app.services.data_status_service import DataStatusService
+from app.services.validation_service import ValidationService
 
 router = APIRouter()
 terrain_service = TerrainService()
 drainage_service = DrainageCouplingService()
+flood_model_service = FloodModelService()
+forecast_service = ForecastService()
+route_service = RouteService()
+data_status_service = DataStatusService()
+validation_service = ValidationService()
 
 class ForecastQuery(BaseModel):
     rainfall: int = 0
@@ -41,7 +50,6 @@ async def get_current_rainfall():
         except Exception as e:
             print("Error saving history", e)
     elif result.get("status") == "UNAVAILABLE":
-        # Fallback to STALE if history exists
         if csv_file.exists():
             try:
                 with open(csv_file, mode="r") as f:
@@ -103,145 +111,33 @@ async def get_current_flood(latitude: float = 13.0827, longitude: float = 80.270
     
     # Fetch real elevation
     elev_data = terrain_service.get_elevation(latitude, longitude)
-    
     elevation_val = elev_data.get("elevation_m")
     has_real_terrain = (elevation_val is not None and elev_data.get("status") == "REAL")
     
-    risk_level = "NORMAL"
-    water_depth = 0
-    
-    # Very basic prototype hydrological/rule-based model integration 
-    # using REAL DEM if available.
-    terrain_factor = 1.0 # Default multiplier
-    if has_real_terrain:
-        if elevation_val < 5:
-            terrain_factor = 1.8 # Low-lying area
-        elif elevation_val < 15:
-            terrain_factor = 1.2
-        else:
-            terrain_factor = 0.5 # Higher ground, less depth gathering
-            
-    if actual_rainfall > 100:
-        risk_level = "CRITICAL"
-        water_depth = actual_rainfall * 0.8 * terrain_factor
-    elif actual_rainfall > 50:
-        risk_level = "FLOOD"
-        water_depth = actual_rainfall * 0.5 * terrain_factor
-    elif actual_rainfall > 20:
-        risk_level = "WATCH"
-        water_depth = actual_rainfall * 0.1 * terrain_factor
-    elif actual_rainfall == 0:
-        risk_level = "RECOVERY"
-        water_depth = 5 * terrain_factor
-        
-    if actual_rainfall == 0 and water_depth <= 5:
-        risk_level = "NORMAL"
-        water_depth = 0
-
-    drainage_evaluation = drainage_service.evaluate_drainage_influence(latitude, longitude, water_depth)
-
-    return {
-        "status": "MODELLED",
-        "source": "Hydrological Model",
-        "timestamp": datetime.utcnow().isoformat() + "Z",
-        "location": {
-            "latitude": latitude,
-            "longitude": longitude
-        },
-        "water_depth_cm": round(water_depth, 2),
-        "risk_level": risk_level,
-        "rainfall_rate_mm_hr": actual_rainfall,
-        "terrain_elevation_m": elevation_val if has_real_terrain else None,
-        "drainage": drainage_evaluation
-    }
+    return flood_model_service.calculate_current_flood(actual_rainfall, elevation_val, has_real_terrain, latitude, longitude)
 
 @router.get("/flood/forecast")
 def get_flood_forecast(rainfall: float = 0, is_simulated: bool = True, latitude: float = 13.0827, longitude: float = 80.2707):
-    # Fetch real elevation if available
     elev_data = terrain_service.get_elevation(latitude, longitude)
-    
     elevation_val = elev_data.get("elevation_m")
     has_real_terrain = (elevation_val is not None and elev_data.get("status") == "REAL")
     
-    status = "NORMAL"
-    water_depth = 0
+    current_flood = flood_model_service.calculate_current_flood(rainfall, elevation_val, has_real_terrain, latitude, longitude)
     
-    # Very basic prototype hydrological/rule-based model integration 
-    # using REAL DEM if available.
-    # Lower elevation -> higher baseline susceptibility to water depth
-    terrain_factor = 1.0 # Default multiplier
-    if has_real_terrain:
-        if elevation_val < 5:
-            terrain_factor = 1.8 # Low-lying area
-        elif elevation_val < 15:
-            terrain_factor = 1.2
-        else:
-            terrain_factor = 0.5 # Higher ground, less depth gathering
-            
-    if rainfall > 100:
-        status = "CRITICAL"
-        water_depth = rainfall * 0.8 * terrain_factor
-    elif rainfall > 50:
-        status = "FLOOD"
-        water_depth = rainfall * 0.5 * terrain_factor
-    elif rainfall > 20:
-        status = "WATCH"
-        water_depth = rainfall * 0.1 * terrain_factor
-    elif rainfall == 0:
-        status = "RECOVERY"
-        water_depth = 5 * terrain_factor
-        
-    if rainfall == 0 and water_depth <= 5:
-        status = "NORMAL"
-        water_depth = 0
-
-    drainage_evaluation = drainage_service.evaluate_drainage_influence(latitude, longitude, water_depth)
-
-    return {
-        "status": status,
-        "water_depth_cm": water_depth,
-        "is_simulated": is_simulated,
-        "rainfall_input_mm": rainfall,
-        "drainage": drainage_evaluation,
-        "forecast": [
-            {
-                "time": "+30m", 
-                "status": status, 
-                "depth": water_depth * 0.9 if rainfall ==0 else water_depth + (rainfall*0.1),
-                "drainage_influence": drainage_evaluation["numerical_influence"]
-            },
-            {
-                "time": "+60m", 
-                "status": status, 
-                "depth": water_depth * 0.7 if rainfall ==0 else water_depth + (rainfall*0.2),
-                "drainage_influence": drainage_evaluation["numerical_influence"]
-            },
-            {
-                "time": "+90m", 
-                "status": "RECOVERY" if rainfall == 0 else status, 
-                "depth": water_depth * 0.5 if rainfall ==0 else max(water_depth, 10),
-                "drainage_influence": drainage_evaluation["numerical_influence"]
-            },
-            {
-                "time": "+120m", 
-                "status": "RECOVERY" if rainfall == 0 else status, 
-                "depth": max(0, water_depth*0.2) if rainfall ==0 else max(water_depth, 10),
-                "drainage_influence": drainage_evaluation["numerical_influence"]
-            },
-            {
-                "time": "+150m", 
-                "status": "NORMAL" if rainfall == 0 else status, 
-                "depth": 0 if rainfall == 0 else max(water_depth, 10),
-                "drainage_influence": drainage_evaluation["numerical_influence"]
-            },
-            {
-                "time": "+180m", 
-                "status": "NORMAL" if rainfall == 0 else status, 
-                "depth": 0 if rainfall == 0 else max(water_depth, 10),
-                "drainage_influence": drainage_evaluation["numerical_influence"]
-            },
-        ]
-    }
+    forecast_data = forecast_service.generate_forecast(
+        current_water_depth=current_flood["water_depth_cm"],
+        current_rainfall=rainfall,
+        current_status=current_flood["risk_level"],
+        drainage_eval=current_flood["drainage"]
+    )
+    
+    # Merge for endpoint compatibility
+    forecast_data["water_depth_cm"] = current_flood["water_depth_cm"]
+    forecast_data["is_simulated"] = is_simulated
+    forecast_data["rainfall_input_mm"] = rainfall
+    forecast_data["drainage"] = current_flood["drainage"]
+    
+    return forecast_data
 
 @router.get("/data-status")
 def get_data_status():
@@ -264,24 +160,9 @@ def get_data_status():
 
     terrain_info = terrain_service.get_status()
     dem_status = terrain_info.get("status", "UNAVAILABLE")
-    if dem_status == "UNAVAILABLE":
-        dem_status_label = "UNAVAILABLE"
-    else:
-        dem_status_label = "REAL"
-
     drainage_info = drainage_service.get_status()
-    drainage_status = "PARTIAL / ESTIMATED" if drainage_info.get("status") == "PARTIAL" else "UNAVAILABLE"
-    drainage_source = drainage_info.get("source", "Chennai Drainage GeoJSON")
-
-    return {
-        "overall_health": "OK",
-        "sources": {
-            "rainfall": {"status": rainfall_status, "source": "NASA GPM IMERG"},
-            "flood_depth": {"status": "MODELLED", "source": "Hydrological Model"},
-            "dem_terrain": {"status": dem_status_label, "source": terrain_info.get("source", "SRTM DEM")},
-            "drainage": {"status": drainage_status, "source": drainage_source},
-        }
-    }
+    
+    return data_status_service.get_status(rainfall_status, dem_status, drainage_info)
 
 @router.get("/terrain/status")
 def get_terrain_status():
@@ -297,28 +178,11 @@ def get_terrain_elevation(latitude: float, longitude: float):
 
 @router.get("/roads/risk")
 def get_roads_risk():
-    return {
-        "is_simulated": True,
-        "roads": [
-            {"id": 1, "name": "Mount Road", "risk": "MODERATE", "depth_cm": 15, "coords": [[13.0658, 80.2642], [13.0450, 80.2450]]},
-            {"id": 2, "name": "OMR IT Expressway", "risk": "LOW", "depth_cm": 5, "coords": [[12.9800, 80.2450], [12.9000, 80.2250]]},
-            {"id": 3, "name": "Velachery Main Road", "risk": "HIGH", "depth_cm": 45, "coords": [[12.9850, 80.2200], [12.9700, 80.2150]]},
-            {"id": 4, "name": "GST Road", "risk": "SAFE", "depth_cm": 0, "coords": [[13.0100, 80.2000], [12.9500, 80.1400]]},
-            {"id": 5, "name": "ECR", "risk": "CRITICAL", "depth_cm": 70, "coords": [[12.9850, 80.2600], [12.9200, 80.2400]]},
-        ]
-    }
-
+    return route_service.get_roads_risk()
 
 @router.get("/locations/critical")
 def get_critical_locations():
-    return {
-        "is_simulated": True,
-        "locations": [
-            {"id": 1, "name": "Apollo Hospital", "type": "Hospital", "risk": "MODERATE", "status": "ACCESSIBLE", "depth_cm": 10, "lat": 13.0604, "lng": 80.2496},
-            {"id": 2, "name": "Chennai Central", "type": "Transport Hub", "risk": "HIGH", "status": "WATCH", "depth_cm": 35, "lat": 13.0827, "lng": 80.2757},
-            {"id": 3, "name": "Velachery Fire Station", "type": "Fire Station", "risk": "CRITICAL", "status": "IMPAIRED", "depth_cm": 60, "lat": 12.9774, "lng": 80.2223},
-        ]
-    }
+    return route_service.get_critical_locations()
 
 @router.get("/drainage/status")
 def get_drainage_status():
@@ -326,12 +190,16 @@ def get_drainage_status():
 
 @router.get("/route/safer")
 def get_safer_route():
+    return route_service.get_safer_route()
+
+@router.get("/flood/zones")
+def get_flood_zones():
     return {
-        "is_simulated": True,
-        "message": "Routing via safe corridors (avoiding Velachery)",
-        "waypoints": [
-            [13.0827, 80.2757],
-            [13.0604, 80.2496],
-            [13.0400, 80.2200]
-        ]
+        "status": "MODELLED",
+        "model_version": "baseline-v1",
+        "zones": []
     }
+
+@router.get("/validation/status")
+def get_validation_status():
+    return validation_service.get_validation_status()
