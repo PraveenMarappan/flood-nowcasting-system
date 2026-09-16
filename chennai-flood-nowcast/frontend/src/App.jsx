@@ -11,12 +11,14 @@ function App() {
   const [isSimulated, setIsSimulated] = useState(true);
   const [rainfall, setRainfall] = useState(0);
   const [liveRainfallData, setLiveRainfallData] = useState(null);
+  const [terrainInfo, setTerrainInfo] = useState(null);
   
   const [forecast, setForecast] = useState(null);
   const [roads, setRoads] = useState([]);
   const [locations, setLocations] = useState([]);
   const [drainage, setDrainage] = useState(null);
   const [historyData, setHistoryData] = useState([]);
+  const [dataStatus, setDataStatus] = useState(null);
 
   // Fetch forecast and dependent data whenever rainfall changes
   useEffect(() => {
@@ -61,6 +63,20 @@ function App() {
       
       const drainRes = await axios.get(`${API_BASE}/drainage/status`);
       setDrainage(drainRes.data.drainage);
+      
+      try {
+        const statusRes = await axios.get(`${API_BASE}/data-status`);
+        setDataStatus(statusRes.data);
+      } catch (err) {
+        console.error("Error fetching data status", err);
+      }
+      
+      try {
+        const terrainRes = await axios.get(`${API_BASE}/terrain/elevation?latitude=13.0827&longitude=80.2707`);
+        setTerrainInfo(terrainRes.data);
+      } catch (err) {
+        console.error("Error fetching terrain data", err);
+      }
       
       // History map
       if (forecastRes.data) {
@@ -183,21 +199,52 @@ function App() {
           </div>
 
           <div className="card">
-            <div className="card-title">System Status</div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <span className={`status-indicator status-${forecast.status.toLowerCase()}`}></span>
-              <span className="score" style={{color: getStatusColor(forecast.status)}}>{forecast.status}</span>
+            <div className="card-title">CURRENT CONDITIONS</div>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 10, fontSize: '0.95rem'}}>
+              <div>
+                <strong>Rainfall:</strong> {rainfall.toFixed(1)} mm/hr
+                {isSimulated ? (
+                  <div className="tag-simulated" style={{marginTop: 5, display: 'inline-block', marginLeft: 10}}>Synthetic Scenario</div>
+                ) : (
+                  liveRainfallData && (
+                    <div style={{fontSize: '0.8rem', color: '#10b981', marginTop: 5}}>
+                      {liveRainfallData.source || 'NASA GPM IMERG'} • {liveRainfallData.status === "LIVE" ? "REAL" : liveRainfallData.status}
+                    </div>
+                  )
+                )}
+              </div>
+              <div style={{display: 'flex', alignItems: 'center', gap: 5}}>
+                <strong>Flood Status:</strong> 
+                <span className={`status-indicator status-${forecast.status.toLowerCase()}`}></span>
+                <span style={{color: getStatusColor(forecast.status), fontWeight: 'bold'}}>{forecast.status}</span>
+              </div>
+              <div>
+                <strong>Max Flood Depth:</strong> {forecast.water_depth_cm.toFixed(1)} cm
+              </div>
+              {terrainInfo && (
+                <div>
+                   <strong>Ref Elevation:</strong> {terrainInfo.elevation_m !== null ? `${terrainInfo.elevation_m.toFixed(1)} m` : 'UNAVAILABLE'}
+                   <div style={{fontSize: '0.8rem', color: terrainInfo.status === 'REAL' ? '#10b981' : '#94a3b8', display: 'inline-block', marginLeft: 6}}>
+                     {terrainInfo.source} • {terrainInfo.status}
+                   </div>
+                </div>
+              )}
+              {drainage && (
+                <div style={{display: 'flex', alignItems: 'center', gap: 5}}>
+                  <strong>Drainage Stress:</strong> {drainage.load_percentage}% LOAD
+                </div>
+              )}
+              {!isSimulated && liveRainfallData && (
+                <div style={{fontSize: '0.8rem', color: '#94a3b8', marginTop: 5}}>
+                  Last Updated: {liveRainfallData.data_timestamp || liveRainfallData.retrieved_at}
+                </div>
+              )}
             </div>
-            <p style={{marginTop: 5, color: '#94a3b8'}}>Estimated water depth: {forecast.water_depth_cm.toFixed(1)} cm</p>
           </div>
           
-          {isSimulated ? (
+          {isSimulated && (
             <div className="card">
-              <div className="card-title">Simulation Control</div>
-              <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 10}}>
-                <span>Rainfall Input:</span>
-                <span style={{fontWeight: 600, color: '#38bdf8'}}>{rainfall.toFixed(1)} mm/hr</span>
-              </div>
+              <div className="card-title">Simulation Scenario</div>
               <input 
                 type="range" 
                 min="0" max="150" step="5"
@@ -208,46 +255,36 @@ function App() {
               <div style={{display: 'flex', gap: 5, marginTop: 15, flexWrap: 'wrap'}}>
                 {[0, 10, 25, 50, 100].map(val => (
                   <button 
-                    key={val} 
-                    onClick={() => setRainfall(val)}
-                    style={{
-                      background: rainfall === val ? '#3b82f6' : '#334155',
-                      color: 'white', border: 'none', padding: '5px 10px', borderRadius: 4, cursor: 'pointer'
-                    }}
+                     key={val} 
+                     onClick={() => setRainfall(val)}
+                     style={{
+                       background: rainfall === val ? '#3b82f6' : '#334155',
+                       color: 'white', border: 'none', padding: '5px 10px', borderRadius: 4, cursor: 'pointer'
+                     }}
                   >
-                    {val}
+                    {val} mm/hr
                   </button>
                 ))}
               </div>
             </div>
-          ) : (
-            <div className="card">
-              <div className="card-title">Live Data</div>
-              <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 10}}>
-                <span>Rainfall Input:</span>
-                <span style={{fontWeight: 600, color: '#10b981'}}>{rainfall.toFixed(2)} mm/hr</span>
-              </div>
-              {liveRainfallData && liveRainfallData.data_timestamp && (
-                <div style={{fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: 5, marginTop: 10}}>
-                  <Clock size={14}/> Obs Time: {liveRainfallData.data_timestamp}
-                </div>
-              )}
-              {liveRainfallData && liveRainfallData.error && (
-                <div style={{color: '#ef4444', fontSize: '0.8rem', marginTop: 10}}>
-                  Error: {liveRainfallData.error}
-                </div>
-              )}
-            </div>
           )}
-          
-          {drainage && (
+
+          {dataStatus && (
             <div className="card">
-              <div className="card-title">Drainage Stress <span className="tag-simulated" style={{fontSize:'0.6rem'}}>SIMULATED</span></div>
-              <div className="score" style={{fontSize: '1.5rem'}}>{drainage.load_percentage}% LOAD</div>
-              <div style={{marginTop: 10}}>
-                <div style={{height: 8, background: '#334155', borderRadius: 4, overflow: 'hidden'}}>
-                  <div style={{height: '100%', width: `${drainage.load_percentage}%`, background: drainage.load_percentage > 80 ? '#ef4444' : '#eab308'}}></div>
-                </div>
+              <div className="card-title">Data Status Panel</div>
+              <div style={{display: 'flex', flexDirection: 'column', gap: 8}}>
+                {Object.entries(dataStatus.sources).map(([key, info]) => (
+                  <div key={key} style={{background: '#1e293b', padding: 8, borderRadius: 6}}>
+                    <div style={{textTransform: 'capitalize', fontWeight: 'bold', fontSize: '0.9rem'}}>{key.replace('_', ' ')}</div>
+                    <div style={{display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.8rem', marginTop: 4}}>
+                       <span style={{
+                         background: info.status === 'REAL' ? '#047857' : (info.status === 'MODELLED' ? '#1d4ed8' : (info.status === 'SIMULATED' ? '#b45309' : '#475569')), 
+                         color: 'white', padding: '2px 6px', borderRadius: 4, fontWeight: 'bold'
+                       }}>{info.status}</span> 
+                       <span style={{color: '#94a3b8'}}>{info.source}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -255,7 +292,7 @@ function App() {
           <div className="card" style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: 200 }}>
             <div className="card-title" style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}><BarChart3 size={16} /> Depth History</span>
-              {isSimulated && <span className="tag-simulated" style={{ fontSize: '0.6rem' }}>SIMULATED</span>}
+              <span className="tag-simulated" style={{ fontSize: '0.6rem', background: '#1d4ed8' }}>MODELLED</span>
             </div>
             <div style={{ flex: 1, width: '100%', minHeight: 150, marginTop: 10 }}>
               <ResponsiveContainer width="100%" height="100%">
@@ -295,10 +332,30 @@ function App() {
                 }}
               >
                 <Popup>
-                  <strong>{loc.name}</strong><br/>
-                  Type: {loc.type}<br/>
-                  Risk: {loc.risk}<br/>
-                  Water Depth: {loc.depth_cm} cm
+                  <div style={{fontSize: '0.9rem', color: '#333'}}>
+                    <strong>{loc.name}</strong><br/>
+                    
+                    {terrainInfo && (
+                       <div style={{marginTop: 5, paddingBottom: 5, borderBottom: '1px solid #ccc'}}>
+                          <div><strong>Elevation:</strong> {terrainInfo.elevation_m !== null ? `${terrainInfo.elevation_m.toFixed(1)} m` : 'UNAVAILABLE'}</div>
+                          <div style={{fontSize: '0.8rem'}}><strong>Terrain:</strong> {terrainInfo.status} — {terrainInfo.source}</div>
+                       </div>
+                    )}
+                    
+                    <div style={{marginTop: 5}}><strong>Type:</strong> {loc.type}</div>
+                    <div><strong>Risk Level:</strong> <span style={{color: loc.risk === 'CRITICAL' ? '#ef4444' : (loc.risk === 'HIGH' ? '#f97316' : '#3b82f6'), fontWeight: 'bold'}}>{loc.risk}</span></div>
+                    <div><strong>Flood Depth:</strong> {loc.depth_cm} cm</div>
+                    
+                    <div style={{marginTop: 5, paddingBottom: 5, borderBottom: '1px solid #ccc'}}>
+                      <div><strong>Rainfall:</strong> {rainfall.toFixed(1)} mm/hr</div>
+                      <div style={{fontSize: '0.8rem'}}><strong>Rainfall:</strong> {isSimulated ? 'SIMULATED' : `REAL — ${liveRainfallData?.source || 'NASA GPM'}`}</div>
+                    </div>
+                    
+                    <div style={{marginTop: 5, fontSize: '0.8rem', color: '#64748b'}}>
+                      <strong>Flood Model:</strong> MODELLED <br/>
+                      <strong>Drainage:</strong> SIMULATED
+                    </div>
+                  </div>
                 </Popup>
               </CircleMarker>
             ))}
@@ -315,10 +372,30 @@ function App() {
                   }}
                 >
                   <Popup>
-                    <strong>{road.name}</strong><br/>
-                    Risk: {road.risk}<br/>
-                    Depth: {road.depth_cm} cm<br/>
-                    <span className="tag-simulated" style={{fontSize: '0.6rem'}}>SIMULATED DATA / FIX</span>
+                    <div style={{fontSize: '0.9rem', color: '#333'}}>
+                      <strong>{road.name}</strong><br/>
+                      
+                      {terrainInfo && (
+                         <div style={{marginTop: 5, paddingBottom: 5, borderBottom: '1px solid #ccc'}}>
+                            <div><strong>Elevation:</strong> {terrainInfo.elevation_m !== null ? `${terrainInfo.elevation_m.toFixed(1)} m` : 'UNAVAILABLE'}</div>
+                            <div style={{fontSize: '0.8rem'}}><strong>Terrain:</strong> {terrainInfo.status} — {terrainInfo.source}</div>
+                         </div>
+                      )}
+                      
+                      <div style={{marginTop: 5}}><strong>Risk Level:</strong> <span style={{color: road.risk === 'CRITICAL' ? '#ef4444' : (road.risk === 'HIGH' ? '#f97316' : (road.risk === 'MODERATE' ? '#eab308' : '#22c55e')), fontWeight: 'bold'}}>{road.risk}</span></div>
+                      <div><strong>Flood Depth:</strong> {road.depth_cm} cm</div>
+                      {drainage && <div><strong>Drainage Stress:</strong> {drainage.load_percentage}%</div>}
+                      
+                      <div style={{marginTop: 5, paddingBottom: 5, borderBottom: '1px solid #ccc'}}>
+                        <div><strong>Rainfall:</strong> {rainfall.toFixed(1)} mm/hr</div>
+                        <div style={{fontSize: '0.8rem'}}><strong>Rainfall:</strong> {isSimulated ? 'SIMULATED' : `REAL — ${liveRainfallData?.source || 'NASA GPM'}`}</div>
+                      </div>
+                      
+                      <div style={{marginTop: 5, fontSize: '0.8rem', color: '#64748b'}}>
+                        <strong>Flood Model:</strong> MODELLED <br/>
+                        <strong>Drainage:</strong> SIMULATED
+                      </div>
+                    </div>
                   </Popup>
                 </Polyline>
               )
@@ -331,7 +408,7 @@ function App() {
       <footer className="footer-timeline">
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <div className="card-title" style={{margin: 0}}>Forecast Timeline</div>
-          {isSimulated && <span className="tag-simulated">SIMULATED FORECAST</span>}
+          <span className="tag-simulated" style={{background: '#1d4ed8'}}>MODELLED</span>
         </div>
         <div className="timeline-track">
           <div className="timeline-line"></div>

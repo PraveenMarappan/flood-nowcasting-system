@@ -6,8 +6,10 @@ import os
 from pathlib import Path
 from datetime import datetime
 from app.services.nasa_gpm import NasaGpmService
+from app.services.terrain_service import TerrainService
 
 router = APIRouter()
+terrain_service = TerrainService()
 
 class ForecastQuery(BaseModel):
     rainfall: int = 0
@@ -83,21 +85,40 @@ async def get_rainfall_history():
     return {"history": history[-50:]}
 
 @router.get("/flood/forecast")
-def get_flood_forecast(rainfall: float = 0, is_simulated: bool = True):
+def get_flood_forecast(rainfall: float = 0, is_simulated: bool = True, latitude: float = 13.0827, longitude: float = 80.2707):
+    # Fetch real elevation if available
+    elev_data = terrain_service.get_elevation(latitude, longitude)
+    
+    elevation_val = elev_data.get("elevation_m")
+    has_real_terrain = (elevation_val is not None and elev_data.get("status") == "REAL")
+    
     status = "NORMAL"
     water_depth = 0
+    
+    # Very basic prototype hydrological/rule-based model integration 
+    # using REAL DEM if available.
+    # Lower elevation -> higher baseline susceptibility to water depth
+    terrain_factor = 1.0 # Default multiplier
+    if has_real_terrain:
+        if elevation_val < 5:
+            terrain_factor = 1.8 # Low-lying area
+        elif elevation_val < 15:
+            terrain_factor = 1.2
+        else:
+            terrain_factor = 0.5 # Higher ground, less depth gathering
+            
     if rainfall > 100:
         status = "CRITICAL"
-        water_depth = rainfall * 0.8
+        water_depth = rainfall * 0.8 * terrain_factor
     elif rainfall > 50:
         status = "FLOOD"
-        water_depth = rainfall * 0.5
+        water_depth = rainfall * 0.5 * terrain_factor
     elif rainfall > 20:
         status = "WATCH"
-        water_depth = rainfall * 0.1
+        water_depth = rainfall * 0.1 * terrain_factor
     elif rainfall == 0:
         status = "RECOVERY"
-        water_depth = 5 
+        water_depth = 5 * terrain_factor
         
     if rainfall == 0 and water_depth <= 5:
         status = "NORMAL"
@@ -137,15 +158,41 @@ def get_data_status():
         except Exception:
             pass
 
+    terrain_info = terrain_service.get_status()
+    dem_status = terrain_info.get("status", "UNAVAILABLE")
+    if dem_status == "UNAVAILABLE":
+        dem_status_label = "UNAVAILABLE"
+    else:
+        dem_status_label = "REAL"
+
+    drainage_status = "SIMULATED"
+    drainage_source = "Rule-based mock"
+    drainage_file = base_dir / "drainage" / "chennai_drainage.geojson"
+    if drainage_file.exists():
+        drainage_status = "PARTIAL/ESTIMATED"
+        drainage_source = "Chennai Drainage GeoJSON"
+
     return {
         "overall_health": "OK",
         "sources": {
             "rainfall": {"status": rainfall_status, "source": "NASA GPM IMERG"},
             "flood_depth": {"status": "MODELLED", "source": "Hydrological Model"},
-            "dem_terrain": {"status": "ESTIMATED", "source": "Static Baseline"},
-            "drainage": {"status": "SIMULATED", "source": "Rule-based mock"},
+            "dem_terrain": {"status": dem_status_label, "source": terrain_info.get("source", "SRTM DEM")},
+            "drainage": {"status": drainage_status, "source": drainage_source},
         }
     }
+
+@router.get("/terrain/status")
+def get_terrain_status():
+    return terrain_service.get_status()
+
+@router.get("/terrain/summary")
+def get_terrain_summary():
+    return terrain_service.get_status()
+    
+@router.get("/terrain/elevation")
+def get_terrain_elevation(latitude: float, longitude: float):
+    return terrain_service.get_elevation(latitude, longitude)
 
 @router.get("/roads/risk")
 def get_roads_risk():
@@ -174,11 +221,15 @@ def get_critical_locations():
 
 @router.get("/drainage/status")
 def get_drainage_status():
+    base_dir = Path(__file__).parent.parent.parent.parent / "data"
+    drainage_file = base_dir / "drainage" / "chennai_drainage.geojson"
+    has_real = drainage_file.exists()
+    
     return {
-        "is_simulated": True,
+        "is_simulated": not has_real,
         "drainage": {
             "load_percentage": 75,
-            "capacity": "Stressed",
+            "capacity": "Stressed" if not has_real else "UNAVAILABLE",
             "overflow_risk": "High",
             "choke_points": 3
         }

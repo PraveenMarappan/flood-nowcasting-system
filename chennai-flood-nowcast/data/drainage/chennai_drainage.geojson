@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Buckingham Canal",
+        "waterway": "canal",
+        "diameter": "UNAVAILABLE",
+        "depth": "UNAVAILABLE",
+        "capacity": "UNAVAILABLE",
+        "slope": "UNAVAILABLE",
+        "flow_direction": "UNAVAILABLE"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.2707, 13.0827],
+          [80.2600, 13.0500],
+          [80.2500, 13.0100]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cooum River",
+        "waterway": "river",
+        "diameter": "UNAVAILABLE",
+        "depth": "UNAVAILABLE",
+        "capacity": "UNAVAILABLE",
+        "slope": "UNAVAILABLE",
+        "flow_direction": "UNAVAILABLE"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.2000, 13.0700],
+          [80.2500, 13.0800],
+          [80.2800, 13.0600]
+        ]
+      }
+    }
+  ]
+}
