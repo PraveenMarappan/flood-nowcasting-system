@@ -1,0 +1,8 @@
+{
+  "feed": {
+    "updated": "2026-09-17T07:20:51.764Z",
+    "id": "https://cmr.earthdata.nasa.gov:443/search/granules.json?short_name=GPM_3IMERGHDF&temporal=2015-11-30T00:00:00Z,2015-12-05T00:00:00Z&page_size=5",
+    "title": "ECHO granule metadata",
+    "entry": []
+  }
+}

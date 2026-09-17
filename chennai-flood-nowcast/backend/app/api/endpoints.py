@@ -188,6 +188,14 @@ def get_critical_locations():
 def get_drainage_status():
     return drainage_service.get_status()
 
+@router.get("/drainage/summary")
+def get_drainage_summary():
+    return drainage_service.get_summary()
+
+@router.get("/drainage/nearest")
+def get_drainage_nearest(latitude: float, longitude: float):
+    return drainage_service.get_nearest(latitude, longitude)
+
 @router.get("/route/safer")
 def get_safer_route():
     return route_service.get_safer_route()

@@ -1,11 +1,14 @@
-﻿Earthdata token configured: YES
-CMR metadata search: PASS
-GPM HDF5 metadata found: YES
-Bearer token -> GPM HDF5: FAIL
-HTTP: 403
-Username/password -> GPM HDF5: FAIL
-HTTP: 401
-GES DISC authorization confirmed: DENIED
-EULA requirement confirmed: LIKELY NOT ACCEPTED or BAD CREDENTIALS
-Actual HDF5 retrieved: NO
-precipitationCal retrieved: NO
+=== Validation Data Processing Report ===
+Sources processed: ['814ca028-4c84-4bd0-aa67-6dbaeb9b6ba5.kml', '93d2905a-a580-482d-96b0-4d9ccf5273ef.kml']
+Total entries reading: 945
+Valid coordinates: 945
+Invalid coordinates: 0
+Duplicates excluded: 0
+Total normalized features: 945
+Features with depth data: 192
+Features without depth data: 753
+Features with recognized event: 753
+Features mapped as UNKNOWN event: 192
+Spatial Bounds [minLat, minLon, maxLat, maxLon]: [[12.8729893, 80.1425033], [13.225626, 80.324751]]
+Coordinate Reference System (CRS): urn:ogc:def:crs:OGC:1.3:CRS84
+Output saved to -> data\validation\processed\chennai_validation_normalized.geojson

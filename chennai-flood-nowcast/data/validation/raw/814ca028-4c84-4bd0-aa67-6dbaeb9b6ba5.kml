@@ -1,0 +1,2321 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="chennai_flood_inundation_inches" id="chennai_flood_inundation_inches">
+	<SimpleField name="OBJECTID_1" type="int"></SimpleField>
+	<SimpleField name="OBJECTID" type="int"></SimpleField>
+	<SimpleField name="F_ID" type="int"></SimpleField>
+	<SimpleField name="F_REMARKS" type="string"></SimpleField>
+	<SimpleField name="F_LATITUDE" type="float"></SimpleField>
+	<SimpleField name="F_LONGITUDE" type="float"></SimpleField>
+	<SimpleField name="DEPTH" type="float"></SimpleField>
+	<SimpleField name="ZONE" type="string"></SimpleField>
+	<SimpleField name="WARD" type="string"></SimpleField>
+</Schema>
+<Folder><name>chennai_flood_inundation_inches</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">37</SimpleData>
+		<SimpleData name="OBJECTID">37</SimpleData>
+		<SimpleData name="F_ID">40</SimpleData>
+		<SimpleData name="F_REMARKS">completely  inundated  with flood water</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99890552</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.207447</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.207447,12.9989055</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">38</SimpleData>
+		<SimpleData name="OBJECTID">38</SimpleData>
+		<SimpleData name="F_ID">41</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99925997</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2075221</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2075221,12.99926</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">39</SimpleData>
+		<SimpleData name="OBJECTID">39</SimpleData>
+		<SimpleData name="F_ID">42</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">13.00254573</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2087814</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2087814,13.0025457</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">40</SimpleData>
+		<SimpleData name="OBJECTID">40</SimpleData>
+		<SimpleData name="F_ID">43</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99995025</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20772696</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.207727,12.9999502</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">41</SimpleData>
+		<SimpleData name="OBJECTID">41</SimpleData>
+		<SimpleData name="F_ID">44</SimpleData>
+		<SimpleData name="F_REMARKS">partially  inundated one side of the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97839607</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20419817</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2041982,12.9783961</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">42</SimpleData>
+		<SimpleData name="OBJECTID">42</SimpleData>
+		<SimpleData name="F_ID">45</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded one side of the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97323496</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21074276</SimpleData>
+		<SimpleData name="DEPTH">5.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2107428,12.973235</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">43</SimpleData>
+		<SimpleData name="OBJECTID">43</SimpleData>
+		<SimpleData name="F_ID">47</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on sides of the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.96137578</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21517478</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2151748,12.9613758</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">44</SimpleData>
+		<SimpleData name="OBJECTID">44</SimpleData>
+		<SimpleData name="F_ID">48</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the side of the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.95736183</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21355975</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2135598,12.9573618</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">45</SimpleData>
+		<SimpleData name="OBJECTID">45</SimpleData>
+		<SimpleData name="F_ID">49</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97256094</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21946564</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2194656,12.9725609</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">46</SimpleData>
+		<SimpleData name="OBJECTID">46</SimpleData>
+		<SimpleData name="F_ID">50</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97270535</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21950521</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2195052,12.9727053</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">47</SimpleData>
+		<SimpleData name="OBJECTID">47</SimpleData>
+		<SimpleData name="F_ID">51</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97379299</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21866065</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2186606,12.973793</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">48</SimpleData>
+		<SimpleData name="OBJECTID">48</SimpleData>
+		<SimpleData name="F_ID">52</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97547983</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22072293</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2207229,12.9754798</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">49</SimpleData>
+		<SimpleData name="OBJECTID">49</SimpleData>
+		<SimpleData name="F_ID">53</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the road side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97555693</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22076853</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2207685,12.9755569</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">50</SimpleData>
+		<SimpleData name="OBJECTID">50</SimpleData>
+		<SimpleData name="F_ID">54</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the road near bus stand</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97610941</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22118963</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2211896,12.9761094</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">51</SimpleData>
+		<SimpleData name="OBJECTID">51</SimpleData>
+		<SimpleData name="F_ID">55</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded on the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97617279</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22126641</SimpleData>
+		<SimpleData name="DEPTH">5.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2212664,12.9761728</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">52</SimpleData>
+		<SimpleData name="OBJECTID">52</SimpleData>
+		<SimpleData name="F_ID">56</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on sides of the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97622572</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22122987</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2212299,12.9762257</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">53</SimpleData>
+		<SimpleData name="OBJECTID">53</SimpleData>
+		<SimpleData name="F_ID">57</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the road side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97753159</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22123925</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2212393,12.9775316</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">54</SimpleData>
+		<SimpleData name="OBJECTID">54</SimpleData>
+		<SimpleData name="F_ID">58</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97749761</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22125937</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2212594,12.9774976</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">55</SimpleData>
+		<SimpleData name="OBJECTID">55</SimpleData>
+		<SimpleData name="F_ID">59</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded on the road side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.978268</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22121076</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2212108,12.978268</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">56</SimpleData>
+		<SimpleData name="OBJECTID">56</SimpleData>
+		<SimpleData name="F_ID">60</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the road side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97865319</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22120036</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2212004,12.9786532</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">57</SimpleData>
+		<SimpleData name="OBJECTID">57</SimpleData>
+		<SimpleData name="F_ID">61</SimpleData>
+		<SimpleData name="F_REMARKS">flood inundated on the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97996134</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22106793</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2210679,12.9799613</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">58</SimpleData>
+		<SimpleData name="OBJECTID">58</SimpleData>
+		<SimpleData name="F_ID">62</SimpleData>
+		<SimpleData name="F_REMARKS">flood inundated on the road near tneb office</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98029981</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22100825</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2210082,12.9802998</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">59</SimpleData>
+		<SimpleData name="OBJECTID">59</SimpleData>
+		<SimpleData name="F_ID">63</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98083365</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22096667</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2209667,12.9808337</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">60</SimpleData>
+		<SimpleData name="OBJECTID">60</SimpleData>
+		<SimpleData name="F_ID">64</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded on the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98094931</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22101026</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2210103,12.9809493</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">61</SimpleData>
+		<SimpleData name="OBJECTID">61</SimpleData>
+		<SimpleData name="F_ID">65</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98102641</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22105418</SimpleData>
+		<SimpleData name="DEPTH">9.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2210542,12.9810264</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">62</SimpleData>
+		<SimpleData name="OBJECTID">62</SimpleData>
+		<SimpleData name="F_ID">66</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98113324</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22108268</SimpleData>
+		<SimpleData name="DEPTH">7.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2210827,12.9811332</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">63</SimpleData>
+		<SimpleData name="OBJECTID">63</SimpleData>
+		<SimpleData name="F_ID">67</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97438468</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22041917</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2204192,12.9743847</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">64</SimpleData>
+		<SimpleData name="OBJECTID">64</SimpleData>
+		<SimpleData name="F_ID">68</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded on the road near bus stop</SimpleData>
+		<SimpleData name="F_LATITUDE">12.9636665</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21545239</SimpleData>
+		<SimpleData name="DEPTH">5.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2154524,12.9636665</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">65</SimpleData>
+		<SimpleData name="OBJECTID">65</SimpleData>
+		<SimpleData name="F_ID">69</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded on the road side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.96374525</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21517377</SimpleData>
+		<SimpleData name="DEPTH">5.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2151738,12.9637452</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">66</SimpleData>
+		<SimpleData name="OBJECTID">66</SimpleData>
+		<SimpleData name="F_ID">70</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded  on the road junction</SimpleData>
+		<SimpleData name="F_LATITUDE">12.96467937</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.1961197</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1961197,12.9646794</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">67</SimpleData>
+		<SimpleData name="OBJECTID">67</SimpleData>
+		<SimpleData name="F_ID">71</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded on the road side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.96464147</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19598592</SimpleData>
+		<SimpleData name="DEPTH">5.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1959859,12.9646415</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">68</SimpleData>
+		<SimpleData name="OBJECTID">68</SimpleData>
+		<SimpleData name="F_ID">72</SimpleData>
+		<SimpleData name="F_REMARKS">food water completely  inundate and cause road block sometimes</SimpleData>
+		<SimpleData name="F_LATITUDE">12.96464669</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.1959135</SimpleData>
+		<SimpleData name="DEPTH">17</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1959135,12.9646467</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">69</SimpleData>
+		<SimpleData name="OBJECTID">69</SimpleData>
+		<SimpleData name="F_ID">73</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded on the road side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.96515214</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19233543</SimpleData>
+		<SimpleData name="DEPTH">5.7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1923354,12.9651521</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">70</SimpleData>
+		<SimpleData name="OBJECTID">70</SimpleData>
+		<SimpleData name="F_ID">74</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded on the road side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.96521912</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19208733</SimpleData>
+		<SimpleData name="DEPTH">5.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1920873,12.9652191</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">82</SimpleData>
+		<SimpleData name="OBJECTID">82</SimpleData>
+		<SimpleData name="F_ID">86</SimpleData>
+		<SimpleData name="F_REMARKS">partially  covered  one side of the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99677716</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24918921</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2491892,12.9967772</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">83</SimpleData>
+		<SimpleData name="OBJECTID">83</SimpleData>
+		<SimpleData name="F_ID">87</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded covering one side of the road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99670431</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24920732</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2492073,12.9967043</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">84</SimpleData>
+		<SimpleData name="OBJECTID">84</SimpleData>
+		<SimpleData name="F_ID">88</SimpleData>
+		<SimpleData name="F_REMARKS">partially  flooded  covering  flyover  entry</SimpleData>
+		<SimpleData name="F_LATITUDE">13.00688792</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24010926</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2401093,13.0068879</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">85</SimpleData>
+		<SimpleData name="OBJECTID">85</SimpleData>
+		<SimpleData name="F_ID">89</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded  and drain within 2 hours</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97966665</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2432156</SimpleData>
+		<SimpleData name="DEPTH">29</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2432156,12.9796666</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">86</SimpleData>
+		<SimpleData name="OBJECTID">86</SimpleData>
+		<SimpleData name="F_ID">90</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded bocking railway  station exit upto 1 feet</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97832746</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23890059</SimpleData>
+		<SimpleData name="DEPTH">17</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2389006,12.9783275</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">87</SimpleData>
+		<SimpleData name="OBJECTID">87</SimpleData>
+		<SimpleData name="F_ID">91</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97820331</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23972739</SimpleData>
+		<SimpleData name="DEPTH">10.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2397274,12.9782033</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">88</SimpleData>
+		<SimpleData name="OBJECTID">88</SimpleData>
+		<SimpleData name="F_ID">92</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded upto 12</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97802003</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24108056</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2410806,12.97802</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">89</SimpleData>
+		<SimpleData name="OBJECTID">89</SimpleData>
+		<SimpleData name="F_ID">93</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded upto10</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97807818</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24142824</SimpleData>
+		<SimpleData name="DEPTH">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2414282,12.9780782</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">90</SimpleData>
+		<SimpleData name="OBJECTID">90</SimpleData>
+		<SimpleData name="F_ID">94</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded bocking railway station entrance  upto 2 feet</SimpleData>
+		<SimpleData name="F_LATITUDE">12.9782056</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24187349</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2418735,12.9782056</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">91</SimpleData>
+		<SimpleData name="OBJECTID">91</SimpleData>
+		<SimpleData name="F_ID">95</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97840391</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24251923</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2425192,12.9784039</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">92</SimpleData>
+		<SimpleData name="OBJECTID">92</SimpleData>
+		<SimpleData name="F_ID">96</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded bocking railway station entrance  upto 1 feet</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97853786</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2430483</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2430483,12.9785379</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">93</SimpleData>
+		<SimpleData name="OBJECTID">93</SimpleData>
+		<SimpleData name="F_ID">97</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded  upto 1.5 feet reported drain in 2 hours</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97838921</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24317469</SimpleData>
+		<SimpleData name="DEPTH">20</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2431747,12.9783892</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">94</SimpleData>
+		<SimpleData name="OBJECTID">94</SimpleData>
+		<SimpleData name="F_ID">98</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded  reported</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97881099</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24313781</SimpleData>
+		<SimpleData name="DEPTH">20</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2431378,12.978811</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">95</SimpleData>
+		<SimpleData name="OBJECTID">95</SimpleData>
+		<SimpleData name="F_ID">99</SimpleData>
+		<SimpleData name="F_REMARKS">railway station covered by flood upto 1 feet</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97835948</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24098601</SimpleData>
+		<SimpleData name="DEPTH">16</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.240986,12.9783595</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">96</SimpleData>
+		<SimpleData name="OBJECTID">96</SimpleData>
+		<SimpleData name="F_ID">100</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded upto  1 feet and drain in 2 hours</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97510803</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24406251</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2440625,12.975108</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">97</SimpleData>
+		<SimpleData name="OBJECTID">97</SimpleData>
+		<SimpleData name="F_ID">101</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded upto 1 feet</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97485907</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24414532</SimpleData>
+		<SimpleData name="DEPTH">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2441453,12.9748591</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">98</SimpleData>
+		<SimpleData name="OBJECTID">98</SimpleData>
+		<SimpleData name="F_ID">102</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97464049</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24420165</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2442016,12.9746405</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">99</SimpleData>
+		<SimpleData name="OBJECTID">99</SimpleData>
+		<SimpleData name="F_ID">103</SimpleData>
+		<SimpleData name="F_REMARKS">flood water inundated  into road juction</SimpleData>
+		<SimpleData name="F_LATITUDE">12.93575135</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23390364</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2339036,12.9357513</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">100</SimpleData>
+		<SimpleData name="OBJECTID">100</SimpleData>
+		<SimpleData name="F_ID">104</SimpleData>
+		<SimpleData name="F_REMARKS">inundated  into road  covering junction</SimpleData>
+		<SimpleData name="F_LATITUDE">12.91398442</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22935662</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2293566,12.9139844</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">115</SimpleData>
+		<SimpleData name="OBJECTID">115</SimpleData>
+		<SimpleData name="F_ID">119</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated on the junction</SimpleData>
+		<SimpleData name="F_LATITUDE">12.91143181</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19584745</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1958475,12.9114318</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">116</SimpleData>
+		<SimpleData name="OBJECTID">116</SimpleData>
+		<SimpleData name="F_ID">120</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.91137396</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.1959021</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1959021,12.911374</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">21</SimpleData>
+		<SimpleData name="OBJECTID">21</SimpleData>
+		<SimpleData name="F_ID">24</SimpleData>
+		<SimpleData name="F_REMARKS">one side of the road got partially  flood</SimpleData>
+		<SimpleData name="F_LATITUDE">12.92707258</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19776087</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1977609,12.9270726</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">22</SimpleData>
+		<SimpleData name="OBJECTID">22</SimpleData>
+		<SimpleData name="F_ID">25</SimpleData>
+		<SimpleData name="F_REMARKS">connecting road junction got flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.92773986</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19821215</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1982122,12.9277399</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">23</SimpleData>
+		<SimpleData name="OBJECTID">23</SimpleData>
+		<SimpleData name="F_ID">26</SimpleData>
+		<SimpleData name="F_REMARKS">main road got partially  flooded and connection got afffected</SimpleData>
+		<SimpleData name="F_LATITUDE">12.9358912</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20432625</SimpleData>
+		<SimpleData name="DEPTH">8.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2043262,12.9358912</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">24</SimpleData>
+		<SimpleData name="OBJECTID">24</SimpleData>
+		<SimpleData name="F_ID">27</SimpleData>
+		<SimpleData name="F_REMARKS">partially  flooded  covering  half of the road on both side</SimpleData>
+		<SimpleData name="F_LATITUDE">12.94048943</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20571563</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2057156,12.9404894</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">25</SimpleData>
+		<SimpleData name="OBJECTID">25</SimpleData>
+		<SimpleData name="F_ID">28</SimpleData>
+		<SimpleData name="F_REMARKS">both side of the road got flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.94122039</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20599324</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2059932,12.9412204</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">26</SimpleData>
+		<SimpleData name="OBJECTID">26</SimpleData>
+		<SimpleData name="F_ID">29</SimpleData>
+		<SimpleData name="F_REMARKS">service road joining main road  got partially  flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.95129029</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21098584</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2109858,12.9512903</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">27</SimpleData>
+		<SimpleData name="OBJECTID">27</SimpleData>
+		<SimpleData name="F_ID">30</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97331664</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21969497</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.219695,12.9733166</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">28</SimpleData>
+		<SimpleData name="OBJECTID">28</SimpleData>
+		<SimpleData name="F_ID">31</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97614633</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2198958</SimpleData>
+		<SimpleData name="DEPTH">6.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2198958,12.9761463</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">29</SimpleData>
+		<SimpleData name="OBJECTID">29</SimpleData>
+		<SimpleData name="F_ID">32</SimpleData>
+		<SimpleData name="F_REMARKS">road got completely  flooed</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97631197</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21930739</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2193074,12.976312</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">30</SimpleData>
+		<SimpleData name="OBJECTID">30</SimpleData>
+		<SimpleData name="F_ID">33</SimpleData>
+		<SimpleData name="F_REMARKS">partially  side of the road got flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97799422</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21909986</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2190999,12.9779942</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">31</SimpleData>
+		<SimpleData name="OBJECTID">31</SimpleData>
+		<SimpleData name="F_ID">34</SimpleData>
+		<SimpleData name="F_REMARKS">completely  flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99742628</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21617256</SimpleData>
+		<SimpleData name="DEPTH">29</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2161726,12.9974263</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">32</SimpleData>
+		<SimpleData name="OBJECTID">32</SimpleData>
+		<SimpleData name="F_ID">35</SimpleData>
+		<SimpleData name="F_REMARKS">partially  flooded  covering  one side  of the road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.00670237</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21266423</SimpleData>
+		<SimpleData name="DEPTH">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2126642,13.0067024</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">33</SimpleData>
+		<SimpleData name="OBJECTID">33</SimpleData>
+		<SimpleData name="F_ID">36</SimpleData>
+		<SimpleData name="F_REMARKS">flood water completely  get inundated  into the road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.0098038</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21502256</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2150226,13.0098038</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">34</SimpleData>
+		<SimpleData name="OBJECTID">34</SimpleData>
+		<SimpleData name="F_ID">37</SimpleData>
+		<SimpleData name="F_REMARKS">flood water inundate upto 2feet in subway</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99558246</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20116225</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2011622,12.9955825</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">35</SimpleData>
+		<SimpleData name="OBJECTID">35</SimpleData>
+		<SimpleData name="F_ID">38</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded covering half road</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99718258</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2070906</SimpleData>
+		<SimpleData name="DEPTH">9.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2070906,12.9971826</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">36</SimpleData>
+		<SimpleData name="OBJECTID">36</SimpleData>
+		<SimpleData name="F_ID">39</SimpleData>
+		<SimpleData name="F_REMARKS">partially flooded</SimpleData>
+		<SimpleData name="F_LATITUDE">12.99740962</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20712782</SimpleData>
+		<SimpleData name="DEPTH">7.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2071278,12.9974096</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">185</SimpleData>
+		<SimpleData name="OBJECTID">185</SimpleData>
+		<SimpleData name="F_ID">190</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated covering entirely- traffic inspector record</SimpleData>
+		<SimpleData name="F_LATITUDE">12.94871485</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20184319</SimpleData>
+		<SimpleData name="DEPTH">60</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2018432,12.9487149</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">186</SimpleData>
+		<SimpleData name="OBJECTID">186</SimpleData>
+		<SimpleData name="F_ID">191</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated covering entirely</SimpleData>
+		<SimpleData name="F_LATITUDE">12.94871649</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20291675</SimpleData>
+		<SimpleData name="DEPTH">40</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2029167,12.9487165</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">187</SimpleData>
+		<SimpleData name="OBJECTID">187</SimpleData>
+		<SimpleData name="F_ID">192</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated  covering entirely</SimpleData>
+		<SimpleData name="F_LATITUDE">12.94876125</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20352729</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2035273,12.9487613</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">188</SimpleData>
+		<SimpleData name="OBJECTID">188</SimpleData>
+		<SimpleData name="F_ID">193</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97255277</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19142818</SimpleData>
+		<SimpleData name="DEPTH">14</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1914282,12.9725528</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">189</SimpleData>
+		<SimpleData name="OBJECTID">189</SimpleData>
+		<SimpleData name="F_ID">194</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated subway blocked</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98530135</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.17683998</SimpleData>
+		<SimpleData name="DEPTH">35</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.17684,12.9853013</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">190</SimpleData>
+		<SimpleData name="OBJECTID">190</SimpleData>
+		<SimpleData name="F_ID">195</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated subways blocked</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98922501</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.18541198</SimpleData>
+		<SimpleData name="DEPTH">35</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.185412,12.989225</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">191</SimpleData>
+		<SimpleData name="OBJECTID">191</SimpleData>
+		<SimpleData name="F_ID">196</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97686869</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.1935022</SimpleData>
+		<SimpleData name="DEPTH">14</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1935022,12.9768687</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">192</SimpleData>
+		<SimpleData name="OBJECTID">192</SimpleData>
+		<SimpleData name="F_ID">197</SimpleData>
+		<SimpleData name="F_REMARKS"></SimpleData>
+		<SimpleData name="F_LATITUDE">12.97770834</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19380596</SimpleData>
+		<SimpleData name="DEPTH">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.193806,12.9777083</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">193</SimpleData>
+		<SimpleData name="OBJECTID">193</SimpleData>
+		<SimpleData name="F_ID">198</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.97949839</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19460358</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1946036,12.9794984</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">194</SimpleData>
+		<SimpleData name="OBJECTID">194</SimpleData>
+		<SimpleData name="F_ID">199</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98092971</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19526441</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1952644,12.9809297</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">195</SimpleData>
+		<SimpleData name="OBJECTID">195</SimpleData>
+		<SimpleData name="F_ID">200</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.98199608</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19589942</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1958994,12.9819961</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">196</SimpleData>
+		<SimpleData name="OBJECTID">196</SimpleData>
+		<SimpleData name="F_ID">201</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated and drain in 4 hours</SimpleData>
+		<SimpleData name="F_LATITUDE">12.95934218</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24459191</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2445919,12.9593422</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">197</SimpleData>
+		<SimpleData name="OBJECTID">197</SimpleData>
+		<SimpleData name="F_ID">202</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.95902296</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24447858</SimpleData>
+		<SimpleData name="DEPTH">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2444786,12.959023</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">198</SimpleData>
+		<SimpleData name="OBJECTID">198</SimpleData>
+		<SimpleData name="F_ID">203</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.95875634</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24434246</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2443425,12.9587563</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">199</SimpleData>
+		<SimpleData name="OBJECTID">199</SimpleData>
+		<SimpleData name="F_ID">204</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">12.96233213</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24597425</SimpleData>
+		<SimpleData name="DEPTH">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2459743,12.9623321</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">200</SimpleData>
+		<SimpleData name="OBJECTID">200</SimpleData>
+		<SimpleData name="F_ID">205</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated blocking connection road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03326511</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20966519</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2096652,13.0332651</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">201</SimpleData>
+		<SimpleData name="OBJECTID">201</SimpleData>
+		<SimpleData name="F_ID">206</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03337878</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20970542</SimpleData>
+		<SimpleData name="DEPTH">7.8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2097054,13.0333788</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">202</SimpleData>
+		<SimpleData name="OBJECTID">202</SimpleData>
+		<SimpleData name="F_ID">207</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03347906</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20972352</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2097235,13.0334791</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">203</SimpleData>
+		<SimpleData name="OBJECTID">203</SimpleData>
+		<SimpleData name="F_ID">208</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03314752</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20967625</SimpleData>
+		<SimpleData name="DEPTH">7.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2096763,13.0331475</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">204</SimpleData>
+		<SimpleData name="OBJECTID">204</SimpleData>
+		<SimpleData name="F_ID">209</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated  blocking road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03524944</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20977851</SimpleData>
+		<SimpleData name="DEPTH">21</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2097785,13.0352494</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">205</SimpleData>
+		<SimpleData name="OBJECTID">205</SimpleData>
+		<SimpleData name="F_ID">210</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated  blocking road reported</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03509069</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20992771</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2099277,13.0350907</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">206</SimpleData>
+		<SimpleData name="OBJECTID">206</SimpleData>
+		<SimpleData name="F_ID">211</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03666573</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21224346</SimpleData>
+		<SimpleData name="DEPTH">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2122435,13.0366657</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">207</SimpleData>
+		<SimpleData name="OBJECTID">207</SimpleData>
+		<SimpleData name="F_ID">212</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03682611</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21225151</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2122515,13.0368261</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">208</SimpleData>
+		<SimpleData name="OBJECTID">208</SimpleData>
+		<SimpleData name="F_ID">213</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated covering entirely junction</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03689078</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21223843</SimpleData>
+		<SimpleData name="DEPTH">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2122384,13.0368908</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">209</SimpleData>
+		<SimpleData name="OBJECTID">209</SimpleData>
+		<SimpleData name="F_ID">214</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated covering one lane</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03706226</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21225553</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2122555,13.0370623</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">210</SimpleData>
+		<SimpleData name="OBJECTID">210</SimpleData>
+		<SimpleData name="F_ID">215</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated covering one lane</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03737681</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21225922</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2122592,13.0373768</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">211</SimpleData>
+		<SimpleData name="OBJECTID">211</SimpleData>
+		<SimpleData name="F_ID">216</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated covering one lane</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03765445</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21225452</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2122545,13.0376545</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">212</SimpleData>
+		<SimpleData name="OBJECTID">212</SimpleData>
+		<SimpleData name="F_ID">217</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03690417</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21207515</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2120752,13.0369042</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">213</SimpleData>
+		<SimpleData name="OBJECTID">213</SimpleData>
+		<SimpleData name="F_ID">218</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03554962</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20695616</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2069562,13.0355496</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">214</SimpleData>
+		<SimpleData name="OBJECTID">214</SimpleData>
+		<SimpleData name="F_ID">219</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.0356316</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20589802</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.205898,13.0356316</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">215</SimpleData>
+		<SimpleData name="OBJECTID">215</SimpleData>
+		<SimpleData name="F_ID">220</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03607256</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20274777</SimpleData>
+		<SimpleData name="DEPTH">14</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2027478,13.0360726</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">216</SimpleData>
+		<SimpleData name="OBJECTID">216</SimpleData>
+		<SimpleData name="F_ID">221</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03663405</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19968636</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1996864,13.036634</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">217</SimpleData>
+		<SimpleData name="OBJECTID">217</SimpleData>
+		<SimpleData name="F_ID">222</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.0372798</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19529894</SimpleData>
+		<SimpleData name="DEPTH">14</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1952989,13.0372798</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">218</SimpleData>
+		<SimpleData name="OBJECTID">218</SimpleData>
+		<SimpleData name="F_ID">223</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03729809</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20456363</SimpleData>
+		<SimpleData name="DEPTH">16</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2045636,13.0372981</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">219</SimpleData>
+		<SimpleData name="OBJECTID">219</SimpleData>
+		<SimpleData name="F_ID">224</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04049353</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20510074</SimpleData>
+		<SimpleData name="DEPTH">16</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2051007,13.0404935</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">220</SimpleData>
+		<SimpleData name="OBJECTID">220</SimpleData>
+		<SimpleData name="F_ID">225</SimpleData>
+		<SimpleData name="F_REMARKS">tree fall</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03851317</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2084877</SimpleData>
+		<SimpleData name="DEPTH">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2084877,13.0385132</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">221</SimpleData>
+		<SimpleData name="OBJECTID">221</SimpleData>
+		<SimpleData name="F_ID">226</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04044258</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20873312</SimpleData>
+		<SimpleData name="DEPTH">8.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2087331,13.0404426</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">222</SimpleData>
+		<SimpleData name="OBJECTID">222</SimpleData>
+		<SimpleData name="F_ID">227</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04134636</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20884611</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2088461,13.0413464</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">223</SimpleData>
+		<SimpleData name="OBJECTID">223</SimpleData>
+		<SimpleData name="F_ID">228</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04187713</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20896513</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2089651,13.0418771</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">224</SimpleData>
+		<SimpleData name="OBJECTID">224</SimpleData>
+		<SimpleData name="F_ID">229</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04313399</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2091093</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2091093,13.043134</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">225</SimpleData>
+		<SimpleData name="OBJECTID">225</SimpleData>
+		<SimpleData name="F_ID">230</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03779327</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21318257</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2131826,13.0377933</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">226</SimpleData>
+		<SimpleData name="OBJECTID">226</SimpleData>
+		<SimpleData name="F_ID">231</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03841877</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21368448</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2136845,13.0384188</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">227</SimpleData>
+		<SimpleData name="OBJECTID">227</SimpleData>
+		<SimpleData name="F_ID">232</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03906975</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21412872</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2141287,13.0390697</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">228</SimpleData>
+		<SimpleData name="OBJECTID">228</SimpleData>
+		<SimpleData name="F_ID">233</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated covering  junction</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03939311</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21418136</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2141814,13.0393931</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">229</SimpleData>
+		<SimpleData name="OBJECTID">229</SimpleData>
+		<SimpleData name="F_ID">234</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03987947</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21467086</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2146709,13.0398795</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">230</SimpleData>
+		<SimpleData name="OBJECTID">230</SimpleData>
+		<SimpleData name="F_ID">235</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated  raised upto 10</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04052979</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21511275</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2151128,13.0405298</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">231</SimpleData>
+		<SimpleData name="OBJECTID">231</SimpleData>
+		<SimpleData name="F_ID">236</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04337308</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21982808</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2198281,13.0433731</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">232</SimpleData>
+		<SimpleData name="OBJECTID">232</SimpleData>
+		<SimpleData name="F_ID">237</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04304286</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22149339</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2214934,13.0430429</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">233</SimpleData>
+		<SimpleData name="OBJECTID">233</SimpleData>
+		<SimpleData name="F_ID">238</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04204894</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22540171</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2254017,13.0420489</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">234</SimpleData>
+		<SimpleData name="OBJECTID">234</SimpleData>
+		<SimpleData name="F_ID">239</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04179743</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22642028</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2264203,13.0417974</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">235</SimpleData>
+		<SimpleData name="OBJECTID">235</SimpleData>
+		<SimpleData name="F_ID">240</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated  and subway closed</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04126503</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22883125</SimpleData>
+		<SimpleData name="DEPTH">60</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2288312,13.041265</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">236</SimpleData>
+		<SimpleData name="OBJECTID">236</SimpleData>
+		<SimpleData name="F_ID">241</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated junction</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04224263</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22493768</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2249377,13.0422426</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">237</SimpleData>
+		<SimpleData name="OBJECTID">237</SimpleData>
+		<SimpleData name="F_ID">242</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04531127</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22578862</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2257886,13.0453113</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">238</SimpleData>
+		<SimpleData name="OBJECTID">238</SimpleData>
+		<SimpleData name="F_ID">243</SimpleData>
+		<SimpleData name="F_REMARKS"></SimpleData>
+		<SimpleData name="F_LATITUDE">13.04620557</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2260793</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2260793,13.0462056</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">239</SimpleData>
+		<SimpleData name="OBJECTID">239</SimpleData>
+		<SimpleData name="F_ID">244</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04669354</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22620972</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2262097,13.0466935</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">240</SimpleData>
+		<SimpleData name="OBJECTID">240</SimpleData>
+		<SimpleData name="F_ID">245</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated blocking junction</SimpleData>
+		<SimpleData name="F_LATITUDE">13.0467471</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22603907</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2260391,13.0467471</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">241</SimpleData>
+		<SimpleData name="OBJECTID">241</SimpleData>
+		<SimpleData name="F_ID">246</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04743791</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23296855</SimpleData>
+		<SimpleData name="DEPTH">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2329686,13.0474379</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">242</SimpleData>
+		<SimpleData name="OBJECTID">242</SimpleData>
+		<SimpleData name="F_ID">247</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04691597</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23300476</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2330048,13.046916</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">243</SimpleData>
+		<SimpleData name="OBJECTID">243</SimpleData>
+		<SimpleData name="F_ID">248</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.0435978</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2324757</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2324757,13.0435978</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">244</SimpleData>
+		<SimpleData name="OBJECTID">244</SimpleData>
+		<SimpleData name="F_ID">249</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04528841</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23285322</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2328532,13.0452884</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">245</SimpleData>
+		<SimpleData name="OBJECTID">245</SimpleData>
+		<SimpleData name="F_ID">250</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04845337</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23321934</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2332193,13.0484534</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">246</SimpleData>
+		<SimpleData name="OBJECTID">246</SimpleData>
+		<SimpleData name="F_ID">251</SimpleData>
+		<SimpleData name="F_REMARKS"></SimpleData>
+		<SimpleData name="F_LATITUDE">13.05005478</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23341246</SimpleData>
+		<SimpleData name="DEPTH">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2334125,13.0500548</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">247</SimpleData>
+		<SimpleData name="OBJECTID">247</SimpleData>
+		<SimpleData name="F_ID">252</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.05311549</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23425534</SimpleData>
+		<SimpleData name="DEPTH">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2342553,13.0531155</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">248</SimpleData>
+		<SimpleData name="OBJECTID">248</SimpleData>
+		<SimpleData name="F_ID">253</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated under flyover upto 7</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04524954</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24009485</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2400948,13.0452495</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">249</SimpleData>
+		<SimpleData name="OBJECTID">249</SimpleData>
+		<SimpleData name="F_ID">254</SimpleData>
+		<SimpleData name="F_REMARKS"></SimpleData>
+		<SimpleData name="F_LATITUDE">13.04495068</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24028931</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2402893,13.0449507</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">250</SimpleData>
+		<SimpleData name="OBJECTID">250</SimpleData>
+		<SimpleData name="F_ID">255</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated under flyover upto  8</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04463679</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23957115</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2395711,13.0446368</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">251</SimpleData>
+		<SimpleData name="OBJECTID">251</SimpleData>
+		<SimpleData name="F_ID">256</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03507697</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23046203</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.230462,13.035077</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">252</SimpleData>
+		<SimpleData name="OBJECTID">252</SimpleData>
+		<SimpleData name="F_ID">257</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated upto 10</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03451026</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23039967</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2303997,13.0345103</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">253</SimpleData>
+		<SimpleData name="OBJECTID">253</SimpleData>
+		<SimpleData name="F_ID">258</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated upto 10</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03510898</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23011334</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2301133,13.035109</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">254</SimpleData>
+		<SimpleData name="OBJECTID">254</SimpleData>
+		<SimpleData name="F_ID">259</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated upto 15inches</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03695578</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23604203</SimpleData>
+		<SimpleData name="DEPTH">20</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.236042,13.0369558</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">255</SimpleData>
+		<SimpleData name="OBJECTID">255</SimpleData>
+		<SimpleData name="F_ID">260</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated upto 10 inch reported</SimpleData>
+		<SimpleData name="F_LATITUDE">13.03987881</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.24318475</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2431848,13.0398788</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">256</SimpleData>
+		<SimpleData name="OBJECTID">256</SimpleData>
+		<SimpleData name="F_ID">261</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.05355413</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.23588646</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2358865,13.0535541</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">257</SimpleData>
+		<SimpleData name="OBJECTID">257</SimpleData>
+		<SimpleData name="F_ID">262</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.05406887</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22836655</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2283666,13.0540689</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">258</SimpleData>
+		<SimpleData name="OBJECTID">258</SimpleData>
+		<SimpleData name="F_ID">263</SimpleData>
+		<SimpleData name="F_REMARKS">partially inundated reported upto 7</SimpleData>
+		<SimpleData name="F_LATITUDE">13.05374324</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22576313</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2257631,13.0537432</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">259</SimpleData>
+		<SimpleData name="OBJECTID">259</SimpleData>
+		<SimpleData name="F_ID">264</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.05082494</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21998633</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2199863,13.0508249</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">260</SimpleData>
+		<SimpleData name="OBJECTID">260</SimpleData>
+		<SimpleData name="F_ID">265</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04747841</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21900799</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.219008,13.0474784</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">261</SimpleData>
+		<SimpleData name="OBJECTID">261</SimpleData>
+		<SimpleData name="F_ID">266</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated</SimpleData>
+		<SimpleData name="F_LATITUDE">13.04405802</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21764576</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2176458,13.044058</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">262</SimpleData>
+		<SimpleData name="OBJECTID">262</SimpleData>
+		<SimpleData name="F_ID">267</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated covering entirely road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.05184169</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21855704</SimpleData>
+		<SimpleData name="DEPTH">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.218557,13.0518417</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">263</SimpleData>
+		<SimpleData name="OBJECTID">263</SimpleData>
+		<SimpleData name="F_ID">268</SimpleData>
+		<SimpleData name="F_REMARKS">completely inundated covering entirely road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.0509079</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21579504</SimpleData>
+		<SimpleData name="DEPTH">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.215795,13.0509079</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">264</SimpleData>
+		<SimpleData name="OBJECTID">264</SimpleData>
+		<SimpleData name="F_ID">269</SimpleData>
+		<SimpleData name="F_REMARKS">completely flooded bocking entire road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.05013643</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21369621</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2136962,13.0501364</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">267</SimpleData>
+		<SimpleData name="OBJECTID">267</SimpleData>
+		<SimpleData name="F_ID">3</SimpleData>
+		<SimpleData name="F_REMARKS">road damage and water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.16460964</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20662121</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2066212,13.1646096</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">268</SimpleData>
+		<SimpleData name="OBJECTID">268</SimpleData>
+		<SimpleData name="F_ID">4</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant and drainage water into the road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.16327701</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20877436</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2087744,13.163277</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">269</SimpleData>
+		<SimpleData name="OBJECTID">269</SimpleData>
+		<SimpleData name="F_ID">5</SimpleData>
+		<SimpleData name="F_REMARKS">road damage</SimpleData>
+		<SimpleData name="F_LATITUDE">13.16212262</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20877671</SimpleData>
+		<SimpleData name="DEPTH">7.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2087767,13.1621226</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">270</SimpleData>
+		<SimpleData name="OBJECTID">270</SimpleData>
+		<SimpleData name="F_ID">6</SimpleData>
+		<SimpleData name="F_REMARKS">road damage and water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.16246639</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20876497</SimpleData>
+		<SimpleData name="DEPTH">7.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.208765,13.1624664</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">271</SimpleData>
+		<SimpleData name="OBJECTID">271</SimpleData>
+		<SimpleData name="F_ID">7</SimpleData>
+		<SimpleData name="F_REMARKS">road damage and water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.16081641</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20790633</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2079063,13.1608164</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">272</SimpleData>
+		<SimpleData name="OBJECTID">272</SimpleData>
+		<SimpleData name="F_ID">8</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.15282364</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20872172</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2087217,13.1528236</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">273</SimpleData>
+		<SimpleData name="OBJECTID">273</SimpleData>
+		<SimpleData name="F_ID">9</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant and road damage</SimpleData>
+		<SimpleData name="F_LATITUDE">13.1449155</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.22320095</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.223201,13.1449155</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">274</SimpleData>
+		<SimpleData name="OBJECTID">274</SimpleData>
+		<SimpleData name="F_ID">10</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant and drainage water into the road and road closed</SimpleData>
+		<SimpleData name="F_LATITUDE">13.14405618</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.25435783</SimpleData>
+		<SimpleData name="DEPTH">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2543578,13.1440562</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">275</SimpleData>
+		<SimpleData name="OBJECTID">275</SimpleData>
+		<SimpleData name="F_ID">11</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.14471961</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.25442421</SimpleData>
+		<SimpleData name="DEPTH">9.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2544242,13.1447196</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">276</SimpleData>
+		<SimpleData name="OBJECTID">276</SimpleData>
+		<SimpleData name="F_ID">12</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.15392127</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.25701355</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2570136,13.1539213</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">277</SimpleData>
+		<SimpleData name="OBJECTID">277</SimpleData>
+		<SimpleData name="F_ID">13</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.15396535</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.25743734</SimpleData>
+		<SimpleData name="DEPTH">8.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2574373,13.1539653</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">278</SimpleData>
+		<SimpleData name="OBJECTID">278</SimpleData>
+		<SimpleData name="F_ID">14</SimpleData>
+		<SimpleData name="F_REMARKS"></SimpleData>
+		<SimpleData name="F_LATITUDE">13.15609627</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.26105799</SimpleData>
+		<SimpleData name="DEPTH">7.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.261058,13.1560963</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">279</SimpleData>
+		<SimpleData name="OBJECTID">279</SimpleData>
+		<SimpleData name="F_ID">15</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.15319551</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.25757045</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2575704,13.1531955</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">280</SimpleData>
+		<SimpleData name="OBJECTID">280</SimpleData>
+		<SimpleData name="F_ID">16</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.15147332</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.25796104</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.257961,13.1514733</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">281</SimpleData>
+		<SimpleData name="OBJECTID">281</SimpleData>
+		<SimpleData name="F_ID">17</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.14891401</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.25815751</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2581575,13.148914</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">282</SimpleData>
+		<SimpleData name="OBJECTID">282</SimpleData>
+		<SimpleData name="F_ID">18</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.14999239</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.25844619</SimpleData>
+		<SimpleData name="DEPTH">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2584462,13.1499924</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">283</SimpleData>
+		<SimpleData name="OBJECTID">283</SimpleData>
+		<SimpleData name="F_ID">19</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.13087859</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2007921</SimpleData>
+		<SimpleData name="DEPTH">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2007921,13.1308786</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">284</SimpleData>
+		<SimpleData name="OBJECTID">284</SimpleData>
+		<SimpleData name="F_ID">20</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.13325688</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.1941523</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1941523,13.1332569</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">285</SimpleData>
+		<SimpleData name="OBJECTID">285</SimpleData>
+		<SimpleData name="F_ID">21</SimpleData>
+		<SimpleData name="F_REMARKS"></SimpleData>
+		<SimpleData name="F_LATITUDE">13.12972731</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19382339</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1938234,13.1297273</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">286</SimpleData>
+		<SimpleData name="OBJECTID">286</SimpleData>
+		<SimpleData name="F_ID">22</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.14536116</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.2189292</SimpleData>
+		<SimpleData name="DEPTH">9.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2189292,13.1453612</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">287</SimpleData>
+		<SimpleData name="OBJECTID">287</SimpleData>
+		<SimpleData name="F_ID">23</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.14618686</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21778021</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2177802,13.1461869</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">288</SimpleData>
+		<SimpleData name="OBJECTID">288</SimpleData>
+		<SimpleData name="F_ID">24</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.14198196</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.1855481</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1855481,13.141982</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">289</SimpleData>
+		<SimpleData name="OBJECTID">289</SimpleData>
+		<SimpleData name="F_ID">25</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.14069426</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.18615294</SimpleData>
+		<SimpleData name="DEPTH">9.5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1861529,13.1406943</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">290</SimpleData>
+		<SimpleData name="OBJECTID">290</SimpleData>
+		<SimpleData name="F_ID">26</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.1321301</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.1708952</SimpleData>
+		<SimpleData name="DEPTH">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1708952,13.1321301</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">291</SimpleData>
+		<SimpleData name="OBJECTID">291</SimpleData>
+		<SimpleData name="F_ID">27</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant and water from the park lake</SimpleData>
+		<SimpleData name="F_LATITUDE">13.12221384</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.16743749</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1674375,13.1222138</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">292</SimpleData>
+		<SimpleData name="OBJECTID">292</SimpleData>
+		<SimpleData name="F_ID">28</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant and drainage water into the road</SimpleData>
+		<SimpleData name="F_LATITUDE">13.1195037</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.16857006</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1685701,13.1195037</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">293</SimpleData>
+		<SimpleData name="OBJECTID">293</SimpleData>
+		<SimpleData name="F_ID">29</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant and damage roads</SimpleData>
+		<SimpleData name="F_LATITUDE">13.11734406</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.16902804</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.169028,13.1173441</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">294</SimpleData>
+		<SimpleData name="OBJECTID">294</SimpleData>
+		<SimpleData name="F_ID">30</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.12338344</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20153608</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2015361,13.1233834</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">318</SimpleData>
+		<SimpleData name="OBJECTID">318</SimpleData>
+		<SimpleData name="F_ID">29</SimpleData>
+		<SimpleData name="F_REMARKS">Water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.01543879</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.18901352</SimpleData>
+		<SimpleData name="DEPTH">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1890135,13.0154388</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">319</SimpleData>
+		<SimpleData name="OBJECTID">319</SimpleData>
+		<SimpleData name="F_ID">30</SimpleData>
+		<SimpleData name="F_REMARKS">Water flow</SimpleData>
+		<SimpleData name="F_LATITUDE">13.01595361</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.18160861</SimpleData>
+		<SimpleData name="DEPTH">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1816086,13.0159536</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">397</SimpleData>
+		<SimpleData name="OBJECTID">397</SimpleData>
+		<SimpleData name="F_ID">110</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.100092</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.16768359</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1676836,13.100092</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">398</SimpleData>
+		<SimpleData name="OBJECTID">398</SimpleData>
+		<SimpleData name="F_ID">111</SimpleData>
+		<SimpleData name="F_REMARKS"></SimpleData>
+		<SimpleData name="F_LATITUDE">13.09961687</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.17087173</SimpleData>
+		<SimpleData name="DEPTH">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1708717,13.0996169</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">399</SimpleData>
+		<SimpleData name="OBJECTID">399</SimpleData>
+		<SimpleData name="F_ID">112</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.0995692</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.17204821</SimpleData>
+		<SimpleData name="DEPTH">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1720482,13.0995692</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">400</SimpleData>
+		<SimpleData name="OBJECTID">400</SimpleData>
+		<SimpleData name="F_ID">113</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.10198468</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21483783</SimpleData>
+		<SimpleData name="DEPTH">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2148378,13.1019847</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">401</SimpleData>
+		<SimpleData name="OBJECTID">401</SimpleData>
+		<SimpleData name="F_ID">114</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.1026208</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20937316</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2093732,13.1026208</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">402</SimpleData>
+		<SimpleData name="OBJECTID">402</SimpleData>
+		<SimpleData name="F_ID">115</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.10560967</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20929169</SimpleData>
+		<SimpleData name="DEPTH">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2092917,13.1056097</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">403</SimpleData>
+		<SimpleData name="OBJECTID">403</SimpleData>
+		<SimpleData name="F_ID">116</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.10556951</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.21083999</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.21084,13.1055695</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">404</SimpleData>
+		<SimpleData name="OBJECTID">404</SimpleData>
+		<SimpleData name="F_ID">117</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.10585295</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20727534</SimpleData>
+		<SimpleData name="DEPTH">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2072753,13.1058529</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">405</SimpleData>
+		<SimpleData name="OBJECTID">405</SimpleData>
+		<SimpleData name="F_ID">118</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.10530468</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20719118</SimpleData>
+		<SimpleData name="DEPTH">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2071912,13.1053047</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">406</SimpleData>
+		<SimpleData name="OBJECTID">406</SimpleData>
+		<SimpleData name="F_ID">119</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.10560053</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.20713653</SimpleData>
+		<SimpleData name="DEPTH">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.2071365,13.1056005</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#chennai_flood_inundation_inches">
+		<SimpleData name="OBJECTID_1">407</SimpleData>
+		<SimpleData name="OBJECTID">407</SimpleData>
+		<SimpleData name="F_ID">120</SimpleData>
+		<SimpleData name="F_REMARKS">water stagnant</SimpleData>
+		<SimpleData name="F_LATITUDE">13.11413949</SimpleData>
+		<SimpleData name="F_LONGITUDE">80.19854844</SimpleData>
+		<SimpleData name="DEPTH">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>80.1985484,13.1141395</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

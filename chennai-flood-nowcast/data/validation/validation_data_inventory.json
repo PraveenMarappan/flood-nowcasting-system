@@ -1,0 +1,1433 @@
+{
+    "status": "ACQUIRED",
+    "datasets": [
+        {
+            "source": "OpenCity",
+            "title": "Chennai Inundation Points with Depth of Inundation",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/ceddf53f-03c0-4866-8ba8-5e84c8007a85/download/814ca028-4c84-4bd0-aa67-6dbaeb9b6ba5.kml",
+            "format": "KML",
+            "data_type": "OBSERVED DATA",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": true,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "814ca028-4c84-4bd0-aa67-6dbaeb9b6ba5.kml",
+            "feature_count": 192,
+            "geometry_type": "Point"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Flooding Points in 2015",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/80ed2fa7-1150-4f55-8125-682ab55282ac/download/93d2905a-a580-482d-96b0-4d9ccf5273ef.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Flows 5 Year Return Period",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/4d8579d9-9331-4c9b-95be-1489160376ee/download/ef3286de-1c9b-41a2-a5f2-a075863e26f6.kml",
+            "format": "KML",
+            "data_type": "MODELLED DATA",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Flows 10 Years Return Period",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/f9e93b56-88d8-4cd8-9a73-bcd86d6fd1bb/download/1bfef958-d4cc-4e50-a926-445e65bac7a8.kml",
+            "format": "KML",
+            "data_type": "MODELLED DATA",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Flows 25 Year Return Period",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/d6263b58-e053-4196-a98d-11755bc2edef/download/a6b4f2b1-f2b4-4dbc-93da-37be6dc7a345.kml",
+            "format": "KML",
+            "data_type": "MODELLED DATA",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Flows 50 Years Return Period",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/9467f93f-5073-4c83-b14b-7e16a56c848a/download/a6b20b7c-d771-4572-a2c7-9d8c125e6e5d.kml",
+            "format": "KML",
+            "data_type": "MODELLED DATA",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Flows 100 Years Return Period",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/e34a8f9d-251c-401d-8642-bd231625a081/download/994a99a1-6104-40c7-ac10-2b7a7ab74437.kml",
+            "format": "KML",
+            "data_type": "MODELLED DATA",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Flows 200 Years Return Period",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/bf1c254d-a308-4bdb-a920-0c05236d168e/download/61f1f06f-1fa1-4ef0-94c7-224d892efbef.kml",
+            "format": "KML",
+            "data_type": "MODELLED DATA",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Flood Hazard Zones Map",
+            "url": "https://data.opencity.in/dataset/022dd080-e927-40d7-897d-adf3ee98ad69/resource/e61afe07-0f52-4be9-bdf3-5eb0f62b2ed6/download/7f29da20-6621-4b49-b0cf-28b9d1de232b.kml",
+            "format": "KML",
+            "data_type": "MODELLED DATA",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": true,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "GCC Stagnation Locations in 2015",
+            "url": "https://data.opencity.in/dataset/866141ab-3a3f-4dc0-8092-421d97ba29a2/resource/b5f39598-2e2d-40c5-82c3-806a1ad65c91/download/db3840ff-9f33-43a3-b826-2f9dae1bcb78.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai 2015 Crowd-sourced Flooding Locations",
+            "url": "https://data.opencity.in/dataset/866141ab-3a3f-4dc0-8092-421d97ba29a2/resource/782a2e52-78ac-4f89-b469-28a6f7d365eb/download/46d6c279-ae09-43a8-8691-7a5386f69e3a.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai 2015 GCC Area Flood Hotspots",
+            "url": "https://data.opencity.in/dataset/866141ab-3a3f-4dc0-8092-421d97ba29a2/resource/8e1c5b2d-322c-4dbd-bd64-6da2d1a8681d/download/31523c86-0ad1-42f5-b4d1-297daa4bbcd6.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai 2015 Tiruvallur District Flood Hotspots",
+            "url": "https://data.opencity.in/dataset/866141ab-3a3f-4dc0-8092-421d97ba29a2/resource/ec58c238-b760-474a-93f5-181abc8d45e9/download/d8d3ac1d-b486-4446-bc76-3dff0af8cbdb.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai 2015 Vellore District Flood Hotspots",
+            "url": "https://data.opencity.in/dataset/866141ab-3a3f-4dc0-8092-421d97ba29a2/resource/28e9897f-d4e4-474c-910c-5f4a9e043d0f/download/8c37d609-9585-4a2a-ae3d-d8997b8d3ad4.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai 2015 Floods Inundation Zone ",
+            "url": "https://data.opencity.in/dataset/866141ab-3a3f-4dc0-8092-421d97ba29a2/resource/2056abd6-26d7-413b-9dfa-e63cbbf41ee7/download/7cb3cecf-a95a-4786-8032-9c7417655d24.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": true,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai 2015 Kancheepuram District Flood Hotspots",
+            "url": "https://data.opencity.in/dataset/866141ab-3a3f-4dc0-8092-421d97ba29a2/resource/e180e7f3-a2bc-4cd5-9883-008c94a24bed/download/3746a11e-620f-40e4-94a1-21ea8fe2a35e.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewerage Command Area",
+            "url": "https://data.opencity.in/dataset/c9844771-3129-4bc8-99d7-398dd93db1fa/resource/84f4fb43-7a36-4203-ba22-63fb094aee08/download/b186696c-251b-49b1-960f-a9e02130ed5f.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewer Terminal Chambers",
+            "url": "https://data.opencity.in/dataset/c9844771-3129-4bc8-99d7-398dd93db1fa/resource/ca265e4e-ff0e-4bac-bed1-d66a74ea2bb8/download/507c87e3-d3ad-479b-88a7-ae058f5f1229.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewage Valves",
+            "url": "https://data.opencity.in/dataset/c9844771-3129-4bc8-99d7-398dd93db1fa/resource/de1063d4-1d81-4bda-817c-11ceeac7da38/download/79010f3e-1b5e-4a66-be3b-a322fd693e23.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewage Ventilating Columns",
+            "url": "https://data.opencity.in/dataset/c9844771-3129-4bc8-99d7-398dd93db1fa/resource/05bc9277-395e-43e1-a698-4701dbac0cd2/download/5d31106a-538c-466a-abd3-513f27967e61.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Monthly Rainfall Data 1901-2021",
+            "url": "https://data.opencity.in/dataset/256d1a20-adf5-4e3a-ae18-27664339117a/resource/39ee6182-093f-4eca-a4fc-9a4480baeaa1/download/49853342-d689-4746-af95-5366d08671e3.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Daily Rainfall Data from 1991-2023",
+            "url": "https://data.opencity.in/dataset/256d1a20-adf5-4e3a-ae18-27664339117a/resource/3086f865-a04c-431e-815d-105ae658871f/download/e5c275eb-a4f2-4412-9677-73654e8f5f4d.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu Daily Rainfall from 1991 to 2023",
+            "url": "https://data.opencity.in/dataset/256d1a20-adf5-4e3a-ae18-27664339117a/resource/fd176db8-caca-42e5-b5a0-9dc78a3d73a9/download/4804c971-4f38-40b5-b203-aba08e19b937.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Hyderabad - Flooding Points",
+            "url": "https://data.opencity.in/dataset/fbc0cf2e-2c10-4d9a-8dfd-0b1c24c6f279/resource/8ab584c9-19ca-4c1b-945f-f19fe1db5de5/download/d6d078ca-7330-4efe-8a5f-0c74cb6a0a70.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Water Census Map 2023",
+            "url": "https://data.opencity.in/dataset/0b4ba0b3-7c78-4165-a45f-75414eb7207e/resource/88af5366-00aa-46a9-ac25-dff35a2bf85c/download/7e357cf5-fd50-400c-9f54-b592ac89b937.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": true,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu Water Census Map 2023 - Part 1",
+            "url": "https://data.opencity.in/dataset/0b4ba0b3-7c78-4165-a45f-75414eb7207e/resource/669de8ab-41b5-4856-be9e-113a209bb1e7/download/4b906063-f835-413d-8066-3c20cd8411aa.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": true,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu Water Census Map 2023 - Part 2",
+            "url": "https://data.opencity.in/dataset/0b4ba0b3-7c78-4165-a45f-75414eb7207e/resource/dead6218-6bc0-4ac6-8240-9a566c55e1f4/download/67311ea2-c3b3-4da8-a550-7a856a96cae1.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": true,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu Water Census Map 2023 - Part 3",
+            "url": "https://data.opencity.in/dataset/0b4ba0b3-7c78-4165-a45f-75414eb7207e/resource/1c12ae44-c801-4790-96f5-5255c05497ec/download/0f39e3c0-aa80-4aee-81f6-84871df93349.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": true,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewage Pumping Stations",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/372002d1-b2d8-4cf0-b4d8-ef3da5bb7bde/download/5a5d73c1-7923-4d48-ba76-0e45d3ef2900.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewage Pumping Main Network",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/8fc15bbe-86a4-4f2a-ad89-aec0c29e2192/download/1d5be1ab-c5fc-442b-8f8d-025dd48e5c77.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewer Chambers",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/001c7d19-5499-444c-b4e8-321d8d8066e9/download/0281a9ce-071c-48f5-8fef-c4b09f71a48b.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Pumping Machine DG Sets",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/5f860501-1361-446b-a3c0-b9fa092f85aa/download/e67421d5-a17e-4335-8b4b-7b2a90a388c6.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Pumping Motors",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/46f8d193-6cdb-499d-aae1-8e3628d19fb2/download/f7f968ea-8708-46fe-a2cc-3dd38713cf05.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewage Flow Meters",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/5b950202-2377-4b67-b5c8-25f8fe17f275/download/ef9a4a1e-469a-4a43-9418-9ae3c6547e0e.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewage Silt Pits",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/241703f2-2308-4f2f-ac45-f8d6472dce5d/download/dae5732a-a5ba-4d38-8a21-3abab87689ac.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewage Wells",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/2b8fe64f-6753-4534-91cf-92668821b9b3/download/f9070e39-952a-4fe1-a8a0-aad2d4efb97f.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Sewage Interconnection Pipes",
+            "url": "https://data.opencity.in/dataset/1f448e8e-c333-4c86-b166-f369035f6abc/resource/6dfe4af2-bd29-46d9-b8ef-7ded16823d30/download/4f34aa07-8216-46eb-8c14-adad116077a8.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Delhi Daily Temperature Data 1951 to 2024",
+            "url": "https://data.opencity.in/dataset/e57cd149-fd78-4853-80b8-47d3d082845e/resource/0c853240-47a3-428c-bb5e-933e74245e08/download/82da1ebe-c0d6-45c4-9785-1e1ab0a9ec3f.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Mumbai Daily Temperature Data 1951 to 2024",
+            "url": "https://data.opencity.in/dataset/e57cd149-fd78-4853-80b8-47d3d082845e/resource/61e2fec8-cbab-4a35-8bc3-ee7824330bb9/download/5e1509d4-1808-4003-bff5-05cc72b65281.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Daily Temperature Data 1951 to 2024",
+            "url": "https://data.opencity.in/dataset/e57cd149-fd78-4853-80b8-47d3d082845e/resource/56df10c7-cd7e-4c7a-950c-96aec31a0e57/download/320fa3c6-0de0-42bc-a0ca-ac25666e8d55.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Bengaluru Daily Temperature Data 1951 to 2024",
+            "url": "https://data.opencity.in/dataset/e57cd149-fd78-4853-80b8-47d3d082845e/resource/9cf80863-97ea-4ad8-a4ef-6a5f026debbb/download/ae01b010-feb0-41ad-959e-83480a9d98c3.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Ahmedabad Daily Temperature Data 1951 to 2024",
+            "url": "https://data.opencity.in/dataset/e57cd149-fd78-4853-80b8-47d3d082845e/resource/db3f6c55-bc4e-4e12-be01-49448686596b/download/877f72ae-d064-4a98-94b6-78db558204f6.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Hyderabad Daily Temperature Data 1951 to 2024",
+            "url": "https://data.opencity.in/dataset/e57cd149-fd78-4853-80b8-47d3d082845e/resource/9446cd01-1759-41d3-8918-86297d43c625/download/e83ee52a-c17e-46da-9566-0ab317d545b4.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Pune Daily Temperature Data 1951 to 2024",
+            "url": "https://data.opencity.in/dataset/e57cd149-fd78-4853-80b8-47d3d082845e/resource/7a654494-2597-4405-8eb4-f0db760f1c1b/download/291ea394-8201-4064-8b8b-9de612edb1c0.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Kolkata Daily Temperature Data 1951 to 2024",
+            "url": "https://data.opencity.in/dataset/e57cd149-fd78-4853-80b8-47d3d082845e/resource/2f2fd6a8-cfad-4648-989c-08272d01982b/download/d95a278d-d655-414a-b791-f937c779b950.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai GCC Flood Hostspots 2005",
+            "url": "https://data.opencity.in/dataset/bdae9914-f0e6-46e1-ad26-ed4ad4f5251a/resource/eeb91a74-eeab-4398-bc87-cc1423c83785/download/7cbcb0b1-7561-4e03-acab-b08ec68a838a.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai GCC Flood Extent 2005",
+            "url": "https://data.opencity.in/dataset/bdae9914-f0e6-46e1-ad26-ed4ad4f5251a/resource/5a5a41fd-d7f5-442a-a523-d58e3b6ef53a/download/c49407c8-1c03-4646-a3ba-0ddb16da0d9f.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai GCC Flood Hostspots 2020",
+            "url": "https://data.opencity.in/dataset/3aef2eef-a97e-4fac-a4a9-aaa42a91fbfa/resource/068cfdae-652d-47c9-9722-7c49396d8a05/download/3a141c21-2b9d-4fc0-bd96-d71650a8a15a.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2015",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/ce1d9115-7bfa-46fb-bca1-048d8084daad/download/722b8a26-3fe5-4089-a904-e1755694cf5b.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2016",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/0f4362e2-95de-45be-b26d-401c0ca54456/download/94800286-105a-4fb7-9a51-d7b148e662e6.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2017",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/7eb56340-f4c4-40e9-be2e-9e17701d1e13/download/37375712-3ba8-4020-9375-2055117262de.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2018",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/2e2fd976-14a5-4e54-9b1a-af7354acf064/download/01b236fe-cda9-456d-9746-0f73aaa880da.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2019",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/9b54a0f6-9b95-43eb-a0ee-a261495cc164/download/31acdbd1-9bab-4b8d-883e-c50ddd7bbe63.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2020",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/c46b55ef-c425-40f9-9363-55738d5f9ec0/download/a6170aaf-6a91-4a83-b527-a058137800a6.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2021",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/02f3d133-c736-4e58-ba55-d7edaa960d70/download/6dd42d33-4722-4fd7-a05c-96377da7496c.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2022",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/291b4deb-f1dd-4ae2-9765-54eedf1f1096/download/57340e2a-9456-406a-a326-f846e039ba96.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2023",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/d1b1023a-d55f-47e2-ae42-13e0580504b4/download/853df0ef-d4e9-406b-be8f-7b743a4f86c8.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2024 (Till June)",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/342596b7-6d7f-444d-a18d-ff4c8dc14ecf/download/35fa1325-e3c5-48c3-92a0-d35554e835fe.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2015",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/63fb513a-aef4-4bf1-b704-5548690b967c/download/dd268012-e67e-432d-af01-d441944987b5.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "2015",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2016",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/8769aff5-99a1-4dba-a267-0ddfce9da86c/download/a7f8f538-66d6-4f71-ad0a-20b7be326927.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2017",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/f4c535bb-fe4d-4854-a12c-a09c3029ca87/download/e4d3a33c-96f2-4cec-8cf2-b0074bea6fbb.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2018",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/58207095-db74-4d26-9e55-82409b5097d9/download/fe8df091-4b42-4498-9fb1-1f8950c521a3.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2019",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/7f05ae5b-9357-410e-854c-bc046eaf323c/download/fa7fc0f2-06e6-41a0-a247-549456f787a9.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2020",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/274b0123-5604-499a-99a5-4cd79210a9a8/download/d1d7bb4f-3494-482d-9f51-924b321241ae.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2021",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/a890645d-4481-40b9-9f7b-8523d7e1fa47/download/21743df7-f0c3-4993-9614-41c574b58193.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2022",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/fd0a001b-61bc-47f8-a72e-afa36899ce90/download/9b088a98-d7da-4e7d-8db8-efcdace36e15.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2023",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/1b274166-0d98-4881-be8b-d875b2a3e533/download/b2b88ca4-6be7-481b-bd46-e6b116afe488.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2024",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/130a325b-21c8-46b4-a188-a570edff0976/download/d015c0bb-9e06-4e75-a939-d27c1f9d1663.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2024",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/b99c1ec6-721d-48d5-a442-563b4d27c80a/download/chennai-2024-domestic.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Monthly Domestic Flights Data - 2025",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/d1e43930-4a57-402c-accf-171409b0e6fa/download/chennai-2025-domestic.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2024",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/4d44ec60-c32a-4f64-9443-621de755f6a8/download/chennai-2024-international.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Quarterly International Flights Data - 2024",
+            "url": "https://data.opencity.in/dataset/b62c9cb1-93fd-42f5-8b2d-44ab50c91506/resource/020d3627-b696-4f4c-b471-4a00403ab611/download/chennai-2025-international.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu District and Citywise Total Complaints - 2021",
+            "url": "https://data.opencity.in/dataset/1ae54d8f-6cbd-4cda-9021-d46314f2b17c/resource/742ba1d4-7e33-48f6-b417-f8bbc24ea33f/download/7c1dfb74-70a9-45a3-939b-1f5bf949c10a.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu District and Citywise IPC Crimes - 2019 to 2021",
+            "url": "https://data.opencity.in/dataset/1ae54d8f-6cbd-4cda-9021-d46314f2b17c/resource/2a6b9737-9ddb-4393-a3f5-db9a770014ff/download/8e47b896-53f4-4e9e-bda7-f23b7dbe23f2.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu District and Citywise Deaths due to Crime and Negligence",
+            "url": "https://data.opencity.in/dataset/1ae54d8f-6cbd-4cda-9021-d46314f2b17c/resource/4e55bc7c-7d4c-4241-a854-8df6458beda0/download/9e487b59-d50e-462f-b0c9-bfe7fde85ff3.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu District and Citywise Causes of Deaths in Road Accidents - 2021",
+            "url": "https://data.opencity.in/dataset/1ae54d8f-6cbd-4cda-9021-d46314f2b17c/resource/496d03ae-cf22-46b9-9fae-b1592e0f5474/download/a7328638-067e-402a-9244-f71675f0c253.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu District and Citywise Sexual Harrassment Cases Data - 2021",
+            "url": "https://data.opencity.in/dataset/1ae54d8f-6cbd-4cda-9021-d46314f2b17c/resource/d33de71f-2a48-4a39-8de1-d54717515737/download/f3a241ff-63be-41e7-9110-7d4475214bb1.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu District and Citywise Total Theft and Robbery Cases Data",
+            "url": "https://data.opencity.in/dataset/1ae54d8f-6cbd-4cda-9021-d46314f2b17c/resource/d342a54b-9e23-4d32-b435-86bff65dbc2a/download/b770d6df-25a7-4053-8b70-3484e4b9c79a.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu District and Citywise Suicides Data - 2021",
+            "url": "https://data.opencity.in/dataset/1ae54d8f-6cbd-4cda-9021-d46314f2b17c/resource/1b00a8ed-808f-4cd5-97e7-f3683a6ccfe4/download/de15d061-13d2-4eea-9add-e5525b502329.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Tamil Nadu District and Citywise Road Accident Deaths in 2019 to 2021",
+            "url": "https://data.opencity.in/dataset/1ae54d8f-6cbd-4cda-9021-d46314f2b17c/resource/7c5ba9d8-955b-4ffd-96af-45f352e223bc/download/67aec008-462b-40af-9373-4e02c9570f4a.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai MRTS Line Map - 2018",
+            "url": "https://data.opencity.in/dataset/0c84bec3-c682-484b-9cfa-3ef8c7366338/resource/daab9817-166e-40a6-aaad-c457f6ad33ea/download/77c9aa1c-d8d3-44e4-b55c-90a1046ba87e.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": true,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai MRTS Stations Map - 2018",
+            "url": "https://data.opencity.in/dataset/0c84bec3-c682-484b-9cfa-3ef8c7366338/resource/848a8268-8b80-4fa1-b8d3-485abfbece60/download/b3221b7e-cb19-4f5d-a404-1fc96060cb66.kml",
+            "format": "KML",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": true,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai - Ward-wise Census Data - 2011",
+            "url": "https://data.opencity.in/dataset/db288d43-56e3-48f4-9932-710d80872155/resource/14e58af6-7ed9-4445-bb47-acc931364c12/download/af83d302-a504-479a-8be9-b3208eb5b6e7.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai MTC Performance Data - 2020-21 to 2025-26 ",
+            "url": "https://data.opencity.in/dataset/c7bf200b-03e1-403f-99be-487d3c4a294a/resource/0c917fe2-aaef-4873-95f3-4da9e50620f3/download/0c917fe2-aaef-4873-95f3-4da9e50620f3.csv",
+            "format": "CSV",
+            "data_type": "SIMULATED",
+            "event_date": "Historical",
+            "retrieval_date": "2026-09-17",
+            "observed_variables": {
+                "depth_available": false,
+                "flood_extent_available": false,
+                "timestamps_available": false
+            },
+            "raw_file": "SKIPPED_LARGE_MODELLED_DATASET",
+            "feature_count": -1,
+            "geometry_type": "Unknown"
+        }
+    ]
+}

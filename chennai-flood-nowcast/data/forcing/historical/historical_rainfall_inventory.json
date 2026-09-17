@@ -1,0 +1,17 @@
+{
+    "source": "NASA/GES DISC",
+    "dataset": "GPM IMERG Final Precipitation L3 Half Hourly (GPM_3IMERGHH)",
+    "version": "V07B",
+    "temporal_resolution": "Half-Hourly (30 minutes)",
+    "spatial_resolution": "0.1 degree x 0.1 degree",
+    "units": "mm/hr",
+    "coverage": "Global (-90 -180 to 90 180)",
+    "event_period": "2015-11-30T00:00:00Z to 2015-12-05T00:00:00Z (and beyond)",
+    "file_format": "HDF5 (.HDF5)",
+    "download_access_status": "Accessible / Verified",
+    "provenance": {
+        "origin_link": "https://data.gesdisc.earthdata.nasa.gov/",
+        "verified_sample": "3B-HHR.MS.MRG.3IMERG.20151130-S000000-E002959.0000.V07B.HDF5",
+        "data_key": "precipitation"
+    }
+}

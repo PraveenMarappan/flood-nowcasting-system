@@ -1,0 +1,46 @@
+{
+  "814ca028-4c84-4bd0-aa67-6dbaeb9b6ba5.kml": {
+    "count": 192,
+    "event": [
+      "UNKNOWN"
+    ],
+    "event_year": [
+      null
+    ],
+    "with_depth": 192,
+    "without_depth": 0,
+    "flood_status": 192,
+    "unknown_status": 0,
+    "timestamp": [
+      false
+    ],
+    "bounds": {
+      "min_lat": 12.911374,
+      "max_lat": 13.1646096,
+      "min_lon": 80.1674375,
+      "max_lon": 80.261058
+    }
+  },
+  "93d2905a-a580-482d-96b0-4d9ccf5273ef.kml": {
+    "count": 753,
+    "event": [
+      "Chennai_2015"
+    ],
+    "event_year": [
+      2015
+    ],
+    "with_depth": 0,
+    "without_depth": 753,
+    "flood_status": 0,
+    "unknown_status": 753,
+    "timestamp": [
+      false
+    ],
+    "bounds": {
+      "min_lat": 12.8729893,
+      "max_lat": 13.225626,
+      "min_lon": 80.1425033,
+      "max_lon": 80.324751
+    }
+  }
+}

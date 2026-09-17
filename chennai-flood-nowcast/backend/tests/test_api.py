@@ -50,4 +50,25 @@ def test_validation():
     res = client.get("/api/flood/validation")
     assert res.status_code == 200
     data = res.json()
-    assert data["validation_status"] == "NOT_VALIDATED"
+    assert data["status"] == "NOT_VALIDATED"
+    assert data["metric"] is None
+    assert "reason" in data
+    
+    prov = data.get("provenance", {})
+    assert prov.get("timestamp_limitation") == "timestamp_available = false"
+    assert prov.get("model_input") == "IMERG (Live)"
+
+def test_drainage_summary():
+    res = client.get("/api/drainage/summary")
+    assert res.status_code == 200
+    data = res.json()
+    assert "feature_count" in data
+    assert data["engineering_parameters_available"] == False
+    assert data["hydraulic_coupling_ready"] == False
+
+def test_drainage_nearest():
+    res = client.get("/api/drainage/nearest?latitude=13.0827&longitude=80.2707")
+    assert res.status_code == 200
+    data = res.json()
+    if data["status"] == "REAL":
+        assert "nearest_swd_distance_m" in data
