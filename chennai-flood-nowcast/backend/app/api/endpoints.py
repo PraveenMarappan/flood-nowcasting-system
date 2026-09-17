@@ -170,15 +170,15 @@ def get_terrain_status():
 
 @router.get("/terrain/summary")
 def get_terrain_summary():
-    return terrain_service.get_status()
+    return terrain_service.get_summary()
     
 @router.get("/terrain/elevation")
 def get_terrain_elevation(latitude: float, longitude: float):
     return terrain_service.get_elevation(latitude, longitude)
 
 @router.get("/roads/risk")
-def get_roads_risk():
-    return route_service.get_roads_risk()
+def get_roads_risk(forecast_offset: int = 0, rainfall: float = 0.0, is_simulated: bool = True):
+    return route_service.get_roads_risk(forecast_offset_minutes=forecast_offset, rainfall=rainfall, is_simulated=is_simulated)
 
 @router.get("/locations/critical")
 def get_critical_locations():
@@ -200,6 +200,6 @@ def get_flood_zones():
         "zones": []
     }
 
-@router.get("/validation/status")
+@router.get("/flood/validation")
 def get_validation_status():
-    return validation_service.get_validation_status()
+    return validation_service.get_validation_metrics()

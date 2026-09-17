@@ -1,0 +1,31 @@
+{
+    "dem_source": "chennai_dem.tif",
+    "algorithm_version": "v3.0.topological",
+    "preprocessing_timestamp": "2026-09-17T04:37:17.776478Z",
+    "resolution_deg": [
+        0.0002777777777777778,
+        0.0002777777777777778
+    ],
+    "cell_area_approx_m2": 956.1838271604937,
+    "aoi_bounds": {
+        "left": 80.17986111111112,
+        "bottom": 13.000138888888888,
+        "right": 80.29986111111113,
+        "top": 13.100138888888887
+    },
+    "raster_dimensions": [
+        432,
+        360
+    ],
+    "valid_cell_count": 155520,
+    "elevation_range": [
+        -13.0,
+        76.0
+    ],
+    "max_flow_accumulation_cells": 95,
+    "max_flow_accumulation_area_m2": 90837.4635802469,
+    "status": {
+        "flow_direction": "PROCESSED",
+        "flow_accumulation": "PROCESSED"
+    }
+}

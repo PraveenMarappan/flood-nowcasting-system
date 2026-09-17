@@ -1,0 +1,404 @@
+{
+    "status": "INITIALIZED",
+    "datasets": [
+        {
+            "source": "OpenCity",
+            "title": "Chennai Storm Water Drains - SWD - Map 2023",
+            "url": "https://data.opencity.in/dataset/e71414ae-d144-4e69-866d-48762c337929/resource/107ac467-2381-4718-9632-645560bc8360/download/c4907fed-934b-4342-a3f4-74226853719d.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "c4907fed-934b-4342-a3f4-74226853719d.kml",
+            "feature_count": 10257
+        },
+        {
+            "source": "OpenCity",
+            "title": "Pune Nalla Map",
+            "url": "https://data.opencity.in/dataset/a83b2053-2250-4e3c-9759-521c81679d24/resource/b9bdda98-a0d1-4e2e-aca3-36c6445751b5/download/3f7228b1-092e-4c66-a62f-6895cf33fbcd.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "3f7228b1-092e-4c66-a62f-6895cf33fbcd.kml",
+            "feature_count": 0
+        },
+        {
+            "source": "OpenCity",
+            "title": "Pune River Map",
+            "url": "https://data.opencity.in/dataset/a83b2053-2250-4e3c-9759-521c81679d24/resource/7507f222-3bcd-4881-b558-90c5cbc2625f/download/b0d9ef1f-14d7-4c93-a498-3ffb7c86737c.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "b0d9ef1f-14d7-4c93-a498-3ffb7c86737c.kml",
+            "feature_count": 0
+        },
+        {
+            "source": "OpenCity",
+            "title": "Pune SWD Utility Chambers",
+            "url": "https://data.opencity.in/dataset/a83b2053-2250-4e3c-9759-521c81679d24/resource/57052d71-5a1b-423b-8749-49f3df156b74/download/pmc_swd_utlitiy_chambers.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "pmc_swd_utlitiy_chambers.kml",
+            "feature_count": 0
+        },
+        {
+            "source": "OpenCity",
+            "title": "PMC SWD Chambers",
+            "url": "https://data.opencity.in/dataset/a83b2053-2250-4e3c-9759-521c81679d24/resource/710a2bd3-437d-43fd-88de-93cd61591f1f/download/pmc_swd_chambers.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "pmc_swd_chambers.kml",
+            "feature_count": 0
+        },
+        {
+            "source": "OpenCity",
+            "title": "Bengaluru Primary Stormwater Drains Map - 2022",
+            "url": "https://data.opencity.in/dataset/fc97e05c-c54b-44e9-8d98-7663ee887922/resource/114758e9-c356-46e0-afdb-e1d52f972863/download/03eea514-d4bf-4cd9-8c7b-f904b1ea83f2.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "03eea514-d4bf-4cd9-8c7b-f904b1ea83f2.kml",
+            "feature_count": 163
+        },
+        {
+            "source": "OpenCity",
+            "title": "Bengaluru Secondary Stormwater Drains Map - 2022",
+            "url": "https://data.opencity.in/dataset/fc97e05c-c54b-44e9-8d98-7663ee887922/resource/4b26cd1b-7956-418d-92e4-35275caf547a/download/7033efa5-2382-4e4a-8884-5715698eac71.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "7033efa5-2382-4e4a-8884-5715698eac71.kml",
+            "feature_count": 870
+        },
+        {
+            "source": "OpenCity",
+            "title": "Bengaluru Tertiary Stormwater Drains Map 2022",
+            "url": "https://data.opencity.in/dataset/fc97e05c-c54b-44e9-8d98-7663ee887922/resource/aa20362c-9769-46dc-9a88-c100504f6d4e/download/79494624-2682-4f31-a0e5-2fa26b867304.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "79494624-2682-4f31-a0e5-2fa26b867304.kml",
+            "feature_count": 5806
+        },
+        {
+            "source": "OpenCity",
+            "title": "Bengaluru Stormwater Drains Map 2022",
+            "url": "https://data.opencity.in/dataset/fc97e05c-c54b-44e9-8d98-7663ee887922/resource/801779e6-ed81-457d-bd2a-7e3cc95ad1ee/download/e42be0cb-1bf4-4a7b-9c78-0c0dbdae3237.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "e42be0cb-1bf4-4a7b-9c78-0c0dbdae3237.kml",
+            "feature_count": 6839
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Basin Rivers and Streams Map",
+            "url": "https://data.opencity.in/dataset/2d68c104-a2ad-4640-bfa1-ecd0720bbd34/resource/340a66b6-5e16-4f2e-bf5c-883a0ecd123f/download/9434de03-2238-4d31-9da1-ea3e466c0ca2.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "9434de03-2238-4d31-9da1-ea3e466c0ca2.kml",
+            "feature_count": 876
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Basin Buckingham Canal Map",
+            "url": "https://data.opencity.in/dataset/2d68c104-a2ad-4640-bfa1-ecd0720bbd34/resource/60608d3a-e466-478d-82f4-eb77b65ea82c/download/1bb30ede-f309-4c16-8ab1-3c1fd211697f.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "1bb30ede-f309-4c16-8ab1-3c1fd211697f.kml",
+            "feature_count": 5
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Basin Krishna Water Canal Map",
+            "url": "https://data.opencity.in/dataset/2d68c104-a2ad-4640-bfa1-ecd0720bbd34/resource/6b40c93c-89be-4c3c-8159-1e2414a4b664/download/b5264c56-9c1a-49e3-9f7d-eb8f9b4fb414.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "b5264c56-9c1a-49e3-9f7d-eb8f9b4fb414.kml",
+            "feature_count": 1
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Basin Macro Drains Map",
+            "url": "https://data.opencity.in/dataset/2d68c104-a2ad-4640-bfa1-ecd0720bbd34/resource/e8f2e6ae-791f-4c59-8a41-73527daeba46/download/80b07b87-0497-46c6-9168-0452cc67693c.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "80b07b87-0497-46c6-9168-0452cc67693c.kml",
+            "feature_count": 15
+        },
+        {
+            "source": "OpenCity",
+            "title": "Chennai Basin Micro Drains Map",
+            "url": "https://data.opencity.in/dataset/2d68c104-a2ad-4640-bfa1-ecd0720bbd34/resource/e77a86e0-ecf4-4244-aa9a-77475610e35d/download/4d6437e5-0869-4d0a-80ae-2e4f493425fe.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "4d6437e5-0869-4d0a-80ae-2e4f493425fe.kml",
+            "feature_count": 37
+        },
+        {
+            "source": "OpenCity",
+            "title": "Parandur Airport Boundary Map",
+            "url": "https://data.opencity.in/dataset/5e29e9a2-d62a-4b3b-a570-22c9c96e797c/resource/a3adb79a-3370-45d9-b65a-9b50916fda0b/download/5fae29df-e772-498c-abfb-7b49b00447bd.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "5fae29df-e772-498c-abfb-7b49b00447bd.kml",
+            "feature_count": 1
+        },
+        {
+            "source": "OpenCity",
+            "title": "Parandur Site Map",
+            "url": "https://data.opencity.in/dataset/5e29e9a2-d62a-4b3b-a570-22c9c96e797c/resource/bde1221a-295e-4ff3-8960-8c13940a8242/download/0e75341d-8e76-4190-8192-ce1729c0d6c6.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "0e75341d-8e76-4190-8192-ce1729c0d6c6.kml",
+            "feature_count": 1
+        },
+        {
+            "source": "OpenCity",
+            "title": "Thiruporur Site Map",
+            "url": "https://data.opencity.in/dataset/5e29e9a2-d62a-4b3b-a570-22c9c96e797c/resource/f655aa12-ed38-4f0f-9f29-4a063cfe2ef9/download/a619aadc-d420-4ffe-984d-6ba058089b0e.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "a619aadc-d420-4ffe-984d-6ba058089b0e.kml",
+            "feature_count": 1
+        },
+        {
+            "source": "OpenCity",
+            "title": "Pannur Site Map",
+            "url": "https://data.opencity.in/dataset/5e29e9a2-d62a-4b3b-a570-22c9c96e797c/resource/fd831dc6-a099-4c86-8e2a-3d9afc7149aa/download/6b729d04-b1cc-4b28-85ac-a1d75082f7c3.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": "6b729d04-b1cc-4b28-85ac-a1d75082f7c3.kml",
+            "feature_count": 1
+        },
+        {
+            "source": "OpenCity",
+            "title": "Padalam Site Map",
+            "url": "https://data.opencity.in/dataset/5e29e9a2-d62a-4b3b-a570-22c9c96e797c/resource/4f95b088-bbc4-4ae3-bc4d-7c2436ccf8a9/download/54bd7fd0-fc1a-4c9e-9516-d4f7931b55c8.kml",
+            "format": "KML",
+            "retrieval_date": "2026-09-17",
+            "available_engineering_parameters": [],
+            "missing_engineering_parameters": [
+                "pipe diameter",
+                "capacity",
+                "slope",
+                "invert elevation",
+                "roughness",
+                "flow direction",
+                "condition",
+                "manhole depth"
+            ],
+            "is_verified_engineering_infrastructure": false,
+            "raw_file": null,
+            "feature_count": 0
+        }
+    ]
+}
