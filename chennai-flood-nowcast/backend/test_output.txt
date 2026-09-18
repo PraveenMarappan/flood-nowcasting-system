@@ -1,195 +1,75 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.10.0, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend
+plugins: anyio-4.15.1
+collecting ... collected 56 items
 
---- /api/health ---
-{
-  "status": "Running",
-  "uptime_seconds": 13,
-  "service": "Chennai Flood Nowcast API"
-}
+tests/test_api.py::test_roads_risk PASSED                                [  1%]
+tests/test_api.py::test_flood_current PASSED                             [  3%]
+tests/test_api.py::test_flood_forecast PASSED                            [  5%]
+tests/test_api.py::test_terrain_status PASSED                            [  7%]
+tests/test_api.py::test_terrain_elevation PASSED                         [  8%]
+tests/test_api.py::test_drainage_status PASSED                           [ 10%]
+tests/test_api.py::test_data_status PASSED                               [ 12%]
+tests/test_api.py::test_terrain_summary PASSED                           [ 14%]
+tests/test_api.py::test_zero_rainfall PASSED                             [ 16%]
+tests/test_api.py::test_validation PASSED                                [ 17%]
+tests/test_api.py::test_drainage_summary PASSED                          [ 19%]
+tests/test_api.py::test_drainage_nearest PASSED                          [ 21%]
+tests/test_historical_replay.py::TestImergFilenameParsing::test_valid_filename PASSED [ 23%]
+tests/test_historical_replay.py::TestImergFilenameParsing::test_second_half_hour_filename PASSED [ 25%]
+tests/test_historical_replay.py::TestImergFilenameParsing::test_invalid_filename_returns_none PASSED [ 26%]
+tests/test_historical_replay.py::TestPrecipVariableDetection::test_preferred_variable PASSED [ 28%]
+tests/test_historical_replay.py::TestPrecipVariableDetection::test_fallback_variable PASSED [ 30%]
+tests/test_historical_replay.py::TestNearestIndex::test_nearest_index_exact PASSED [ 32%]
+tests/test_historical_replay.py::TestNearestIndex::test_nearest_index_between PASSED [ 33%]
+tests/test_historical_replay.py::TestNearestIndex::test_nearest_index_edge PASSED [ 35%]
+tests/test_historical_replay.py::TestTimestampExtraction::test_timestamp_from_filename PASSED [ 37%]
+tests/test_historical_replay.py::TestTimestampExtraction::test_version_from_filename PASSED [ 39%]
+tests/test_historical_replay.py::TestChronologicalOrdering::test_files_sorted_chronologically PASSED [ 41%]
+tests/test_historical_replay.py::TestMissingValueHandling::test_nan_value_is_missing PASSED [ 42%]
+tests/test_historical_replay.py::TestNegativeValueHandling::test_negative_value_preserved PASSED [ 44%]
+tests/test_historical_replay.py::TestUnitHandling::test_rainfall_in_mm_hr PASSED [ 46%]
+tests/test_historical_replay.py::TestSyntheticExtraction::test_known_value_extraction PASSED [ 48%]
+tests/test_historical_replay.py::TestSyntheticExtraction::test_zero_rainfall_is_valid PASSED [ 50%]
+tests/test_historical_replay.py::TestDefaultTimestep::test_default_timestep_produces_original_result PASSED [ 51%]
+tests/test_historical_replay.py::TestDefaultTimestep::test_invalid_timestep_raises PASSED [ 53%]
+tests/test_historical_replay.py::TestHalfHourTimestep::test_half_hour_gives_half_runoff PASSED [ 55%]
+tests/test_historical_replay.py::TestHalfHourTimestep::test_half_hour_less_depth PASSED [ 57%]
+tests/test_historical_replay.py::TestProductionCompat::test_route_service_call_signature PASSED [ 58%]
+tests/test_historical_replay.py::TestProductionCompat::test_positional_args_only PASSED [ 60%]
+tests/test_historical_replay.py::TestMaeCalculation::test_known_mae PASSED [ 62%]
+tests/test_historical_replay.py::TestMaeCalculation::test_mae_empty_returns_none PASSED [ 64%]
+tests/test_historical_replay.py::TestMaeCalculation::test_engine_depth_validation_mae PASSED [ 66%]
+tests/test_historical_replay.py::TestRmseCalculation::test_known_rmse PASSED [ 67%]
+tests/test_historical_replay.py::TestRmseCalculation::test_rmse_empty_returns_none PASSED [ 69%]
+tests/test_historical_replay.py::TestOccurrenceNullThreshold::test_null_threshold_not_computable PASSED [ 71%]
+tests/test_historical_replay.py::TestOccurrenceWithThreshold::test_with_threshold_computes_metrics PASSED [ 73%]
+tests/test_historical_replay.py::TestOccurrenceWithThreshold::test_threshold_not_tuned PASSED [ 75%]
+tests/test_historical_replay.py::TestEmptyObservations::test_depth_validation_empty PASSED [ 76%]
+tests/test_historical_replay.py::TestEmptyObservations::test_depth_validation_no_depth_field PASSED [ 78%]
+tests/test_historical_replay.py::TestEmptyObservations::test_occurrence_validation_empty PASSED [ 80%]
+tests/test_historical_replay.py::TestEmptyObservations::test_depth_validation_no_rainfall PASSED [ 82%]
+tests/test_historical_replay.py::TestNoNetworkRequests::test_historical_service_no_imports_requests PASSED [ 83%]
+tests/test_historical_replay.py::TestNoNetworkRequests::test_validation_engine_no_network_imports PASSED [ 85%]
+tests/test_historical_replay.py::TestNoNasaCredentials::test_no_credential_access PASSED [ 87%]
+tests/test_historical_replay.py::TestMetricsAssembly::test_build_metrics_not_validated PASSED [ 89%]
+tests/test_terrain_topology.py::test_flat_cells_and_sinks PASSED         [ 91%]
+tests/test_terrain_topology.py::test_flow_accumulation_queue PASSED      [ 92%]
+tests/test_validation_pipeline.py::test_mae_with_compatible_observations PASSED [ 94%]
+tests/test_validation_pipeline.py::test_rmse_with_compatible_observations PASSED [ 96%]
+tests/test_validation_pipeline.py::test_spatial_matching PASSED          [ 98%]
+tests/test_validation_pipeline.py::test_production_2015_returns_not_validated_without_historical_forcing PASSED [100%]
 
---- /api/terrain/status ---
-{
-  "status": "REAL",
-  "source": "SRTM DEM",
-  "details": {
-    "source": "SRTM DEM",
-    "status": "REAL",
-    "file": "data\\dem\\chennai_dem.tif",
-    "resolution": [
-      0.0002777777777777778,
-      0.0002777777777777778
-    ],
-    "crs": "EPSG:4326",
-    "width": 3601,
-    "height": 3601,
-    "bounds": {
-      "left": 79.99986111111112,
-      "bottom": 12.999861111111109,
-      "right": 81.0001388888889,
-      "top": 14.000138888888888
-    },
-    "nodata": -32767.0,
-    "python_executable": "C:\\Users\\HP\\OneDrive\\Desktop\\flood nowcasting\\chennai-flood-nowcast\\backend\\venv\\Scripts\\python.exe",
-    "rasterio_version": "1.4.4"
-  }
-}
+============================== warnings summary ===============================
+venv\lib\site-packages\fastapi\testclient.py:1
+  C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend\venv\lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
 
---- /api/terrain/elevation?latitude=13.0827&longitude=80.2707 ---
-{
-  "latitude": 13.0827,
-  "longitude": 80.2707,
-  "elevation_m": 8.0,
-  "source": "SRTM DEM",
-  "status": "REAL"
-}
+venv\lib\site-packages\starlette\testclient.py:53
+  C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend\venv\lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
 
---- /api/terrain/elevation?latitude=13.10&longitude=80.25 ---
-{
-  "latitude": 13.1,
-  "longitude": 80.25,
-  "elevation_m": 8.0,
-  "source": "SRTM DEM",
-  "status": "REAL"
-}
-
---- /api/terrain/elevation?latitude=12.5&longitude=80.25 ---
-{
-  "latitude": 12.5,
-  "longitude": 80.25,
-  "elevation_m": null,
-  "source": "SRTM DEM",
-  "status": "UNAVAILABLE",
-  "error": "location_outside_dem"
-}
-
---- /api/rainfall/current ---
-{
-  "status": "LIVE",
-  "source": "NASA GPM IMERG Early Run",
-  "dataset": "GPM_3IMERGHHE",
-  "rainfall_rate": 0.0,
-  "unit": "mm/hr",
-  "latitude": 13.0827,
-  "longitude": 80.2707,
-  "data_timestamp": "2026-09-16T07:30:00.000Z",
-  "retrieved_at": "2026-09-16T13:21:26.854667Z"
-}
-
---- /api/data-status ---
-{
-  "overall_health": "OK",
-  "sources": {
-    "rainfall": {
-      "status": "REAL",
-      "source": "NASA GPM IMERG"
-    },
-    "flood_depth": {
-      "status": "MODELLED",
-      "source": "Hydrological Model"
-    },
-    "dem_terrain": {
-      "status": "REAL",
-      "source": "SRTM DEM"
-    },
-    "drainage": {
-      "status": "PARTIAL / ESTIMATED",
-      "source": "Chennai Drainage GeoJSON"
-    }
-  }
-}
-
---- /api/flood/current ---
-{
-  "status": "MODELLED",
-  "source": "Hydrological Model",
-  "timestamp": "2026-09-16T13:21:35.425822Z",
-  "location": {
-    "latitude": 13.0827,
-    "longitude": 80.2707
-  },
-  "water_depth_cm": 6.0,
-  "risk_level": "RECOVERY",
-  "rainfall_rate_mm_hr": 0.0,
-  "terrain_elevation_m": 8.0,
-  "drainage": {
-    "status": "PARTIAL",
-    "capacity_status": "UNAVAILABLE",
-    "engineering_parameters_available": false,
-    "numerical_influence": "NOT_COMPUTABLE",
-    "proxy_mode_enabled": false
-  }
-}
-
---- /api/flood/forecast ---
-{
-  "status": "RECOVERY",
-  "water_depth_cm": 6.0,
-  "is_simulated": true,
-  "rainfall_input_mm": 0.0,
-  "drainage": {
-    "status": "PARTIAL",
-    "capacity_status": "UNAVAILABLE",
-    "engineering_parameters_available": false,
-    "numerical_influence": "NOT_COMPUTABLE",
-    "proxy_mode_enabled": false
-  },
-  "forecast": [
-    {
-      "time": "+30m",
-      "status": "RECOVERY",
-      "depth": 5.4,
-      "drainage_influence": "NOT_COMPUTABLE"
-    },
-    {
-      "time": "+60m",
-      "status": "RECOVERY",
-      "depth": 4.199999999999999,
-      "drainage_influence": "NOT_COMPUTABLE"
-    },
-    {
-      "time": "+90m",
-      "status": "RECOVERY",
-      "depth": 3.0,
-      "drainage_influence": "NOT_COMPUTABLE"
-    },
-    {
-      "time": "+120m",
-      "status": "RECOVERY",
-      "depth": 1.2000000000000002,
-      "drainage_influence": "NOT_COMPUTABLE"
-    },
-    {
-      "time": "+150m",
-      "status": "NORMAL",
-      "depth": 0,
-      "drainage_influence": "NOT_COMPUTABLE"
-    },
-    {
-      "time": "+180m",
-      "status": "NORMAL",
-      "depth": 0,
-      "drainage_influence": "NOT_COMPUTABLE"
-    }
-  ]
-}
-
---- /api/drainage/status ---
-{
-  "status": "PARTIAL",
-  "source": "Chennai Drainage GeoJSON",
-  "feature_count": 2,
-  "feature_types": [
-    "canal",
-    "river"
-  ],
-  "crs": "EPSG:4326",
-  "engineering_parameters": {
-    "diameter": "UNAVAILABLE",
-    "slope": "UNAVAILABLE",
-    "capacity": "UNAVAILABLE",
-    "condition": "UNAVAILABLE",
-    "flow_direction": "UNAVAILABLE",
-    "depth": "UNAVAILABLE"
-  },
-  "capacity_availability": "UNAVAILABLE",
-  "flood_model_integration": "NOT_COMPUTABLE"
-}
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 56 passed, 2 warnings in 41.48s =======================

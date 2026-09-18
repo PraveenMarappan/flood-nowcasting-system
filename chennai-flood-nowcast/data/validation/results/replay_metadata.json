@@ -1,0 +1,18 @@
+{
+  "historical_replay_status": "PARTIAL",
+  "event_replay_status": "INCOMPLETE",
+  "forcing": {
+    "source": "NASA GES DISC",
+    "dataset": "GPM_3IMERGHH",
+    "version": "V07B",
+    "requested_start": "2015-11-30T00:00:00Z",
+    "requested_end": "2015-12-05T00:00:00Z",
+    "files_available": 1,
+    "timesteps_processed": 1,
+    "temporal_resolution_minutes": 30,
+    "replay_timestep_hours": 0.5,
+    "processed_start": "2015-11-30T00:00:00+00:00",
+    "processed_end": "2015-11-30T00:00:00+00:00"
+  },
+  "processed_window_peak_rainfall_mm_hr": 5.1
+}

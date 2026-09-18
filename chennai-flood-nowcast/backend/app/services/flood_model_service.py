@@ -13,7 +13,11 @@ class FloodModelService:
         self.model_version = "v3-spatial-heuristic"
         self.calibration_status = "NOT_CALIBRATED"
 
-    def calculate_spatial_flood(self, lat: float, lng: float, rainfall: float, forecast_offset_minutes: int):
+    def calculate_spatial_flood(self, lat: float, lng: float, rainfall: float, forecast_offset_minutes: int, timestep_hours: float = 1.0):
+        # Validate timestep_hours
+        if timestep_hours <= 0:
+            raise ValueError(f"timestep_hours must be > 0, got {timestep_hours}")
+        
         # 1. 0-Rainfall Behavior: Explicitly bail on flat zero without storage abstraction
         if rainfall <= 0 and forecast_offset_minutes == 0:
             return {
@@ -31,8 +35,9 @@ class FloodModelService:
         C = catchment["impervious_fraction"]
         
         # 4. Strict Dimensional Runoff Eq
+        # timestep_hours converts rainfall rate (mm/hr) to accumulated depth (mm)
+        # Production default: 1.0 hr. Historical IMERG replay: 0.5 hr (30-min resolution).
         runoff_rate_mm_hr = rainfall * C
-        timestep_hours = 1.0 # Base temporal resolution context
         runoff_depth_mm = runoff_rate_mm_hr * timestep_hours
         runoff_depth_cm = runoff_depth_mm * 0.1
         

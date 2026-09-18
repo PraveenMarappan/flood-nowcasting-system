@@ -1,0 +1,53 @@
+{
+  "historical_replay_status": "PARTIAL",
+  "event_replay_status": "INCOMPLETE",
+  "model_validation_status": "NOT_VALIDATED",
+  "forcing": {
+    "source": "NASA GES DISC",
+    "dataset": "GPM_3IMERGHH",
+    "version": "V07B",
+    "requested_start": "2015-11-30T00:00:00Z",
+    "requested_end": "2015-12-05T00:00:00Z",
+    "files_available": 1,
+    "timesteps_processed": 1,
+    "temporal_resolution_minutes": 30,
+    "replay_timestep_hours": 0.5,
+    "processed_start": "2015-11-30T00:00:00+00:00",
+    "processed_end": "2015-11-30T00:00:00+00:00"
+  },
+  "processed_window_peak_rainfall_mm_hr": 5.1,
+  "depth_validation": {
+    "status": "READY_FOR_REVIEW",
+    "validation_type": "SPATIAL_EVENT_LEVEL",
+    "temporal_matching": "NONE",
+    "sample_count": 192,
+    "valid_comparison_count": 192,
+    "mae_cm": 26.4987,
+    "rmse_cm": 32.2122,
+    "median_ae_cm": 22.64,
+    "observation_event_attribution": "UNKNOWN",
+    "observation_limitation": "No reliable timestamps; event attribution uncertain"
+  },
+  "occurrence_validation": {
+    "status": "NOT_COMPUTABLE",
+    "reason": "THRESHOLD_REQUIRED \u2014 no binary classification threshold has been set",
+    "sample_count": 753,
+    "threshold_depth_cm": null,
+    "threshold_source": null,
+    "threshold_tuned_against_validation": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "continuous_predictions_available": true
+  },
+  "limitations": [
+    "Only 1 of ~240 expected IMERG half-hourly files processed \u2014 event replay INCOMPLETE",
+    "Observations have no reliable timestamps \u2014 validation is SPATIAL_EVENT_LEVEL only",
+    "192 depth observations have event=UNKNOWN \u2014 may not correspond to 2015 event",
+    "Model uses heuristic impervious_fraction=0.85, NOT calibrated land cover",
+    "Drainage infrastructure is NOT coupled in flood model",
+    "processed_window_peak_rainfall is NOT the full 2015 event peak \u2014 only covers available files",
+    "Model accumulation timestep for replay (0.5 hr) differs from production default (1.0 hr)",
+    "No occurrence classification threshold set \u2014 precision/recall/F1 not computable"
+  ]
+}

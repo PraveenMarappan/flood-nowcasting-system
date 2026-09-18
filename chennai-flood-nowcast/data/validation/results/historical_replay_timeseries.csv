@@ -1,0 +1,2 @@
+timestamp_utc,latitude,longitude,rainfall_mm_hr,rainfall_status,model_depth_cm,model_risk,source_file,dataset,version,timestep_hours,forecast_offset_minutes
+2015-11-30T00:00:00+00:00,13.0827,80.2707,5.1,VALID,0.22,LOW,3B-HHR.MS.MRG.3IMERG.20151130-S000000-E002959.0000.V07B.HDF5,GPM_3IMERGHH,V07B,0.5,0

@@ -14,8 +14,24 @@ class RouteService:
         if self.roads_file.exists():
             with open(self.roads_file, 'r') as f:
                 self._cached_roads = json.load(f)
+            
+            flood_service = FloodModelService()
+            self._road_spatial_params = []
+            for feature in self._cached_roads.get("features", []):
+                coords = feature.get("geometry", {}).get("coordinates", [])
+                if not coords:
+                    self._road_spatial_params.append(None)
+                    continue
+                lng = sum(pt[0] for pt in coords) / len(coords)
+                lat = sum(pt[1] for pt in coords) / len(coords)
+                terrain = flood_service.terrain_service.get_derivatives(lat, lng)
+                conc = terrain.get("acc_prioritization_factor", 1.0)
+                catchment = flood_service.catchment_service.get_catchment_properties(lat, lng)
+                c_val = catchment.get("impervious_fraction", 0.85)
+                self._road_spatial_params.append((c_val, conc))
         else:
             self._cached_roads = None
+            self._road_spatial_params = []
 
     def _get_risk_class(self, depth_cm):
         # 8. ROAD RISK RULE: Missing prediction -> GRAY
@@ -36,33 +52,52 @@ class RouteService:
                 "features": []
             }
             
-        flood_service = FloodModelService()
         processed_features = []
+        features = self._cached_roads.get("features", [])
         
-        for feature in self._cached_roads.get("features", []):
-            coords = feature.get("geometry", {}).get("coordinates", [])
-            if not coords:
+        # Precompute recession_mult and forecast_type for forecast_offset_minutes
+        recession_mult = 1.0
+        forecast_type = "CURRENT"
+        if forecast_offset_minutes > 0:
+            forecast_type = "BASELINE HEURISTIC PROJECTION" 
+            if forecast_offset_minutes >= 180: recession_mult = 0.05
+            elif forecast_offset_minutes >= 150: recession_mult = 0.1
+            elif forecast_offset_minutes >= 120: recession_mult = 0.2
+            elif forecast_offset_minutes >= 90: recession_mult = 0.5
+            elif forecast_offset_minutes >= 60: recession_mult = 0.7
+            elif forecast_offset_minutes >= 30: recession_mult = 0.9
+            
+        for i, feature in enumerate(features):
+            params = self._road_spatial_params[i] if i < len(self._road_spatial_params) else None
+            if not params:
                 continue
                 
-            lng = sum(pt[0] for pt in coords) / len(coords)
-            lat = sum(pt[1] for pt in coords) / len(coords)
+            c_val, conc = params
             
-            # 4. FLOOD GRID AUDIT: Truly fetching spatial results using coordinates
-            flood = flood_service.calculate_spatial_flood(lat, lng, rainfall, forecast_offset_minutes)
-            
-            risk_level, risk_color = self._get_risk_class(flood.get("water_depth_cm"))
+            if rainfall <= 0 and forecast_offset_minutes == 0:
+                water_depth = 0.0
+            else:
+                runoff_depth_cm = (rainfall * c_val * 1.0) * 0.1
+                base_water_depth_cm = runoff_depth_cm * conc
+                if rainfall > 0:
+                    water_depth = base_water_depth_cm + (rainfall * (1.0 - recession_mult) * 0.1)
+                else:
+                    water_depth = base_water_depth_cm * recession_mult
+                    
+            water_depth_rounded = round(water_depth, 2)
+            risk_level, risk_color = self._get_risk_class(water_depth_rounded)
             
             feature_copy = dict(feature)
             feature_copy["properties"] = dict(feature["properties"])
             feature_copy["properties"].update({
-                "predicted_flood_depth_cm": flood.get("water_depth_cm", "UNAVAILABLE"),
-                "max_depth_cm": flood.get("water_depth_cm", "UNAVAILABLE"),
-                "mean_depth_cm": flood.get("water_depth_cm", "UNAVAILABLE"),
+                "predicted_flood_depth_cm": water_depth_rounded,
+                "max_depth_cm": water_depth_rounded,
+                "mean_depth_cm": water_depth_rounded,
                 "risk_level": risk_level,
                 "risk_color": risk_color,
                 "forecast_time": f"+{forecast_offset_minutes} MIN" if forecast_offset_minutes > 0 else "NOW",
                 "model_version": self.model_version,
-                "data_status": "MODELLED" if flood.get("water_depth_cm") is not None else "DATA UNAVAILABLE"
+                "data_status": "MODELLED"
             })
             processed_features.append(feature_copy)
 

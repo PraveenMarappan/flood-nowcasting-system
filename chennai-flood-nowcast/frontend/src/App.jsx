@@ -21,6 +21,8 @@ function App() {
   const [historyData, setHistoryData] = useState([]);
   const [dataStatus, setDataStatus] = useState(null);
 
+  const requestIdRef = React.useRef(0);
+
   useEffect(() => {
     fetchData();
   }, [rainfall, isSimulated, forecastOffset]);
@@ -50,44 +52,53 @@ function App() {
   };
 
   const fetchData = async () => {
+    const currentRequestId = ++requestIdRef.current;
+    console.log(`[ROADS] request #${currentRequestId}`, { forecastOffset, rainfall, isSimulated });
+
     try {
       const forecastRes = await axios.get(`${API_BASE}/flood/forecast?rainfall=${rainfall}&is_simulated=${isSimulated}`);
-      setForecast(forecastRes.data);
-      
-      const roadsRes = await axios.get(`${API_BASE}/roads/risk?forecast_offset=${forecastOffset}&rainfall=${rainfall}&is_simulated=${isSimulated}`);
-      setRoadsGeojson(roadsRes.data);
-      
-      const locRes = await axios.get(`${API_BASE}/locations/critical`);
-      setLocations(locRes.data.locations);
-      
-      const drainRes = await axios.get(`${API_BASE}/drainage/status`);
-      setDrainage(drainRes.data.drainage);
-      
-      try {
-        const statusRes = await axios.get(`${API_BASE}/data-status`);
-        setDataStatus(statusRes.data);
-      } catch (err) {
-        console.error("Error fetching data status", err);
-      }
-      
-      try {
-        const terrainRes = await axios.get(`${API_BASE}/terrain/elevation?latitude=13.0827&longitude=80.2707`);
-        setTerrainInfo(terrainRes.data);
-      } catch (err) {
-        console.error("Error fetching terrain data", err);
-      }
-      
-      if (forecastRes.data) {
-        const hData = [
-          { time: '-2h', depth: Math.max(0, forecastRes.data.water_depth_cm * 0.2), rain: rainfall * 0.1 },
-          { time: '-1h', depth: Math.max(0, forecastRes.data.water_depth_cm * 0.5), rain: rainfall * 0.4 },
-          { time: 'Now', depth: forecastRes.data.water_depth_cm, rain: rainfall }
-        ];
-        setHistoryData(hData);
+      if (currentRequestId === requestIdRef.current) {
+        setForecast(forecastRes.data);
       }
     } catch (e) {
-      console.error("Error fetching data", e);
+      console.error("Error fetching forecast", e);
     }
+    
+    try {
+      const roadsRes = await axios.get(`${API_BASE}/roads/risk?forecast_offset=${forecastOffset}&rainfall=${rainfall}&is_simulated=${isSimulated}`);
+      if (currentRequestId === requestIdRef.current) {
+        console.log(`[ROADS] response #${currentRequestId} status: ${roadsRes.data?.road_data_status}, feature count: ${roadsRes.data?.features?.length}`);
+        if (roadsRes.data && Array.isArray(roadsRes.data.features) && roadsRes.data.features.length > 0) {
+          setRoadsGeojson(roadsRes.data);
+        } else {
+          console.warn("[ROADS] Response contained 0 features or unavailable status. Retaining existing valid road geometry.");
+        }
+      }
+    } catch (e) {
+      console.error("[ROADS] Transient error fetching roads risk. Retaining existing valid road geometry.", e);
+    }
+
+    if (currentRequestId !== requestIdRef.current) return;
+
+    try {
+      const locRes = await axios.get(`${API_BASE}/locations/critical`);
+      if (currentRequestId === requestIdRef.current) setLocations(locRes.data.locations || []);
+    } catch (err) { console.error("Error fetching locations", err); }
+
+    try {
+      const drainRes = await axios.get(`${API_BASE}/drainage/status`);
+      if (currentRequestId === requestIdRef.current) setDrainage(drainRes.data.drainage);
+    } catch (err) { console.error("Error fetching drainage", err); }
+    
+    try {
+      const statusRes = await axios.get(`${API_BASE}/data-status`);
+      if (currentRequestId === requestIdRef.current) setDataStatus(statusRes.data);
+    } catch (err) { console.error("Error fetching data status", err); }
+    
+    try {
+      const terrainRes = await axios.get(`${API_BASE}/terrain/elevation?latitude=13.0827&longitude=80.2707`);
+      if (currentRequestId === requestIdRef.current) setTerrainInfo(terrainRes.data);
+    } catch (err) { console.error("Error fetching terrain data", err); }
   };
 
   const getStatusColor = (status) => {
@@ -100,6 +111,19 @@ function App() {
       case 'GRAY': case 'DATA UNAVAILABLE': return '#9ca3af'; // Gray
       default: return '#94a3b8'; 
     }
+  };
+
+  const getRoadStyle = (feature) => {
+    const props = feature?.properties || {};
+    const riskColor = props.risk_color === 'GREEN' ? '#10b981' : 
+                      props.risk_color === 'ORANGE' ? '#f59e0b' : 
+                      props.risk_color === 'RED' ? '#ef4444' : '#9ca3af';
+    return {
+      color: riskColor,
+      weight: 5,
+      opacity: 0.9,
+      lineCap: 'round'
+    };
   };
 
   const onEachRoadFeature = (feature, layer) => {
@@ -408,10 +432,11 @@ function App() {
               </CircleMarker>
             ))}
 
-            {roadsGeojson && roadsGeojson.features && (
+            {roadsGeojson && roadsGeojson.features && roadsGeojson.features.length > 0 && (
               <GeoJSON
-                key={`roads-${forecastOffset}-${rainfall}-${isSimulated}`} // Force React to rebuild the native leaflet layers when API outputs alter natively
+                key="real-chennai-road-layer"
                 data={roadsGeojson}
+                style={getRoadStyle}
                 onEachFeature={onEachRoadFeature}
               />
             )}
