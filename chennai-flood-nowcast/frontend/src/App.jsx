@@ -9,7 +9,7 @@ const API_BASE = "http://localhost:8000/api";
 
 function App() {
   const [isSimulated, setIsSimulated] = useState(true);
-  const [rainfall, setRainfall] = useState(0);
+  const [simulationRainfall, setSimulationRainfall] = useState(0);
   const [liveRainfallData, setLiveRainfallData] = useState(null);
   const [terrainInfo, setTerrainInfo] = useState(null);
   const [forecastOffset, setForecastOffset] = useState(0);
@@ -23,9 +23,15 @@ function App() {
 
   const requestIdRef = React.useRef(0);
 
+  const liveRainfall = (liveRainfallData?.status === "LIVE" || liveRainfallData?.status === "STALE") 
+    ? (liveRainfallData.rainfall_rate || 0) 
+    : 0;
+
+  const currentModelRainfall = isSimulated ? simulationRainfall : liveRainfall;
+
   useEffect(() => {
     fetchData();
-  }, [rainfall, isSimulated, forecastOffset]);
+  }, [currentModelRainfall, isSimulated, forecastOffset]);
 
   useEffect(() => {
     let interval;
@@ -42,9 +48,6 @@ function App() {
     try {
       const res = await axios.get(`${API_BASE}/rainfall/current`);
       setLiveRainfallData(res.data);
-      if (res.data.status === "LIVE" || res.data.status === "STALE") {
-        setRainfall(res.data.rainfall_rate || 0);
-      }
     } catch (e) {
       console.error("Error fetching live rainfall", e);
       setLiveRainfallData({ status: "UNAVAILABLE", error: "Connection Error" });
@@ -53,10 +56,16 @@ function App() {
 
   const fetchData = async () => {
     const currentRequestId = ++requestIdRef.current;
-    console.log(`[ROADS] request #${currentRequestId}`, { forecastOffset, rainfall, isSimulated });
+    console.log("[MODEL RAINFALL]", currentModelRainfall);
+    console.log("[ROAD RISK REQUEST]", {
+      rainfall: currentModelRainfall,
+      forecastOffset,
+      isSimulated,
+      requestId: currentRequestId
+    });
 
     try {
-      const forecastRes = await axios.get(`${API_BASE}/flood/forecast?rainfall=${rainfall}&is_simulated=${isSimulated}`);
+      const forecastRes = await axios.get(`${API_BASE}/flood/forecast?rainfall=${currentModelRainfall}&is_simulated=${isSimulated}`);
       if (currentRequestId === requestIdRef.current) {
         setForecast(forecastRes.data);
       }
@@ -64,8 +73,10 @@ function App() {
       console.error("Error fetching forecast", e);
     }
     
+    if (currentRequestId !== requestIdRef.current) return;
+
     try {
-      const roadsRes = await axios.get(`${API_BASE}/roads/risk?forecast_offset=${forecastOffset}&rainfall=${rainfall}&is_simulated=${isSimulated}`);
+      const roadsRes = await axios.get(`${API_BASE}/roads/risk?forecast_offset=${forecastOffset}&rainfall=${currentModelRainfall}&is_simulated=${isSimulated}`);
       if (currentRequestId === requestIdRef.current) {
         console.log(`[ROADS] response #${currentRequestId} status: ${roadsRes.data?.road_data_status}, feature count: ${roadsRes.data?.features?.length}`);
         if (roadsRes.data && Array.isArray(roadsRes.data.features) && roadsRes.data.features.length > 0) {
@@ -86,9 +97,9 @@ function App() {
     } catch (err) { console.error("Error fetching locations", err); }
 
     try {
-      const drainRes = await axios.get(`${API_BASE}/drainage/status`);
-      if (currentRequestId === requestIdRef.current) setDrainage(drainRes.data.drainage);
-    } catch (err) { console.error("Error fetching drainage", err); }
+      const drainRes = await axios.get(`${API_BASE}/drainage/diagnostics?latitude=13.0827&longitude=80.2707`);
+      if (currentRequestId === requestIdRef.current) setDrainage(drainRes.data);
+    } catch (err) { console.error("Error fetching drainage diagnostics", err); }
     
     try {
       const statusRes = await axios.get(`${API_BASE}/data-status`);
@@ -102,24 +113,37 @@ function App() {
   };
 
   const getStatusColor = (status) => {
-    if (!status) return '#94a3b8';
+    if (!status) return '#9ca3af';
     switch(status.toUpperCase()) {
-      case 'NORMAL': case 'LOW': return '#10b981'; // Green
-      case 'WATCH': case 'MODERATE': return '#f59e0b'; // Orange
-      case 'FLOOD': case 'HIGH': case 'CRITICAL': return '#ef4444'; // Red
+      case 'NORMAL': return '#ffffff';
+      case 'LOW': return '#38bdf8';
+      case 'WATCH': case 'MODERATE': return '#f59e0b';
+      case 'FLOOD': case 'HIGH': case 'CRITICAL': return '#ef4444';
       case 'RECOVERY': return '#3b82f6';
-      case 'GRAY': case 'DATA UNAVAILABLE': return '#9ca3af'; // Gray
-      default: return '#94a3b8'; 
+      case 'GRAY': case 'DATA UNAVAILABLE': case 'UNAVAILABLE': return '#9ca3af';
+      default: return '#9ca3af'; 
     }
+  };
+
+  const getRoadColor = (props) => {
+    if (!props) return '#9ca3af';
+    const riskLevel = (props.risk_level || '').toUpperCase();
+    const riskColorProp = (props.risk_color || '').toUpperCase();
+
+    if (riskLevel === 'NORMAL' || riskColorProp === 'WHITE') return '#ffffff';
+    if (riskLevel === 'LOW' || riskColorProp === 'GREEN' || riskColorProp === 'LIGHT_BLUE' || riskColorProp === 'BLUE') return '#38bdf8';
+    if (riskLevel === 'MODERATE' || riskColorProp === 'ORANGE') return '#f59e0b';
+    if (riskLevel === 'HIGH' || riskLevel === 'CRITICAL' || riskColorProp === 'RED') return '#ef4444';
+    if (riskLevel === 'DATA UNAVAILABLE' || riskLevel === 'UNAVAILABLE' || riskColorProp === 'GRAY') return '#9ca3af';
+    
+    return '#38bdf8';
   };
 
   const getRoadStyle = (feature) => {
     const props = feature?.properties || {};
-    const riskColor = props.risk_color === 'GREEN' ? '#10b981' : 
-                      props.risk_color === 'ORANGE' ? '#f59e0b' : 
-                      props.risk_color === 'RED' ? '#ef4444' : '#9ca3af';
+    const color = getRoadColor(props);
     return {
-      color: riskColor,
+      color: color,
       weight: 5,
       opacity: 0.9,
       lineCap: 'round'
@@ -129,10 +153,7 @@ function App() {
   const onEachRoadFeature = (feature, layer) => {
     const props = feature.properties;
     if (props) {
-      // Dynamic rendering style natively mapping GeoJSON Risk classes precisely
-      const riskColor = props.risk_color === 'GREEN' ? '#10b981' : 
-                        props.risk_color === 'ORANGE' ? '#f59e0b' : 
-                        props.risk_color === 'RED' ? '#ef4444' : '#9ca3af';
+      const riskColor = getRoadColor(props);
       
       layer.setStyle({
         color: riskColor,
@@ -143,6 +164,9 @@ function App() {
       
       layer.on('mouseover', (e) => e.target.setStyle({ weight: 8 }));
       layer.on('mouseout', (e) => e.target.setStyle({ weight: 5 }));
+
+      const badgeTextColor = riskColor === '#ffffff' ? '#0f172a' : '#ffffff';
+      const badgeBorder = riskColor === '#ffffff' ? 'border: 1px solid #94a3b8;' : '';
 
       // Popup Content satisfying the 11-point popup requirement verbatim
       const popupContent = `
@@ -164,16 +188,16 @@ function App() {
           </div>
 
           <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
-            Risk: <span style="font-weight: 700; background: ${riskColor}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">${props.risk_level || 'UNKNOWN'}</span>
+            Risk: <span style="font-weight: 700; background: ${riskColor}; color: ${badgeTextColor}; ${badgeBorder} padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">${props.risk_level || 'UNKNOWN'}</span>
           </div>
 
           <div style="font-size: 0.8rem; color: #475569; padding-bottom: 5px; border-bottom: 1px solid #e2e8f0;">
-            Rainfall: <strong>${rainfall.toFixed(1)} mm/hr</strong><br/>
+            Rainfall: <strong>${currentModelRainfall.toFixed(1)} mm/hr</strong><br/>
           </div>
           
           <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px; line-height: 1.4;">
             Model: ${props.model_version || 'baseline'}<br/>
-            Drainage: NOT USED<br/>
+            Drainage Capacity: UNKNOWN (Not Used)<br/>
             Calibration: NOT CALIBRATED
           </div>
         </div>
@@ -204,7 +228,7 @@ function App() {
     
     if (status === "LIVE") {
       return (
-        <div style={{display: 'flex', gap: 10, alignItems: 'center', color: '#10b981'}}>
+        <div style={{display: 'flex', gap: 10, alignItems: 'center', color: '#38bdf8'}}>
           <Wifi size={18} /> <span>LIVE NASA GPM / IMERG</span>
           <span style={{fontSize: '0.8rem', color: '#94a3b8', marginLeft: 10}}>
             Last updated: {new Date(retrieved_at).toLocaleTimeString()}
@@ -232,11 +256,12 @@ function App() {
   };
   
   // Calculate Road Counts explicitly based on the API response per requirements
-  let countLow = 0, countMod = 0, countHigh = 0, countGray = 0;
+  let countNormal = 0, countLow = 0, countMod = 0, countHigh = 0, countGray = 0;
   if (roadsGeojson && roadsGeojson.features) {
     roadsGeojson.features.forEach(f => {
-      const r = f.properties.risk_level;
-      if (r === 'LOW') countLow++;
+      const r = (f.properties?.risk_level || '').toUpperCase();
+      if (r === 'NORMAL') countNormal++;
+      else if (r === 'LOW') countLow++;
       else if (r === 'MODERATE') countMod++;
       else if (r === 'HIGH' || r === 'CRITICAL') countHigh++;
       else countGray++;
@@ -277,7 +302,7 @@ function App() {
                 onClick={() => setIsSimulated(false)}
                 style={{
                   flex: 1, padding: '10px 0', border: 'none', cursor: 'pointer',
-                  background: !isSimulated ? '#10b981' : '#1e293b',
+                  background: !isSimulated ? '#38bdf8' : '#1e293b',
                   color: !isSimulated ? '#fff' : '#94a3b8',
                   fontWeight: !isSimulated ? 'bold' : 'normal'
                 }}
@@ -310,12 +335,12 @@ function App() {
             <div className="card-title">CURRENT CONDITIONS</div>
             <div style={{display: 'flex', flexDirection: 'column', gap: 10, fontSize: '0.95rem'}}>
               <div>
-                <strong>Rainfall:</strong> {rainfall.toFixed(1)} mm/hr
+                <strong>Rainfall:</strong> {currentModelRainfall.toFixed(1)} mm/hr
                 {isSimulated ? (
                   <div className="tag-simulated" style={{marginTop: 5, display: 'inline-block', marginLeft: 10}}>Synthetic Scenario</div>
                 ) : (
                   liveRainfallData && (
-                    <div style={{fontSize: '0.8rem', color: '#10b981', marginTop: 5}}>
+                    <div style={{fontSize: '0.8rem', color: '#38bdf8', marginTop: 5}}>
                       {liveRainfallData.source || 'NASA GPM IMERG'} • {liveRainfallData.status === "LIVE" ? "REAL" : liveRainfallData.status}
                     </div>
                   )
@@ -338,17 +363,17 @@ function App() {
               <input 
                 type="range" 
                 min="0" max="150" step="5"
-                value={rainfall}
-                onChange={(e) => setRainfall(Number(e.target.value))}
+                value={simulationRainfall}
+                onChange={(e) => setSimulationRainfall(Number(e.target.value))}
                 className="input-slider"
               />
               <div style={{display: 'flex', gap: 5, marginTop: 15, flexWrap: 'wrap'}}>
                 {[0, 10, 25, 50, 100].map(val => (
                   <button 
                      key={val} 
-                     onClick={() => setRainfall(val)}
+                     onClick={() => setSimulationRainfall(val)}
                      style={{
-                       background: rainfall === val ? '#3b82f6' : '#334155',
+                       background: simulationRainfall === val ? '#3b82f6' : '#334155',
                        color: 'white', border: 'none', padding: '5px 10px', borderRadius: 4, cursor: 'pointer'
                      }}
                   >
@@ -359,24 +384,43 @@ function App() {
             </div>
           )}
 
+          {drainage && (
+            <div className="card">
+              <div className="card-title">DRAINAGE DIAGNOSTICS (INFORMATIONAL)</div>
+              <div style={{fontSize: '0.8rem', color: '#cbd5e1', display: 'flex', flexDirection: 'column', gap: 6}}>
+                <div><strong>Coverage:</strong> <span style={{color: drainage.coverage?.status === 'DRAINAGE_SERVED' ? '#38bdf8' : '#f59e0b', fontWeight: 'bold'}}>{drainage.coverage?.status || 'N/A'}</span> ({drainage.coverage?.nearest_swd_distance_m ?? 'N/A'}m to SWD)</div>
+                <div><strong>Density:</strong> {drainage.density?.density_km_per_km2 ?? 'N/A'} km/km²</div>
+                <div><strong>Deficit Index (DBI):</strong> {drainage.dbi?.value ?? 'N/A'} ({drainage.dbi?.status || 'N/A'})</div>
+                <div><strong>Hydraulic Capacity:</strong> <span style={{color: '#9ca3af', fontWeight: 'bold'}}>UNKNOWN</span></div>
+                <div style={{fontSize: '0.75rem', color: '#94a3b8', fontStyle: 'italic', borderTop: '1px solid #334155', paddingTop: 4, marginTop: 2}}>
+                  Informational spatial diagnostics only. Drain proximity does not reduce flood depth calculations.
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="card">
               <div className="card-title">ROAD RISK COUNTERS</div>
               <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '0.85rem'}}>
-                 <div style={{background: 'rgba(16, 185, 129, 0.1)', border: '1px solid #10b981', padding: '6px', borderRadius: '4px'}}>
-                    <div style={{color: '#10b981', fontWeight: 'bold'}}>LOW ROADS</div>
-                    <div style={{fontSize: '1.2rem'}}>{countLow}</div>
+                 <div style={{background: 'rgba(255, 255, 255, 0.05)', border: '1px solid #ffffff', padding: '6px', borderRadius: '4px'}}>
+                    <div style={{color: '#ffffff', fontWeight: 'bold'}}>NORMAL</div>
+                    <div style={{fontSize: '1.2rem', color: '#ffffff'}}>{countNormal}</div>
+                 </div>
+                 <div style={{background: 'rgba(56, 189, 248, 0.1)', border: '1px solid #38bdf8', padding: '6px', borderRadius: '4px'}}>
+                    <div style={{color: '#38bdf8', fontWeight: 'bold'}}>LOW RISK</div>
+                    <div style={{fontSize: '1.2rem', color: '#38bdf8'}}>{countLow}</div>
                  </div>
                  <div style={{background: 'rgba(245, 158, 11, 0.1)', border: '1px solid #f59e0b', padding: '6px', borderRadius: '4px'}}>
                     <div style={{color: '#f59e0b', fontWeight: 'bold'}}>MODERATE</div>
-                    <div style={{fontSize: '1.2rem'}}>{countMod}</div>
+                    <div style={{fontSize: '1.2rem', color: '#f59e0b'}}>{countMod}</div>
                  </div>
                  <div style={{background: 'rgba(239, 68, 68, 0.1)', border: '1px solid #ef4444', padding: '6px', borderRadius: '4px'}}>
                     <div style={{color: '#ef4444', fontWeight: 'bold'}}>HIGH-RISK</div>
-                    <div style={{fontSize: '1.2rem'}}>{countHigh}</div>
+                    <div style={{fontSize: '1.2rem', color: '#ef4444'}}>{countHigh}</div>
                  </div>
-                 <div style={{background: 'rgba(156, 163, 175, 0.1)', border: '1px solid #9ca3af', padding: '6px', borderRadius: '4px'}}>
-                    <div style={{color: '#9ca3af', fontWeight: 'bold'}}>UNAVAILABLE</div>
-                    <div style={{fontSize: '1.2rem'}}>{countGray}</div>
+                 <div style={{background: 'rgba(156, 163, 175, 0.1)', border: '1px solid #9ca3af', padding: '6px', borderRadius: '4px', gridColumn: 'span 2'}}>
+                    <div style={{color: '#9ca3af', fontWeight: 'bold'}}>DATA UNAVAILABLE</div>
+                    <div style={{fontSize: '1.2rem', color: '#9ca3af'}}>{countGray}</div>
                  </div>
               </div>
           </div>
@@ -396,7 +440,7 @@ function App() {
                 center={[loc.lat, loc.lng]} 
                 radius={8}
                 pathOptions={{
-                  fillColor: loc.risk === 'CRITICAL' ? '#ef4444' : (loc.risk === 'HIGH' ? '#f97316' : '#3b82f6'),
+                  fillColor: loc.risk === 'CRITICAL' || loc.risk === 'HIGH' ? '#ef4444' : (loc.risk === 'MODERATE' ? '#f59e0b' : (loc.risk === 'LOW' ? '#38bdf8' : '#ffffff')),
                   color: 'white',
                   weight: 2,
                   fillOpacity: 0.8
@@ -414,18 +458,19 @@ function App() {
                     )}
                     
                     <div style={{marginTop: 5}}><strong>Type:</strong> {loc.type}</div>
-                    <div><strong>Modelled Risk Level:</strong> <span style={{color: loc.risk === 'CRITICAL' ? '#ef4444' : (loc.risk === 'HIGH' ? '#f97316' : '#3b82f6'), fontWeight: 'bold'}}>{loc.risk}</span></div>
+                    <div><strong>Modelled Risk Level:</strong> <span style={{color: loc.risk === 'CRITICAL' || loc.risk === 'HIGH' ? '#ef4444' : (loc.risk === 'MODERATE' ? '#f59e0b' : (loc.risk === 'LOW' ? '#38bdf8' : '#ffffff')), fontWeight: 'bold'}}>{loc.risk}</span></div>
                     <div><strong>Modelled Flood Depth:</strong> {loc.depth_cm} cm</div>
                     
                     <div style={{marginTop: 5, paddingBottom: 5, borderBottom: '1px solid #ccc'}}>
-                      <div><strong>Rainfall Input:</strong> {rainfall.toFixed(1)} mm/hr</div>
+                      <div><strong>Rainfall Input:</strong> {currentModelRainfall.toFixed(1)} mm/hr</div>
                       <div style={{fontSize: '0.8rem'}}><strong>Rainfall Source:</strong> {isSimulated ? 'SIMULATED' : `REAL — ${liveRainfallData?.source || 'NASA GPM'}`}</div>
                     </div>
                     
                     <div style={{marginTop: 5, fontSize: '0.8rem', color: '#64748b'}}>
                       <strong>Flood Model:</strong> MODELLED (baseline-v1) <br/>
                       <strong>Calibration:</strong> NOT CALIBRATED <br/>
-                      <strong>Drainage:</strong> NOT USED
+                      <strong>Drainage Capacity:</strong> UNKNOWN (Data Unavailable) <br/>
+                      <strong>Flood Depth Reduction:</strong> NONE (0.0 cm)
                     </div>
                   </div>
                 </Popup>
@@ -433,24 +478,44 @@ function App() {
             ))}
 
             {roadsGeojson && roadsGeojson.features && roadsGeojson.features.length > 0 && (
-              <GeoJSON
-                key="real-chennai-road-layer"
-                data={roadsGeojson}
-                style={getRoadStyle}
-                onEachFeature={onEachRoadFeature}
-              />
+              <>
+                <GeoJSON
+                  key={`road-casing-${forecastOffset}-${currentModelRainfall}-${isSimulated}`}
+                  data={roadsGeojson}
+                  style={(feature) => {
+                    const props = feature?.properties || {};
+                    const color = getRoadColor(props);
+                    const isWhite = color === '#ffffff';
+                    return {
+                      color: isWhite ? '#1e293b' : '#0f172a',
+                      weight: isWhite ? 8 : 7,
+                      opacity: 0.85,
+                      lineCap: 'round',
+                      lineJoin: 'round'
+                    };
+                  }}
+                  interactive={false}
+                />
+                <GeoJSON
+                  key={`real-chennai-road-layer-${forecastOffset}-${currentModelRainfall}-${isSimulated}`}
+                  data={roadsGeojson}
+                  style={getRoadStyle}
+                  onEachFeature={onEachRoadFeature}
+                />
+              </>
             )}
           </MapContainer>
           
           {/* STATIC OVERLAY LEGEND */}
           <div style={{
             position: 'absolute', bottom: '30px', right: '10px', 
-            background: 'white', padding: '10px 15px', borderRadius: '8px', 
-            boxShadow: '0 4px 6px rgba(0,0,0,0.3)', zIndex: 1000, color: '#333'
+            background: 'rgba(15, 23, 42, 0.95)', border: '1px solid #334155', padding: '10px 15px', borderRadius: '8px', 
+            boxShadow: '0 4px 12px rgba(0,0,0,0.4)', zIndex: 1000, color: '#f8fafc'
           }}>
-            <h4 style={{margin: '0 0 10px 0', fontSize: '0.9rem', borderBottom: '1px solid #ddd', paddingBottom: '4px'}}>FLOOD RISK</h4>
+            <h4 style={{margin: '0 0 10px 0', fontSize: '0.85rem', borderBottom: '1px solid #334155', paddingBottom: '4px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em'}}>FLOOD RISK</h4>
             <div style={{display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.85rem', fontWeight: '600'}}>
-              <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><div style={{width: 14, height: 14, borderRadius: '50%', background: '#10b981'}}></div> LOW</div>
+              <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><div style={{width: 14, height: 14, borderRadius: '50%', background: '#ffffff', border: '1px solid #94a3b8'}}></div> NORMAL</div>
+              <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><div style={{width: 14, height: 14, borderRadius: '50%', background: '#38bdf8'}}></div> LOW</div>
               <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><div style={{width: 14, height: 14, borderRadius: '50%', background: '#f59e0b'}}></div> MODERATE</div>
               <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><div style={{width: 14, height: 14, borderRadius: '50%', background: '#ef4444'}}></div> HIGH</div>
               <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><div style={{width: 14, height: 14, borderRadius: '50%', background: '#9ca3af'}}></div> DATA UNAVAILABLE</div>
@@ -467,14 +532,17 @@ function App() {
         </div>
         <div className="timeline-track">
           <div className="timeline-line"></div>
-          {forecast.forecast.map((node, i) => (
-            <div className="timeline-node" key={i}>
-              <div className="timeline-dot" style={{borderColor: getStatusColor(node.status)}}></div>
-              <div style={{fontWeight: 700, color: getStatusColor(node.status)}}>{node.status}</div>
-              <div className="timeline-label">{node.time}</div>
-              <div className="timeline-label">{node.depth.toFixed(1)} cm</div>
-            </div>
-          ))}
+          {forecast.forecast.map((node, i) => {
+            const color = getStatusColor(node.status);
+            return (
+              <div className="timeline-node" key={i}>
+                <div className="timeline-dot" style={{borderColor: color, backgroundColor: color === '#ffffff' ? '#ffffff' : undefined}}></div>
+                <div style={{fontWeight: 700, color: color}}>{node.status}</div>
+                <div className="timeline-label">{node.time}</div>
+                <div className="timeline-label">{node.depth.toFixed(1)} cm</div>
+              </div>
+            );
+          })}
         </div>
       </footer>
 

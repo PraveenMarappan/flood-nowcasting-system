@@ -176,9 +176,14 @@ def get_terrain_summary():
 def get_terrain_elevation(latitude: float, longitude: float):
     return terrain_service.get_elevation(latitude, longitude)
 
+from fastapi.responses import Response
+import json
+
 @router.get("/roads/risk")
 def get_roads_risk(forecast_offset: int = 0, rainfall: float = 0.0, is_simulated: bool = True):
-    return route_service.get_roads_risk(forecast_offset_minutes=forecast_offset, rainfall=rainfall, is_simulated=is_simulated)
+    print(f"[ROAD RISK API] received request: forecast_offset={forecast_offset}, rainfall={rainfall}, is_simulated={is_simulated}")
+    data = route_service.get_roads_risk(forecast_offset_minutes=forecast_offset, rainfall=rainfall, is_simulated=is_simulated)
+    return Response(content=json.dumps(data), media_type="application/json")
 
 @router.get("/locations/critical")
 def get_critical_locations():
@@ -196,6 +201,10 @@ def get_drainage_summary():
 def get_drainage_nearest(latitude: float, longitude: float):
     return drainage_service.get_nearest(latitude, longitude)
 
+@router.get("/drainage/diagnostics")
+def get_drainage_diagnostics(latitude: float = 13.0827, longitude: float = 80.2707):
+    return drainage_service.calculate_diagnostics(latitude, longitude, terrain_service)
+
 @router.get("/route/safer")
 def get_safer_route():
     return route_service.get_safer_route()
@@ -211,3 +220,4 @@ def get_flood_zones():
 @router.get("/flood/validation")
 def get_validation_status():
     return validation_service.get_validation_metrics()
+

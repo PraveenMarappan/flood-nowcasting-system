@@ -1,0 +1,4 @@
+Offset 0m: response_time=3318.0ms, features=73174, max_depth=8.64cm, counts={'NORMAL': 0, 'LOW': 73174, 'MODERATE': 0, 'HIGH': 0, 'DATA UNAVAILABLE': 0}
+Offset 60m: response_time=3265.1ms, features=73174, max_depth=10.89cm, counts={'NORMAL': 0, 'LOW': 72751, 'MODERATE': 423, 'HIGH': 0, 'DATA UNAVAILABLE': 0}
+Offset 120m: response_time=3558.9ms, features=73174, max_depth=14.64cm, counts={'NORMAL': 0, 'LOW': 0, 'MODERATE': 73174, 'HIGH': 0, 'DATA UNAVAILABLE': 0}
+Offset 180m: response_time=4959.8ms, features=73174, max_depth=15.77cm, counts={'NORMAL': 0, 'LOW': 0, 'MODERATE': 73174, 'HIGH': 0, 'DATA UNAVAILABLE': 0}

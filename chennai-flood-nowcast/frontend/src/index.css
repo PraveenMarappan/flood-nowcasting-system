@@ -7,16 +7,17 @@
   --text-muted: #94a3b8;
   --border-color: #334155;
   
-  --normal: #10b981;
-  --watch: #eab308;
-  --flood: #f97316;
+  --normal: #ffffff;
+  --low: #38bdf8;
+  --watch: #f59e0b;
+  --moderate: #f59e0b;
+  --flood: #ef4444;
+  --high: #ef4444;
   --critical: #ef4444;
   --recovery: #3b82f6;
+  --unavailable: #9ca3af;
   
-  --safe: #22c55e;
-  --low: #eab308;
-  --moderate: #f97316;
-  --high: #ef4444;
+  --safe: #ffffff;
   
   --font-family: 'Inter', sans-serif;
 }
@@ -187,11 +188,15 @@ body {
   margin-right: 8px;
 }
 
-.status-normal { background-color: var(--normal); }
+.status-normal { background-color: var(--normal); border: 1px solid #64748b; }
+.status-low { background-color: var(--low); }
 .status-watch { background-color: var(--watch); }
+.status-moderate { background-color: var(--moderate); }
 .status-flood { background-color: var(--flood); }
+.status-high { background-color: var(--high); }
 .status-critical { background-color: var(--critical); }
 .status-recovery { background-color: var(--recovery); }
+.status-unavailable { background-color: var(--unavailable); }
 
 .leaflet-container {
   height: 100%;

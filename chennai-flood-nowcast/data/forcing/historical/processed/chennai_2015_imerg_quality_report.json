@@ -1,0 +1,16 @@
+{
+    "event_window": "2015-11-30T00:00:00Z to 2015-12-05T00:00:00Z",
+    "first_timestamp": "2015-11-30T00:00:00+00:00",
+    "last_timestamp": "2015-11-30T18:30:00+00:00",
+    "expected_timesteps": 241,
+    "downloaded_timesteps": 36,
+    "actual_timesteps_processed": 36,
+    "missing_timesteps": 0,
+    "duplicate_timesteps": 0,
+    "corrupt_timesteps": 205,
+    "min_rainfall_mm_hr": 0.0,
+    "max_rainfall_during_processed_window_mm_hr": 5.66,
+    "mean_rainfall_mm_hr": 1.6978,
+    "total_accumulated_rainfall_mm": 30.56,
+    "zero_rainfall_intervals": 7
+}

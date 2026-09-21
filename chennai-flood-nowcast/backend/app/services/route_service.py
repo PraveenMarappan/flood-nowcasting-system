@@ -34,10 +34,14 @@ class RouteService:
             self._road_spatial_params = []
 
     def _get_risk_class(self, depth_cm):
-        # 8. ROAD RISK RULE: Missing prediction -> GRAY
-        if depth_cm is None or depth_cm < 0: return "DATA UNAVAILABLE", "GRAY"
-        if depth_cm < 10.0: return "LOW", "GREEN"
-        if depth_cm < 30.0: return "MODERATE", "ORANGE"
+        if depth_cm is None or depth_cm < 0:
+            return "DATA UNAVAILABLE", "GRAY"
+        if depth_cm <= 0.1:
+            return "NORMAL", "WHITE"
+        if depth_cm < 10.0:
+            return "LOW", "LIGHT_BLUE"
+        if depth_cm < 30.0:
+            return "MODERATE", "ORANGE"
         return "HIGH", "RED"
 
     def get_roads_risk(self, forecast_offset_minutes: int, rainfall: float, is_simulated: bool):
