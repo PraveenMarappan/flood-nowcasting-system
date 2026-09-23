@@ -54,46 +54,42 @@ def main():
     
     for feat in features:
         props = feat.get("properties", {})
-        attr = props.get("event_attribution") or props.get("attribution") or "UNKNOWN"
+        attr = props.get("event") or props.get("event_attribution") or props.get("attribution") or "UNKNOWN"
         if attr == "Chennai_2015":
             event_2015_features.append(feat)
         else:
             unknown_attr_features.append(feat)
             
-    print(f"  - Event-Attributed (Chennai_2015): {len(event_2015_features)}")
-    print(f"  - Unknown Event Attribution:       {len(unknown_attr_features)}")
+    c2015_with_depth = [f for f in event_2015_features if f.get("properties", {}).get("observed_depth_cm") is not None]
+    c2015_without_depth = [f for f in event_2015_features if f.get("properties", {}).get("observed_depth_cm") is None]
     
-    # Filter features with valid observed depth
-    usable_2015_obs = []
-    for feat in event_2015_features:
-        props = feat.get("properties", {})
-        obs_depth = props.get("observed_depth_cm")
-        if obs_depth is not None and not np.isnan(float(obs_depth)):
-            usable_2015_obs.append(feat)
-            
-    print(f"  - Usable 2015 Observations with depth: {len(usable_2015_obs)}")
-    
-    # Spatial prediction & error evaluation for usable observations
+    unk_with_depth = [f for f in unknown_attr_features if f.get("properties", {}).get("observed_depth_cm") is not None]
+    unk_without_depth = [f for f in unknown_attr_features if f.get("properties", {}).get("observed_depth_cm") is None]
+
+    print(f"  - Chennai_2015 Total: {len(event_2015_features)} (with depth: {len(c2015_with_depth)}, without depth: {len(c2015_without_depth)})")
+    print(f"  - UNKNOWN Event Total: {len(unknown_attr_features)} (with depth: {len(unk_with_depth)}, without depth: {len(unk_without_depth)})")
+    print(f"  - 2015 Event Depth Validation: NOT_COMPUTABLE (0 usable depth observations)")
+
+    # Spatial depth error evaluation for UNKNOWN event depth observations
     model = FloodModelService()
     validation_records = []
     abs_errors = []
     sq_errors = []
     diffs = []
     
-    for idx, feat in enumerate(usable_2015_obs):
+    for idx, feat in enumerate(unk_with_depth):
         geom = shape(feat["geometry"])
         coords = geom.coords[0] if geom.geom_type == "Point" else (geom.centroid.x, geom.centroid.y)
         lng, lat = coords[0], coords[1]
         
         props = feat.get("properties", {})
         obs_depth_cm = float(props["observed_depth_cm"])
-        obs_id = props.get("id") or f"obs_{idx+1}"
+        obs_id = props.get("id") or props.get("source_feature_id") or f"obs_{idx+1}"
         
-        # Calculate event peak depth at this location using peak event rainfall
         calc = model.calculate_spatial_flood(
-            latitude=lat,
-            longitude=lng,
-            rainfall_mm_hr=peak_event_rain,
+            lat=lat,
+            lng=lng,
+            rainfall=peak_event_rain,
             forecast_offset_minutes=0,
             timestep_hours=0.5
         )
@@ -116,7 +112,7 @@ def main():
             "absolute_error_cm": abs_err,
             "squared_error_cm2": sq_err,
             "timestamp_status": "UNKNOWN",
-            "event_attribution": "Chennai_2015"
+            "event_attribution": "UNKNOWN"
         })
         
     # Calculate Statistical Validation Metrics
@@ -132,37 +128,60 @@ def main():
     metrics = {
         "event_window": "2015-11-30T00:00:00Z to 2015-12-05T00:00:00Z",
         "dataset": "GPM_3IMERGHH V07B",
-        "total_replay_timesteps": len(replay_records),
-        "peak_event_rainfall_mm_hr": peak_event_rain,
+        "expected_timesteps": 241,
+        "available_timesteps": len(replay_records),
+        "missing_timesteps": max(0, 241 - len(replay_records)),
+        "event_replay_status": "INCOMPLETE",
+        "processed_window_peak_rainfall_mm_hr": peak_event_rain,
         "observation_counts": {
             "total_normalized_records": len(features),
-            "chennai_2015_attributed": len(event_2015_features),
-            "unknown_attribution_excluded": len(unknown_attr_features),
-            "usable_depth_observations": sample_count
+            "chennai_2015": {
+                "total": len(event_2015_features),
+                "with_observed_depth": len(c2015_with_depth),
+                "without_observed_depth": len(c2015_without_depth),
+            },
+            "unknown_event": {
+                "total": len(unknown_attr_features),
+                "with_observed_depth": len(unk_with_depth),
+                "without_observed_depth": len(unk_without_depth),
+            }
         },
+        "2015_depth_validation": "NOT_COMPUTABLE",
+        "unknown_event_spatial_depth_comparison": "AVAILABLE",
+        "metric_population": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
         "depth_validation": {
-            "mae_cm": round(mae, 2) if mae is not None else None,
-            "rmse_cm": round(rmse, 2) if rmse is not None else None,
-            "bias_cm": round(bias, 2) if bias is not None else None,
-            "median_absolute_error_cm": round(median_ae, 2) if median_ae is not None else None,
-            "sample_count": sample_count
+            "metric_population": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
+            "unknown_event_depth_sample_count": sample_count,
+            "unknown_event_depth_mae_cm": round(mae, 4) if mae is not None else None,
+            "unknown_event_depth_rmse_cm": round(rmse, 4) if rmse is not None else None,
+            "unknown_event_depth_bias_cm": round(bias, 4) if bias is not None else None,
+            "unknown_event_depth_median_absolute_error_cm": round(median_ae, 4) if median_ae is not None else None,
+            "mae_cm": round(mae, 4) if mae is not None else None,
+            "rmse_cm": round(rmse, 4) if rmse is not None else None,
+            "bias_cm": round(bias, 4) if bias is not None else None,
+            "median_absolute_error_cm": round(median_ae, 4) if median_ae is not None else None,
+            "sample_count": sample_count,
+            "provenance_statement": "The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation."
         },
         "occurrence_validation": {
             "status": "NOT_COMPUTABLE",
             "reason": "THRESHOLD_NOT_DEFINED",
-            "note": "No predefined observation inundation threshold exists in project spec. Threshold was not arbitrarily invented."
+            "note": "No predefined observation inundation threshold exists in project spec."
         },
         "time_matched_validation": {
             "status": "NOT_COMPUTABLE",
             "reason": "OBSERVATION_TIMESTAMPS_UNAVAILABLE",
-            "note": "Historical observations lack sub-daily timestamps. Event-level spatial comparison performed."
+            "note": "Historical observations lack sub-daily timestamps."
         },
-        "event_level_spatial_validation": {
-            "status": "COMPUTABLE",
-            "sample_count": sample_count
+        "drainage_diagnostics": {
+            "terminology": "drainage-constrained diagnostic locations",
+            "hydraulic_capacity": "UNKNOWN",
+            "hydraulic_conveyance": "UNAVAILABLE",
+            "hydraulic_coupling": "UNAVAILABLE",
+            "drainage_effect_on_flood_depth_cm": 0.0
         },
-        "overall_validation_status": "READY_FOR_REVIEW",
-        "validation_disclaimer": "Model is NOT fully validated due to missing observation timestamps and coarse satellite forcing. Results reflect baseline spatial event replay."
+        "overall_validation_status": "NOT_VALIDATED",
+        "validation_disclaimer": "The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation."
     }
     
     # Save Metrics JSON
@@ -171,6 +190,8 @@ def main():
         
     print(f"\nSaved Validation Metrics JSON to {METRICS_JSON}")
     print("\nVALIDATION METRICS SUMMARY:")
+    print(f"  - 2015 Depth Validation: NOT_COMPUTABLE")
+    print(f"  - Metric Population: UNKNOWN_EVENT_DEPTH_OBSERVATIONS")
     print(f"  - Sample Count: {sample_count}")
     print(f"  - MAE:  {mae:.2f} cm" if mae else "  - MAE: N/A")
     print(f"  - RMSE: {rmse:.2f} cm" if rmse else "  - RMSE: N/A")
@@ -180,12 +201,14 @@ def main():
     # Generate Validation Report Markdown
     report_content = f"""# 2015 Chennai Flood Event Replay & Historical Validation Report
 
-## Executive Summary
-This report presents the scientific validation results of the Chennai Flood Nowcasting baseline model (`baseline-v1`) replayed against the 2015 Chennai extreme precipitation event (`2015-11-30T00:00Z` to `2015-12-05T00:00Z`) using NASA GPM IMERG Final V07B half-hourly forcing.
+## Executive Disclaimer
 
 > [!IMPORTANT]
-> **Validation Status:** `READY_FOR_REVIEW` (Spatial Event-Level Only)  
-> The model is **NOT** labeled as fully `VALIDATED` due to missing historical observation timestamps and coarse satellite spatial resolution. Zero model coefficients were tuned or calibrated during this phase.
+> **2015 Depth Validation:** `NOT_COMPUTABLE` (0 usable depth records for Chennai_2015)  
+> **Overall Validation Status:** `NOT_VALIDATED`  
+> **Event Replay Status:** `INCOMPLETE` (128 of 241 expected timesteps)  
+>  
+> **The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation.**
 
 ---
 
@@ -193,63 +216,80 @@ This report presents the scientific validation results of the Chennai Flood Nowc
 * **Event Window:** `2015-11-30T00:00:00Z` to `2015-12-05T00:00:00Z`
 * **Dataset:** NASA GPM IMERG Final L3 Half-Hourly (`GPM_3IMERGHH.07` V07B)
 * **Replay Timestep:** `0.5 hours` (30 minutes)
-* **Total Replay Timesteps:** {len(replay_records)} timesteps
-* **Peak Event Rainfall (IMERG Grid Cell):** {peak_event_rain:.2f} mm/hr
+* **Expected Timesteps:** 241
+* **Available Timesteps:** {len(replay_records)}
+* **Missing Timesteps:** {max(0, 241 - len(replay_records))}
+* **Event Replay Status:** `INCOMPLETE`
+* **Processed-Window Peak Rainfall:** {peak_event_rain:.2f} mm/hr (NOT 2015 event peak rainfall)
 
 ---
 
 ## 2. Observation Dataset Partitioning
-The historical observation dataset (`chennai_validation_normalized.geojson`) was partitioned according to explicit event attribution:
 
-| Category | Count | Usage |
-| :--- | :--- | :--- |
-| **Total Benchmark Features** | {len(features)} | Full normalized GeoJSON dataset |
-| **Event-Attributed (`Chennai_2015`)** | {len(event_2015_features)} | Eligible for 2015 event evaluation |
-| **Unknown Attribution (`UNKNOWN`)** | {len(unknown_attr_features)} | **Excluded** from 2015 event validation |
-| **Usable Depths (`Chennai_2015`)** | {sample_count} | Used for spatial depth error calculation |
+| Category | Total Records | With Observed Depth | Without Observed Depth | Event Depth Validation Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **Chennai_2015 Attributed** | {len(event_2015_features)} | **0** | {len(c2015_without_depth)} | **NOT_COMPUTABLE** |
+| **UNKNOWN Event Attribution** | {len(unknown_attr_features)} | **{len(unk_with_depth)}** | 0 | **AVAILABLE** (Spatial Comparison Only) |
+| **Total Benchmark Features** | {len(features)} | {len(unk_with_depth)} | {len(c2015_without_depth)} | N/A |
 
----
-
-## 3. Quantitative Depth Validation Metrics
-
-Depth error metrics computed across {sample_count} usable observation coordinates:
-
-* **Mean Absolute Error (MAE):** **{mae:.2f} cm**
-* **Root Mean Square Error (RMSE):** **{rmse:.2f} cm**
-* **Mean Bias Error (Mean Error):** **{bias:.2f} cm**
-* **Median Absolute Error:** **{median_ae:.2f} cm**
-* **Sample Count ($N$):** **{sample_count}**
+> **Notice:** UNKNOWN event observations were NOT moved into the 2015 validation set.
 
 ---
 
-## 4. Methodological Limitations & Statuses
+## 3. Quantitative Depth Metrics (UNKNOWN Event Observations)
 
-### A. Occurrence Validation Status
+**Metric Population:** `UNKNOWN_EVENT_DEPTH_OBSERVATIONS`  
+**Terminology:** Comparison against UNKNOWN-event depth observations / Spatial depth comparison using observations with unknown event attribution.
+
+> [!WARNING]
+> **The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation.**
+
+* **`unknown_event_depth_mae_cm`:** **{mae:.2f} cm**
+* **`unknown_event_depth_rmse_cm`:** **{rmse:.2f} cm**
+* **`unknown_event_depth_bias_cm`:** **{bias:.2f} cm**
+* **`unknown_event_depth_median_absolute_error_cm`:** **{median_ae:.2f} cm**
+* **`unknown_event_depth_sample_count`:** **{sample_count}**
+
+---
+
+## 4. Drainage Diagnostics & Terminology
+
+- **Diagnostic Terminology:** Drainage-constrained diagnostic locations
+- **SWD Pipe Geometry:** Real spatial geometry loaded from GIS dataset
+- **Drainage Diagnostics:** Proximity and density diagnostics computed
+- **Hydraulic Capacity:** `UNKNOWN`
+- **Hydraulic Conveyance:** `UNAVAILABLE` (No hydraulic conveyance calculated)
+- **Hydraulic Coupling:** `UNAVAILABLE`
+- **Drainage Effect on Flood Depth:** `0.0 cm` (Drainage does not alter numerical flood depth)
+
+---
+
+## 5. Methodological Limitations & Statuses
+
+### A. 2015 Event Depth Validation Status
+* **Status:** `NOT_COMPUTABLE`
+* **Reason:** `NO_USABLE_DEPTH_OBSERVATIONS`
+* **Details:** The 753 Chennai_2015 attributed records contain zero measured depth values.
+
+### B. Occurrence Validation Status
 * **Status:** `NOT_COMPUTABLE`
 * **Reason:** `THRESHOLD_NOT_DEFINED`
-* **Details:** No standardized inundation threshold is defined in project specifications. An arbitrary threshold was **not** fabricated.
+* **Details:** No standardized inundation threshold is defined in project specifications.
 
-### B. Time-Matched Validation Status
+### C. Time-Matched Validation Status
 * **Status:** `NOT_COMPUTABLE`
 * **Reason:** `OBSERVATION_TIMESTAMPS_UNAVAILABLE`
-* **Details:** Historical crowd-sourced/surveyed flood depths lack sub-daily timestamps (`timestamp_status = UNKNOWN`). Evaluation performed as peak event-level spatial matching.
+* **Details:** Historical flood depths lack sub-daily timestamps.
 
 ---
 
-## 5. Model Limitations Identified
-
-1. **Satellite Spatial Resolution:** NASA IMERG 0.1° (~11 km grid) smooths localized cloudburst intensity relative to local ground rain gauges.
-2. **Uncalibrated Runoff Coefficient:** Urban runoff coefficient ($C = 0.85$) is a static heuristic.
-3. **Terrain Smoothing:** USGS SRTM 30m DEM elevation resolution smooths micro-topographic street gutters and roadside retention.
-4. **Lack of SWD Pipe Capacity Data:** Drainage infrastructure operates with zero numerical flood reduction (`drainage_effect_on_flood_depth = 0.0`) due to unavailable SWD pipe cross-sections and invert levels.
-5. **Observation Timestamp Absence:** Benchmark flood depth records lack timestamping, precluding dynamic hydrograph time-series matching.
-
----
-
-## 6. Verification & Regression Protection
-* **Backend Unit Tests:** **65 / 65 Passed**
-* **Frontend Build:** **Vite build clean (0 errors)**
-* **Phase A Drainage Diagnostics:** **Frozen & Unaltered** (`drainage_effect_on_flood_depth = 0.0`)
+## 6. Verification & Summary of Statuses
+* **2015 Depth Validation:** `NOT_COMPUTABLE`
+* **Unknown-Event Spatial Depth Comparison:** `AVAILABLE`
+* **Event Replay Status:** `INCOMPLETE`
+* **Occurrence Validation:** `NOT_COMPUTABLE`
+* **Time-Matched Validation:** `NOT_COMPUTABLE`
+* **Overall Validation Status:** `NOT_VALIDATED`
 """
 
     with open(REPORT_MD, "w", encoding="utf-8") as f:
@@ -259,3 +299,4 @@ Depth error metrics computed across {sample_count} usable observation coordinate
 
 if __name__ == "__main__":
     main()
+

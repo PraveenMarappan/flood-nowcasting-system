@@ -578,7 +578,36 @@ class TestMetricsAssembly:
 
         metrics = build_validation_metrics(replay, depth, occurrence)
         assert metrics["model_validation_status"] == "NOT_VALIDATED"
+        assert metrics["overall_validation_status"] == "NOT_VALIDATED"
         assert metrics["historical_replay_status"] == "PARTIAL"
         assert metrics["event_replay_status"] == "INCOMPLETE"
+        assert metrics["2015_depth_validation"] == "NOT_COMPUTABLE"
+        assert metrics["unknown_event_spatial_depth_comparison"] == "AVAILABLE"
+        assert metrics["metric_population"] == "UNKNOWN_EVENT_DEPTH_OBSERVATIONS"
         assert "limitations" in metrics
         assert len(metrics["limitations"]) > 0
+
+    def test_provenance_metadata_assembly(self):
+        from app.services.historical_validation_engine import run_depth_validation, build_validation_metrics
+
+        obs = [
+            {
+                "geometry": {"type": "Point", "coordinates": [80.27, 13.08]},
+                "properties": {"event": "Chennai_2015", "observed_depth_cm": None},
+            },
+            {
+                "geometry": {"type": "Point", "coordinates": [80.28, 13.09]},
+                "properties": {"event": "UNKNOWN", "observed_depth_cm": 15.0},
+            },
+        ]
+        depth_res = run_depth_validation(obs, peak_rainfall=10.0)
+        assert depth_res["2015_depth_validation"] == "NOT_COMPUTABLE"
+        assert depth_res["unknown_event_spatial_depth_comparison"] == "AVAILABLE"
+        assert depth_res["metric_population"] == "UNKNOWN_EVENT_DEPTH_OBSERVATIONS"
+        assert depth_res["unknown_event_depth_sample_count"] == 1
+        assert "unknown_event_depth_mae_cm" in depth_res
+        assert depth_res["observation_counts"]["chennai_2015"]["total"] == 1
+        assert depth_res["observation_counts"]["chennai_2015"]["with_observed_depth"] == 0
+        assert depth_res["observation_counts"]["unknown_event"]["total"] == 1
+        assert depth_res["observation_counts"]["unknown_event"]["with_observed_depth"] == 1
+

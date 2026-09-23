@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
 import time
 from dotenv import load_dotenv
 
@@ -9,6 +10,9 @@ load_dotenv()
 from app.api.endpoints import router as api_router
 
 app = FastAPI(title="Chennai Flood Nowcast API")
+
+# GZip middleware — compress responses >= 1KB (roads/risk is ~43MB uncompressed)
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 app.add_middleware(
     CORSMiddleware,

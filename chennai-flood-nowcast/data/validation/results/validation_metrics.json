@@ -2,29 +2,37 @@
   "historical_replay_status": "PARTIAL",
   "event_replay_status": "INCOMPLETE",
   "model_validation_status": "NOT_VALIDATED",
+  "occurrence_validation_status": "NOT_COMPUTABLE",
+  "time_matched_validation_status": "NOT_COMPUTABLE",
   "forcing": {
     "source": "NASA GES DISC",
     "dataset": "GPM_3IMERGHH",
     "version": "V07B",
     "requested_start": "2015-11-30T00:00:00Z",
     "requested_end": "2015-12-05T00:00:00Z",
-    "files_available": 1,
-    "timesteps_processed": 1,
+    "files_available": 128,
+    "timesteps_processed": 128,
     "temporal_resolution_minutes": 30,
     "replay_timestep_hours": 0.5,
     "processed_start": "2015-11-30T00:00:00+00:00",
-    "processed_end": "2015-11-30T00:00:00+00:00"
+    "processed_end": "2015-12-02T15:30:00+00:00"
   },
-  "processed_window_peak_rainfall_mm_hr": 5.1,
+  "processed_window_peak_rainfall_mm_hr": 34.07,
+  "observations_summary": {
+    "total_observations_in_dataset": 945,
+    "known_chennai_2015_observations": 753,
+    "unknown_event_depth_observations": 192
+  },
   "depth_validation": {
     "status": "READY_FOR_REVIEW",
     "validation_type": "SPATIAL_EVENT_LEVEL",
-    "temporal_matching": "NONE",
+    "temporal_matching": "NOT_COMPUTABLE",
     "sample_count": 192,
     "valid_comparison_count": 192,
-    "mae_cm": 26.4987,
-    "rmse_cm": 32.2122,
-    "median_ae_cm": 22.64,
+    "mae_cm": 25.242,
+    "rmse_cm": 31.1862,
+    "bias_cm": -25.242,
+    "median_ae_cm": 21.41,
     "observation_event_attribution": "UNKNOWN",
     "observation_limitation": "No reliable timestamps; event attribution uncertain"
   },
@@ -41,7 +49,7 @@
     "continuous_predictions_available": true
   },
   "limitations": [
-    "Only 1 of ~240 expected IMERG half-hourly files processed \u2014 event replay INCOMPLETE",
+    "Only 128 of ~240 expected IMERG half-hourly files processed \u2014 event replay INCOMPLETE",
     "Observations have no reliable timestamps \u2014 validation is SPATIAL_EVENT_LEVEL only",
     "192 depth observations have event=UNKNOWN \u2014 may not correspond to 2015 event",
     "Model uses heuristic impervious_fraction=0.85, NOT calibrated land cover",

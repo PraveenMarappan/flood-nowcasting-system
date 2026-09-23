@@ -1,13 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup, GeoJSON } from 'react-leaflet';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { MapContainer, TileLayer, CircleMarker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { CloudRain, AlertTriangle, Navigation, Activity, BarChart3, Wifi, WifiOff, Clock, Info } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import axios from 'axios';
+import HistoricalValidation from './HistoricalValidation';
 
 const API_BASE = "http://localhost:8000/api";
 
+// Debounce utility
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+  return debouncedValue;
+}
+
+// Component to track map viewport and provide bbox
+function MapViewportTracker({ onBoundsChange }) {
+  const map = useMap();
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    const handleMoveEnd = () => {
+      // Debounce: wait 300ms after movement stops
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => {
+        const bounds = map.getBounds();
+        const bbox = `${bounds.getWest().toFixed(6)},${bounds.getSouth().toFixed(6)},${bounds.getEast().toFixed(6)},${bounds.getNorth().toFixed(6)}`;
+        onBoundsChange(bbox);
+      }, 300);
+    };
+
+    map.invalidateSize();
+    map.on('moveend', handleMoveEnd);
+    // Fire once on mount
+    handleMoveEnd();
+    return () => {
+      map.off('moveend', handleMoveEnd);
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [map, onBoundsChange]);
+
+  return null;
+}
+
 function App() {
+  const [activeView, setActiveView] = useState('nowcast'); // 'nowcast' | 'validation'
   const [isSimulated, setIsSimulated] = useState(true);
   const [simulationRainfall, setSimulationRainfall] = useState(0);
   const [liveRainfallData, setLiveRainfallData] = useState(null);
@@ -18,10 +59,13 @@ function App() {
   const [roadsGeojson, setRoadsGeojson] = useState(null);
   const [locations, setLocations] = useState([]);
   const [drainage, setDrainage] = useState(null);
-  const [historyData, setHistoryData] = useState([]);
   const [dataStatus, setDataStatus] = useState(null);
+  const [mapBbox, setMapBbox] = useState(null);
 
-  const requestIdRef = React.useRef(0);
+  const requestIdRef = useRef(0);
+  const geoJsonLayerRef = useRef(null);
+  const casingLayerRef = useRef(null);
+  const staticDataLoaded = useRef(false);
 
   const liveRainfall = (liveRainfallData?.status === "LIVE" || liveRainfallData?.status === "STALE") 
     ? (liveRainfallData.rainfall_rate || 0) 
@@ -29,14 +73,84 @@ function App() {
 
   const currentModelRainfall = isSimulated ? simulationRainfall : liveRainfall;
 
-  useEffect(() => {
-    fetchData();
-  }, [currentModelRainfall, isSimulated, forecastOffset]);
+  // Debounce rainfall slider by 300ms to avoid request storms while dragging
+  const debouncedRainfall = useDebounce(currentModelRainfall, 300);
+  const debouncedForecastOffset = useDebounce(forecastOffset, 300);
 
+  // ===== STATIC DATA: fetch once on mount =====
+  useEffect(() => {
+    if (staticDataLoaded.current) return;
+    staticDataLoaded.current = true;
+
+    const fetchStatic = async () => {
+      try {
+        const [locRes, drainRes, statusRes, terrainRes] = await Promise.all([
+          axios.get(`${API_BASE}/locations/critical`),
+          axios.get(`${API_BASE}/drainage/diagnostics?latitude=13.0827&longitude=80.2707`),
+          axios.get(`${API_BASE}/data-status`),
+          axios.get(`${API_BASE}/terrain/elevation?latitude=13.0827&longitude=80.2707`),
+        ]);
+        setLocations(locRes.data.locations || []);
+        setDrainage(drainRes.data);
+        setDataStatus(statusRes.data);
+        setTerrainInfo(terrainRes.data);
+      } catch (e) {
+        console.error("Error fetching static data", e);
+      }
+    };
+    fetchStatic();
+  }, []);
+
+  // ===== DYNAMIC DATA: forecast (depends on rainfall, not on bbox) =====
+  useEffect(() => {
+    const fetchForecast = async () => {
+      const currentRequestId = ++requestIdRef.current;
+      try {
+        const forecastRes = await axios.get(`${API_BASE}/flood/forecast?rainfall=${debouncedRainfall}&is_simulated=${isSimulated}`);
+        if (currentRequestId === requestIdRef.current) {
+          setForecast(forecastRes.data);
+        }
+      } catch (e) {
+        console.error("Error fetching forecast", e);
+      }
+    };
+    fetchForecast();
+  }, [debouncedRainfall, isSimulated]);
+
+  // ===== ROAD RISK DATA: depends on rainfall, forecast offset, bbox =====
+  useEffect(() => {
+    if (mapBbox === null) return; // Wait for initial map bounds
+
+    const fetchRoads = async () => {
+      try {
+        const url = `${API_BASE}/roads/risk?forecast_offset=${debouncedForecastOffset}&rainfall=${debouncedRainfall}&is_simulated=${isSimulated}&bbox=${mapBbox}`;
+        const roadsRes = await axios.get(url);
+        if (roadsRes.data && Array.isArray(roadsRes.data.features) && roadsRes.data.features.length > 0) {
+          setRoadsGeojson(roadsRes.data);
+        } else {
+          console.warn("[ROADS] Response contained 0 features or unavailable status.");
+        }
+      } catch (e) {
+        console.error("[ROADS] Error fetching roads risk.", e);
+      }
+    };
+    fetchRoads();
+  }, [debouncedRainfall, debouncedForecastOffset, isSimulated, mapBbox]);
+
+  // ===== LIVE RAINFALL POLLING =====
   useEffect(() => {
     let interval;
     if (!isSimulated) {
-      fetchLiveRainfall(); // initial fetch
+      const fetchLiveRainfall = async () => {
+        try {
+          const res = await axios.get(`${API_BASE}/rainfall/current`);
+          setLiveRainfallData(res.data);
+        } catch (e) {
+          console.error("Error fetching live rainfall", e);
+          setLiveRainfallData({ status: "UNAVAILABLE", error: "Connection Error" });
+        }
+      };
+      fetchLiveRainfall();
       interval = setInterval(fetchLiveRainfall, 10 * 60 * 1000);
     }
     return () => {
@@ -44,73 +158,10 @@ function App() {
     };
   }, [isSimulated]);
 
-  const fetchLiveRainfall = async () => {
-    try {
-      const res = await axios.get(`${API_BASE}/rainfall/current`);
-      setLiveRainfallData(res.data);
-    } catch (e) {
-      console.error("Error fetching live rainfall", e);
-      setLiveRainfallData({ status: "UNAVAILABLE", error: "Connection Error" });
-    }
-  };
-
-  const fetchData = async () => {
-    const currentRequestId = ++requestIdRef.current;
-    console.log("[MODEL RAINFALL]", currentModelRainfall);
-    console.log("[ROAD RISK REQUEST]", {
-      rainfall: currentModelRainfall,
-      forecastOffset,
-      isSimulated,
-      requestId: currentRequestId
-    });
-
-    try {
-      const forecastRes = await axios.get(`${API_BASE}/flood/forecast?rainfall=${currentModelRainfall}&is_simulated=${isSimulated}`);
-      if (currentRequestId === requestIdRef.current) {
-        setForecast(forecastRes.data);
-      }
-    } catch (e) {
-      console.error("Error fetching forecast", e);
-    }
-    
-    if (currentRequestId !== requestIdRef.current) return;
-
-    try {
-      const roadsRes = await axios.get(`${API_BASE}/roads/risk?forecast_offset=${forecastOffset}&rainfall=${currentModelRainfall}&is_simulated=${isSimulated}`);
-      if (currentRequestId === requestIdRef.current) {
-        console.log(`[ROADS] response #${currentRequestId} status: ${roadsRes.data?.road_data_status}, feature count: ${roadsRes.data?.features?.length}`);
-        if (roadsRes.data && Array.isArray(roadsRes.data.features) && roadsRes.data.features.length > 0) {
-          setRoadsGeojson(roadsRes.data);
-        } else {
-          console.warn("[ROADS] Response contained 0 features or unavailable status. Retaining existing valid road geometry.");
-        }
-      }
-    } catch (e) {
-      console.error("[ROADS] Transient error fetching roads risk. Retaining existing valid road geometry.", e);
-    }
-
-    if (currentRequestId !== requestIdRef.current) return;
-
-    try {
-      const locRes = await axios.get(`${API_BASE}/locations/critical`);
-      if (currentRequestId === requestIdRef.current) setLocations(locRes.data.locations || []);
-    } catch (err) { console.error("Error fetching locations", err); }
-
-    try {
-      const drainRes = await axios.get(`${API_BASE}/drainage/diagnostics?latitude=13.0827&longitude=80.2707`);
-      if (currentRequestId === requestIdRef.current) setDrainage(drainRes.data);
-    } catch (err) { console.error("Error fetching drainage diagnostics", err); }
-    
-    try {
-      const statusRes = await axios.get(`${API_BASE}/data-status`);
-      if (currentRequestId === requestIdRef.current) setDataStatus(statusRes.data);
-    } catch (err) { console.error("Error fetching data status", err); }
-    
-    try {
-      const terrainRes = await axios.get(`${API_BASE}/terrain/elevation?latitude=13.0827&longitude=80.2707`);
-      if (currentRequestId === requestIdRef.current) setTerrainInfo(terrainRes.data);
-    } catch (err) { console.error("Error fetching terrain data", err); }
-  };
+  // ===== MAP BBOX HANDLER =====
+  const handleBoundsChange = useCallback((bbox) => {
+    setMapBbox(bbox);
+  }, []);
 
   const getStatusColor = (status) => {
     if (!status) return '#9ca3af';
@@ -125,7 +176,7 @@ function App() {
     }
   };
 
-  const getRoadColor = (props) => {
+  const getRoadColor = useCallback((props) => {
     if (!props) return '#9ca3af';
     const riskLevel = (props.risk_level || '').toUpperCase();
     const riskColorProp = (props.risk_color || '').toUpperCase();
@@ -137,9 +188,9 @@ function App() {
     if (riskLevel === 'DATA UNAVAILABLE' || riskLevel === 'UNAVAILABLE' || riskColorProp === 'GRAY') return '#9ca3af';
     
     return '#38bdf8';
-  };
+  }, []);
 
-  const getRoadStyle = (feature) => {
+  const getRoadStyle = useCallback((feature) => {
     const props = feature?.properties || {};
     const color = getRoadColor(props);
     return {
@@ -148,19 +199,25 @@ function App() {
       opacity: 0.9,
       lineCap: 'round'
     };
-  };
+  }, [getRoadColor]);
 
-  const onEachRoadFeature = (feature, layer) => {
+  const getCasingStyle = useCallback((feature) => {
+    const props = feature?.properties || {};
+    const color = getRoadColor(props);
+    const isWhite = color === '#ffffff';
+    return {
+      color: isWhite ? '#1e293b' : '#0f172a',
+      weight: isWhite ? 8 : 7,
+      opacity: 0.85,
+      lineCap: 'round',
+      lineJoin: 'round'
+    };
+  }, [getRoadColor]);
+
+  const onEachRoadFeature = useCallback((feature, layer) => {
     const props = feature.properties;
     if (props) {
       const riskColor = getRoadColor(props);
-      
-      layer.setStyle({
-        color: riskColor,
-        weight: 5,
-        opacity: 0.9,
-        lineCap: 'round'
-      });
       
       layer.on('mouseover', (e) => e.target.setStyle({ weight: 8 }));
       layer.on('mouseout', (e) => e.target.setStyle({ weight: 5 }));
@@ -168,7 +225,6 @@ function App() {
       const badgeTextColor = riskColor === '#ffffff' ? '#0f172a' : '#ffffff';
       const badgeBorder = riskColor === '#ffffff' ? 'border: 1px solid #94a3b8;' : '';
 
-      // Popup Content satisfying the 11-point popup requirement verbatim
       const popupContent = `
         <div style="font-size: 0.9rem; color: #333; min-width: 200px;">
           <h4 style="margin: 0 0 5px 0; padding-bottom: 5px; border-bottom: 1px solid #e2e8f0; font-size: 1rem;">${props.name || 'Unnamed Road'}</h4>
@@ -192,7 +248,7 @@ function App() {
           </div>
 
           <div style="font-size: 0.8rem; color: #475569; padding-bottom: 5px; border-bottom: 1px solid #e2e8f0;">
-            Rainfall: <strong>${currentModelRainfall.toFixed(1)} mm/hr</strong><br/>
+            Rainfall: <strong>${debouncedRainfall.toFixed(1)} mm/hr</strong><br/>
           </div>
           
           <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px; line-height: 1.4;">
@@ -204,7 +260,7 @@ function App() {
       `;
       layer.bindPopup(popupContent);
     }
-  };
+  }, [getRoadColor, debouncedRainfall]);
 
   const renderHeaderStatus = () => {
     if (isSimulated) {
@@ -256,32 +312,80 @@ function App() {
   };
   
   // Calculate Road Counts explicitly based on the API response per requirements
-  let countNormal = 0, countLow = 0, countMod = 0, countHigh = 0, countGray = 0;
-  if (roadsGeojson && roadsGeojson.features) {
-    roadsGeojson.features.forEach(f => {
-      const r = (f.properties?.risk_level || '').toUpperCase();
-      if (r === 'NORMAL') countNormal++;
-      else if (r === 'LOW') countLow++;
-      else if (r === 'MODERATE') countMod++;
-      else if (r === 'HIGH' || r === 'CRITICAL') countHigh++;
-      else countGray++;
-    });
-  }
+  const { countNormal, countLow, countMod, countHigh, countGray } = useMemo(() => {
+    let n = 0, l = 0, m = 0, h = 0, g = 0;
+    if (roadsGeojson && roadsGeojson.features) {
+      roadsGeojson.features.forEach(f => {
+        const r = (f.properties?.risk_level || '').toUpperCase();
+        if (r === 'NORMAL') n++;
+        else if (r === 'LOW') l++;
+        else if (r === 'MODERATE') m++;
+        else if (r === 'HIGH' || r === 'CRITICAL') h++;
+        else g++;
+      });
+    }
+    return { countNormal: n, countLow: l, countMod: m, countHigh: h, countGray: g };
+  }, [roadsGeojson]);
+
+  // Stable key for GeoJSON — changes only when underlying data object identity changes
+  // This avoids destroying/recreating 146K Leaflet layers on slider changes
+  const geoJsonDataId = useMemo(() => {
+    if (!roadsGeojson) return 0;
+    return roadsGeojson;
+  }, [roadsGeojson]);
 
   if (!forecast) return <div style={{padding: 20}}>Loading (or backend unreachable)...</div>;
 
   return (
     <div className="dashboard-layout">
-      <header className="header">
-        <div className="header-title">
-          <CloudRain size={24} /> Chennai Flood Nowcast
+      <header className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div className="header-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <CloudRain size={24} /> Chennai Flood Nowcast
+          </div>
+          <nav style={{ display: 'flex', gap: '6px', background: '#0f172a', padding: '4px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <button
+              onClick={() => setActiveView('nowcast')}
+              style={{
+                background: activeView === 'nowcast' ? '#3b82f6' : 'transparent',
+                color: activeView === 'nowcast' ? '#ffffff' : '#94a3b8',
+                border: 'none',
+                padding: '6px 14px',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontWeight: activeView === 'nowcast' ? 'bold' : 'normal',
+                fontSize: '0.85rem'
+              }}
+            >
+              NOWCAST DASHBOARD
+            </button>
+            <button
+              onClick={() => setActiveView('validation')}
+              style={{
+                background: activeView === 'validation' ? '#3b82f6' : 'transparent',
+                color: activeView === 'validation' ? '#ffffff' : '#94a3b8',
+                border: 'none',
+                padding: '6px 14px',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontWeight: activeView === 'validation' ? 'bold' : 'normal',
+                fontSize: '0.85rem'
+              }}
+            >
+              HISTORICAL VALIDATION
+            </button>
+          </nav>
         </div>
         <div className="header-status">
           {renderHeaderStatus()}
         </div>
       </header>
       
-      <div className="main-content">
+      {activeView === 'validation' ? (
+        <HistoricalValidation />
+      ) : (
+        <>
+          <div className="main-content">
         <aside className="sidebar">
           
           <div className="card">
@@ -428,11 +532,14 @@ function App() {
         </aside>
 
         <main className="map-container" style={{ position: 'relative' }}>
-          <MapContainer center={[13.0500, 80.2400]} zoom={13} style={{height: '100%', width: '100%'}}>
+          <MapContainer center={[13.0827, 80.2707]} zoom={13} style={{height: '100%', width: '100%'}}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+
+            {/* Map viewport tracker for bbox-based road loading */}
+            <MapViewportTracker onBoundsChange={handleBoundsChange} />
 
             {locations.map(loc => (
               <CircleMarker 
@@ -477,27 +584,19 @@ function App() {
               </CircleMarker>
             ))}
 
+            {/* Road layers — use data identity as key so layers are only recreated when new data arrives from API, NOT on every slider tick */}
             {roadsGeojson && roadsGeojson.features && roadsGeojson.features.length > 0 && (
               <>
                 <GeoJSON
-                  key={`road-casing-${forecastOffset}-${currentModelRainfall}-${isSimulated}`}
+                  key="road-casing-stable"
+                  ref={casingLayerRef}
                   data={roadsGeojson}
-                  style={(feature) => {
-                    const props = feature?.properties || {};
-                    const color = getRoadColor(props);
-                    const isWhite = color === '#ffffff';
-                    return {
-                      color: isWhite ? '#1e293b' : '#0f172a',
-                      weight: isWhite ? 8 : 7,
-                      opacity: 0.85,
-                      lineCap: 'round',
-                      lineJoin: 'round'
-                    };
-                  }}
+                  style={getCasingStyle}
                   interactive={false}
                 />
                 <GeoJSON
-                  key={`real-chennai-road-layer-${forecastOffset}-${currentModelRainfall}-${isSimulated}`}
+                  key="road-overlay-stable"
+                  ref={geoJsonLayerRef}
                   data={roadsGeojson}
                   style={getRoadStyle}
                   onEachFeature={onEachRoadFeature}
@@ -545,6 +644,8 @@ function App() {
           })}
         </div>
       </footer>
+        </>
+      )}
 
     </div>
   );

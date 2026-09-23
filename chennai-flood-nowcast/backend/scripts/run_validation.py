@@ -142,12 +142,12 @@ def main():
 
     metrics = build_validation_metrics(replay, depth_result, occurrence_result)
 
-    metrics_path = results_dir / "validation_metrics.json"
+    metrics_path = results_dir / "historical_validation_metrics.json"
     with open(metrics_path, "w", encoding="utf-8") as f:
         json.dump(metrics, f, indent=2, default=str)
     print(f"  Metrics: {metrics_path}")
 
-    report_path = results_dir / "validation_report.md"
+    report_path = results_dir / "historical_validation_report.md"
     write_validation_report(metrics, depth_result, occurrence_result, report_path)
     print(f"  Report:  {report_path}")
     print()

@@ -93,10 +93,10 @@ def download_single_granule(g_info, token):
     session = EarthdataSession()
     headers = {"Authorization": f"Bearer {token}"} if token else {}
     
-    max_retries = 3
+    max_retries = 5
     for attempt in range(max_retries):
         try:
-            resp = session.get(url, headers=headers, allow_redirects=True, timeout=45)
+            resp = session.get(url, headers=headers, allow_redirects=True, timeout=60)
             if resp.status_code == 200:
                 with open(out_path, "wb") as f:
                     f.write(resp.content)
@@ -107,7 +107,7 @@ def download_single_granule(g_info, token):
             elif resp.status_code == 404:
                 return {"status": "MISSING", "filename": fname, "filepath": None, "time_start": g_info["time_start"]}
         except Exception as e:
-            time.sleep(1)
+            time.sleep(2 * (attempt + 1))
             
     return {"status": "FAILED", "filename": fname, "filepath": None, "time_start": g_info["time_start"]}
 
@@ -138,10 +138,10 @@ def main():
     granules = fetch_cmr_granule_links("2015-11-30T00:00:00Z", "2015-12-05T00:00:00Z")
     
     expected_count = len(granules)
-    print(f"Downloading/verifying {expected_count} granules using multi-threading (10 workers)...")
+    print(f"Downloading/verifying {expected_count} granules using multi-threading (4 workers)...")
     
     download_results = []
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(download_single_granule, g, token): g for g in granules}
         for future in as_completed(futures):
             res = future.result()

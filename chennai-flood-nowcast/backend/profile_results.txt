@@ -1,0 +1,13 @@
+health: 2123ms / 2030ms / 2060ms | 0.1KB
+terrain/status: 2064ms / 2050ms / 2056ms | 0.2KB
+drainage/status: 2077ms / 2056ms / 2027ms | 0.3KB
+locations/critical: 2060ms / 2041ms / 2060ms | 0.0KB
+forecast?r=0: 2046ms / 2044ms / 2056ms | 1.0KB
+forecast?r=50: 2044ms / 2044ms / 2067ms | 0.9KB
+roads/risk?r=0: 3338ms / 2913ms / 2949ms | 43262.6KB
+roads/risk?r=50: 3193ms / 2991ms / 2988ms | 43611.2KB
+roads/risk?r=50 repeat: 3007ms / 3016ms / 2983ms | 43611.2KB
+drainage/diagnostics: 2103ms / 2077ms / 2045ms | 1.4KB
+validation/historical: 2105ms / 2039ms / 2071ms | 20.8KB
+data-status: 2028ms / 2059ms / 2038ms | 0.5KB
+DONE

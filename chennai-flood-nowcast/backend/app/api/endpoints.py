@@ -1,8 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from pydantic import BaseModel
 import csv
 from pathlib import Path
 from datetime import datetime
+from collections import OrderedDict
+from typing import Optional
 
 from app.services.nasa_gpm import NasaGpmService
 from app.services.terrain_service import TerrainService
@@ -14,6 +16,8 @@ from app.services.data_status_service import DataStatusService
 from app.services.validation_service import ValidationService
 
 router = APIRouter()
+
+# Module-level singletons — created once at startup, reused across requests
 terrain_service = TerrainService()
 drainage_service = DrainageCouplingService()
 flood_model_service = FloodModelService()
@@ -21,14 +25,39 @@ forecast_service = ForecastService()
 route_service = RouteService()
 data_status_service = DataStatusService()
 validation_service = ValidationService()
+nasa_gpm_service = NasaGpmService()  # Singleton — was previously instantiated per request
+
+# Bounded LRU caches for endpoint results
+_forecast_cache = OrderedDict()
+_forecast_cache_max = 64
+
+_diagnostics_cache = OrderedDict()
+_diagnostics_cache_max = 16
+
+# NASA rainfall cache
+_nasa_cache = {"result": None, "timestamp": None}
+
+def _lru_get(cache, key):
+    if key in cache:
+        cache.move_to_end(key)
+        return cache[key]
+    return None
+
+def _lru_put(cache, key, value, max_size):
+    if key in cache:
+        cache.move_to_end(key)
+        cache[key] = value
+    else:
+        if len(cache) >= max_size:
+            cache.popitem(last=False)
+        cache[key] = value
 
 class ForecastQuery(BaseModel):
     rainfall: int = 0
 
 @router.get("/rainfall/current")
 async def get_current_rainfall():
-    service = NasaGpmService()
-    result = await service.fetch_latest_precipitation()
+    result = await nasa_gpm_service.fetch_latest_precipitation()
     
     base_dir = Path(__file__).parent.parent.parent.parent / "data"
     raw_dir = base_dir / "raw"
@@ -118,6 +147,12 @@ async def get_current_flood(latitude: float = 13.0827, longitude: float = 80.270
 
 @router.get("/flood/forecast")
 def get_flood_forecast(rainfall: float = 0, is_simulated: bool = True, latitude: float = 13.0827, longitude: float = 80.2707):
+    # Check forecast cache
+    cache_key = (round(rainfall, 2), is_simulated, round(latitude, 4), round(longitude, 4))
+    cached = _lru_get(_forecast_cache, cache_key)
+    if cached is not None:
+        return cached
+
     elev_data = terrain_service.get_elevation(latitude, longitude)
     elevation_val = elev_data.get("elevation_m")
     has_real_terrain = (elevation_val is not None and elev_data.get("status") == "REAL")
@@ -136,6 +171,8 @@ def get_flood_forecast(rainfall: float = 0, is_simulated: bool = True, latitude:
     forecast_data["is_simulated"] = is_simulated
     forecast_data["rainfall_input_mm"] = rainfall
     forecast_data["drainage"] = current_flood["drainage"]
+
+    _lru_put(_forecast_cache, cache_key, forecast_data, _forecast_cache_max)
     
     return forecast_data
 
@@ -180,9 +217,28 @@ from fastapi.responses import Response
 import json
 
 @router.get("/roads/risk")
-def get_roads_risk(forecast_offset: int = 0, rainfall: float = 0.0, is_simulated: bool = True):
-    print(f"[ROAD RISK API] received request: forecast_offset={forecast_offset}, rainfall={rainfall}, is_simulated={is_simulated}")
-    data = route_service.get_roads_risk(forecast_offset_minutes=forecast_offset, rainfall=rainfall, is_simulated=is_simulated)
+def get_roads_risk(
+    forecast_offset: int = 0, 
+    rainfall: float = 0.0, 
+    is_simulated: bool = True,
+    bbox: Optional[str] = Query(None, description="Viewport bounding box: minLon,minLat,maxLon,maxLat")
+):
+    # Parse bbox if provided
+    bbox_tuple = None
+    if bbox:
+        try:
+            parts = [float(x.strip()) for x in bbox.split(",")]
+            if len(parts) == 4:
+                bbox_tuple = tuple(parts)
+        except (ValueError, TypeError):
+            pass  # Ignore invalid bbox, return all roads
+
+    data = route_service.get_roads_risk(
+        forecast_offset_minutes=forecast_offset, 
+        rainfall=rainfall, 
+        is_simulated=is_simulated,
+        bbox=bbox_tuple
+    )
     return Response(content=json.dumps(data), media_type="application/json")
 
 @router.get("/locations/critical")
@@ -203,7 +259,15 @@ def get_drainage_nearest(latitude: float, longitude: float):
 
 @router.get("/drainage/diagnostics")
 def get_drainage_diagnostics(latitude: float = 13.0827, longitude: float = 80.2707):
-    return drainage_service.calculate_diagnostics(latitude, longitude, terrain_service)
+    # Cache diagnostics — static geometry and terrain data
+    cache_key = (round(latitude, 6), round(longitude, 6))
+    cached = _lru_get(_diagnostics_cache, cache_key)
+    if cached is not None:
+        return cached
+    
+    result = drainage_service.calculate_diagnostics(latitude, longitude, terrain_service)
+    _lru_put(_diagnostics_cache, cache_key, result, _diagnostics_cache_max)
+    return result
 
 @router.get("/route/safer")
 def get_safer_route():
@@ -221,3 +285,6 @@ def get_flood_zones():
 def get_validation_status():
     return validation_service.get_validation_metrics()
 
+@router.get("/validation/historical")
+def get_historical_validation():
+    return validation_service.get_historical_validation()

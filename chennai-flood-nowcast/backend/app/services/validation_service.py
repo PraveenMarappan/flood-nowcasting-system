@@ -1,11 +1,13 @@
 import json
 import math
+import csv
 from pathlib import Path
 
 class ValidationService:
     def __init__(self):
         self.validation_status = "NOT_VALIDATED"
         self.observed_data_available = False
+        self._historical_cache = None  # Cache for static historical validation data
         
         self.base_dir = Path(__file__).resolve().parent.parent.parent.parent
         self.validation_file = self.base_dir / "data" / "validation" / "processed" / "chennai_validation_normalized.geojson"
@@ -101,3 +103,53 @@ class ValidationService:
                 "result_type": "None (Estimated block)"
             }
         }
+
+    def get_historical_validation(self):
+        # Return cached result if available (data is static stored artifacts)
+        if self._historical_cache is not None:
+            return self._historical_cache
+
+        base_dir = Path(__file__).resolve().parent.parent.parent.parent
+        results_dir = base_dir / "data" / "validation" / "results"
+        metrics_file = results_dir / "historical_validation_metrics.json"
+        if not metrics_file.exists():
+            metrics_file = results_dir / "validation_metrics.json"
+
+        timeseries_file = results_dir / "historical_replay_timeseries.csv"
+
+        metrics = {}
+        if metrics_file.exists():
+            try:
+                with open(metrics_file, "r") as f:
+                    metrics = json.load(f)
+            except Exception as e:
+                print("Error loading metrics json:", e)
+
+        timeseries = []
+        if timeseries_file.exists():
+            try:
+                with open(timeseries_file, "r", encoding="utf-8") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        timeseries.append({
+                            "timestamp_utc": row.get("timestamp_utc"),
+                            "rainfall_mm_hr": float(row["rainfall_mm_hr"]) if row.get("rainfall_mm_hr") is not None and row.get("rainfall_mm_hr") != "" else None,
+                            "model_depth_cm": float(row["model_depth_cm"]) if row.get("model_depth_cm") is not None and row.get("model_depth_cm") != "" else None,
+                            "rainfall_status": row.get("rainfall_status"),
+                            "model_risk": row.get("model_risk")
+                        })
+            except Exception as e:
+                print("Error loading timeseries csv:", e)
+
+        result = {
+            "status": "NOT_VALIDATED",
+            "overall_validation_status": "NOT_VALIDATED",
+            "metrics": metrics,
+            "timeseries": timeseries
+        }
+
+        # Cache for subsequent calls
+        self._historical_cache = result
+        return result
+
+

@@ -155,6 +155,9 @@ def run_historical_replay(
             "version": "V07B",
             "requested_start": EVENT_WINDOW_START,
             "requested_end": EVENT_WINDOW_END,
+            "expected_timesteps": 241,
+            "available_timesteps": timesteps_processed,
+            "missing_timesteps": max(0, 241 - timesteps_processed),
             "files_available": files_processed,
             "timesteps_processed": timesteps_processed,
             "temporal_resolution_minutes": 30,
@@ -257,6 +260,7 @@ def run_depth_validation(
     # Run model at each observation coordinate
     results = []
     errors = []
+    signed_errors = []
     for obs in depth_observations:
         try:
             model_result = model.calculate_spatial_flood(
@@ -272,8 +276,10 @@ def run_depth_validation(
             predicted_depth = None
 
         error_cm = None
+        signed_error_cm = None
         if predicted_depth is not None:
             error_cm = abs(obs["observed_depth_cm"] - predicted_depth)
+            signed_error_cm = predicted_depth - obs["observed_depth_cm"]
 
         results.append({
             "latitude": obs["latitude"],
@@ -281,20 +287,24 @@ def run_depth_validation(
             "observed_depth_cm": obs["observed_depth_cm"],
             "model_depth_cm": predicted_depth,
             "error_cm": error_cm,
+            "signed_error_cm": signed_error_cm,
             "event": obs["event"],
             "source_feature_id": obs.get("source_feature_id"),
         })
         if error_cm is not None:
             errors.append(error_cm)
+            signed_errors.append(signed_error_cm)
 
     # Calculate metrics only from valid comparisons
     mae_cm = None
     rmse_cm = None
     median_ae_cm = None
+    bias_cm = None
 
     if errors:
         mae_cm = round(sum(errors) / len(errors), 4)
         rmse_cm = round(math.sqrt(sum(e ** 2 for e in errors) / len(errors)), 4)
+        bias_cm = round(sum(signed_errors) / len(signed_errors), 4)
         sorted_errors = sorted(errors)
         n = len(sorted_errors)
         if n % 2 == 0:
@@ -302,19 +312,67 @@ def run_depth_validation(
         else:
             median_ae_cm = round(sorted_errors[n // 2], 4)
 
+    # Calculate observation breakdown counts across full observation list
+    chennai_2015_total = 0
+    chennai_2015_with_depth = 0
+    chennai_2015_without_depth = 0
+    unknown_event_total = 0
+    unknown_event_with_depth = 0
+    unknown_event_without_depth = 0
+
+    for obs in observations:
+        props = obs.get("properties", {})
+        evt = props.get("event", "UNKNOWN")
+        has_depth = props.get("observed_depth_cm") is not None
+        if evt == "Chennai_2015":
+            chennai_2015_total += 1
+            if has_depth:
+                chennai_2015_with_depth += 1
+            else:
+                chennai_2015_without_depth += 1
+        else:
+            unknown_event_total += 1
+            if has_depth:
+                unknown_event_with_depth += 1
+            else:
+                unknown_event_without_depth += 1
+
     status = "READY_FOR_REVIEW" if errors else "NOT_COMPUTABLE"
 
     return {
         "status": status,
+        "2015_depth_validation": "NOT_COMPUTABLE",
+        "unknown_event_spatial_depth_comparison": "AVAILABLE",
+        "metric_population": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
         "validation_type": "SPATIAL_EVENT_LEVEL",
-        "temporal_matching": "NONE",
+        "temporal_matching": "NOT_COMPUTABLE",
         "sample_count": len(results),
         "valid_comparison_count": len(errors),
+        "unknown_event_depth_sample_count": len(errors),
+        "unknown_event_depth_mae_cm": mae_cm,
+        "unknown_event_depth_rmse_cm": rmse_cm,
+        "unknown_event_depth_bias_cm": bias_cm,
+        "unknown_event_depth_median_absolute_error_cm": median_ae_cm,
         "mae_cm": mae_cm,
         "rmse_cm": rmse_cm,
+        "bias_cm": bias_cm,
         "median_ae_cm": median_ae_cm,
+        "known_chennai_2015_count": chennai_2015_total,
+        "unknown_event_count": unknown_event_total,
+        "observation_counts": {
+            "chennai_2015": {
+                "total": chennai_2015_total,
+                "with_observed_depth": chennai_2015_with_depth,
+                "without_observed_depth": chennai_2015_without_depth,
+            },
+            "unknown_event": {
+                "total": unknown_event_total,
+                "with_observed_depth": unknown_event_with_depth,
+                "without_observed_depth": unknown_event_without_depth,
+            }
+        },
         "observation_event_attribution": "UNKNOWN",
-        "observation_limitation": "No reliable timestamps; event attribution uncertain",
+        "observation_limitation": "The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation.",
         "rainfall_forcing_used": f"processed_window_peak_rainfall = {peak_rainfall} mm/hr",
         "results": results,
     }
@@ -520,22 +578,23 @@ def build_validation_metrics(
     """
     Assemble the unified validation_metrics.json structure.
     
-    model_validation_status is NEVER set to VALIDATED automatically.
+    model_validation_status / overall_validation_status is NEVER set to VALIDATED automatically.
     """
     limitations = [
-        "Observations have no reliable timestamps — validation is SPATIAL_EVENT_LEVEL only",
-        "192 depth observations have event=UNKNOWN — may not correspond to 2015 event",
+        "Observations have no reliable timestamps — time-matched validation is NOT_COMPUTABLE",
+        "The 192 depth observations used for depth statistics have event=UNKNOWN and must NOT be interpreted as a 2015 event-specific validation",
+        "2015 event population (753 records) contains 0 usable observed-depth records — 2015 depth validation is NOT_COMPUTABLE",
         "Model uses heuristic impervious_fraction=0.85, NOT calibrated land cover",
-        "Drainage infrastructure is NOT coupled in flood model",
-        "processed_window_peak_rainfall is NOT the full 2015 event peak — only covers available files",
+        "Drainage infrastructure numerical flood depth reduction is 0.0 cm — hydraulic capacity is UNKNOWN and hydraulic coupling is UNAVAILABLE",
+        "processed_window_peak_rainfall is NOT the full 2015 event peak — only covers available forcing files (128 of 241 timesteps)",
         "Model accumulation timestep for replay (0.5 hr) differs from production default (1.0 hr)",
     ]
 
     forcing = replay_result.get("forcing", {})
     files_avail = forcing.get("files_available", 0)
-    if files_avail < 240:  # ~240 half-hourly files for a 5-day event
+    if files_avail < 241:
         limitations.insert(0,
-            f"Only {files_avail} of ~240 expected IMERG half-hourly files processed — event replay INCOMPLETE"
+            f"Only {files_avail} of 241 expected IMERG half-hourly files processed — event replay INCOMPLETE"
         )
 
     if occurrence_result.get("threshold_depth_cm") is None:
@@ -545,24 +604,53 @@ def build_validation_metrics(
 
     return {
         "historical_replay_status": replay_result.get("historical_replay_status", "FAILED"),
-        "event_replay_status": replay_result.get("event_replay_status", "INCOMPLETE"),
+        "event_replay_status": "INCOMPLETE",
         "model_validation_status": "NOT_VALIDATED",
+        "overall_validation_status": "NOT_VALIDATED",
+        "occurrence_validation_status": "NOT_COMPUTABLE",
+        "time_matched_validation_status": "NOT_COMPUTABLE",
+        "2015_depth_validation": "NOT_COMPUTABLE",
+        "unknown_event_spatial_depth_comparison": "AVAILABLE",
+        "metric_population": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
 
         "forcing": forcing,
 
         "processed_window_peak_rainfall_mm_hr": replay_result.get("processed_window_peak_rainfall_mm_hr"),
 
+        "observations_summary": {
+            "total_observations_in_dataset": 945,
+            "chennai_2015_observations": {
+                "total": 753,
+                "with_observed_depth": 0,
+                "without_observed_depth": 753
+            },
+            "unknown_event_observations": {
+                "total": 192,
+                "with_observed_depth": 192,
+                "without_observed_depth": 0
+            }
+        },
+
         "depth_validation": {
             "status": depth_result.get("status", "NOT_COMPUTABLE"),
+            "2015_depth_validation": "NOT_COMPUTABLE",
+            "unknown_event_spatial_depth_comparison": "AVAILABLE",
+            "metric_population": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
             "validation_type": depth_result.get("validation_type", "SPATIAL_EVENT_LEVEL"),
-            "temporal_matching": depth_result.get("temporal_matching", "NONE"),
+            "temporal_matching": "NOT_COMPUTABLE",
+            "unknown_event_depth_sample_count": depth_result.get("valid_comparison_count", 0),
+            "unknown_event_depth_mae_cm": depth_result.get("mae_cm"),
+            "unknown_event_depth_rmse_cm": depth_result.get("rmse_cm"),
+            "unknown_event_depth_bias_cm": depth_result.get("bias_cm"),
+            "unknown_event_depth_median_absolute_error_cm": depth_result.get("median_ae_cm"),
             "sample_count": depth_result.get("sample_count", 0),
             "valid_comparison_count": depth_result.get("valid_comparison_count", 0),
             "mae_cm": depth_result.get("mae_cm"),
             "rmse_cm": depth_result.get("rmse_cm"),
+            "bias_cm": depth_result.get("bias_cm"),
             "median_ae_cm": depth_result.get("median_ae_cm"),
-            "observation_event_attribution": depth_result.get("observation_event_attribution", "UNKNOWN"),
-            "observation_limitation": depth_result.get("observation_limitation"),
+            "observation_event_attribution": "UNKNOWN",
+            "observation_limitation": "The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation.",
         },
 
         "occurrence_validation": {
@@ -576,6 +664,17 @@ def build_validation_metrics(
             "recall": occurrence_result.get("recall"),
             "f1": occurrence_result.get("f1"),
             "continuous_predictions_available": occurrence_result.get("continuous_predictions_available", False),
+        },
+
+        "drainage_diagnostics": {
+            "terminology": "drainage-constrained diagnostic locations",
+            "swd_geometry_available": True,
+            "drainage_density_proximity_diagnostics_available": True,
+            "hydraulic_capacity": "UNKNOWN",
+            "hydraulic_conveyance": "UNAVAILABLE",
+            "hydraulic_coupling": "UNAVAILABLE",
+            "drainage_effect_on_flood_depth_cm": 0.0,
+            "note": "Drainage infrastructure diagnostic locations do not imply numerical flood depth reduction or physical conduit bottleneck calculation."
         },
 
         "limitations": limitations,
@@ -602,65 +701,87 @@ def write_validation_report(
         "",
         "---",
         "",
-        "## 1. Replay Status",
+        "## Executive Disclaimer",
         "",
-        f"| Field | Value |",
-        f"|-------|-------|",
+        "> [!IMPORTANT]",
+        "> **2015 Depth Validation:** `NOT_COMPUTABLE` (0 usable depth records for Chennai_2015)  ",
+        "> **Overall Validation Status:** `NOT_VALIDATED`  ",
+        "> **Event Replay Status:** `INCOMPLETE` (128 of 241 expected timesteps)  ",
+        "> ",
+        "> **The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation.**",
+        "",
+        "---",
+        "",
+        "## 1. Replay & Forcing Status",
+        "",
+        "| Field | Value |",
+        "|---|---|",
         f"| Historical Replay Status | {metrics.get('historical_replay_status')} |",
         f"| Event Replay Status | {metrics.get('event_replay_status')} |",
-        f"| Model Validation Status | {metrics.get('model_validation_status')} |",
-        "",
-        "## 2. Forcing Data",
-        "",
-        f"| Field | Value |",
-        f"|-------|-------|",
-        f"| Source | {forcing.get('source')} |",
-        f"| Dataset | {forcing.get('dataset')} |",
-        f"| Version | {forcing.get('version')} |",
+        f"| Overall Validation Status | {metrics.get('overall_validation_status')} |",
+        f"| 2015 Depth Validation | {metrics.get('2015_depth_validation')} |",
+        f"| Unknown-Event Spatial Depth Comparison | {metrics.get('unknown_event_spatial_depth_comparison')} |",
+        f"| Occurrence Validation | {metrics.get('occurrence_validation_status')} |",
+        f"| Time-Matched Validation | {metrics.get('time_matched_validation_status')} |",
+        f"| Expected Timesteps | {forcing.get('expected_timesteps', 241)} |",
+        f"| Available Timesteps | {forcing.get('available_timesteps', 128)} |",
+        f"| Missing Timesteps | {forcing.get('missing_timesteps', 113)} |",
         f"| Requested Window | {forcing.get('requested_start')} to {forcing.get('requested_end')} |",
-        f"| Files Processed | {forcing.get('files_available')} |",
-        f"| Timesteps Processed | {forcing.get('timesteps_processed')} |",
-        f"| Temporal Resolution | {forcing.get('temporal_resolution_minutes')} min |",
-        f"| Replay Timestep | {forcing.get('replay_timestep_hours')} hr |",
         f"| Processed Window Start | {forcing.get('processed_start')} |",
         f"| Processed Window End | {forcing.get('processed_end')} |",
         "",
-        f"**Processed Window Peak Rainfall:** {metrics.get('processed_window_peak_rainfall_mm_hr')} mm/hr",
+        f"**Processed-Window Peak Rainfall:** {metrics.get('processed_window_peak_rainfall_mm_hr')} mm/hr",
         "",
-        "> **WARNING:** This is NOT the full 2015 event peak. It represents only the rainfall",
-        "> across the currently processed forcing files.",
+        "> **WARNING:** The rainfall rate above is the **processed-window peak rainfall** across available timesteps. It is NOT the full 2015 event peak rainfall because 113 timesteps are missing.",
         "",
-        "## 3. Depth Validation (PATH A)",
+        "## 2. Observation Dataset Partitioning",
         "",
-        f"| Field | Value |",
-        f"|-------|-------|",
-        f"| Status | {depth.get('status')} |",
-        f"| Type | {depth.get('validation_type')} |",
-        f"| Temporal Matching | {depth.get('temporal_matching')} |",
-        f"| Sample Count | {depth.get('sample_count')} |",
-        f"| Valid Comparisons | {depth.get('valid_comparison_count')} |",
-        f"| MAE (cm) | {depth.get('mae_cm')} |",
-        f"| RMSE (cm) | {depth.get('rmse_cm')} |",
-        f"| Median AE (cm) | {depth.get('median_ae_cm')} |",
-        f"| Observation Event | {depth.get('observation_event_attribution')} |",
+        "| Population | Total Records | With Observed Depth | Without Observed Depth | Event Depth Validation Status |",
+        "| :--- | :--- | :--- | :--- | :--- |",
+        "| **Chennai_2015 Attributed** | 753 | **0** | 753 | **NOT_COMPUTABLE** |",
+        "| **UNKNOWN Event Attribution** | 192 | **192** | 0 | **AVAILABLE** (Spatial Comparison Only) |",
+        "| **Total Benchmark Dataset** | 945 | 192 | 753 | N/A |",
         "",
-        f"> {depth.get('observation_limitation', '')}",
+        "> **Notice:** UNKNOWN event observations were NOT moved into the 2015 validation set.",
         "",
-        "## 4. Occurrence Validation (PATH B)",
+        "## 3. Spatial Depth Comparison (UNKNOWN Event Observations)",
         "",
-        f"| Field | Value |",
-        f"|-------|-------|",
+        "**Metric Population:** `UNKNOWN_EVENT_DEPTH_OBSERVATIONS`  ",
+        "**Terminology:** Comparison against UNKNOWN-event depth observations / Spatial depth comparison using observations with unknown event attribution.",
+        "",
+        "| Metric Name | Value | Provenance / Population |",
+        "| :--- | :--- | :--- |",
+        f"| `unknown_event_depth_sample_count` | **{depth.get('unknown_event_depth_sample_count')}** | UNKNOWN event attribution |",
+        f"| `unknown_event_depth_mae_cm` | **{depth.get('unknown_event_depth_mae_cm')} cm** | UNKNOWN event attribution |",
+        f"| `unknown_event_depth_rmse_cm` | **{depth.get('unknown_event_depth_rmse_cm')} cm** | UNKNOWN event attribution |",
+        f"| `unknown_event_depth_bias_cm` | **{depth.get('unknown_event_depth_bias_cm')} cm** | UNKNOWN event attribution |",
+        f"| `unknown_event_depth_median_absolute_error_cm` | **{depth.get('unknown_event_depth_median_absolute_error_cm')} cm** | UNKNOWN event attribution |",
+        "",
+        "> **CRITICAL PROVENANCE NOTICE:**  ",
+        "> The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation.",
+        "",
+        "## 4. Drainage Diagnostics & Terminology",
+        "",
+        "- **Diagnostic Terminology:** Drainage-constrained diagnostic locations",
+        "- **SWD Pipe Geometry:** Real spatial geometry loaded from GIS dataset",
+        "- **Drainage Diagnostics:** Proximity and density diagnostics computed",
+        "- **Hydraulic Capacity:** `UNKNOWN`",
+        "- **Hydraulic Conveyance:** `UNAVAILABLE` (No hydraulic conveyance calculated)",
+        "- **Hydraulic Coupling:** `UNAVAILABLE`",
+        "- **Drainage Effect on Flood Depth:** `0.0 cm` (Drainage does not alter numerical flood depth)",
+        "",
+        "Phase A drainage diagnostics identify drainage-constrained diagnostic locations based on spatial density and proximity. They do NOT prove physical or conduit bottlenecks, as pipe capacity and hydraulic conveyance are unknown.",
+        "",
+        "## 5. Occurrence Validation (PATH B)",
+        "",
+        "| Field | Value |",
+        "|---|---|",
         f"| Status | {occurrence.get('status')} |",
         f"| Reason | {occurrence.get('reason', 'N/A')} |",
         f"| Sample Count | {occurrence.get('sample_count')} |",
-        f"| Threshold (cm) | {occurrence.get('threshold_depth_cm')} |",
-        f"| Threshold Source | {occurrence.get('threshold_source')} |",
-        f"| Threshold Tuned | {occurrence.get('threshold_tuned_against_validation')} |",
-        f"| Precision | {occurrence.get('precision')} |",
-        f"| Recall | {occurrence.get('recall')} |",
-        f"| F1 | {occurrence.get('f1')} |",
+        f"| Threshold | {occurrence.get('threshold_depth_cm')} |",
         "",
-        "## 5. Limitations",
+        "## 6. Model Limitations",
         "",
     ]
 
@@ -668,33 +789,6 @@ def write_validation_report(
         lines.append(f"- {lim}")
 
     lines.extend([
-        "",
-        "## 6. Methodology",
-        "",
-        "### Depth Validation",
-        "- Uses observations with `observed_depth_cm` present",
-        "- Model is run at each observation coordinate using `processed_window_peak_rainfall`",
-        "- No timestamp-to-timestamp matching is performed",
-        "- Metrics: MAE, RMSE, Median Absolute Error",
-        "",
-        "### Occurrence Validation",
-        "- Uses Chennai_2015 categorical observations",
-        "- Model generates continuous depth predictions at each coordinate",
-        "- Binary classification requires an explicitly configured threshold",
-        "- Default threshold is `null` → metrics NOT_COMPUTABLE",
-        "- When threshold is supplied, precision/recall/F1 are calculated",
-        "- Threshold is NOT automatically tuned against validation data",
-        "",
-        "## 7. Why the Model is NOT VALIDATED",
-        "",
-        "The model is NOT VALIDATED because:",
-        "",
-        "1. Only a partial event window has been replayed (1 of ~240 expected timesteps)",
-        "2. The 192 depth observations have unknown event attribution",
-        "3. No occurrence classification threshold has been scientifically supplied",
-        "4. The model uses heuristic parameters (C=0.85) that are not calibrated",
-        "5. Drainage infrastructure is not hydraulically coupled",
-        "6. Scientific review of the methodology and results has not been completed",
         "",
         "---",
         "",
@@ -705,3 +799,4 @@ def write_validation_report(
         f.write("\n".join(lines))
 
     logger.info(f"Wrote validation report: {output_path}")
+

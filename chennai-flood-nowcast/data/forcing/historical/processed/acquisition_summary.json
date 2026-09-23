@@ -1,0 +1,12 @@
+{
+  "expected_timesteps": 241,
+  "successfully_downloaded_timesteps": 105,
+  "missing_timesteps": 136,
+  "duplicate_or_corrupt_files": 0,
+  "first_available_timestamp": "2015-11-30T00:00:00Z",
+  "last_available_timestamp": "2015-12-05T00:00:00Z",
+  "rainfall_min": 0.0,
+  "rainfall_max": 34.07,
+  "rainfall_mean": 6.2153,
+  "processed_window_peak_rainfall": 34.07
+}

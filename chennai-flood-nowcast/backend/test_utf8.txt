@@ -1,0 +1,85 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.10.0, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend
+plugins: anyio-4.15.1
+collecting ... collected 66 items
+
+tests/test_api.py::test_roads_risk PASSED                                [  1%]
+tests/test_api.py::test_flood_current PASSED                             [  3%]
+tests/test_api.py::test_flood_forecast PASSED                            [  4%]
+tests/test_api.py::test_terrain_status PASSED                            [  6%]
+tests/test_api.py::test_terrain_elevation PASSED                         [  7%]
+tests/test_api.py::test_drainage_status PASSED                           [  9%]
+tests/test_api.py::test_data_status PASSED                               [ 10%]
+tests/test_api.py::test_terrain_summary PASSED                           [ 12%]
+tests/test_api.py::test_zero_rainfall PASSED                             [ 13%]
+tests/test_api.py::test_validation PASSED                                [ 15%]
+tests/test_api.py::test_drainage_summary PASSED                          [ 16%]
+tests/test_api.py::test_drainage_nearest PASSED                          [ 18%]
+tests/test_drainage_diagnostics.py::test_nearest_swd_distance_and_coverage PASSED [ 19%]
+tests/test_drainage_diagnostics.py::test_drainage_density_units_and_values PASSED [ 21%]
+tests/test_drainage_diagnostics.py::test_dbi_calculation_and_dref_provenance PASSED [ 22%]
+tests/test_drainage_diagnostics.py::test_missing_dem_dbi_behavior PASSED [ 24%]
+tests/test_drainage_diagnostics.py::test_flat_terrain_alpha_align_behavior PASSED [ 25%]
+tests/test_drainage_diagnostics.py::test_hydraulic_data_status_strictly_unknown PASSED [ 27%]
+tests/test_drainage_diagnostics.py::test_safety_guarantees_zero_flood_depth_impact PASSED [ 28%]
+tests/test_drainage_diagnostics.py::test_flood_model_service_unaffected_by_drainage PASSED [ 30%]
+tests/test_drainage_diagnostics.py::test_drainage_diagnostics_api_endpoint PASSED [ 31%]
+tests/test_historical_replay.py::TestImergFilenameParsing::test_valid_filename PASSED [ 33%]
+tests/test_historical_replay.py::TestImergFilenameParsing::test_second_half_hour_filename PASSED [ 34%]
+tests/test_historical_replay.py::TestImergFilenameParsing::test_invalid_filename_returns_none PASSED [ 36%]
+tests/test_historical_replay.py::TestPrecipVariableDetection::test_preferred_variable PASSED [ 37%]
+tests/test_historical_replay.py::TestPrecipVariableDetection::test_fallback_variable PASSED [ 39%]
+tests/test_historical_replay.py::TestNearestIndex::test_nearest_index_exact PASSED [ 40%]
+tests/test_historical_replay.py::TestNearestIndex::test_nearest_index_between PASSED [ 42%]
+tests/test_historical_replay.py::TestNearestIndex::test_nearest_index_edge PASSED [ 43%]
+tests/test_historical_replay.py::TestTimestampExtraction::test_timestamp_from_filename PASSED [ 45%]
+tests/test_historical_replay.py::TestTimestampExtraction::test_version_from_filename PASSED [ 46%]
+tests/test_historical_replay.py::TestChronologicalOrdering::test_files_sorted_chronologically PASSED [ 48%]
+tests/test_historical_replay.py::TestMissingValueHandling::test_nan_value_is_missing PASSED [ 50%]
+tests/test_historical_replay.py::TestNegativeValueHandling::test_negative_value_preserved PASSED [ 51%]
+tests/test_historical_replay.py::TestUnitHandling::test_rainfall_in_mm_hr PASSED [ 53%]
+tests/test_historical_replay.py::TestSyntheticExtraction::test_known_value_extraction PASSED [ 54%]
+tests/test_historical_replay.py::TestSyntheticExtraction::test_zero_rainfall_is_valid PASSED [ 56%]
+tests/test_historical_replay.py::TestDefaultTimestep::test_default_timestep_produces_original_result PASSED [ 57%]
+tests/test_historical_replay.py::TestDefaultTimestep::test_invalid_timestep_raises PASSED [ 59%]
+tests/test_historical_replay.py::TestHalfHourTimestep::test_half_hour_gives_half_runoff PASSED [ 60%]
+tests/test_historical_replay.py::TestHalfHourTimestep::test_half_hour_less_depth PASSED [ 62%]
+tests/test_historical_replay.py::TestProductionCompat::test_route_service_call_signature PASSED [ 63%]
+tests/test_historical_replay.py::TestProductionCompat::test_positional_args_only PASSED [ 65%]
+tests/test_historical_replay.py::TestMaeCalculation::test_known_mae PASSED [ 66%]
+tests/test_historical_replay.py::TestMaeCalculation::test_mae_empty_returns_none PASSED [ 68%]
+tests/test_historical_replay.py::TestMaeCalculation::test_engine_depth_validation_mae PASSED [ 69%]
+tests/test_historical_replay.py::TestRmseCalculation::test_known_rmse PASSED [ 71%]
+tests/test_historical_replay.py::TestRmseCalculation::test_rmse_empty_returns_none PASSED [ 72%]
+tests/test_historical_replay.py::TestOccurrenceNullThreshold::test_null_threshold_not_computable PASSED [ 74%]
+tests/test_historical_replay.py::TestOccurrenceWithThreshold::test_with_threshold_computes_metrics PASSED [ 75%]
+tests/test_historical_replay.py::TestOccurrenceWithThreshold::test_threshold_not_tuned PASSED [ 77%]
+tests/test_historical_replay.py::TestEmptyObservations::test_depth_validation_empty PASSED [ 78%]
+tests/test_historical_replay.py::TestEmptyObservations::test_depth_validation_no_depth_field PASSED [ 80%]
+tests/test_historical_replay.py::TestEmptyObservations::test_occurrence_validation_empty PASSED [ 81%]
+tests/test_historical_replay.py::TestEmptyObservations::test_depth_validation_no_rainfall PASSED [ 83%]
+tests/test_historical_replay.py::TestNoNetworkRequests::test_historical_service_no_imports_requests PASSED [ 84%]
+tests/test_historical_replay.py::TestNoNetworkRequests::test_validation_engine_no_network_imports PASSED [ 86%]
+tests/test_historical_replay.py::TestNoNasaCredentials::test_no_credential_access PASSED [ 87%]
+tests/test_historical_replay.py::TestMetricsAssembly::test_build_metrics_not_validated PASSED [ 89%]
+tests/test_historical_replay.py::TestMetricsAssembly::test_provenance_metadata_assembly PASSED [ 90%]
+tests/test_terrain_topology.py::test_flat_cells_and_sinks PASSED         [ 92%]
+tests/test_terrain_topology.py::test_flow_accumulation_queue PASSED      [ 93%]
+tests/test_validation_pipeline.py::test_mae_with_compatible_observations PASSED [ 95%]
+tests/test_validation_pipeline.py::test_rmse_with_compatible_observations PASSED [ 96%]
+tests/test_validation_pipeline.py::test_spatial_matching PASSED          [ 98%]
+tests/test_validation_pipeline.py::test_production_2015_returns_not_validated_without_historical_forcing PASSED [100%]
+
+============================== warnings summary ===============================
+venv\lib\site-packages\fastapi\testclient.py:1
+  C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend\venv\lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+venv\lib\site-packages\starlette\testclient.py:53
+  C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend\venv\lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 66 passed, 2 warnings in 47.88s =======================

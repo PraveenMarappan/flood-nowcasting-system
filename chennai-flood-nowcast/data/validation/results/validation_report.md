@@ -1,6 +1,6 @@
 # Chennai Flood Nowcasting — Historical Validation Report
 
-**Generated:** 2026-09-18T05:17:18.593596+00:00
+**Generated:** 2026-09-22T10:40:10.651689+00:00
 
 ---
 
@@ -20,14 +20,14 @@
 | Dataset | GPM_3IMERGHH |
 | Version | V07B |
 | Requested Window | 2015-11-30T00:00:00Z to 2015-12-05T00:00:00Z |
-| Files Processed | 1 |
-| Timesteps Processed | 1 |
+| Files Processed | 128 |
+| Timesteps Processed | 128 |
 | Temporal Resolution | 30 min |
 | Replay Timestep | 0.5 hr |
 | Processed Window Start | 2015-11-30T00:00:00+00:00 |
-| Processed Window End | 2015-11-30T00:00:00+00:00 |
+| Processed Window End | 2015-12-02T15:30:00+00:00 |
 
-**Processed Window Peak Rainfall:** 5.1 mm/hr
+**Processed Window Peak Rainfall:** 34.07 mm/hr
 
 > **WARNING:** This is NOT the full 2015 event peak. It represents only the rainfall
 > across the currently processed forcing files.
@@ -38,12 +38,12 @@
 |-------|-------|
 | Status | READY_FOR_REVIEW |
 | Type | SPATIAL_EVENT_LEVEL |
-| Temporal Matching | NONE |
+| Temporal Matching | NOT_COMPUTABLE |
 | Sample Count | 192 |
 | Valid Comparisons | 192 |
-| MAE (cm) | 26.4987 |
-| RMSE (cm) | 32.2122 |
-| Median AE (cm) | 22.64 |
+| MAE (cm) | 25.242 |
+| RMSE (cm) | 31.1862 |
+| Median AE (cm) | 21.41 |
 | Observation Event | UNKNOWN |
 
 > No reliable timestamps; event attribution uncertain
@@ -64,7 +64,7 @@
 
 ## 5. Limitations
 
-- Only 1 of ~240 expected IMERG half-hourly files processed — event replay INCOMPLETE
+- Only 128 of ~240 expected IMERG half-hourly files processed — event replay INCOMPLETE
 - Observations have no reliable timestamps — validation is SPATIAL_EVENT_LEVEL only
 - 192 depth observations have event=UNKNOWN — may not correspond to 2015 event
 - Model uses heuristic impervious_fraction=0.85, NOT calibrated land cover
