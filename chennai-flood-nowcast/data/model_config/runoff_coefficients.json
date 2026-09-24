@@ -1,0 +1,39 @@
+{
+  "description": "Spatial runoff coefficients for Chennai Urban Flood Nowcasting Model",
+  "version": "1.0",
+  "provenance_status": "ASSUMED",
+  "source": "Literature values for Indian coastal urban catchments (UNVALIDATED ASSUMPTION)",
+  "default_coefficient": 0.85,
+  "categories": {
+    "BUILT_UP": {
+      "runoff_coefficient": 0.85,
+      "imperviousness": 0.85,
+      "provenance": "ASSUMED",
+      "source": "Standard high-density urban catchment proxy"
+    },
+    "ROAD": {
+      "runoff_coefficient": 0.90,
+      "imperviousness": 0.95,
+      "provenance": "ASSUMED",
+      "source": "Asphalt / concrete impervious surface proxy"
+    },
+    "BARE_SOIL": {
+      "runoff_coefficient": 0.45,
+      "imperviousness": 0.20,
+      "provenance": "ASSUMED",
+      "source": "Unpaved open land proxy"
+    },
+    "VEGETATION": {
+      "runoff_coefficient": 0.25,
+      "imperviousness": 0.10,
+      "provenance": "ASSUMED",
+      "source": "Park / canopy interception proxy"
+    },
+    "WATER": {
+      "runoff_coefficient": 1.00,
+      "imperviousness": 1.00,
+      "provenance": "ASSUMED",
+      "source": "Direct precipitation on water body"
+    }
+  }
+}

@@ -103,7 +103,7 @@ def test_flood_model_service_unaffected_by_drainage():
     
     # Ensure water depth calculation is purely hydrological (rainfall * C * terrain_factor)
     assert result["water_depth_cm"] > 0.0
-    assert "SPATIAL HEURISTIC" in result["estimator"]
+    assert ("GRID-BASED HYDROLOGICAL" in result["estimator"]) or ("SPATIAL HEURISTIC" in result["estimator"])
 
 def test_drainage_diagnostics_api_endpoint():
     response = client.get("/api/drainage/diagnostics?latitude=13.0827&longitude=80.2707")

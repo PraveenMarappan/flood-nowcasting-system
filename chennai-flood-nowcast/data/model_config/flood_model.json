@@ -1,0 +1,48 @@
+{
+  "model_version": "GRID_HYDROLOGY_V1",
+  "description": "Grid-based hydrological flood-depth estimation parameters",
+  "parameters": {
+    "recession_half_life_hours": {
+      "value": 2.0,
+      "units": "hours",
+      "provenance": "ASSUMED",
+      "source": "Empirical urban drainage recession decay proxy",
+      "physical_interpretation": "Time constant for surface water drainage/evaporation/infiltration loss after rainfall cessation"
+    },
+    "min_slope_threshold": {
+      "value": 0.001,
+      "units": "m/m",
+      "provenance": "ASSUMED",
+      "source": "Hydrological terrain processing standard floor",
+      "physical_interpretation": "Minimum slope floor to prevent division by zero in routing equations"
+    },
+    "ponding_concentration_factor": {
+      "value": 1.25,
+      "units": "dimensionless",
+      "provenance": "ASSUMED",
+      "source": "Topographic wetness index / depression convergence multiplier",
+      "physical_interpretation": "Amplification factor of excess runoff in low-lying terrain depressions"
+    },
+    "max_ponding_depth_cm": {
+      "value": 200.0,
+      "units": "cm",
+      "provenance": "ASSUMED",
+      "source": "Physical urban flooding cap",
+      "physical_interpretation": "Maximum realistic flood depth threshold for surface nowcasting"
+    },
+    "cell_area_default_m2": {
+      "value": 900.0,
+      "units": "m2",
+      "provenance": "DERIVED",
+      "source": "USGS SRTM 1 Arc-Second (~30m x 30m grid at 13 deg N)",
+      "physical_interpretation": "Nominal area of a single computational grid cell"
+    },
+    "drainage_mode": {
+      "value": "GEOMETRIC_ONLY",
+      "units": "categorical",
+      "provenance": "REAL",
+      "source": "Chennai Storm Water Drains (10,255 LineStrings)",
+      "physical_interpretation": "Spatial proximity diagnostic only; no fake hydraulic capacity subtraction"
+    }
+  }
+}

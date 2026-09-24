@@ -120,7 +120,7 @@ export default function DataModelStatus({ isSimulated, liveRainfallData, drainag
               <span style={{ fontWeight: '600', color: '#f8fafc' }}>RAINFALL</span>
               <StatusBadge type={rainStatus} />
             </div>
-            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Source: NASA GPM IMERG</div>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Source: NASA GPM IMERG (~0.1°)</div>
             <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Observed: {rainObsTime}</div>
             <div style={{ fontSize: '0.7rem', color: '#64748b', fontStyle: 'italic', marginTop: '4px', borderTop: '1px solid rgba(51,65,85,0.4)', paddingTop: '3px' }}>
               NASA IMERG rainfall is ~0.1° spatial resolution and is not street-level rainfall.
@@ -133,13 +133,13 @@ export default function DataModelStatus({ isSimulated, liveRainfallData, drainag
               <span style={{ fontWeight: '600', color: '#f8fafc' }}>TERRAIN</span>
               <StatusBadge type="REAL" />
             </div>
-            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Source: USGS SRTM DEM</div>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Source: USGS SRTM DEM (~30m)</div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2px' }}>
-              <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>D8 Flow Features:</span>
+              <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>D8 Topological Routing:</span>
               <StatusBadge type="MODELLED" />
             </div>
             <div style={{ fontSize: '0.7rem', color: '#64748b', fontStyle: 'italic', marginTop: '4px', borderTop: '1px solid rgba(51,65,85,0.4)', paddingTop: '3px' }}>
-              Terrain-derived flow features are used for spatial modelling and are not a full hydraulic flood-routing model.
+              Terrain processing performs D8 sink filling and downstream accumulation routing on a 30m grid.
             </div>
           </div>
 
@@ -149,12 +149,9 @@ export default function DataModelStatus({ isSimulated, liveRainfallData, drainag
               <span style={{ fontWeight: '600', color: '#f8fafc' }}>DRAINAGE</span>
               <StatusBadge type="GEOMETRIC ONLY" />
             </div>
-            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Source: Chennai SWD 2023</div>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Source: Chennai SWD (10,255 LineStrings)</div>
             <div style={{ color: '#94a3b8', fontSize: '0.75rem', marginTop: '2px' }}>
               Coverage: <span style={{ color: '#38bdf8' }}>{drainage?.coverage?.status || 'DRAINAGE_SERVED'}</span>
-            </div>
-            <div style={{ fontSize: '0.68rem', color: '#64748b', marginTop: '1px' }}>
-              (DRAINAGE_SERVED = drainage geometry detected within proximity threshold)
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px', marginTop: '4px', fontSize: '0.72rem' }}>
               <div>Capacity: <StatusBadge type="UNKNOWN" /></div>
@@ -165,24 +162,25 @@ export default function DataModelStatus({ isSimulated, liveRainfallData, drainag
             <div style={{ color: '#94a3b8', fontSize: '0.75rem', marginTop: '4px' }}>
               Flood Depth Reduction: <strong>NONE / 0.0 cm</strong>
             </div>
-            <div style={{ fontSize: '0.7rem', color: '#64748b', fontStyle: 'italic', marginTop: '4px', borderTop: '1px solid rgba(51,65,85,0.4)', paddingTop: '3px' }}>
-              Drainage geometry is used for spatial diagnostics only. Hydraulic capacity and network flow data are unavailable.
-            </div>
           </div>
 
           {/* 4. FLOOD MODEL */}
           <div style={{ background: 'rgba(15, 23, 42, 0.4)', padding: '8px 10px', borderRadius: '6px', border: '1px solid #1e293b' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
               <span style={{ fontWeight: '600', color: '#f8fafc' }}>FLOOD MODEL</span>
-              <StatusBadge type="MODELLED" />
+              <StatusBadge type="MODELLED" text="GRID_HYDROLOGY_V1" />
             </div>
-            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Type: Spatial Heuristic Estimate</div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2px' }}>
+            <div style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: '700' }}>Type: GRID-BASED HYDROLOGICAL FLOOD-RISK ESTIMATE</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
               <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Validation:</span>
               <StatusBadge type="NOT VALIDATED" />
             </div>
-            <div style={{ fontSize: '0.7rem', color: '#64748b', fontStyle: 'italic', marginTop: '4px', borderTop: '1px solid rgba(51,65,85,0.4)', paddingTop: '3px' }}>
-              The current flood-depth estimate is a spatial heuristic and has not yet been validated as a calibrated hydraulic model.
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2px' }}>
+              <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Calibration:</span>
+              <StatusBadge type="NOT VALIDATED" text="NOT CALIBRATED" />
+            </div>
+            <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontStyle: 'italic', marginTop: '4px', borderTop: '1px solid rgba(51,65,85,0.4)', paddingTop: '3px' }}>
+              Model upgrade active (GRID_HYDROLOGY_V1). Legacy heuristic model (LEGACY_HEURISTIC) retained side-by-side for comparison.
             </div>
           </div>
 

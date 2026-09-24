@@ -1,0 +1,132 @@
+{
+  "timestamp": "2026-09-24T22:00:52Z",
+  "models_compared": [
+    "LEGACY_HEURISTIC",
+    "GRID_HYDROLOGY_V1"
+  ],
+  "validation_status": "NOT_VALIDATED",
+  "scenario_results": [
+    {
+      "rainfall_rate_mm_hr": 0.0,
+      "legacy_heuristic": {
+        "max_depth_cm": 0.0,
+        "mean_depth_cm": 0.0,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 0,
+        "low_risk_roads": 0,
+        "execution_time_ms": 0.014
+      },
+      "grid_hydrology_v1": {
+        "max_depth_cm": 0.0,
+        "mean_depth_cm": 0.0,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 0,
+        "low_risk_roads": 0,
+        "execution_time_ms": 0.793
+      }
+    },
+    {
+      "rainfall_rate_mm_hr": 25.0,
+      "legacy_heuristic": {
+        "max_depth_cm": 2.25,
+        "mean_depth_cm": 2.15,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 0,
+        "low_risk_roads": 73174,
+        "execution_time_ms": 0.855
+      },
+      "grid_hydrology_v1": {
+        "max_depth_cm": 2.38,
+        "mean_depth_cm": 2.17,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 0,
+        "low_risk_roads": 73174,
+        "execution_time_ms": 0.81
+      }
+    },
+    {
+      "rainfall_rate_mm_hr": 50.0,
+      "legacy_heuristic": {
+        "max_depth_cm": 4.5,
+        "mean_depth_cm": 4.3,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 0,
+        "low_risk_roads": 73174,
+        "execution_time_ms": 0.985
+      },
+      "grid_hydrology_v1": {
+        "max_depth_cm": 4.76,
+        "mean_depth_cm": 4.35,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 0,
+        "low_risk_roads": 73174,
+        "execution_time_ms": 0.878
+      }
+    },
+    {
+      "rainfall_rate_mm_hr": 75.0,
+      "legacy_heuristic": {
+        "max_depth_cm": 6.76,
+        "mean_depth_cm": 6.46,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 68,
+        "low_risk_roads": 73106,
+        "execution_time_ms": 0.822
+      },
+      "grid_hydrology_v1": {
+        "max_depth_cm": 7.14,
+        "mean_depth_cm": 6.53,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 68,
+        "low_risk_roads": 73106,
+        "execution_time_ms": 0.756
+      }
+    },
+    {
+      "rainfall_rate_mm_hr": 105.0,
+      "legacy_heuristic": {
+        "max_depth_cm": 9.46,
+        "mean_depth_cm": 9.04,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 6370,
+        "low_risk_roads": 66804,
+        "execution_time_ms": 1.145
+      },
+      "grid_hydrology_v1": {
+        "max_depth_cm": 10.0,
+        "mean_depth_cm": 9.14,
+        "high_risk_roads": 0,
+        "moderate_risk_roads": 6370,
+        "low_risk_roads": 66804,
+        "execution_time_ms": 1.059
+      }
+    }
+  ],
+  "cessation_recovery_comparison": [
+    {
+      "offset_minutes": 0,
+      "legacy_depth_cm": 4.25,
+      "grid_depth_cm": 4.25
+    },
+    {
+      "offset_minutes": 30,
+      "legacy_depth_cm": 4.75,
+      "grid_depth_cm": 4.59
+    },
+    {
+      "offset_minutes": 60,
+      "legacy_depth_cm": 5.75,
+      "grid_depth_cm": 4.87
+    },
+    {
+      "offset_minutes": 120,
+      "legacy_depth_cm": 8.25,
+      "grid_depth_cm": 5.31
+    },
+    {
+      "offset_minutes": 180,
+      "legacy_depth_cm": 9.0,
+      "grid_depth_cm": 5.62
+    }
+  ]
+}
