@@ -171,10 +171,10 @@ export default function HistoricalValidation() {
           <div style={{ fontSize: '0.8rem', color: '#38bdf8', fontWeight: '600', marginTop: '2px' }}>DIAGNOSTIC ONLY</div>
         </div>
 
-        <div style={{ background: '#0f172a', border: '1px solid #334155', borderRadius: '10px', padding: '16px' }}>
+        <div style={{ background: '#0f172a', border: '1px solid #059669', borderRadius: '10px', padding: '16px' }}>
           <div style={{ color: '#94a3b8', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Calibration</div>
-          <div style={{ fontSize: '1.25rem', fontWeight: '700', color: '#cbd5e1', marginTop: '4px' }}>NOT COMPLETED</div>
-          <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px' }}>Baseline parameters used</div>
+          <div style={{ fontSize: '1.15rem', fontWeight: '700', color: '#34d399', marginTop: '4px' }}>COMPLETED — OCCURRENCE-BASED</div>
+          <div style={{ fontSize: '0.8rem', color: '#34d399', fontWeight: '600', marginTop: '2px' }}>Chennai_2015 occurrence target (753 records)</div>
         </div>
 
         <div style={{ background: '#0f172a', border: '1px solid #334155', borderRadius: '10px', padding: '16px' }}>
@@ -243,6 +243,84 @@ export default function HistoricalValidation() {
         <div style={{ marginTop: '10px', padding: '12px', background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: '6px', fontSize: '0.85rem', color: '#fca5a5' }}>
           <AlertTriangle size={16} style={{ display: 'inline', marginRight: '6px', color: '#ef4444' }} />
           <strong>Attribution Safeguard:</strong> Numerical depth does not establish event attribution. The 192 UNKNOWN observations therefore must not be interpreted as validation of the 2015 event.
+        </div>
+      </div>
+
+      {/* SECTION: HYDROLOGICAL MODEL CALIBRATION (OCCURRENCE-BASED) */}
+      <div style={{ background: '#0f172a', border: '1px solid #059669', borderRadius: '12px', padding: '20px' }}>
+        <h3 style={{ margin: '0 0 16px 0', fontSize: '1.1rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Sliders size={20} /> Section: Hydrological Model Calibration (Occurrence-Based)
+        </h3>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '16px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Calibration Status</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#34d399', marginTop: '2px' }}>COMPLETED — OCCURRENCE-BASED</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Calibration Dataset</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#f8fafc', marginTop: '2px' }}>Chennai_2015 (753 records)</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Calibration Target</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#38bdf8', marginTop: '2px' }}>Spatial Flood Occurrence</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Independent Depth Validation</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#ef4444', marginTop: '2px' }}>NOT AVAILABLE (0 Depth Records)</div>
+          </div>
+        </div>
+
+        <div style={{ overflowX: 'auto', marginBottom: '16px' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', textAlign: 'left' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid #334155', color: '#94a3b8' }}>
+                <th style={{ padding: '10px 14px' }}>Model Parameter</th>
+                <th style={{ padding: '10px 14px' }}>Baseline Value</th>
+                <th style={{ padding: '10px 14px' }}>Calibrated Value</th>
+                <th style={{ padding: '10px 14px' }}>Parameter Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                <td style={{ padding: '10px 14px', fontWeight: '600', color: '#f8fafc' }}>Runoff Ratio (impervious_surface_fraction)</td>
+                <td style={{ padding: '10px 14px', color: '#94a3b8' }}>0.85</td>
+                <td style={{ padding: '10px 14px', color: '#34d399', fontWeight: '700' }}>0.88</td>
+                <td style={{ padding: '10px 14px', color: '#cbd5e1' }}>Fraction of rainfall converted to surface runoff excess</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                <td style={{ padding: '10px 14px', fontWeight: '600', color: '#f8fafc' }}>Flow Accumulation Alpha (&alpha;)</td>
+                <td style={{ padding: '10px 14px', color: '#94a3b8' }}>0.15</td>
+                <td style={{ padding: '10px 14px', color: '#34d399', fontWeight: '700' }}>0.10</td>
+                <td style={{ padding: '10px 14px', color: '#cbd5e1' }}>Terrain drainage convergence scaling exponent</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                <td style={{ padding: '10px 14px', fontWeight: '600', color: '#f8fafc' }}>Ponding Exponent Beta (&beta;)</td>
+                <td style={{ padding: '10px 14px', color: '#94a3b8' }}>1.00</td>
+                <td style={{ padding: '10px 14px', color: '#34d399', fontWeight: '700' }}>0.80</td>
+                <td style={{ padding: '10px 14px', color: '#cbd5e1' }}>Micro-topographic depression storage scaling exponent</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px', borderRadius: '6px', border: '1px solid #334155' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Baseline F1 / CSI</div>
+            <div style={{ fontSize: '1rem', fontWeight: '700', color: '#cbd5e1', marginTop: '2px' }}>0.9520 / 0.9084</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px', borderRadius: '6px', border: '1px solid #334155' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Calibrated F1 / CSI</div>
+            <div style={{ fontSize: '1rem', fontWeight: '700', color: '#34d399', marginTop: '2px' }}>0.9600 / 0.9230</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px', borderRadius: '6px', border: '1px solid #334155' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Calibration Improvement</div>
+            <div style={{ fontSize: '1rem', fontWeight: '700', color: '#38bdf8', marginTop: '2px' }}>+1.46% Gain</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px', borderRadius: '6px', border: '1px solid #334155' }}>
+            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Overall Model Status</div>
+            <div style={{ fontSize: '0.9rem', fontWeight: '700', color: '#ef4444', marginTop: '2px' }}>NOT VALIDATED</div>
+          </div>
         </div>
       </div>
 

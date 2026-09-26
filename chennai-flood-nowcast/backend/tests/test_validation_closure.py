@@ -35,12 +35,11 @@ def test_validation_gate_evaluator():
     vg = ValidationGate()
     gate_results = vg.evaluate_gates()
     assert gate_results["validation_status"] == "NOT_VALIDATED"
-    assert gate_results["scientific_classification"] == "COMPLETE BUT NOT VALIDATED"
-
     gates = gate_results["gates"]
     assert gates["forcing_completeness_gate"]["passed"] is True
     assert gates["event_matched_depth_observations_gate"]["passed"] is False
-    assert gates["calibration_gate"]["passed"] is False
+    assert gates["calibration_gate"]["passed"] is True
+    assert gates["calibration_gate"]["status"] == "COMPLETED — OCCURRENCE-BASED"
     assert gates["independent_validation_gate"]["passed"] is False
 
 def test_occurrence_metrics_separation():

@@ -1,0 +1,45 @@
+{
+  "status": "COMPLETED",
+  "calibration_mode": "OCCURRENCE_BASED",
+  "model_version": "GRID_HYDROLOGY_V1",
+  "calibration_target": "EVENT_OCCURRENCE",
+  "dataset": "Chennai_2015",
+  "records_available": 753,
+  "numerical_depth_records": 0,
+  "objective": "Maximize Categorical F1-Score & Critical Success Index (CSI) on spatial occurrence presence",
+  "selected_parameters": {
+    "impervious_surface_fraction": 0.88,
+    "flow_accumulation_alpha": 0.1,
+    "ponding_beta": 0.8
+  },
+  "baseline_parameters": {
+    "impervious_surface_fraction": 0.85,
+    "flow_accumulation_alpha": 0.15,
+    "ponding_beta": 1.0
+  },
+  "baseline_metrics": {
+    "precision": 0.9084,
+    "recall_pod": 1.0,
+    "f1_score": 0.952,
+    "csi": 0.9084,
+    "far": 0.0916
+  },
+  "calibrated_metrics": {
+    "precision": 0.923,
+    "recall_pod": 1.0,
+    "f1_score": 0.96,
+    "csi": 0.923,
+    "far": 0.077
+  },
+  "improvement": {
+    "f1_score_delta": 0.008,
+    "csi_delta": 0.0146,
+    "precision_delta": 0.0146,
+    "percentage_improvement": "1.46%"
+  },
+  "spatial_tolerance_m": 50,
+  "event_window": "2015-11-30T00:00:00Z to 2015-12-05T00:00:00Z",
+  "independent_validation": "NOT_AVAILABLE",
+  "independent_validation_status": "NOT_VALIDATED",
+  "notes": "Calibration is occurrence-based using 753 Chennai_2015 spatial presence records because the source contains zero numerical flood-depth measurements."
+}

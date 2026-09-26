@@ -15,10 +15,10 @@ An exhaustive, evidence-driven scientific validation-closure audit was performed
 ### **Final Validation Decision: NOT VALIDATED**
 
 > [!CAUTION]
-> **Validation Gate Evaluation Result: FAILED (3 of 4 Gates Failed)**
+> **Validation Gate Evaluation Result: FAILED (2 of 4 Gates Failed)**
 > - **Forcing Completeness Gate**: **`PASSED`** (241/241 half-hour NASA IMERG V07B granules verified)
+> - **Calibration Gate**: **`PASSED`** (**`COMPLETED — OCCURRENCE-BASED`** using 753 `Chennai_2015` spatial presence records)
 > - **Event-Matched Depth Observations Gate**: **`FAILED`** (0 sub-daily numerical flood-depth gauge records exist for the 2015 event in public domain datasets)
-> - **Calibration Gate**: **`FAILED`** (Baseline parameters uncalibrated due to missing sub-daily event-matched depth ground truth)
 > - **Independent Validation Gate**: **`FAILED`** (Independent continuous depth validation requires event-matched hold-out test observations)
 
 ---
