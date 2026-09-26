@@ -1,0 +1,65 @@
+{
+  "system_name": "Chennai Urban Flood Nowcasting System (SIH26085)",
+  "report_date": "2026-09-26",
+  "historical_forcing": {
+    "dataset": "NASA GPM IMERG Final Run V07B (GPM_3IMERGHH)",
+    "expected_timesteps": 241,
+    "available_timesteps": 241,
+    "missing_timesteps": 0,
+    "completeness_percentage": 100.0,
+    "status": "COMPLETE"
+  },
+  "historical_replay": {
+    "model_version": "GRID_HYDROLOGY_V1",
+    "legacy_comparison_model": "LEGACY_HEURISTIC",
+    "replayed_timesteps": 241,
+    "status": "COMPLETE"
+  },
+  "observation_datasets": {
+    "Chennai_2015": {
+      "total_records": 753,
+      "numerical_depth_records": 0,
+      "attribution_status": "EVENT-ATTRIBUTED",
+      "usage": "Categorical occurrence only"
+    },
+    "UNKNOWN": {
+      "total_records": 192,
+      "numerical_depth_records": 192,
+      "attribution_status": "EVENT UNKNOWN",
+      "usage": "Diagnostic spatial comparison only"
+    }
+  },
+  "diagnostic_depth_metrics": {
+    "population_name": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
+    "mae_cm": 25.2106,
+    "rmse_cm": 31.1606,
+    "bias_cm": -25.2106,
+    "median_ae_cm": 21.41,
+    "samples": 192,
+    "usage": "DIAGNOSTIC SPATIAL ONLY (NOT 2015 VALIDATION)"
+  },
+  "drainage": {
+    "geometry_features": 10255,
+    "geometry_source": "OpenCity / Greater Chennai Corporation 2023",
+    "hydraulic_attributes": "UNAVAILABLE",
+    "hydraulic_coupling": "UNAVAILABLE",
+    "depth_reduction_cm": 0.0,
+    "status_flag": "DRAINAGE_GEOMETRIC_ONLY"
+  },
+  "model_calibration": {
+    "status": "NOT COMPLETED",
+    "reason": "Baseline parameters retained due to missing sub-daily event-matched depth observations"
+  },
+  "independent_validation": {
+    "status": "NOT AVAILABLE",
+    "reason": "Independent event validation gate unfulfilled"
+  },
+  "quality_assurance": {
+    "backend_tests_passed": 108,
+    "backend_tests_failed": 0,
+    "frontend_build_status": "SUCCESS"
+  },
+  "final_scientific_status": "COMPLETE BUT NOT VALIDATED",
+  "model_status": "IMPLEMENTED — NOT VALIDATED",
+  "validation_blocker": "Lack of verified sub-daily event-matched numerical depth gauge observations for 2015 Chennai event"
+}

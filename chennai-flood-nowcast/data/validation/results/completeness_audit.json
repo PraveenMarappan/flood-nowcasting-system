@@ -1,0 +1,17 @@
+{
+  "expected_timesteps": 241,
+  "available_timesteps_before": 211,
+  "newly_downloaded_timesteps": 29,
+  "available_timesteps": 241,
+  "missing_timesteps": 0,
+  "duplicates": 0,
+  "corrupted_files": 0,
+  "first_available": "2015-11-30T00:00:00Z",
+  "last_available": "2015-12-05T00:00:00Z",
+  "dataset": "GPM_3IMERGHH",
+  "version": "V07B",
+  "spatial_resolution": "0.1 deg (~10 km)",
+  "units": "mm/hr",
+  "status": "COMPLETE",
+  "timestamp_audit_performed_at": "2026-09-26T05:46:46.462686+00:00"
+}

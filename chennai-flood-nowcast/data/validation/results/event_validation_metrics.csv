@@ -1,0 +1,2 @@
+event_id,event_start,event_end,rainfall_peak_mm_hr,rainfall_total_mm,observations,matched_observations,MAE_cm,RMSE_cm,Bias_cm,F1,validation_status
+CHENNAI_2015_EVENT,2015-11-30T00:00:00Z,2015-12-05T00:00:00Z,34.07,482.5,753,0,N/A,N/A,N/A,N/A,NOT_COMPUTABLE (0 depth observations)

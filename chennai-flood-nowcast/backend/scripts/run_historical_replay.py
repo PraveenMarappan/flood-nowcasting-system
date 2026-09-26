@@ -43,7 +43,8 @@ def main():
     print()
 
     # Run replay
-    replay = run_historical_replay(raw_dir)
+    model_version = "GRID_HYDROLOGY_V1"
+    replay = run_historical_replay(raw_dir, model_version=model_version)
 
     # Write timeseries CSV
     csv_path = results_dir / "historical_replay_timeseries.csv"
@@ -54,6 +55,8 @@ def main():
     print("─── REPLAY SUMMARY ────────────────────────────────")
     print(f"Historical Replay Status:     {replay['historical_replay_status']}")
     print(f"Event Replay Status:          {replay['event_replay_status']}")
+    print(f"Model Version:                {replay.get('historical_replay_model_version', model_version)}")
+    print(f"Legacy Comparison Model:      {replay.get('legacy_comparison_model', 'LEGACY_HEURISTIC')}")
     print(f"Forcing Files Processed:      {forcing.get('files_available', 0)}")
     print(f"Forcing Timesteps Processed:  {forcing.get('timesteps_processed', 0)}")
     print(f"Temporal Resolution:          {forcing.get('temporal_resolution_minutes', 'N/A')} min")

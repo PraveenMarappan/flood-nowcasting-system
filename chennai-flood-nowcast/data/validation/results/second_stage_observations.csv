@@ -1,0 +1,4 @@
+source_id,institution,dataset_name,latitude,longitude,event_id,numerical_depth_cm,water_level_m_msl,timestamp_utc,data_quality,usability
+SRC_GCC_CONTROL_ROOM,Greater Chennai Corporation,GCC Flood Control Room Response Log 2015,13.0827,80.2707,CHENNAI_2015_FLOOD,N/A,N/A,2015-12-01T12:00:00Z,HIGH_SPATIAL_LOCATION,CATEGORICAL_OCCURRENCE_ONLY
+SRC_OPENCITY_INUNDATION,OpenCity Chennai,Chennai Crowdsourced Inundation Map,13.0405,80.2333,UNKNOWN,25.0,N/A,UNVERIFIED,MEDIUM_DEPTH_UNVERIFIED_TS,DIAGNOSTIC_SPATIAL_ONLY
+SRC_TN_WRD_RIVER_GAUGES,TN Water Resources Dept,Adyar River Gauge Bulletin,13.0225,80.2241,CHENNAI_2015_FLOOD,N/A,11.45,2015-12-01T18:00:00Z,HIGH_RIVER_STAGE,WATER_LEVEL_ONLY

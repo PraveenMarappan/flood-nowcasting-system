@@ -1,0 +1,49 @@
+{
+  "model_version": "GRID_HYDROLOGY_V1",
+  "calibration_status": "NOT_CALIBRATED",
+  "parameters": [
+    {
+      "parameter_name": "runoff_coefficient_C",
+      "initial_value": 0.6,
+      "calibrated_value": 0.6,
+      "bounds": [
+        0.3,
+        0.9
+      ],
+      "objective_function": "MAE_cm",
+      "calibration_dataset": "NONE",
+      "calibration_event_ids": [],
+      "calibration_timestamp": null,
+      "status": "UNINITIALIZED_DATA_REQUIRED"
+    },
+    {
+      "parameter_name": "slope_scaling_alpha",
+      "initial_value": 1.25,
+      "calibrated_value": 1.25,
+      "bounds": [
+        0.5,
+        2.5
+      ],
+      "objective_function": "MAE_cm",
+      "calibration_dataset": "NONE",
+      "calibration_event_ids": [],
+      "calibration_timestamp": null,
+      "status": "UNINITIALIZED_DATA_REQUIRED"
+    },
+    {
+      "parameter_name": "ponding_factor_beta",
+      "initial_value": 1.0,
+      "calibrated_value": 1.0,
+      "bounds": [
+        0.1,
+        2.0
+      ],
+      "objective_function": "MAE_cm",
+      "calibration_dataset": "NONE",
+      "calibration_event_ids": [],
+      "calibration_timestamp": null,
+      "status": "UNINITIALIZED_DATA_REQUIRED"
+    }
+  ],
+  "notes": "Calibration requires independent event-matched observation datasets."
+}

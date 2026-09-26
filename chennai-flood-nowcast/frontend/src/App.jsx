@@ -922,7 +922,7 @@ function App() {
                     </div>
                     
                     <div style={{marginTop: 5, fontSize: '0.8rem', color: '#64748b'}}>
-                      <strong>Flood Model:</strong> MODELLED (baseline-v1) <br/>
+                      <strong>Flood Model:</strong> {props.model_version || 'GRID_HYDROLOGY_V1'} <br/>
                       <strong>Calibration:</strong> NOT CALIBRATED <br/>
                       <strong>Drainage Capacity:</strong> UNKNOWN (Data Unavailable) <br/>
                       <strong>Flood Depth Reduction:</strong> NONE (0.0 cm)

@@ -1,0 +1,40 @@
+{
+  "model_version": "GRID_HYDROLOGY_V1",
+  "calibration_status": "NOT_CALIBRATED",
+  "calibration_reason": "Insufficient event-matched sub-daily numerical depth observations for historical tuning",
+  "objective_function": "Weighted RMSE / MAE with Categorical F1",
+  "parameters": {
+    "impervious_surface_fraction": {
+      "baseline_value": 0.85,
+      "min_bound": 0.30,
+      "max_bound": 0.95,
+      "units": "dimensionless ratio [0-1]",
+      "provenance": "ASSUMED_BASELINE_HEURISTIC",
+      "calibrated": false
+    },
+    "flow_accumulation_alpha": {
+      "baseline_value": 0.15,
+      "min_bound": 0.05,
+      "max_bound": 0.50,
+      "units": "dimensionless scaling factor",
+      "provenance": "ASSUMED_BASELINE_HEURISTIC",
+      "calibrated": false
+    },
+    "ponding_beta": {
+      "baseline_value": 1.00,
+      "min_bound": 0.50,
+      "max_bound": 2.00,
+      "units": "dimensionless exponent",
+      "provenance": "ASSUMED_BASELINE_HEURISTIC",
+      "calibrated": false
+    },
+    "recession_tau_hours": {
+      "baseline_value": 3.0,
+      "min_bound": 1.0,
+      "max_bound": 12.0,
+      "units": "hours",
+      "provenance": "ASSUMED_BASELINE_HEURISTIC",
+      "calibrated": false
+    }
+  }
+}

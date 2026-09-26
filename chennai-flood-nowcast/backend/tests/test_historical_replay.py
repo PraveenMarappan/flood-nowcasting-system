@@ -581,6 +581,9 @@ class TestMetricsAssembly:
         assert metrics["overall_validation_status"] == "NOT_VALIDATED"
         assert metrics["historical_replay_status"] == "PARTIAL"
         assert metrics["event_replay_status"] == "INCOMPLETE"
+        assert metrics["historical_replay_model_version"] == "GRID_HYDROLOGY_V1"
+        assert metrics["legacy_comparison_model"] == "LEGACY_HEURISTIC"
+        assert metrics["model_status"] == "IMPLEMENTED — NOT VALIDATED"
         assert metrics["2015_depth_validation"] == "NOT_COMPUTABLE"
         assert metrics["unknown_event_spatial_depth_comparison"] == "AVAILABLE"
         assert metrics["metric_population"] == "UNKNOWN_EVENT_DEPTH_OBSERVATIONS"
@@ -610,4 +613,16 @@ class TestMetricsAssembly:
         assert depth_res["observation_counts"]["chennai_2015"]["with_observed_depth"] == 0
         assert depth_res["observation_counts"]["unknown_event"]["total"] == 1
         assert depth_res["observation_counts"]["unknown_event"]["with_observed_depth"] == 1
+
+    def test_replay_supports_explicit_legacy_model(self, tmp_path):
+        from app.services.historical_validation_engine import run_historical_replay
+        _create_synthetic_hdf5(tmp_path / "3B-HHR.MS.MRG.3IMERG.20151130-S000000-E002959.0000.V07B.HDF5", precip_value=10.0)
+        
+        replay_grid = run_historical_replay(tmp_path, model_version="GRID_HYDROLOGY_V1")
+        assert replay_grid["historical_replay_model_version"] == "GRID_HYDROLOGY_V1"
+        assert replay_grid["legacy_comparison_model"] == "LEGACY_HEURISTIC"
+
+        replay_legacy = run_historical_replay(tmp_path, model_version="LEGACY_HEURISTIC")
+        assert replay_legacy["historical_replay_model_version"] == "LEGACY_HEURISTIC"
+
 

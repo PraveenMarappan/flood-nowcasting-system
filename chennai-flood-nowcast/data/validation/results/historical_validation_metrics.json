@@ -1,58 +1,99 @@
 {
-    "event_window": "2015-11-30T00:00:00Z to 2015-12-05T00:00:00Z",
-    "dataset": "GPM_3IMERGHH V07B",
+  "historical_replay_status": "COMPLETE",
+  "event_replay_status": "INCOMPLETE",
+  "historical_replay_model_version": "GRID_HYDROLOGY_V1",
+  "model_version": "GRID_HYDROLOGY_V1",
+  "legacy_comparison_model": "LEGACY_HEURISTIC",
+  "model_status": "IMPLEMENTED \u2014 NOT VALIDATED",
+  "model_validation_status": "NOT_VALIDATED",
+  "overall_validation_status": "NOT_VALIDATED",
+  "occurrence_validation_status": "NOT_COMPUTABLE",
+  "time_matched_validation_status": "NOT_COMPUTABLE",
+  "2015_depth_validation": "NOT_COMPUTABLE",
+  "unknown_event_spatial_depth_comparison": "AVAILABLE",
+  "metric_population": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
+  "forcing": {
+    "source": "NASA GES DISC",
+    "dataset": "GPM_3IMERGHH",
+    "version": "V07B",
+    "requested_start": "2015-11-30T00:00:00Z",
+    "requested_end": "2015-12-05T00:00:00Z",
     "expected_timesteps": 241,
-    "available_timesteps": 141,
-    "missing_timesteps": 100,
-    "event_replay_status": "INCOMPLETE",
-    "processed_window_peak_rainfall_mm_hr": 34.07,
-    "observation_counts": {
-        "total_normalized_records": 945,
-        "chennai_2015": {
-            "total": 753,
-            "with_observed_depth": 0,
-            "without_observed_depth": 753
-        },
-        "unknown_event": {
-            "total": 192,
-            "with_observed_depth": 192,
-            "without_observed_depth": 0
-        }
+    "available_timesteps": 241,
+    "missing_timesteps": 0,
+    "files_available": 241,
+    "timesteps_processed": 241,
+    "temporal_resolution_minutes": 30,
+    "replay_timestep_hours": 0.5,
+    "processed_start": "2015-11-30T00:00:00+00:00",
+    "processed_end": "2015-12-05T00:00:00+00:00",
+    "status": "COMPLETE"
+  },
+  "processed_window_peak_rainfall_mm_hr": 34.07,
+  "observations_summary": {
+    "total_observations_in_dataset": 945,
+    "chennai_2015_observations": {
+      "total": 753,
+      "with_observed_depth": 0,
+      "without_observed_depth": 753
     },
+    "unknown_event_observations": {
+      "total": 192,
+      "with_observed_depth": 192,
+      "without_observed_depth": 0
+    }
+  },
+  "depth_validation": {
+    "status": "READY_FOR_REVIEW",
     "2015_depth_validation": "NOT_COMPUTABLE",
     "unknown_event_spatial_depth_comparison": "AVAILABLE",
     "metric_population": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
-    "depth_validation": {
-        "metric_population": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
-        "unknown_event_depth_sample_count": 192,
-        "unknown_event_depth_mae_cm": 25.242,
-        "unknown_event_depth_rmse_cm": 31.1862,
-        "unknown_event_depth_bias_cm": -25.242,
-        "unknown_event_depth_median_absolute_error_cm": 21.41,
-        "mae_cm": 25.242,
-        "rmse_cm": 31.1862,
-        "bias_cm": -25.242,
-        "median_absolute_error_cm": 21.41,
-        "sample_count": 192,
-        "provenance_statement": "The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation."
-    },
-    "occurrence_validation": {
-        "status": "NOT_COMPUTABLE",
-        "reason": "THRESHOLD_NOT_DEFINED",
-        "note": "No predefined observation inundation threshold exists in project spec."
-    },
-    "time_matched_validation": {
-        "status": "NOT_COMPUTABLE",
-        "reason": "OBSERVATION_TIMESTAMPS_UNAVAILABLE",
-        "note": "Historical observations lack sub-daily timestamps."
-    },
-    "drainage_diagnostics": {
-        "terminology": "drainage-constrained diagnostic locations",
-        "hydraulic_capacity": "UNKNOWN",
-        "hydraulic_conveyance": "UNAVAILABLE",
-        "hydraulic_coupling": "UNAVAILABLE",
-        "drainage_effect_on_flood_depth_cm": 0.0
-    },
-    "overall_validation_status": "NOT_VALIDATED",
-    "validation_disclaimer": "The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation."
+    "validation_type": "SPATIAL_EVENT_LEVEL",
+    "temporal_matching": "NOT_COMPUTABLE",
+    "unknown_event_depth_sample_count": 192,
+    "unknown_event_depth_mae_cm": 25.2106,
+    "unknown_event_depth_rmse_cm": 31.1606,
+    "unknown_event_depth_bias_cm": -25.2106,
+    "unknown_event_depth_median_absolute_error_cm": 21.41,
+    "sample_count": 192,
+    "valid_comparison_count": 192,
+    "mae_cm": 25.2106,
+    "rmse_cm": 31.1606,
+    "bias_cm": -25.2106,
+    "median_ae_cm": 21.41,
+    "observation_event_attribution": "UNKNOWN",
+    "observation_limitation": "The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation."
+  },
+  "occurrence_validation": {
+    "status": "NOT_COMPUTABLE",
+    "reason": "THRESHOLD_REQUIRED \u2014 no binary classification threshold has been set",
+    "sample_count": 753,
+    "threshold_depth_cm": null,
+    "threshold_source": null,
+    "threshold_tuned_against_validation": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "continuous_predictions_available": true
+  },
+  "drainage_diagnostics": {
+    "terminology": "drainage-constrained diagnostic locations",
+    "swd_geometry_available": true,
+    "drainage_density_proximity_diagnostics_available": true,
+    "hydraulic_capacity": "UNKNOWN",
+    "hydraulic_conveyance": "UNAVAILABLE",
+    "hydraulic_coupling": "UNAVAILABLE",
+    "drainage_effect_on_flood_depth_cm": 0.0,
+    "note": "Drainage infrastructure diagnostic locations do not imply numerical flood depth reduction or physical conduit bottleneck calculation."
+  },
+  "limitations": [
+    "Observations have no reliable timestamps \u2014 time-matched validation is NOT_COMPUTABLE",
+    "The 192 depth observations used for depth statistics have event=UNKNOWN and must NOT be interpreted as a 2015 event-specific validation",
+    "2015 event population (753 records) contains 0 usable observed-depth records \u2014 2015 depth validation is NOT_COMPUTABLE",
+    "Model uses heuristic impervious_fraction=0.85, NOT calibrated land cover",
+    "Drainage infrastructure numerical flood depth reduction is 0.0 cm \u2014 hydraulic capacity is UNKNOWN and hydraulic coupling is UNAVAILABLE",
+    "processed_window_peak_rainfall is NOT the full 2015 event peak \u2014 only covers available forcing files (128 of 241 timesteps)",
+    "Model accumulation timestep for replay (0.5 hr) differs from production default (1.0 hr)",
+    "No occurrence classification threshold set \u2014 precision/recall/F1 not computable"
+  ]
 }

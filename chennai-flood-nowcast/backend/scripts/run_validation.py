@@ -57,13 +57,15 @@ def main():
     print()
 
     # ─── Step 1: Run Historical Replay ─────────────────────────
-    print("Step 1: Running historical replay...")
-    replay = run_historical_replay(raw_dir)
+    model_version = "GRID_HYDROLOGY_V1"
+    print(f"Step 1: Running historical replay with model_version={model_version}...")
+    replay = run_historical_replay(raw_dir, model_version=model_version)
 
     csv_path = results_dir / "historical_replay_timeseries.csv"
     write_replay_csv(replay["timeseries"], csv_path)
     print(f"  Replay status: {replay['historical_replay_status']}")
     print(f"  Event status:  {replay['event_replay_status']}")
+    print(f"  Model version: {replay.get('historical_replay_model_version', model_version)}")
     print(f"  Timesteps:     {replay.get('forcing', {}).get('timesteps_processed', 0)}")
     print(f"  Peak rainfall: {replay.get('processed_window_peak_rainfall_mm_hr')} mm/hr")
     print()
@@ -100,6 +102,7 @@ def main():
     depth_result = run_depth_validation(
         observations=observations,
         peak_rainfall=peak_rainfall,
+        model_version=model_version,
     )
 
     depth_csv_path = results_dir / "depth_validation_results.csv"
@@ -123,6 +126,7 @@ def main():
         peak_rainfall=peak_rainfall,
         threshold_cm=None,  # Explicitly null — no arbitrary threshold
         threshold_source=None,
+        model_version=model_version,
     )
 
     occ_path = results_dir / "occurrence_validation_results.json"
@@ -140,7 +144,7 @@ def main():
     # ─── Step 5: Write Metrics and Report ──────────────────────
     print("Step 5: Writing validation metrics and report...")
 
-    metrics = build_validation_metrics(replay, depth_result, occurrence_result)
+    metrics = build_validation_metrics(replay, depth_result, occurrence_result, model_version=model_version)
 
     metrics_path = results_dir / "historical_validation_metrics.json"
     with open(metrics_path, "w", encoding="utf-8") as f:

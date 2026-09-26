@@ -1,0 +1,48 @@
+{
+  "second_stage_audit_date": "2026-09-26",
+  "audit_scope": "Public Domain Second-Stage Validation Data Audit for SIH26085",
+  "sources_evaluated": [
+    {
+      "source_id": "SRC_GCC_CONTROL_ROOM",
+      "institution": "Greater Chennai Corporation",
+      "dataset_name": "GCC Flood Control Room Response Log 2015",
+      "url": "https://tn.gov.in/disaster-management",
+      "date_range": "2015-11-30 to 2015-12-05",
+      "event": "CHENNAI_2015_FLOOD",
+      "record_count": 753,
+      "measurement_type": "Categorical Inundation Location",
+      "has_numerical_depth": false,
+      "public_accessibility": "Public Domain / Open Data",
+      "datum_conversion_defensible": false,
+      "audit_status": "UNSUITABLE_FOR_NUMERICAL_DEPTH"
+    },
+    {
+      "source_id": "SRC_OPENCITY_INUNDATION",
+      "institution": "OpenCity Chennai Open Data Portal",
+      "dataset_name": "Chennai Crowdsourced Inundation Map",
+      "url": "https://opencity.in/data/chennai-floods-2015",
+      "date_range": "Unverified / Undated",
+      "event": "UNKNOWN",
+      "record_count": 192,
+      "measurement_type": "Numerical Flood Depth (Inches/cm)",
+      "has_numerical_depth": true,
+      "public_accessibility": "Public Domain",
+      "datum_conversion_defensible": true,
+      "audit_status": "DIAGNOSTIC_SPATIAL_ONLY_UNVERIFIED_TIMESTAMP"
+    },
+    {
+      "source_id": "SRC_TN_WRD_RIVER_GAUGES",
+      "institution": "Tamil Nadu Water Resources Department (WRD)",
+      "dataset_name": "Adyar & Cooum River Reservoir & Gauge Bulletins",
+      "url": "http://www.wrd.tn.gov.in",
+      "date_range": "2015-11-30 to 2015-12-05",
+      "event": "CHENNAI_2015_FLOOD",
+      "record_count": 12,
+      "measurement_type": "Water Level / Stage (m MSL) & Discharge (cusecs)",
+      "has_numerical_depth": false,
+      "public_accessibility": "Public Bulletins",
+      "datum_conversion_defensible": false,
+      "audit_status": "WATER_LEVEL_ONLY_CANNOT_CONVERT_TO_STREET_DEPTH"
+    }
+  ]
+}

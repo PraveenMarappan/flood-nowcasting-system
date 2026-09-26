@@ -1,1 +1,1 @@
-{"bearer": "200", "up": "Error: HTTPSConnectionPool(host='urs.earthdata.nasa.gov', port=443): Read timed out. (read timeout=10)", "link": "https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGHHE.07/2026/265/3B-HHR-E.MS.MRG.3IMERG.20260922-S223000-E225959.1350.V07C.HDF5"}
+{"bearer": "200", "up": "401", "link": "https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGHHE.07/2026/269/3B-HHR-E.MS.MRG.3IMERG.20260926-S003000-E005959.0030.V07C.HDF5"}

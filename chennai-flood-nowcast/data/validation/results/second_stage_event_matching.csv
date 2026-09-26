@@ -1,0 +1,4 @@
+observation_id,source_id,event_id,latitude,longitude,observation_timestamp,matched_forcing_timestamp,spatial_distance_m,temporal_offset_min,match_status,reason
+STAGE2_OBS_0001,SRC_GCC_CONTROL_ROOM,CHENNAI_2015_FLOOD,13.0827,80.2707,2015-12-01T12:00:00Z,2015-12-01T12:00:00Z,0.0,0.0,NOT_COMPUTABLE_DEPTH,0 numerical depth values available
+STAGE2_OBS_0002,SRC_OPENCITY_INUNDATION,UNKNOWN,13.0405,80.2333,UNVERIFIED,N/A,0.0,N/A,DIAGNOSTIC_SPATIAL_ONLY,Numerical depth available but timestamp unverified
+STAGE2_OBS_0003,SRC_TN_WRD_RIVER_GAUGES,CHENNAI_2015_FLOOD,13.0225,80.2241,2015-12-01T18:00:00Z,2015-12-01T18:00:00Z,0.0,0.0,RIVER_STAGE_ONLY,River stage level cannot be defensibly converted to street flood depth

@@ -1,23 +1,232 @@
 
 --- /api/health ---
-Error: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+{
+  "status": "Running",
+  "uptime_seconds": 83,
+  "service": "Chennai Flood Nowcast API"
+}
 
 --- /api/terrain/status ---
-Error: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+{
+  "status": "REAL",
+  "source": "USGS SRTM 1 Arc-Second",
+  "message": "Real terrain loaded",
+  "calibration_status": "NOT_CALIBRATED",
+  "bounds": {
+    "left": 79.99986111111112,
+    "bottom": 12.999861111111109,
+    "right": 81.0001388888889,
+    "top": 14.000138888888888
+  }
+}
 
 --- /api/terrain/elevation?latitude=13.0827&longitude=80.2707 ---
-Error: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+{
+  "status": "REAL",
+  "source": "USGS SRTM 1 Arc-Second DEM",
+  "elevation_m": 8.0,
+  "row": 3302,
+  "col": 975
+}
 
 --- /api/terrain/elevation?latitude=13.10&longitude=80.25 ---
-Error: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+{
+  "status": "REAL",
+  "source": "USGS SRTM 1 Arc-Second DEM",
+  "elevation_m": 8.0,
+  "row": 3240,
+  "col": 900
+}
 
 --- /api/terrain/elevation?latitude=12.5&longitude=80.25 ---
-Error: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+{
+  "status": "UNAVAILABLE",
+  "source": "DEM simulation",
+  "elevation_m": null,
+  "error": "nodata cell found at this coordinate"
+}
 
 --- /api/rainfall/current ---
-Error: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+{
+  "status": "LIVE",
+  "source": "NASA GPM IMERG Early Run",
+  "dataset": "GPM_3IMERGHHE",
+  "rainfall_rate": 0.0,
+  "unit": "mm/hr",
+  "latitude": 13.0827,
+  "longitude": 80.2707,
+  "data_timestamp": "2026-09-26T00:30:00.000Z",
+  "retrieved_at": "2026-09-26T06:05:13.446043Z"
+}
 
 --- /api/data-status ---
-Error: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+{
+  "overall_health": "OK",
+  "data_confidence": "MEDIUM",
+  "sources": {
+    "rainfall": {
+      "status": "REAL",
+      "source": "NASA GPM IMERG (~0.1 deg)"
+    },
+    "dem_terrain": {
+      "status": "REAL",
+      "source": "USGS SRTM 1 Arc-Second Global (~30m)"
+    },
+    "drainage": {
+      "status": "PARTIAL / NOT VERIFIED",
+      "geometry_available": true,
+      "hydraulic_data_available": false,
+      "used_in_flood_model": false,
+      "drainage_mode": "GEOMETRIC_ONLY"
+    },
+    "flood_depth": {
+      "status": "MODELLED",
+      "model_version": "GRID_HYDROLOGY_V1",
+      "model_type": "GRID-BASED HYDROLOGICAL FLOOD-RISK ESTIMATE",
+      "calibration_status": "NOT_CALIBRATED",
+      "validation_status": "NOT_VALIDATED"
+    },
+    "forecast": {
+      "status": "MODELLED",
+      "source": "Grid-Based Hydrological Forecast Decay",
+      "model_version": "GRID_HYDROLOGY_V1"
+    }
+  }
+}
 
 --- /api/flood/current ---
+{
+  "status": "MODELLED",
+  "source": "Grid-Based Hydrological Flood Model",
+  "model_version": "GRID_HYDROLOGY_V1",
+  "calibration_status": "NOT_CALIBRATED",
+  "validation_status": "NOT_VALIDATED",
+  "timestamp": "2026-09-26T06:05:37.179028Z",
+  "location": {
+    "latitude": 13.0827,
+    "longitude": 80.2707
+  },
+  "rainfall_rate_mm_hr": 0.0,
+  "runoff_coefficient": 0.85,
+  "runoff_rate_mm_hr": 0.0,
+  "accumulation_interval_hours": 1.0,
+  "runoff_depth_cm": 0.0,
+  "terrain_elevation_m": 8.0,
+  "terrain_factor": 1.0,
+  "flow_direction": "D8_GRID_ROUTING",
+  "flow_accumulation": 0,
+  "water_depth_cm": 0.0,
+  "risk_level": "NORMAL",
+  "drainage_used": false,
+  "drainage": {
+    "status": "PARTIAL",
+    "capacity_status": "UNAVAILABLE",
+    "engineering_parameters_available": false,
+    "numerical_influence": "NOT_COMPUTABLE",
+    "proxy_mode_enabled": false,
+    "drainage_used": false,
+    "hydraulic_coupling": "UNAVAILABLE",
+    "engineering_parameters": "UNAVAILABLE"
+  },
+  "provenance": {
+    "model_version": "GRID_HYDROLOGY_V1",
+    "model_type": "GRID-BASED HYDROLOGICAL FLOOD-RISK ESTIMATE",
+    "rainfall_source": "NASA GPM IMERG",
+    "rainfall_source_resolution": "~0.1 degree (~10-11 km)",
+    "rainfall_information_resolution": "~0.1 degree (~10-11 km)",
+    "computational_grid_resolution": "~1 Arc-Second (~30 meters)",
+    "resolution_warning": "Fine computational grid does not imply fine-resolution street-level rainfall observations.",
+    "dem_source": "USGS SRTM 1 Arc-Second Global",
+    "dem_resolution": "~30 meters",
+    "routing_method": "D8_GRID_ROUTING",
+    "runoff_coefficient_source": "Configurable Land-Cover Proxy (ASSUMED)",
+    "drainage_mode": "GEOMETRIC_ONLY",
+    "hydraulic_coupling": "UNAVAILABLE",
+    "validation_status": "NOT_VALIDATED",
+    "calibration_status": "NOT_CALIBRATED",
+    "forcing_status": "REAL",
+    "is_simulated": false,
+    "provenance_map": {
+      "rainfall": "REAL",
+      "dem_elevation": "REAL",
+      "flow_direction": "DERIVED",
+      "flow_accumulation": "DERIVED",
+      "runoff_coefficients": "ASSUMED",
+      "drainage_capacity": "UNKNOWN",
+      "flood_depth_calibration": "NOT_CALIBRATED",
+      "historical_event_validation": "NOT_VALIDATED"
+    }
+  }
+}
+
+--- /api/flood/forecast ---
+{
+  "model_version": "GRID_HYDROLOGY_V1",
+  "calibration_status": "NOT_CALIBRATED",
+  "status": "MODELLED",
+  "source": "BASELINE HEURISTIC PROJECTION",
+  "forecast": [
+    {
+      "time": "+30m",
+      "status": "NORMAL",
+      "depth": 0.0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+60m",
+      "status": "NORMAL",
+      "depth": 0.0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+90m",
+      "status": "LOW",
+      "depth": 0.0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+120m",
+      "status": "LOW",
+      "depth": 0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+150m",
+      "status": "NORMAL",
+      "depth": 0.0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    },
+    {
+      "time": "+180m",
+      "status": "NORMAL",
+      "depth": 0.0,
+      "drainage_influence": "NOT_COMPUTABLE"
+    }
+  ],
+  "water_depth_cm": 0.0,
+  "is_simulated": true,
+  "rainfall_input_mm": 0.0,
+  "drainage": {
+    "status": "PARTIAL",
+    "capacity_status": "UNAVAILABLE",
+    "engineering_parameters_available": false,
+    "numerical_influence": "NOT_COMPUTABLE",
+    "proxy_mode_enabled": false,
+    "drainage_used": false,
+    "hydraulic_coupling": "UNAVAILABLE",
+    "engineering_parameters": "UNAVAILABLE"
+  },
+  "validation_status": "NOT_VALIDATED"
+}
+
+--- /api/drainage/status ---
+{
+  "status": "PARTIAL",
+  "geometry_available": true,
+  "hydraulic_data_available": false,
+  "engineering_parameters_available": false,
+  "used_in_flood_model": false,
+  "source": "OpenCity / Greater Chennai Corporation",
+  "dataset": "Chennai Storm Water Drains - SWD - Map 2023",
+  "feature_count": 10255
+}

@@ -1,18 +1,26 @@
 {
-  "historical_replay_status": "PARTIAL",
-  "event_replay_status": "INCOMPLETE",
+  "historical_replay_status": "COMPLETE",
+  "event_replay_status": "COMPLETE",
+  "replay_status": "COMPLETE",
+  "historical_replay_model_version": "GRID_HYDROLOGY_V1",
+  "legacy_comparison_model": "LEGACY_HEURISTIC",
+  "model_status": "IMPLEMENTED \u2014 NOT VALIDATED",
   "forcing": {
     "source": "NASA GES DISC",
     "dataset": "GPM_3IMERGHH",
     "version": "V07B",
     "requested_start": "2015-11-30T00:00:00Z",
     "requested_end": "2015-12-05T00:00:00Z",
-    "files_available": 1,
-    "timesteps_processed": 1,
+    "expected_timesteps": 241,
+    "available_timesteps": 241,
+    "missing_timesteps": 0,
+    "files_available": 241,
+    "timesteps_processed": 241,
     "temporal_resolution_minutes": 30,
     "replay_timestep_hours": 0.5,
     "processed_start": "2015-11-30T00:00:00+00:00",
-    "processed_end": "2015-11-30T00:00:00+00:00"
+    "processed_end": "2015-12-05T00:00:00+00:00",
+    "status": "COMPLETE"
   },
-  "processed_window_peak_rainfall_mm_hr": 5.1
+  "processed_window_peak_rainfall_mm_hr": 34.07
 }

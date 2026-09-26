@@ -1,0 +1,62 @@
+{
+  "validation_status": "NOT_VALIDATED",
+  "scientific_classification": "COMPLETE BUT NOT VALIDATED",
+  "model_status": "IMPLEMENTED \u2014 NOT VALIDATED",
+  "gates": {
+    "forcing_completeness_gate": {
+      "passed": true,
+      "available_timesteps": 241,
+      "expected_timesteps": 241,
+      "detail": "100% NASA GPM IMERG V07B forcing data available"
+    },
+    "event_matched_depth_observations_gate": {
+      "passed": false,
+      "sample_count": 0,
+      "detail": "Zero sub-daily numerical flood depth gauge records attributed to 2015 event"
+    },
+    "calibration_gate": {
+      "passed": false,
+      "status": "NOT_COMPLETED",
+      "detail": "Baseline parameters uncalibrated due to missing event depth ground truth"
+    },
+    "independent_validation_gate": {
+      "passed": false,
+      "status": "NOT_AVAILABLE",
+      "detail": "Independent validation requires event-matched test observations"
+    }
+  },
+  "unknown_event_depth_comparison": {
+    "population_name": "UNKNOWN_EVENT_DEPTH_OBSERVATIONS",
+    "mae_cm": 25.2106,
+    "rmse_cm": 31.1606,
+    "bias_cm": -25.2106,
+    "median_ae_cm": 21.41,
+    "sample_count": 192,
+    "usage": "DIAGNOSTIC_SPATIAL_ONLY",
+    "disclaimer": "NOT_2015_VALIDATION (Observations have unknown event attribution)"
+  },
+  "occurrence_validation_diagnostic": {
+    "population_name": "Chennai_2015",
+    "total_records": 753,
+    "observation_definition": "Categorical location-based flood occurrence presence",
+    "model_prediction_threshold_cm": 5.0,
+    "spatial_tolerance_m": 50.0,
+    "event_attribution": "CHENNAI_2015_FLOOD",
+    "comparison_level": "Event-level maximum depth window",
+    "used_during_calibration": false,
+    "is_independent_validation": false,
+    "usage": "DIAGNOSTIC_OCCURRENCE_ONLY",
+    "metrics": {
+      "true_positives": 684,
+      "false_positives": 69,
+      "true_negatives": 0,
+      "false_negatives": 0,
+      "precision": 0.9084,
+      "recall_pod": 1.0,
+      "f1_score": 0.952,
+      "csi": 0.9084,
+      "far": 0.0916
+    },
+    "disclaimer": "DIAGNOSTIC ONLY \u2014 Cannot be used for continuous numerical depth validation"
+  }
+}

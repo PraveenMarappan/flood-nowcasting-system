@@ -1,0 +1,34 @@
+{
+  "datasets": [
+    {
+      "dataset_id": "Chennai_2015_Categorical",
+      "population_name": "Chennai_2015",
+      "total_records": 753,
+      "records_with_depth": 0,
+      "event_id": "CHENNAI_2015_FLOOD",
+      "event_date": "2015-11-30 to 2015-12-05",
+      "event_confidence": "HIGH",
+      "spatial_reference": "EPSG:4326",
+      "depth_units": null,
+      "source_name": "Greater Chennai Corporation & Tamil Nadu State Disaster Records",
+      "source_url": "https://tn.gov.in/disaster-management",
+      "license": "Public Domain / Government Open Data",
+      "usage": "Categorical flood location verification only (no numerical depth data available)"
+    },
+    {
+      "dataset_id": "Unknown_Event_Depth_Points",
+      "population_name": "UNKNOWN",
+      "total_records": 192,
+      "records_with_depth": 192,
+      "event_id": "UNKNOWN_EVENT",
+      "event_date": "UNVERIFIED",
+      "event_confidence": "UNKNOWN",
+      "spatial_reference": "EPSG:4326",
+      "depth_units": "meters (normalized to centimeters)",
+      "source_name": "Inundation Point Spatial Dataset",
+      "source_url": "Internal Repository Benchmark",
+      "license": "Research Use",
+      "usage": "Spatial depth comparison only (MUST NOT be described as 2015 event validation due to unverified event attribution)"
+    }
+  ]
+}

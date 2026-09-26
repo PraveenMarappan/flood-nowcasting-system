@@ -1,0 +1,9 @@
+{
+  "model_version": "GRID_HYDROLOGY_V1",
+  "calibration_status": "NOT_COMPLETED",
+  "calibration_gate_passed": false,
+  "train_event_samples": 0,
+  "validation_event_samples": 0,
+  "parameter_updates": [],
+  "reason": "No event-matched sub-daily numerical depth observations available for train/validation optimization. Baseline parameters retained."
+}

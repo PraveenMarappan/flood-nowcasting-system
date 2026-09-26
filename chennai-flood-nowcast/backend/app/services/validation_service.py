@@ -94,7 +94,9 @@ class ValidationService:
             # Provenance Trace
             "provenance": {
                 "observation_source": "OpenCity / GCC / Crowd-Sourced",
-                "model_version": "v3-spatial-heuristic",
+                "model_version": "GRID_HYDROLOGY_V1",
+                "legacy_comparison_model": "LEGACY_HEURISTIC",
+                "model_status": "IMPLEMENTED — NOT VALIDATED",
                 "model_input": "IMERG (Live)",  # Fails compatibility with 2015
                 "event": "Chennai_2015",
                 "spatial_matching_method": "Point-to-Grid Tolerance (Euclidean)",
@@ -144,6 +146,13 @@ class ValidationService:
         result = {
             "status": "NOT_VALIDATED",
             "overall_validation_status": "NOT_VALIDATED",
+            "historical_replay_status": metrics.get("historical_replay_status", "COMPLETE"),
+            "event_replay_status": metrics.get("event_replay_status", "COMPLETE"),
+            "historical_replay_model_version": metrics.get("historical_replay_model_version", "GRID_HYDROLOGY_V1"),
+            "legacy_comparison_model": metrics.get("legacy_comparison_model", "LEGACY_HEURISTIC"),
+            "model_status": metrics.get("model_status", "IMPLEMENTED — NOT VALIDATED"),
+            "forcing": metrics.get("forcing", {}),
+            "depth_validation": metrics.get("depth_validation", {}),
             "metrics": metrics,
             "timeseries": timeseries
         }
