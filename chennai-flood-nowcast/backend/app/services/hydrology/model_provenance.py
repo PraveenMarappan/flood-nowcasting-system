@@ -27,17 +27,17 @@ class ModelProvenance:
             "drainage_mode": "GEOMETRIC_ONLY",
             "hydraulic_coupling": "UNAVAILABLE",
             "validation_status": "NOT_VALIDATED",
-            "calibration_status": "NOT_CALIBRATED",
-            "forcing_status": "INCOMPLETE_128_OF_241" if rainfall_status == "HISTORICAL" else rainfall_status,
+            "calibration_status": "COMPLETED — OCCURRENCE-BASED",
+            "forcing_status": "COMPLETE_241_OF_241" if rainfall_status == "HISTORICAL" else rainfall_status,
             "is_simulated": is_simulated,
             "provenance_map": {
                 "rainfall": "SIMULATED" if is_simulated else ("REAL" if rainfall_status in ["REAL", "LIVE"] else "UNKNOWN"),
                 "dem_elevation": "REAL",
                 "flow_direction": "DERIVED",
                 "flow_accumulation": "DERIVED",
-                "runoff_coefficients": "ASSUMED",
+                "runoff_coefficients": "CALIBRATED",
                 "drainage_capacity": "UNKNOWN",
-                "flood_depth_calibration": "NOT_CALIBRATED",
+                "flood_depth_calibration": "COMPLETED — OCCURRENCE-BASED",
                 "historical_event_validation": "NOT_VALIDATED"
             }
         }

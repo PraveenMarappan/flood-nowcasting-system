@@ -1,0 +1,487 @@
+{
+  "model_version": "GRID_HYDROLOGY_V1",
+  "forcing_peak_mm_hr": 38.8,
+  "total_combinations_evaluated": 80,
+  "sensitivity_results": [
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 2.47
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 2.86
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 3.15
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 3.47
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 2.91
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 3.71
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 4.37
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 5.13
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 3.29
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 4.52
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 5.58
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 6.89
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 3.94
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 6.03
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 8.0
+    },
+    {
+      "impervious_surface_fraction": 0.5,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 10.62
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 3.46
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 4.01
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 4.41
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 4.86
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 4.07
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 5.2
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 6.11
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 7.19
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 4.61
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 6.32
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 7.81
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 9.64
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 5.52
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 8.44
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 11.2
+    },
+    {
+      "impervious_surface_fraction": 0.7,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 14.87
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 4.2
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 4.86
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 5.36
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 5.91
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 4.95
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 6.31
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 7.42
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 8.73
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 5.59
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 7.68
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 9.48
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 11.71
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 6.7
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 10.25
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 13.6
+    },
+    {
+      "impervious_surface_fraction": 0.85,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 18.06
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 4.35
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 5.03
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 5.55
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 6.11
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 5.12
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 6.53
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 7.68
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 9.04
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 5.79
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 7.95
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 9.82
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 12.12
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 6.93
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 10.61
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 14.08
+    },
+    {
+      "impervious_surface_fraction": 0.88,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 18.7
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 4.7
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 5.44
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 5.99
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.05,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 6.6
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 5.53
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 7.05
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 8.29
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.1,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 9.75
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 6.25
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 8.58
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 10.6
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.15,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 13.09
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.5,
+      "modelled_depth_cm": 7.49
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 0.8,
+      "modelled_depth_cm": 11.45
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.0,
+      "modelled_depth_cm": 15.2
+    },
+    {
+      "impervious_surface_fraction": 0.95,
+      "flow_accumulation_alpha": 0.25,
+      "ponding_beta": 1.2,
+      "modelled_depth_cm": 20.19
+    }
+  ]
+}

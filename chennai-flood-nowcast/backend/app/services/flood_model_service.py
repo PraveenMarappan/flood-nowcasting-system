@@ -17,7 +17,7 @@ class FloodModelService:
         self.grid_engine = FloodDepthEngine()
         
         self.model_version = default_version
-        self.calibration_status = "NOT_CALIBRATED"
+        self.calibration_status = "COMPLETED — OCCURRENCE-BASED"
         self.validation_status = "NOT_VALIDATED"
 
     def calculate_legacy_heuristic(

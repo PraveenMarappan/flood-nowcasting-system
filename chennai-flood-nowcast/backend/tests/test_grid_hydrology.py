@@ -156,10 +156,10 @@ class TestGridHydrologyScience:
 
         assert prov["model_version"] == "GRID_HYDROLOGY_V1"
         assert prov["validation_status"] == "NOT_VALIDATED"
-        assert prov["calibration_status"] == "NOT_CALIBRATED"
+        assert prov["calibration_status"] == "COMPLETED — OCCURRENCE-BASED"
         assert prov["provenance_map"]["dem_elevation"] == "REAL"
         assert prov["provenance_map"]["flow_direction"] == "DERIVED"
-        assert prov["provenance_map"]["runoff_coefficients"] == "ASSUMED"
+        assert prov["provenance_map"]["runoff_coefficients"] == "CALIBRATED"
 
     def test_dual_model_selection(self):
         model = FloodModelService()

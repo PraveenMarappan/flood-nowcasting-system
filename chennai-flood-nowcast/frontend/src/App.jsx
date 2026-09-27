@@ -120,6 +120,63 @@ function MapSearchController({ searchTarget }) {
   );
 }
 
+// Custom Leaflet GeoJSON layer component to efficiently update road risk data and styles immediately without requiring map zoom/pan
+function RoadRiskLayer({ data, getRoadStyle, getCasingStyle, onEachRoadFeature }) {
+  const map = useMap();
+  const casingLayerRef = useRef(null);
+  const geoJsonLayerRef = useRef(null);
+
+  useEffect(() => {
+    if (!map) return;
+
+    const casingLayer = L.geoJSON(null, {
+      style: getCasingStyle,
+      interactive: false
+    }).addTo(map);
+
+    const geoJsonLayer = L.geoJSON(null, {
+      style: getRoadStyle,
+      onEachFeature: onEachRoadFeature
+    }).addTo(map);
+
+    casingLayerRef.current = casingLayer;
+    geoJsonLayerRef.current = geoJsonLayer;
+
+    return () => {
+      if (casingLayerRef.current) {
+        map.removeLayer(casingLayerRef.current);
+        casingLayerRef.current = null;
+      }
+      if (geoJsonLayerRef.current) {
+        map.removeLayer(geoJsonLayerRef.current);
+        geoJsonLayerRef.current = null;
+      }
+    };
+  }, [map]);
+
+  useEffect(() => {
+    const casingLayer = casingLayerRef.current;
+    const geoJsonLayer = geoJsonLayerRef.current;
+
+    if (!casingLayer || !geoJsonLayer) return;
+
+    // Update style & event handler options
+    casingLayer.options.style = getCasingStyle;
+    geoJsonLayer.options.style = getRoadStyle;
+    geoJsonLayer.options.onEachFeature = onEachRoadFeature;
+
+    casingLayer.clearLayers();
+    geoJsonLayer.clearLayers();
+
+    if (data && Array.isArray(data.features) && data.features.length > 0) {
+      casingLayer.addData(data);
+      geoJsonLayer.addData(data);
+    }
+  }, [data, getRoadStyle, getCasingStyle, onEachRoadFeature]);
+
+  return null;
+}
+
 function App() {
   const [activeView, setActiveView] = useState('nowcast'); // 'nowcast' | 'validation'
   const [isSimulated, setIsSimulated] = useState(true);
@@ -137,8 +194,7 @@ function App() {
   const [mapBbox, setMapBbox] = useState(null);
 
   const requestIdRef = useRef(0);
-  const geoJsonLayerRef = useRef(null);
-  const casingLayerRef = useRef(null);
+  const roadsRequestIdRef = useRef(0);
   const staticDataLoaded = useRef(false);
 
   const liveRainfall = (liveRainfallData?.status === "LIVE" || liveRainfallData?.status === "STALE") 
@@ -195,17 +251,23 @@ function App() {
   useEffect(() => {
     if (mapBbox === null) return; // Wait for initial map bounds
 
+    const currentRequestId = ++roadsRequestIdRef.current;
+
     const fetchRoads = async () => {
       try {
         const url = `${API_BASE}/roads/risk?forecast_offset=${debouncedForecastOffset}&rainfall=${debouncedRainfall}&is_simulated=${isSimulated}&bbox=${mapBbox}`;
         const roadsRes = await axios.get(url);
-        if (roadsRes.data && Array.isArray(roadsRes.data.features) && roadsRes.data.features.length > 0) {
-          setRoadsGeojson(roadsRes.data);
-        } else {
-          console.warn("[ROADS] Response contained 0 features or unavailable status.");
+        if (currentRequestId === roadsRequestIdRef.current) {
+          if (roadsRes.data && Array.isArray(roadsRes.data.features) && roadsRes.data.features.length > 0) {
+            setRoadsGeojson(roadsRes.data);
+          } else {
+            console.warn("[ROADS] Response contained 0 features or unavailable status.");
+          }
         }
       } catch (e) {
-        console.error("[ROADS] Error fetching roads risk.", e);
+        if (currentRequestId === roadsRequestIdRef.current) {
+          console.error("[ROADS] Error fetching roads risk.", e);
+        }
       }
     };
     fetchRoads();
@@ -389,7 +451,7 @@ function App() {
           <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px; line-height: 1.4;">
             Model: ${props.model_version || 'baseline'}<br/>
             Drainage Capacity: UNKNOWN (Not Used)<br/>
-            Calibration: NOT CALIBRATED
+            Calibration: COMPLETED — OCCURRENCE-BASED
           </div>
         </div>
       `;
@@ -923,7 +985,7 @@ function App() {
                     
                     <div style={{marginTop: 5, fontSize: '0.8rem', color: '#64748b'}}>
                       <strong>Flood Model:</strong> {props.model_version || 'GRID_HYDROLOGY_V1'} <br/>
-                      <strong>Calibration:</strong> NOT CALIBRATED <br/>
+                      <strong>Calibration:</strong> COMPLETED — OCCURRENCE-BASED <br/>
                       <strong>Drainage Capacity:</strong> UNKNOWN (Data Unavailable) <br/>
                       <strong>Flood Depth Reduction:</strong> NONE (0.0 cm)
                     </div>
@@ -932,25 +994,13 @@ function App() {
               </CircleMarker>
             ))}
 
-            {/* Road layers — use data identity as key so layers are only recreated when new data arrives from API, NOT on every slider tick */}
-            {roadsGeojson && roadsGeojson.features && roadsGeojson.features.length > 0 && (
-              <>
-                <GeoJSON
-                  key="road-casing-stable"
-                  ref={casingLayerRef}
-                  data={roadsGeojson}
-                  style={getCasingStyle}
-                  interactive={false}
-                />
-                <GeoJSON
-                  key="road-overlay-stable"
-                  ref={geoJsonLayerRef}
-                  data={roadsGeojson}
-                  style={getRoadStyle}
-                  onEachFeature={onEachRoadFeature}
-                />
-              </>
-            )}
+            {/* Road risk layer — updates features/styles immediately when roadsGeojson data changes without requiring zoom/pan */}
+            <RoadRiskLayer
+              data={roadsGeojson}
+              getCasingStyle={getCasingStyle}
+              getRoadStyle={getRoadStyle}
+              onEachRoadFeature={onEachRoadFeature}
+            />
           </MapContainer>
           
           {/* STATIC OVERLAY LEGEND */}

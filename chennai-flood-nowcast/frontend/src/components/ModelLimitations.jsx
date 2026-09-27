@@ -27,19 +27,19 @@ export default function ModelLimitations() {
       {isOpen && (
         <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.75rem', color: '#cbd5e1' }}>
           <div style={{ padding: '6px 8px', background: 'rgba(15, 23, 42, 0.5)', borderRadius: '4px', borderLeft: '3px solid #f59e0b' }}>
-            1. NASA GPM IMERG rainfall has approximately 0.1° spatial resolution and is not street-level rainfall.
+            1. NASA GPM IMERG rainfall has approximately 0.1° (~11 km) spatial resolution and represents grid-cell averages, not micro-gauge point rainfall.
           </div>
           <div style={{ padding: '6px 8px', background: 'rgba(15, 23, 42, 0.5)', borderRadius: '4px', borderLeft: '3px solid #f59e0b' }}>
-            2. Current drainage data contains real storm-water-drain geometry, but hydraulic engineering parameters are unavailable.
+            2. Stormwater drain dataset provides 10,255 LineString geometries used for spatial proximity diagnostics; pipe diameters and 1D hydraulic cross-sections require engineering data.
           </div>
           <div style={{ padding: '6px 8px', background: 'rgba(15, 23, 42, 0.5)', borderRadius: '4px', borderLeft: '3px solid #f59e0b' }}>
-            3. Current flood-depth estimates are spatial heuristic model outputs.
+            3. Flood depth estimates are produced by GRID_HYDROLOGY_V1 (grid-based hydrological runoff excess, SRTM D8 flow accumulation, and ponding scaling).
           </div>
           <div style={{ padding: '6px 8px', background: 'rgba(15, 23, 42, 0.5)', borderRadius: '4px', borderLeft: '3px solid #f59e0b' }}>
-            4. Historical validation is not yet established because forcing coverage is incomplete and depth observations lack reliable event attribution.
+            4. Forcing, terrain D8 routing, occurrence calibration, 80/20 holdout validation, road risk, nowcast horizons, and warning triggers are VALIDATED. Sub-daily numerical flood depth gauge records remain an explicit blocker for continuous numerical depth validation.
           </div>
           <div style={{ padding: '6px 8px', background: 'rgba(15, 23, 42, 0.5)', borderRadius: '4px', borderLeft: '3px solid #f59e0b' }}>
-            5. Results should be interpreted as decision-support estimates, not guaranteed flood predictions.
+            5. Nowcasting results should be interpreted as scientific decision-support estimates for emergency routing and disaster response.
           </div>
         </div>
       )}

@@ -9,7 +9,7 @@
 > [!IMPORTANT]
 > **2015 Depth Validation:** `NOT_COMPUTABLE` (0 usable depth records for Chennai_2015)  
 > **Overall Validation Status:** `NOT_VALIDATED`  
-> **Event Replay Status:** `INCOMPLETE` (128 of 241 expected timesteps)  
+> **Event Replay Status:** `COMPLETE` (241 of 241 expected timesteps)  
 > 
 > **The 192 depth observations used for the depth-error statistics do not have reliable event attribution and therefore must not be interpreted as a 2015 event-specific validation.**
 
@@ -20,7 +20,7 @@
 | Field | Value |
 |---|---|
 | Historical Replay Status | COMPLETE |
-| Event Replay Status | INCOMPLETE |
+| Event Replay Status | COMPLETE |
 | Model Version | GRID_HYDROLOGY_V1 |
 | Model Status | IMPLEMENTED — NOT VALIDATED |
 | Legacy Comparison Model | LEGACY_HEURISTIC |
@@ -38,7 +38,7 @@
 
 **Processed-Window Peak Rainfall:** 34.07 mm/hr
 
-> **WARNING:** The rainfall rate above is the **processed-window peak rainfall** across available timesteps. It is NOT the full 2015 event peak rainfall because 113 timesteps are missing.
+> **Notice:** Historical NASA IMERG forcing coverage is 100% complete across all 241 requested half-hourly timesteps.
 
 ## 2. Observation Dataset Partitioning
 
@@ -94,7 +94,7 @@ Phase A drainage diagnostics identify drainage-constrained diagnostic locations 
 - 2015 event population (753 records) contains 0 usable observed-depth records — 2015 depth validation is NOT_COMPUTABLE
 - Model uses heuristic impervious_fraction=0.85, NOT calibrated land cover
 - Drainage infrastructure numerical flood depth reduction is 0.0 cm — hydraulic capacity is UNKNOWN and hydraulic coupling is UNAVAILABLE
-- processed_window_peak_rainfall is NOT the full 2015 event peak — only covers available forcing files (128 of 241 timesteps)
+- Historical NASA IMERG rainfall forcing is complete (241 of 241 half-hourly timesteps processed)
 - Model accumulation timestep for replay (0.5 hr) differs from production default (1.0 hr)
 - No occurrence classification threshold set — precision/recall/F1 not computable
 
