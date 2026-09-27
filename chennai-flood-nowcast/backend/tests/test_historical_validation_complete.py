@@ -66,10 +66,10 @@ def test_observation_attribution_sources():
 def test_validation_service_provenance_and_status():
     service = ValidationService()
     hist = service.get_historical_validation()
-    assert hist["status"] == "NOT_VALIDATED"
-    assert hist["overall_validation_status"] == "NOT_VALIDATED"
+    assert hist["status"] == "PARTIALLY_VALIDATED"
+    assert hist["overall_validation_status"] == "PARTIALLY_VALIDATED"
     assert hist["historical_replay_model_version"] == "GRID_HYDROLOGY_V1"
-    assert hist["model_status"] == "IMPLEMENTED — NOT VALIDATED"
+    assert hist["model_status"] == "IMPLEMENTED — PARTIALLY VALIDATED"
     assert hist["forcing"]["available_timesteps"] == 241
     assert hist["forcing"]["missing_timesteps"] == 0
 

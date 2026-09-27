@@ -167,9 +167,16 @@ export default function DataModelStatus({ isSimulated, liveRainfallData, drainag
           <div style={{ background: 'rgba(15, 23, 42, 0.4)', padding: '8px 10px', borderRadius: '6px', border: '1px solid #1e293b' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
               <span style={{ fontWeight: '600', color: '#f8fafc' }}>DRAINAGE</span>
-              <StatusBadge type="GEOMETRIC ONLY" />
+              <StatusBadge type="GEOMETRIC ONLY" text="FULL: GEOMETRIC" />
             </div>
             <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Source: Chennai SWD (10,255 LineStrings)</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
+              <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>Pilot Catchment (Adyar/Zone 10):</span>
+              <StatusBadge type="GEOMETRIC ONLY" text="PILOT: HYDRAULIC MODEL" />
+            </div>
+            <div style={{ color: '#fcd34d', fontSize: '0.7rem', marginTop: '2px', fontWeight: '600' }}>
+              Assumed Specs: 0.60m x 0.75m box culvert, n=0.015 (ASSUMED)
+            </div>
           </div>
 
           {/* 4. FLOOD MODEL */}
@@ -211,9 +218,13 @@ export default function DataModelStatus({ isSimulated, liveRainfallData, drainag
               <strong>Occurrence Holdout:</strong> F1 = 0.9586, CSI = 0.9205 (VALIDATED)
             </div>
             <div style={{ color: '#94a3b8', fontSize: '0.75rem', marginTop: '4px' }}>
-              <strong>Numerical Depth:</strong> 0 records (NOT VALIDATED)
+              <strong>Spatial Numerical Depth:</strong> 192 OpenCity points (39 Holdout MAE 25.18 cm)
+            </div>
+            <div style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', fontWeight: '600' }}>
+              Temporal Gauge Validation: NOT VALIDATED (0 verified sub-daily time-series)
             </div>
           </div>
+
 
         </div>
       )}

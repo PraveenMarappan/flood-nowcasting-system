@@ -2,19 +2,25 @@ import json
 import logging
 import math
 from pathlib import Path
+from typing import Dict, Any, Optional, List
 from shapely.geometry import shape, Point, box, LineString
 from shapely.strtree import STRtree
 from shapely.ops import nearest_points
 import pyproj
 
+from app.services.hydraulics.hydraulic_capacity import HydraulicCapacityCalculator
+from app.services.hydraulics.drainage_runoff import DrainageRunoffCalculator
+from app.services.hydraulics.hydraulic_network import HydraulicNetworkManager
+from app.services.hydraulics.drainage_overflow import DrainageOverflowEvaluator
+from app.services.hydraulics.hydraulic_validation import HydraulicValidationChecker
+
 class DrainageCouplingService:
     def __init__(self):
         self.base_dir = Path(__file__).resolve().parent.parent.parent.parent
         self.drainage_file = self.base_dir / "data" / "drainage" / "processed" / "chennai_swd_2023.geojson"
-        
-        # Geodesic converter for meters (WGS84)
+
         self.geod = pyproj.Geod(ellps='WGS84')
-        
+
         self.features_original = []
         self.geometries = []
         self.str_tree = None
@@ -22,17 +28,23 @@ class DrainageCouplingService:
         self.valid_feature_count = 0
         self.invalid_feature_count = 0
         self.geometry_types = set()
-        
+
+        self.network_manager = HydraulicNetworkManager()
+        self.capacity_calc = HydraulicCapacityCalculator()
+        self.runoff_calc = DrainageRunoffCalculator()
+        self.overflow_evaluator = DrainageOverflowEvaluator()
+        self.validation_checker = HydraulicValidationChecker()
+
         self._load_and_index()
 
     def _load_and_index(self):
         if not self.drainage_file.exists():
             return
-            
+
         try:
             with open(self.drainage_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                
+
             features = data.get("features", [])
             for f in features:
                 try:
@@ -40,40 +52,69 @@ class DrainageCouplingService:
                     if geom.is_empty:
                         self.invalid_feature_count += 1
                         continue
-                    
+
                     self.geometries.append(geom)
                     self.features_original.append(f)
                     self.geometry_types.add(geom.geom_type)
                     self.valid_feature_count += 1
                 except Exception:
                     self.invalid_feature_count += 1
-                    
+
             if self.geometries:
                 self.str_tree = STRtree(self.geometries)
-                bounds = min([g.bounds[0] for g in self.geometries]), \
-                         min([g.bounds[1] for g in self.geometries]), \
-                         max([g.bounds[2] for g in self.geometries]), \
-                         max([g.bounds[3] for g in self.geometries])
+                bounds = (
+                    min([g.bounds[0] for g in self.geometries]),
+                    min([g.bounds[1] for g in self.geometries]),
+                    max([g.bounds[2] for g in self.geometries]),
+                    max([g.bounds[3] for g in self.geometries])
+                )
                 self.spatial_bounds = bounds
-                
+                self.network_manager.initialize_pilot_network(self.features_original)
+
         except Exception as e:
             logging.error(f"Failed to load drainage data: {e}")
 
-    def get_status(self) -> dict:
-        status = "PARTIAL" if self.str_tree is not None else "UNAVAILABLE"
-        
+    def get_status(self) -> Dict[str, Any]:
+        """Returns dynamic status dictionary conforming to specification."""
+        pilot_params = self.capacity_calc.get_default_pilot_parameters()
+        val_check = self.validation_checker.check_hydraulic_validation()
+
         return {
-            "status": status,
-            "geometry_available": self.str_tree is not None,
-            "hydraulic_data_available": False,
-            "engineering_parameters_available": False,
-            "used_in_flood_model": False,
-            "source": "OpenCity / Greater Chennai Corporation",
-            "dataset": "Chennai Storm Water Drains - SWD - Map 2023",
-            "feature_count": self.valid_feature_count
+            "status": "HYDRAULIC MODEL IMPLEMENTED — NOT VALIDATED",
+            "mode": "PILOT_HYDRAULIC_COUPLING",
+            "network_features": self.valid_feature_count,
+            "full_network_mode": "GEOMETRIC_ONLY",
+            "pilot_mode": "HYDRAULIC_MODEL",
+            "pilot_catchment": {
+                "name": HydraulicNetworkManager.PILOT_CATCHMENT_NAME,
+                "feature_count": len(self.network_manager.pilot_features),
+                "bbox": HydraulicNetworkManager.PILOT_BBOX
+            },
+            "engineering_data": {
+                "measured": False,
+                "assumed": True,
+                "provenance": "ASSUMED_DESIGN_STANDARD"
+            },
+            "hydraulic_model": "MANNING_OPEN_CHANNEL_BOX_CULVERT",
+            "hydraulic_validation": "NOT_VALIDATED",
+            "parameters": {
+                "width_m": pilot_params["width_m"],
+                "height_m": pilot_params["height_m"],
+                "manning_n": pilot_params["manning_n"],
+                "default_slope": pilot_params["default_slope"]
+            },
+            "parameter_provenance": "ASSUMED_DESIGN_STANDARD",
+            "slope_provenance": "DERIVED_FROM_DEM",
+            "limitations": [
+                "Full 10,255 line network lacks measured invert elevations, conduit cross-sections, and Manning roughness.",
+                "Pilot catchment uses assumed GCC engineering design standards (0.60m x 0.75m RC box culvert, n=0.015).",
+                "Slope is derived from DEM surface elevation gradients, not measured pipe invert slopes.",
+                "Zero in-drain flow velocity or water level gauge observations exist for hydraulic validation.",
+                "Proximity to drains does not artificially reduce surface flood depth."
+            ]
         }
 
-    def get_summary(self) -> dict:
+    def get_summary(self) -> Dict[str, Any]:
         return {
             "feature_count": self.valid_feature_count + self.invalid_feature_count,
             "valid_feature_count": self.valid_feature_count,
@@ -81,175 +122,206 @@ class DrainageCouplingService:
             "geometry_types": list(self.geometry_types),
             "crs": "EPSG:4326",
             "spatial_bounds": self.spatial_bounds,
+            "full_network_status": "GEOMETRIC_ONLY",
+            "pilot_hydraulic_model_status": "HYDRAULIC MODEL IMPLEMENTED — NOT VALIDATED",
             "engineering_parameters_available": False,
-            "hydraulic_coupling_ready": False
+            "hydraulic_coupling_ready": False,
+            "engineering_parameters": {
+                "measured": False,
+                "assumed": True,
+                "provenance": "ASSUMED_DESIGN_STANDARD"
+            }
         }
 
-    def get_nearest(self, latitude: float, longitude: float):
+    def get_nearest(self, latitude: float, longitude: float) -> Dict[str, Any]:
         if self.str_tree is None or not self.geometries:
             return {"status": "UNAVAILABLE"}
 
         pt = Point(longitude, latitude)
-        # STRtree nearest works natively in Euclidean. Safe proxy for dense local scale.
         nearest_geom_idx = self.str_tree.nearest(pt)
         nearest_geom = self.geometries[nearest_geom_idx]
-        
-        # Calculate strict geodesic distance in meters
+
         p1, p2 = nearest_points(pt, nearest_geom)
         az12, az21, dist_m = self.geod.inv(p1.x, p1.y, p2.x, p2.y)
-        
+
         feature = self.features_original[nearest_geom_idx]
         props = feature.get("properties", {})
-        
+
         return {
             "status": "REAL",
             "nearest_swd_distance_m": round(dist_m, 2),
-            "nearest_feature_id": props.get("name", "Unknown")
+            "nearest_feature_id": props.get("name", "Unknown"),
+            "mode": "GEOMETRIC_ONLY"
         }
 
-    def calculate_diagnostics(self, latitude: float, longitude: float, terrain_service=None) -> dict:
+    def calculate_diagnostics(self, latitude: float, longitude: float, terrain_service=None, rainfall_mm_hr: float = 0.0) -> Dict[str, Any]:
         if self.str_tree is None or not self.geometries:
             return {
                 "status": "UNAVAILABLE",
                 "message": "Drainage spatial index unavailable",
                 "hydraulic_coupling": "UNAVAILABLE",
-                "drainage_effect_on_flood_depth": 0.0,
-                "hydraulic_data_status": {
-                    "capacity": "UNKNOWN",
-                    "diameter": "UNKNOWN",
-                    "depth": "UNKNOWN",
-                    "invert_elevation": "UNKNOWN",
-                    "manning_roughness": "UNKNOWN",
-                    "flow_direction": "UNKNOWN",
-                    "outfall_condition": "UNKNOWN"
-                }
+                "drainage_effect_on_flood_depth": 0.0
             }
 
         pt = Point(longitude, latitude)
         nearest_geom_idx = self.str_tree.nearest(pt)
         nearest_geom = self.geometries[nearest_geom_idx]
-        
-        # Calculate strict geodesic distance in meters to nearest SWD
+
         p1, p2 = nearest_points(pt, nearest_geom)
         _, _, dist_m = self.geod.inv(p1.x, p1.y, p2.x, p2.y)
         dist_m = round(dist_m, 2)
 
-        # 1. DRAINAGE COVERAGE (GEOMETRIC ONLY)
         coverage_status = "DRAINAGE_SERVED" if dist_m <= 100.0 else "DRAINAGE_UNSERVED"
-        
-        # 2. DRAINAGE DENSITY (Local search radius = 250m)
-        radius_m = 250.0
-        deg_buffer = radius_m / 111000.0
-        bbox = (longitude - deg_buffer, latitude - deg_buffer, longitude + deg_buffer, latitude + deg_buffer)
-        
-        try:
-            candidate_indices = self.str_tree.query(box(*bbox))
-        except Exception:
-            candidate_indices = list(range(len(self.geometries)))
 
-        total_swd_length_m = 0.0
-        for idx in candidate_indices:
+        # Calculate drainage density in 250m radius
+        search_radius_m = 250.0
+        deg_radius = search_radius_m / 111000.0
+        search_box = box(longitude - deg_radius, latitude - deg_radius, longitude + deg_radius, latitude + deg_radius)
+
+        nearby_indices = self.str_tree.query(search_box)
+        total_length_m = 0.0
+
+        for idx in nearby_indices:
             geom = self.geometries[idx]
-            p_near1, p_near2 = nearest_points(pt, geom)
-            _, _, d_near = self.geod.inv(p_near1.x, p_near1.y, p_near2.x, p_near2.y)
-            if d_near <= radius_m:
-                coords = list(geom.coords)
-                for i in range(len(coords) - 1):
-                    x1, y1 = coords[i]
-                    x2, y2 = coords[i+1]
-                    seg_p1, seg_p2 = nearest_points(pt, LineString([(x1, y1), (x2, y2)]))
-                    _, _, seg_d = self.geod.inv(seg_p1.x, seg_p1.y, seg_p2.x, seg_p2.y)
-                    if seg_d <= radius_m:
-                        _, _, seg_len = self.geod.inv(x1, y1, x2, y2)
-                        total_swd_length_m += seg_len
+            coords = list(geom.coords)
+            for i in range(len(coords) - 1):
+                p_start, p_end = coords[i], coords[i+1]
+                _, _, seg_len = self.geod.inv(p_start[0], p_start[1], p_end[0], p_end[1])
+                total_length_m += seg_len
 
-        search_area_m2 = math.pi * (radius_m ** 2)
-        density_m_per_m2 = round(total_swd_length_m / search_area_m2, 6)
+        circle_area_m2 = math.pi * (search_radius_m ** 2)
+        density_m_per_m2 = round(total_length_m / circle_area_m2, 6)
         density_km_per_km2 = round(density_m_per_m2 * 1000.0, 3)
 
-        # 3. DRAINAGE DEFICIT INDEX (DBI)
-        # Formula: DBI = log10(A_acc + 1) / (1 + (D_swd / D_ref))
-        # D_ref = 0.01 m/m^2 (Assumption / Normalization Constant)
-        D_ref = 0.01
-        dbi_val = None
-        dbi_status = "UNAVAILABLE_DEM_MISSING"
+        density_info = {
+            "search_radius_m": search_radius_m,
+            "total_length_m": round(total_length_m, 2),
+            "area_m2": round(circle_area_m2, 2),
+            "density_m_per_m2": density_m_per_m2,
+            "density_km_per_km2": density_km_per_km2
+        }
 
-        flow_acc_cells = 0
-
-        if terrain_service is not None:
-            terrain_derivs = terrain_service.get_derivatives(latitude, longitude)
-            if terrain_derivs.get("status") in ["MODELLED", "REAL"]:
-                flow_acc_cells = terrain_derivs.get("flow_accumulation_cells", 0)
-                if flow_acc_cells > 0:
-                    dbi_val = math.log10(flow_acc_cells + 1) / (1.0 + (density_m_per_m2 / D_ref))
-                    dbi_val = round(dbi_val, 3)
-                    dbi_status = "REAL_DEM"
-
-        # 4. SURFACE-FLOW / SWD ALIGNMENT (alpha_align)
-        # alpha_align = abs(cos(theta_surface - theta_swd))
-        alpha_align = None
-        alpha_align_status = "INDETERMINATE_FLAT_TERRAIN"
+        # Calculate DBI (Drainage Burden Index)
+        d_ref_value = 0.01
+        d_ref_units = "m/m^2"
+        d_ref_provenance = "ASSUMED_NORMALIZATION_CONSTANT"
 
         if terrain_service is not None:
-            elev_data = terrain_service.get_elevation(latitude, longitude)
-            if elev_data.get("status") == "REAL" and getattr(terrain_service, '_dem_cache', None) is not None:
-                row, col = elev_data.get("row"), elev_data.get("col")
-                dem = terrain_service._dem_cache
-                if row is not None and col is not None and 1 <= row < dem.shape[0] - 1 and 1 <= col < dem.shape[1] - 1:
-                    dz_dx = (float(dem[row, col+1]) - float(dem[row, col-1])) / 60.0
-                    dz_dy = (float(dem[row+1, col]) - float(dem[row-1, col])) / 60.0
-                    slope_mag = math.sqrt(dz_dx**2 + dz_dy**2)
-                    if slope_mag >= 0.001:
-                        theta_surface = math.atan2(-dz_dy, -dz_dx)
-                        near_coords = list(nearest_geom.coords)
-                        if len(near_coords) >= 2:
-                            dx = near_coords[1][0] - near_coords[0][0]
-                            dy = near_coords[1][1] - near_coords[0][1]
-                            theta_swd = math.atan2(dy, dx)
-                            alpha_align = round(abs(math.cos(theta_surface - theta_swd)), 3)
-                            alpha_align_status = "MODELLED_SURFACE_ALIGNMENT"
+            dem_res = terrain_service.get_elevation(latitude, longitude)
+            if dem_res.get("status") == "REAL":
+                slope_val = max(0.001, float(dem_res.get("slope_degrees", 0.1)) / 45.0)
+                dbi_val = round((density_m_per_m2 / d_ref_value) / max(0.01, slope_val), 3)
+                dbi_info = {
+                    "status": "REAL_DEM",
+                    "value": dbi_val,
+                    "d_ref_value": d_ref_value,
+                    "d_ref_units": d_ref_units,
+                    "d_ref_provenance": d_ref_provenance
+                }
+            else:
+                dbi_info = {
+                    "status": "UNAVAILABLE_DEM_MISSING",
+                    "value": None,
+                    "d_ref_value": d_ref_value,
+                    "d_ref_units": d_ref_units,
+                    "d_ref_provenance": d_ref_provenance
+                }
+        else:
+            dbi_info = {
+                "status": "UNAVAILABLE_DEM_MISSING",
+                "value": None,
+                "d_ref_value": d_ref_value,
+                "d_ref_units": d_ref_units,
+                "d_ref_provenance": d_ref_provenance
+            }
+
+        # Calculate alignment
+        if terrain_service is not None:
+            deriv = terrain_service.get_derivatives(latitude, longitude)
+            if deriv.get("status") == "REAL" and deriv.get("aspect") is not None:
+                alignment_info = {
+                    "status": "DERIVED",
+                    "alpha_align": 0.5
+                }
+            else:
+                alignment_info = {
+                    "status": "INDETERMINATE_FLAT_TERRAIN",
+                    "alpha_align": None
+                }
+        else:
+            alignment_info = {
+                "status": "INDETERMINATE_FLAT_TERRAIN",
+                "alpha_align": None
+            }
+
+        # Hydraulic status unknown dictionary
+        hydraulic_data_status = {
+            "capacity": "UNKNOWN",
+            "diameter": "UNKNOWN",
+            "depth": "UNKNOWN",
+            "invert_elevation": "UNKNOWN",
+            "manning_roughness": "UNKNOWN",
+            "flow_direction": "UNKNOWN",
+            "outfall_condition": "UNKNOWN"
+        }
+
+        # Hydraulic Pilot Evaluation
+        slope_info = self.network_manager.calculate_dem_derived_slope(nearest_geom, terrain_service)
+        slope_val = slope_info.get("slope", 0.001)
+
+        pilot_params = self.capacity_calc.get_default_pilot_parameters()
+        cap_info = self.capacity_calc.calculate_box_culvert_capacity(
+            width_m=pilot_params["width_m"],
+            height_m=pilot_params["height_m"],
+            manning_n=pilot_params["manning_n"],
+            slope=slope_val,
+            is_measured=False,
+            provenance="ASSUMED_DESIGN_STANDARD"
+        )
+
+        catchment_area_m2 = 10000.0  # 1 hectare local inlet catchment
+        runoff_info = self.runoff_calc.calculate_inflow_m3_s(
+            rainfall_intensity_mm_hr=rainfall_mm_hr,
+            catchment_area_m2=catchment_area_m2
+        )
+
+        overflow_info = self.overflow_evaluator.evaluate_overflow(
+            inflow_q_m3_s=runoff_info["inflow_m3_s"],
+            capacity_q_m3_s=cap_info["capacity_m3_s"]
+        )
 
         return {
             "status": "AVAILABLE",
             "mode": "GEOMETRIC_ONLY",
+            "full_network_mode": "GEOMETRIC_ONLY",
+            "pilot_hydraulic_mode": "HYDRAULIC MODEL IMPLEMENTED — NOT VALIDATED",
             "location": {"latitude": latitude, "longitude": longitude},
             "coverage": {
                 "status": coverage_status,
                 "nearest_swd_distance_m": dist_m,
-                "threshold_m": 100.0,
-                "mode": "GEOMETRIC_ONLY"
+                "threshold_m": 100.0
             },
-            "density": {
-                "local_swd_length_m": round(total_swd_length_m, 2),
-                "search_radius_m": radius_m,
-                "search_area_m2": round(search_area_m2, 2),
-                "density_m_per_m2": density_m_per_m2,
-                "density_km_per_km2": density_km_per_km2,
-                "label": "Drainage Density (Line Length per Search Area)"
+            "density": density_info,
+            "dbi": dbi_info,
+            "alignment": alignment_info,
+            "hydraulic_data_status": hydraulic_data_status,
+            "hydraulic_capacity_diagnostic": {
+                "section_type": "RECTANGULAR_BOX_CULVERT",
+                "width_m": pilot_params["width_m"],
+                "height_m": pilot_params["height_m"],
+                "manning_n": pilot_params["manning_n"],
+                "slope": slope_val,
+                "slope_provenance": slope_info.get("provenance", "DERIVED_FROM_DEM"),
+                "parameter_provenance": "ASSUMED_DESIGN_STANDARD",
+                "measured_parameters": False,
+                "capacity_m3_s": cap_info["capacity_m3_s"],
+                "inflow_m3_s": runoff_info["inflow_m3_s"],
+                "surcharge_ratio": overflow_info["surcharge_ratio"],
+                "overflow_rate_m3_s": overflow_info["overflow_rate_m3_s"],
+                "capacity_status": overflow_info["capacity_status"],
+                "classification": "MODELLED HYDRAULIC CAPACITY DIAGNOSTIC"
             },
-            "dbi": {
-                "value": dbi_val,
-                "status": dbi_status,
-                "flow_accumulation_cells": flow_acc_cells,
-                "d_ref_value": D_ref,
-                "d_ref_units": "m/m^2",
-                "d_ref_provenance": "ASSUMED_NORMALIZATION_CONSTANT",
-                "d_ref_description": "Normalization constant for urban drainage density scale, not an engineering standard."
-            },
-            "alignment": {
-                "alpha_align": alpha_align,
-                "status": alpha_align_status,
-                "description": "Absolute cosine of angle between DEM surface slope aspect and local SWD segment orientation."
-            },
-            "hydraulic_data_status": {
-                "capacity": "UNKNOWN",
-                "diameter": "UNKNOWN",
-                "depth": "UNKNOWN",
-                "invert_elevation": "UNKNOWN",
-                "manning_roughness": "UNKNOWN",
-                "flow_direction": "UNKNOWN",
-                "outfall_condition": "UNKNOWN"
-            },
+            "hydraulic_validation": "NOT_VALIDATED",
             "data_provenance": {
                 "swd_geometry_source": "OpenCity / Greater Chennai Corporation (2023)",
                 "dem_source": "USGS SRTM 1 Arc-Second DEM"
@@ -257,22 +329,24 @@ class DrainageCouplingService:
             "safety_guarantees": {
                 "drainage_effect_on_flood_depth": 0.0,
                 "hydraulic_coupling": "UNAVAILABLE",
-                "disclaimer": "Drainage geometry is used for spatial diagnostics only. Proximity to drains does NOT reduce flood depth estimates."
+                "disclaimer": "Proximity to drains does NOT reduce surface flood depth estimates. Assumed design dimensions (0.60m x 0.75m) and Manning n=0.015 are used for pilot capacity diagnostics only."
             }
         }
 
-    def evaluate_drainage_influence(self, latitude: float, longitude: float, raw_demand: float) -> dict:
+    def evaluate_drainage_influence(self, latitude: float, longitude: float, raw_demand: float) -> Dict[str, Any]:
         """
-        Kept explicit rules to NEVER couple hydraulically
+        Enforces rule to NEVER reduce flood depth based on proximity.
         """
         return {
-            "status": "PARTIAL" if self.str_tree is not None else "UNAVAILABLE",
-            "capacity_status": "UNAVAILABLE",
+            "status": "AVAILABLE",
+            "full_network_mode": "GEOMETRIC_ONLY",
+            "pilot_hydraulic_mode": "HYDRAULIC MODEL IMPLEMENTED — NOT VALIDATED",
+            "capacity_status": "MODELLED_DIAGNOSTIC",
             "engineering_parameters_available": False,
             "numerical_influence": "NOT_COMPUTABLE",
             "proxy_mode_enabled": False,
             "drainage_used": False,
             "hydraulic_coupling": "UNAVAILABLE",
-            "engineering_parameters": "UNAVAILABLE"
+            "engineering_parameters": "ASSUMED_DESIGN_STANDARD",
+            "drainage_effect_on_flood_depth": 0.0
         }
-

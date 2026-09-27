@@ -85,7 +85,8 @@ class FloodModelService:
         rainfall: float,
         forecast_offset_minutes: int,
         timestep_hours: float = 1.0,
-        model_version: Optional[str] = None
+        model_version: Optional[str] = None,
+        runoff_coefficient: Optional[float] = None
     ) -> Dict[str, Any]:
         """
         Main model router supporting both LEGACY_HEURISTIC and GRID_HYDROLOGY_V1.
@@ -100,8 +101,11 @@ class FloodModelService:
         elevation_m = terrain.get("elevation_m")
         flow_acc_cells = terrain.get("flow_accumulation_cells", 0)
         
-        catchment = self.catchment_service.get_catchment_properties(lat, lng)
-        runoff_c = catchment.get("impervious_fraction", 0.85)
+        if runoff_coefficient is not None:
+            runoff_c = runoff_coefficient
+        else:
+            catchment = self.catchment_service.get_catchment_properties(lat, lng)
+            runoff_c = catchment.get("impervious_fraction", 0.85)
 
         return self.grid_engine.compute_flood_depth(
             rainfall_rate_mm_hr=rainfall,

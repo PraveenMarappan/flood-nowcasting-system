@@ -300,6 +300,11 @@ def get_validation_status():
 def get_historical_validation():
     return validation_service.get_historical_validation()
 
+@router.get("/validation/temporal-gauge")
+def get_temporal_gauge_validation():
+    return validation_service.get_temporal_gauge_validation()
+
 @router.get("/model/comparison")
 def get_model_comparison():
     return comparison_service.run_comparison()
+

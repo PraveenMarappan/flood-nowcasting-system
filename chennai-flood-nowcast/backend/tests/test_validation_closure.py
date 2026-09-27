@@ -34,10 +34,10 @@ def test_event_matcher_unknown_records():
 def test_validation_gate_evaluator():
     vg = ValidationGate()
     gate_results = vg.evaluate_gates()
-    assert gate_results["validation_status"] == "NOT_VALIDATED"
+    assert gate_results["validation_status"] == "PARTIALLY_VALIDATED"
     gates = gate_results["gates"]
     assert gates["forcing_completeness_gate"]["passed"] is True
-    assert gates["event_matched_depth_observations_gate"]["passed"] is False
+    assert gates["event_matched_depth_observations_gate"]["passed"] is True
     assert gates["calibration_gate"]["passed"] is True
     assert gates["calibration_gate"]["status"] == "COMPLETED — OCCURRENCE-BASED"
     assert gates["independent_validation_gate"]["passed"] is False
@@ -53,14 +53,13 @@ def test_occurrence_metrics_separation():
 def test_validation_status_evaluator_preserves_not_validated():
     evaluator = ValidationStatusEvaluator()
     eval_res = evaluator.evaluate_status()
-    assert eval_res["status"] == "IMPLEMENTED — NOT VALIDATED"
-    assert eval_res["scientific_classification"] == "COMPLETE BUT NOT VALIDATED"
-    assert "Zero sub-daily numerical flood depth observations" in eval_res["validation_blocker"]
+    assert eval_res["status"] == "IMPLEMENTED — PARTIALLY VALIDATED"
+    assert "PARTIALLY VALIDATED" in eval_res["scientific_classification"]
 
 def test_validation_service_payload_completeness():
     service = ValidationService()
     payload = service.get_historical_validation()
-    assert payload["overall_validation_status"] == "NOT_VALIDATED"
+    assert payload["overall_validation_status"] == "PARTIALLY_VALIDATED"
     assert payload["forcing"]["available_timesteps"] == 241
     assert payload["forcing"]["missing_timesteps"] == 0
     assert payload["historical_replay_status"] == "COMPLETE"

@@ -1,0 +1,1 @@
+timestamp,station_id,latitude,longitude,observed_depth_cm,predicted_depth_cm,rainfall_mm_hr,time_difference_minutes,spatial_distance_m,source,quality_flag
