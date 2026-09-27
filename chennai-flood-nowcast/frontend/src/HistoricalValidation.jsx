@@ -341,22 +341,31 @@ export default function HistoricalValidation() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '16px' }}>
         
         {/* CARD A: TEMPORAL GAUGE VALIDATION */}
-        <div style={{ background: '#0f172a', border: '1px solid #ef4444', borderRadius: '12px', padding: '20px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Clock size={20} /> TEMPORAL GAUGE VALIDATION
+        <div style={{ background: '#0f172a', border: '1px solid #38bdf8', borderRadius: '12px', padding: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Clock size={20} /> TEMPORAL HYDROLOGICAL DATA & GAUGE AUDIT
             </h3>
-            <span style={{ fontSize: '0.75rem', background: 'rgba(239, 68, 68, 0.2)', border: '1px solid #ef4444', color: '#fca5a5', padding: '4px 10px', borderRadius: '6px', fontWeight: '800' }}>
-              NOT VALIDATED
-            </span>
+            <div style={{ display: 'flex', gap: '6px' }}>
+              <span style={{ fontSize: '0.75rem', background: 'rgba(16, 185, 129, 0.2)', border: '1px solid #10b981', color: '#34d399', padding: '4px 8px', borderRadius: '6px', fontWeight: '800' }}>
+                RESERVOIR: AVAILABLE
+              </span>
+              <span style={{ fontSize: '0.75rem', background: 'rgba(239, 68, 68, 0.2)', border: '1px solid #ef4444', color: '#fca5a5', padding: '4px 8px', borderRadius: '6px', fontWeight: '800' }}>
+                URBAN DEPTH: NOT VALIDATED
+              </span>
+            </div>
           </div>
           <div style={{ fontSize: '0.85rem', color: '#cbd5e1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <div><strong>Verified Sub-Daily Datasets:</strong> <span style={{ color: '#ef4444' }}>0 verified datasets</span></div>
-            <div><strong>Stations / Gauges Evaluated:</strong> 0</div>
-            <div><strong>Observation Count:</strong> 0</div>
-            <div><strong>Reason:</strong> No verified sub-daily urban flood-depth gauge time series identified for the Chennai 2015 event.</div>
+            <div><strong>Temporal Hydrological Dataset:</strong> <span style={{ color: '#34d399', fontWeight: '700' }}>Chembarambakkam Tank — Dec 1–2, 2015</span></div>
+            <div><strong>Source & Agency:</strong> <span style={{ color: '#38bdf8' }}>CAG / WRD</span> (Official Government Performance Audit Report)</div>
+            <div><strong>Observation Count:</strong> <strong>10 verified records</strong> (2–4 hr timestamps)</div>
+            <div><strong>Observed Peak Water Level:</strong> <span style={{ color: '#fcd34d', fontWeight: '700' }}>23.40 ft</span> (Peak Inflow: 31,000 cusec, Outflow: 29,000 cusec)</div>
+            <div style={{ borderTop: '1px solid #334155', paddingTop: '8px', marginTop: '4px' }}>
+              <div><strong>Urban Flood-Depth Temporal Gauge:</strong> <span style={{ color: '#ef4444', fontWeight: '700' }}>NOT VALIDATED</span></div>
+              <div style={{ marginTop: '2px' }}><strong>Reason:</strong> No verified continuous street-level or Adyar-river flood-depth gauge series for the 2015 event was identified.</div>
+            </div>
             <div style={{ background: 'rgba(0,0,0,0.2)', padding: '8px 12px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)', marginTop: '4px', fontSize: '0.8rem', color: '#94a3b8' }}>
-              <strong>Data Audit Log:</strong> Exhaustive search across GCC, WRD, TNSDMA, CMWSSB, data.gov.in, IMD, CWC, IIT Madras, Zenodo, Figshare, Dryad, HydroShare, and Harvard Dataverse. Reference: <code>docs/temporal_gauge_data_audit.md</code>
+              <strong>Scientific Provenance Rule:</strong> Reservoir water level observations confirm upstream hydrological forcing dynamics but are NOT directly scored against urban street flood depth. Reference: <code>docs/temporal_gauge_data_audit.md</code>
             </div>
           </div>
         </div>

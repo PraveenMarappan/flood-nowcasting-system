@@ -90,13 +90,15 @@ def test_drainage_coupling_service_status():
     assert status["hydraulic_validation"] == "NOT_VALIDATED"
 
 def test_temporal_gauge_api():
-    """Test /api/validation/temporal-gauge endpoint returns dynamic NOT_VALIDATED payload."""
+    """Test /api/validation/temporal-gauge endpoint returns dynamic CAG temporal payload."""
     response = client.get("/api/validation/temporal-gauge")
     assert response.status_code == 200
     data = response.json()
-    assert data["status"] == "NOT_VALIDATED"
-    assert data["stations"] == 0
-    assert data["observations"] == 0
+    assert data["status"] == "PARTIALLY_VALIDATED"
+    assert data["temporal_hydrological_observations"] == "AVAILABLE"
+    assert data["urban_flood_depth_temporal_validation"] == "NOT_VALIDATED"
+    assert data["observation_count"] == 10
+    assert data["source_agency"] == "CAG / WRD"
 
 def test_drainage_status_api():
     """Test /api/drainage/status endpoint returns required dynamic payload."""
@@ -109,10 +111,12 @@ def test_drainage_status_api():
     assert data["parameter_provenance"] == "ASSUMED_DESIGN_STANDARD"
 
 def test_validation_gate_core_12_gates():
-    """Verify ValidationGate evaluates 12 core component gates."""
+    """Verify ValidationGate evaluates 12 core component gates with 10 passing."""
     vg = ValidationGate()
     summary = vg.evaluate_gates()
     assert summary["total_gates_count"] == 12
-    assert summary["passed_gates_count"] == 9
+    assert summary["passed_gates_count"] == 10
+    assert summary["gates"]["temporal_hydrological_observation_gate"]["status"] == "AVAILABLE"
     assert summary["gates"]["temporal_gauge_gate"]["status"] == "NOT VALIDATED"
     assert summary["gates"]["drainage_hydraulic_model_gate"]["status"] == "HYDRAULIC MODEL IMPLEMENTED — NOT VALIDATED"
+

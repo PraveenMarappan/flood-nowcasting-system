@@ -14,10 +14,11 @@ The **Chennai Urban Flood Nowcasting System** is a grid-based hydrological nowca
 
 Crucially, in adherence to strict scientific integrity standards:
 1. **Zero Data Fabrication:** No missing sub-daily flood depth gauge observations, timestamps, or measured hydraulic cross-sections have been synthesized.
-2. **Strict Data Leakage Prevention:** Calibration and validation use independent spatial holdout sets (80/20 split for occurrence, 153/39 split for numerical depth).
-3. **Transparent Blocker Identification:**
-   - **Temporal Gauge Validation:** Maintained as **`NOT VALIDATED`** following an exhaustive audit across 20 public data portals and research clearinghouses confirming zero sub-daily urban flood-depth gauge time-series exist for the Chennai 2015 event.
-   - **Drainage Network:** Full 10,255 SWD LineString network is maintained as **`GEOMETRIC ONLY`**. A defensible **`PILOT HYDRAULIC MODEL`** (Manning open-channel & box-culvert engine) is implemented for the Adyar / Zone 10 Pilot Catchment using **`ASSUMED`** GCC design specifications ($0.60\text{m} \times 0.75\text{m}$, Manning $n=0.015$). Hydraulic observational validation remains **`NOT VALIDATED`** due to lack of in-drain telemetry logs.
+2. **Verified Historical Reservoir Data:** Verified 10-point timestamped reservoir water-level and discharge observations for Chembarambakkam Tank (Dec 1–2, 2015) from the official Comptroller and Auditor General of India (CAG) / WRD report have been ingested (`data/validation/temporal/chembarambakkam_2015_temporal.csv`).
+3. **Explicit Data-Provenance Separation:**
+   - **Temporal Hydrological Observation:** **`AVAILABLE`** (Chembarambakkam Reservoir Dec 1–2, 2015, CAG/WRD Report).
+   - **Urban Flood-Depth Temporal Gauge:** **`NOT VALIDATED`** (No verified sub-daily street-level or Adyar river flood-depth gauge time-series exist for the 2015 event).
+   - **Direct Model Comparison:** **`FALSE`** (Reservoir water levels cannot be directly scored against urban street flood depth).
 
 ---
 
@@ -31,34 +32,25 @@ Crucially, in adherence to strict scientific integrity standards:
 | **4** | **Occurrence Calibration** | **COMPLETED — OCCURRENCE** | 80% train partition (602 points, `Chennai_2015` event-attributed) | `occurrence_calibration_gate` (PASSED) |
 | **5** | **Occurrence Holdout** | **VALIDATED (INDEPENDENT HOLDOUT)** | 20% spatial holdout (151 points): **Precision: 0.9205**, **CSI: 0.9205**, **F1: 0.9586** | `holdout_occurrence_gate` (PASSED) |
 | **6** | **Spatial Numerical Depth** | **SPATIAL HOLDOUT VALIDATED** | 192 OpenCity records (153 train / 39 holdout): **MAE: 25.18 cm**, **RMSE: 35.75 cm**, **Pearson r: 0.5720** | `numerical_spatial_holdout_gate` (PASSED) |
-| **7** | **Temporal Gauge Validation** | **NOT VALIDATED** | **0 sub-daily gauge records** available in public domain for 2015 event (`docs/temporal_gauge_data_audit.md`) | `temporal_gauge_gate` (FAILED / NOT VALIDATED) |
-| **8** | **Road Risk & Routing** | **VALIDATED** | 73,174 road segments classified into 4 risk tiers with Dijkstra cost penalty | `road_validation_gate` (PASSED) |
-| **9** | **Forecast Horizons** | **VALIDATED** | Skill matrix evaluated across 0 to +180 min forecast offsets | `forecast_validation_gate` (PASSED) |
-| **10** | **Warning Triggers** | **VALIDATED** | Threshold triggers (0.1cm, 10cm, 30cm) & alert stability verified | `warning_validation_gate` (PASSED) |
-| **11** | **Drainage Hydraulic Model** | **HYDRAULIC MODEL IMPLEMENTED — NOT VALIDATED** | Full Network (10,255 features): **GEOMETRIC ONLY**. Pilot Catchment (Adyar/Zone 10): Manning box-culvert engine with **ASSUMED** parameters ($0.60\text{m} \times 0.75\text{m}$, $n=0.015$) & **DEM-DERIVED** slope. | `drainage_hydraulic_model_gate` (IMPLEMENTED — NOT VALIDATED) |
-| **12** | **Drainage Hydraulic Validation** | **NOT VALIDATED** | Zero in-drain flow rate, water level, manhole surcharge, or outfall telemetry gauge observations exist for 2015 event. | `drainage_hydraulic_validation_gate` (FAILED / NOT VALIDATED) |
+| **7** | **Temporal Hydrological Observation** | **AVAILABLE** | **10 timestamped records** (Chembarambakkam Reservoir, CAG/WRD Report, Dec 1–2, 2015, Peak = 23.40 ft) | `temporal_hydrological_observation_gate` (PASSED / AVAILABLE) |
+| **8** | **Temporal Urban Depth Gauge** | **NOT VALIDATED** | Sub-daily street-level flood depth time-series unavailable for 2015 storm (`docs/temporal_gauge_data_audit.md`) | `temporal_gauge_gate` (FAILED / NOT VALIDATED) |
+| **9** | **Road Risk & Routing** | **VALIDATED** | 73,174 road segments classified into 4 risk tiers with Dijkstra cost penalty | `road_validation_gate` (PASSED) |
+| **10** | **Forecast Horizons** | **VALIDATED** | Skill matrix evaluated across 0 to +180 min forecast offsets | `forecast_validation_gate` (PASSED) |
+| **11** | **Warning Triggers** | **VALIDATED** | Threshold triggers (0.1cm, 10cm, 30cm) & alert stability verified | `warning_validation_gate` (PASSED) |
+| **12** | **Drainage Hydraulics** | **HYDRAULIC MODEL IMPLEMENTED — NOT VALIDATED** | Full Network (10,255 features): **GEOMETRIC ONLY**. Pilot Catchment (Adyar/Zone 10): Manning box-culvert engine with **ASSUMED** parameters ($0.60\text{m} \times 0.75\text{m}$, $n=0.015$) & **DEM-DERIVED** slope. | `drainage_hydraulic_model_gate` (IMPLEMENTED — NOT VALIDATED) |
 
 ---
 
-## Detailed Audit of Remaining Validation Gaps
+## Detailed Audit of Verified Temporal Data
 
-### Part A: Temporal Gauge Validation Audit
-- **Status:** `NOT VALIDATED`
-- **Scientific Audit Finding:** Exhaustive search across GCC, WRD, TNSDMA, CMWSSB, data.gov.in, IMD, CWC, IIT Madras, Anna University, Zenodo, Figshare, Dryad, HydroShare, Harvard Dataverse, and Copernicus confirmed zero sub-daily urban flood-depth gauge time-series exist for the December 2015 benchmark event.
-- **Data Audit Document:** `docs/temporal_gauge_data_audit.md`
+- **Dataset:** Chembarambakkam Reservoir Water Level & Flow Series (Dec 1–2, 2015)
+- **Source:** Comptroller and Auditor General of India (CAG) / Tamil Nadu WRD
+- **Observation Count:** 10 verified records
+- **Peak Water Level:** $23.40\,ft$ (`2015-12-01 20:00` to `2015-12-02 00:00`)
+- **Peak Inflow:** $31,000\,cusec$
+- **Peak Outflow:** $29,000\,cusec$
 - **Dynamic API Endpoint:** `/api/validation/temporal-gauge`
-
-### Part B: Drainage Hydraulic Coupling Audit
-- **Full Network Status:** `GEOMETRIC ONLY` (10,255 SWD LineStrings)
-- **Pilot Catchment Status:** `HYDRAULIC MODEL IMPLEMENTED — NOT VALIDATED`
-- **Hydraulic Engine:** Manning Equation ($Q_{cap} = \frac{1}{n} A R^{2/3} S^{1/2}$)
-- **Parameter Provenance:**
-  - Conduit Width ($w$): $0.60\,\text{m}$ (`ASSUMED_DESIGN_STANDARD`)
-  - Conduit Height ($h$): $0.75\,\text{m}$ (`ASSUMED_DESIGN_STANDARD`)
-  - Manning Roughness ($n$): $0.015$ (`ASSUMED_DESIGN_STANDARD`)
-  - Bed Slope ($S$): `DERIVED FROM DEM` (Surface elevation gradient)
-- **Safety Enforcement:** Surface flood depth is **NEVER** artificially reduced based solely on drain proximity (`drainage_effect_on_flood_depth = 0.0 cm`).
-- **Dynamic API Endpoint:** `/api/drainage/status`
+- **Data Audit Document:** `docs/temporal_gauge_data_audit.md`
 
 ---
 
