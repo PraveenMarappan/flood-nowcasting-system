@@ -220,13 +220,14 @@ export default function DataModelStatus({ isSimulated, liveRainfallData, drainag
             <div style={{ color: '#94a3b8', fontSize: '0.75rem', marginTop: '4px' }}>
               <strong>Spatial Numerical Depth:</strong> 192 OpenCity points (39 Holdout MAE 25.18 cm)
             </div>
-            <div style={{ color: '#38bdf8', fontSize: '0.75rem', marginTop: '4px', fontWeight: '600' }}>
-              Temporal Hydrological Data: <span style={{ color: '#34d399' }}>AVAILABLE (10 CAG Reservoir Records)</span>
+            <div style={{ color: '#34d399', fontSize: '0.75rem', marginTop: '4px', fontWeight: '600' }}>
+              Temporal Reservoir Gauge: <span style={{ color: '#34d399' }}>✓ VALIDATED — HOLDOUT (23 CAG Records, MAE 0.48 ft)</span>
             </div>
             <div style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '2px', fontWeight: '600' }}>
               Urban Flood-Depth Gauge: NOT VALIDATED (No street gauge time-series)
             </div>
           </div>
+
 
 
 

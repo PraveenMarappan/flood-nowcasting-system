@@ -43,9 +43,13 @@ export default function HistoricalValidation() {
     const fetchHistoricalValidation = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${API_BASE}/validation/historical`);
-        _historicalDataCache = res.data;
-        setData(res.data);
+        const [histRes, tempRes] = await Promise.all([
+          axios.get(`${API_BASE}/validation/historical`),
+          axios.get(`${API_BASE}/validation/temporal-gauge`).catch(() => ({ data: null }))
+        ]);
+        const combined = { ...histRes.data, temporal_gauge_api: tempRes?.data };
+        _historicalDataCache = combined;
+        setData(combined);
         setError(null);
       } catch (err) {
         console.error("Error fetching historical validation data:", err);
@@ -340,32 +344,63 @@ export default function HistoricalValidation() {
       {/* SECTION 5: DETAILED GAP AUDITS & HYDRAULIC IMPLEMENTATION STATUS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '16px' }}>
         
-        {/* CARD A: TEMPORAL GAUGE VALIDATION */}
-        <div style={{ background: '#0f172a', border: '1px solid #38bdf8', borderRadius: '12px', padding: '20px' }}>
+        {/* CARD A: TEMPORAL GAUGE VALIDATION — RESERVOIR VS URBAN STREET-FLOOD */}
+        <div style={{ background: '#0f172a', border: '1px solid #10b981', borderRadius: '12px', padding: '20px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
-            <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Clock size={20} /> TEMPORAL HYDROLOGICAL DATA & GAUGE AUDIT
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Clock size={20} /> TEMPORAL GAUGE VALIDATION DUAL GATES
             </h3>
-            <div style={{ display: 'flex', gap: '6px' }}>
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '0.75rem', background: 'rgba(16, 185, 129, 0.2)', border: '1px solid #10b981', color: '#34d399', padding: '4px 8px', borderRadius: '6px', fontWeight: '800' }}>
-                RESERVOIR: AVAILABLE
+                ✓ RESERVOIR: VALIDATED (HOLDOUT)
               </span>
               <span style={{ fontSize: '0.75rem', background: 'rgba(239, 68, 68, 0.2)', border: '1px solid #ef4444', color: '#fca5a5', padding: '4px 8px', borderRadius: '6px', fontWeight: '800' }}>
-                URBAN DEPTH: NOT VALIDATED
+                URBAN GAUGE: NOT VALIDATED
               </span>
             </div>
           </div>
-          <div style={{ fontSize: '0.85rem', color: '#cbd5e1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <div><strong>Temporal Hydrological Dataset:</strong> <span style={{ color: '#34d399', fontWeight: '700' }}>Chembarambakkam Tank — Dec 1–2, 2015</span></div>
-            <div><strong>Source & Agency:</strong> <span style={{ color: '#38bdf8' }}>CAG / WRD</span> (Official Government Performance Audit Report)</div>
-            <div><strong>Observation Count:</strong> <strong>10 verified records</strong> (2–4 hr timestamps)</div>
-            <div><strong>Observed Peak Water Level:</strong> <span style={{ color: '#fcd34d', fontWeight: '700' }}>23.40 ft</span> (Peak Inflow: 31,000 cusec, Outflow: 29,000 cusec)</div>
-            <div style={{ borderTop: '1px solid #334155', paddingTop: '8px', marginTop: '4px' }}>
-              <div><strong>Urban Flood-Depth Temporal Gauge:</strong> <span style={{ color: '#ef4444', fontWeight: '700' }}>NOT VALIDATED</span></div>
-              <div style={{ marginTop: '2px' }}><strong>Reason:</strong> No verified continuous street-level or Adyar-river flood-depth gauge series for the 2015 event was identified.</div>
+          
+          <div style={{ fontSize: '0.85rem', color: '#cbd5e1', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {/* RESERVOIR GATE DETAILS */}
+            <div style={{ background: 'rgba(16, 185, 129, 0.08)', padding: '12px 14px', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
+              <div style={{ color: '#34d399', fontWeight: '700', fontSize: '0.9rem', marginBottom: '6px' }}>
+                Gate 1: Temporal Reservoir Gauge (Chembarambakkam Tank)
+              </div>
+              <div><strong>Status:</strong> <span style={{ color: '#34d399', fontWeight: '700' }}>VALIDATED — TEMPORAL HOLDOUT</span></div>
+              <div><strong>Source Agency & Document:</strong> <span style={{ color: '#38bdf8' }}>CAG Report No. 4 of 2017, Appendix 5.6 (WRD)</span></div>
+              <div><strong>Observation Count:</strong> 23 records (16 Calibration / 7 Chronological Holdout)</div>
+              <div><strong>Observation Period:</strong> 2015-12-01T06:00Z to 2015-12-03T09:00Z</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', fontSize: '0.78rem', color: '#e2e8f0', marginTop: '6px', background: 'rgba(0,0,0,0.2)', padding: '8px', borderRadius: '6px' }}>
+                <div>MAE: <strong style={{ color: '#34d399' }}>0.48 ft</strong></div>
+                <div>RMSE: <strong>0.52 ft</strong></div>
+                <div>Pearson r: <strong style={{ color: '#34d399' }}>0.8834</strong></div>
+                <div>Peak Error: <strong>-0.96 ft (2.0 hrs)</strong></div>
+              </div>
             </div>
-            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '8px 12px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)', marginTop: '4px', fontSize: '0.8rem', color: '#94a3b8' }}>
-              <strong>Scientific Provenance Rule:</strong> Reservoir water level observations confirm upstream hydrological forcing dynamics but are NOT directly scored against urban street flood depth. Reference: <code>docs/temporal_gauge_data_audit.md</code>
+
+            {/* URBAN FLOOD DEPTH TEMPORAL GATE DETAILS */}
+            <div style={{ background: 'rgba(239, 68, 68, 0.08)', padding: '12px 14px', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.25)' }}>
+              <div style={{ color: '#fca5a5', fontWeight: '700', fontSize: '0.9rem', marginBottom: '6px' }}>
+                Gate 2: Urban Flood-Depth Temporal Gauge (Street Overland Inundation)
+              </div>
+              <div><strong>Status:</strong> <span style={{ color: '#ef4444', fontWeight: '700' }}>NOT VALIDATED</span></div>
+              <div><strong>Dataset:</strong> N/A (Public Sub-Daily Urban Flood-Depth Time-Series Unavailable)</div>
+              <div><strong>Source:</strong> Exhaustive Data Audit (GCC, WRD, TNSDMA, CMWSSB, IMD, CWC, IIT Madras, OpenCity)</div>
+              <div><strong>Observations:</strong> 0 matched / 0 total (Calibration: 0 | Holdout: 0)</div>
+              <div><strong>Temporal Period:</strong> 2015-11-30 to 2015-12-05 (GPM IMERG Forcing Period)</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', fontSize: '0.78rem', color: '#94a3b8', marginTop: '6px', background: 'rgba(0,0,0,0.2)', padding: '8px', borderRadius: '6px' }}>
+                <div>MAE: <strong>N/A</strong></div>
+                <div>RMSE: <strong>N/A</strong></div>
+                <div>R&sup2;: <strong>N/A</strong></div>
+                <div>NSE: <strong>N/A</strong></div>
+              </div>
+              <div style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: '6px' }}>
+                <strong>Audit Gap Report:</strong> <code>data/validation/results/urban_flood_depth_temporal_gap_analysis.md</code>
+              </div>
+            </div>
+
+            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '8px 12px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)', fontSize: '0.8rem', color: '#94a3b8' }}>
+              <strong>Scientific Provenance Rule:</strong> Reservoir water level validation proves upstream reservoir storage dynamics but is strictly NOT used or claimed as urban street flood depth. Reference: <code>docs/temporal_gauge_data_audit.md</code>
             </div>
           </div>
         </div>

@@ -1,0 +1,57 @@
+{
+  "status": "NOT_VALIDATED",
+  "scientific_status": "NOT VALIDATED \u2014 Sub-Daily Urban Flood-Depth Time-Series Unavailable",
+  "validation_type": "TEMPORAL_URBAN_FLOOD_HOLDOUT",
+  "scope": "CHENNAI_URBAN_STREET_FLOODING",
+  "dataset": "N/A (Public Sub-Daily Urban Flood-Depth Time-Series Unavailable)",
+  "source": "Exhaustive Data Audit (GCC, WRD, TNSDMA, CMWSSB, data.gov.in, IMD, CWC, IIT Madras, OpenCity, Zenodo, Figshare)",
+  "observation_count": 0,
+  "matched_count": 0,
+  "unmatched_count": 0,
+  "calibration_count": 0,
+  "holdout_count": 0,
+  "forcing_source": "NASA GPM IMERG V07B Half-Hourly (2015-11-30 to 2015-12-05)",
+  "spatial_matching_radius_m": 500.0,
+  "observational": false,
+  "synthetic": false,
+  "metrics": {},
+  "threshold_metrics": {
+    "threshold_cm": 10.0,
+    "tp": 0,
+    "tn": 0,
+    "fp": 0,
+    "fn": 0,
+    "precision": null,
+    "recall_pod": null,
+    "f1_score": null,
+    "csi": null,
+    "far": null
+  },
+  "peak_metrics": {
+    "peak_observed_cm": null,
+    "peak_predicted_cm": null,
+    "peak_depth_error_cm": null,
+    "peak_timing_error_hours": null
+  },
+  "counts": {
+    "underprediction_count": 0,
+    "overprediction_count": 0,
+    "zero_depth_prediction_count": 0,
+    "observed_nonzero_count": 0
+  },
+  "quality_control": {
+    "missing_timestamps": 0,
+    "duplicate_timestamps": 0,
+    "negative_depths": 0,
+    "impossible_depths": 0,
+    "outliers_flagged": 0
+  },
+  "limitations": [
+    "No public sub-daily urban flood depth gauge time-series dataset exists for the Chennai 2015 event.",
+    "OpenCity 192 spatial depth points lack sub-daily timestamps and serve exclusively as spatial numerical depth validation.",
+    "Reservoir level and rainfall time-series cannot be substituted for street flood-depth gauge observations.",
+    "Synthetic data generation and conversion of hydrodynamic model outputs to observations are strictly prohibited."
+  ],
+  "gap_analysis_reference": "data/validation/results/urban_flood_depth_temporal_gap_analysis.md",
+  "reason": "Exhaustive research confirms no legitimate sub-daily urban flood-depth gauge time-series observations are publicly available for Chennai."
+}

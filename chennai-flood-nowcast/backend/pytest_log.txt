@@ -1,0 +1,48 @@
+============================= test session starts =============================
+platform win32 -- Python 3.10.0, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\HP\AppData\Local\Programs\Python\Python310\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\HP\OneDrive\Desktop\flood nowcasting\chennai-flood-nowcast\backend
+plugins: anyio-4.12.1
+collecting ... collected 8 items
+
+tests/test_urban_flood_temporal_validation.py::test_utc_timestamp_parsing PASSED [ 12%]
+tests/test_urban_flood_temporal_validation.py::test_haversine_distance FAILED [ 25%]
+tests/test_urban_flood_temporal_validation.py::test_empty_dataset_behavior FAILED [ 37%]
+tests/test_urban_flood_temporal_validation.py::test_continuous_metrics_calculation FAILED [ 50%]
+tests/test_urban_flood_temporal_validation.py::test_threshold_metrics_calculation PASSED [ 62%]
+tests/test_urban_flood_temporal_validation.py::test_peak_metrics_calculation PASSED [ 75%]
+tests/test_urban_flood_temporal_validation.py::test_synthetic_chronological_holdout_split PASSED [ 87%]
+tests/test_urban_flood_temporal_validation.py::test_validation_gate_and_service_integration FAILED [100%]
+
+================================== FAILURES ===================================
+___________________________ test_haversine_distance ___________________________
+tests\test_urban_flood_temporal_validation.py:29: in test_haversine_distance
+    assert 1800 < dist < 2500
+E   assert 1800 < 1497.5139423406554
+_________________________ test_empty_dataset_behavior _________________________
+tests\test_urban_flood_temporal_validation.py:40: in test_empty_dataset_behavior
+    assert res["status"] == "NOT_VALIDATED"
+E   AssertionError: assert 'NOT VALIDATED' == 'NOT_VALIDATED'
+E     
+E     - NOT_VALIDATED
+E     ?    ^
+E     + NOT VALIDATED
+E     ?    ^
+_____________________ test_continuous_metrics_calculation _____________________
+tests\test_urban_flood_temporal_validation.py:62: in test_continuous_metrics_calculation
+    assert metrics["bias_cm"] == 0.0
+E   assert -0.4 == 0.0
+________________ test_validation_gate_and_service_integration _________________
+tests\test_urban_flood_temporal_validation.py:157: in test_validation_gate_and_service_integration
+    assert temp_val["temporal_reservoir_gauge_gate"]["status"] == "VALIDATED — TEMPORAL HOLDOUT"
+E   AssertionError: assert 'VALIDATED — ...RVOIR HOLDOUT' == 'VALIDATED — TEMPORAL HOLDOUT'
+E     
+E     - VALIDATED — TEMPORAL HOLDOUT
+E     + VALIDATED — TEMPORAL RESERVOIR HOLDOUT
+E     ?                      ++++++++++
+=========================== short test summary info ===========================
+FAILED tests/test_urban_flood_temporal_validation.py::test_haversine_distance
+FAILED tests/test_urban_flood_temporal_validation.py::test_empty_dataset_behavior
+FAILED tests/test_urban_flood_temporal_validation.py::test_continuous_metrics_calculation
+FAILED tests/test_urban_flood_temporal_validation.py::test_validation_gate_and_service_integration
+========================= 4 failed, 4 passed in 2.78s =========================

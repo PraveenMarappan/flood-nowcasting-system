@@ -10,6 +10,7 @@ import MapSearch from './components/MapSearch';
 import DataModelStatus from './components/DataModelStatus';
 import ModelLimitations from './components/ModelLimitations';
 import SystemPipeline from './components/SystemPipeline';
+import ForecastHorizon from './components/ForecastHorizon';
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -177,6 +178,29 @@ function RoadRiskLayer({ data, getRoadStyle, getCasingStyle, onEachRoadFeature }
   return null;
 }
 
+// Controller component to trigger Leaflet map resize when forecast horizon panel resizes or collapses
+function MapResizer({ isCollapsed, panelHeight, resizeSignal }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+
+    map.invalidateSize();
+
+    const t1 = setTimeout(() => map.invalidateSize(), 50);
+    const t2 = setTimeout(() => map.invalidateSize(), 150);
+    const t3 = setTimeout(() => map.invalidateSize(), 270);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [map, isCollapsed, panelHeight, resizeSignal]);
+
+  return null;
+}
+
 function App() {
   const [activeView, setActiveView] = useState('nowcast'); // 'nowcast' | 'validation'
   const [isSimulated, setIsSimulated] = useState(true);
@@ -185,6 +209,34 @@ function App() {
   const [liveRainfallData, setLiveRainfallData] = useState(null);
   const [terrainInfo, setTerrainInfo] = useState(null);
   const [forecastOffset, setForecastOffset] = useState(0);
+
+  const [isForecastCollapsed, setIsForecastCollapsed] = useState(() => {
+    try {
+      const saved = localStorage.getItem('floodNowcast.forecastPanelCollapsed');
+      return saved !== null ? saved === 'true' : false;
+    } catch {
+      return false;
+    }
+  });
+
+  const [forecastPanelHeight, setForecastPanelHeight] = useState(() => {
+    try {
+      const saved = localStorage.getItem('floodNowcast.forecastPanelHeight');
+      if (saved !== null) {
+        const parsed = parseInt(saved, 10);
+        if (!isNaN(parsed) && parsed >= 44 && parsed <= 350) {
+          return parsed;
+        }
+      }
+    } catch {}
+    return 160;
+  });
+
+  const [resizeSignal, setResizeSignal] = useState(0);
+
+  const handlePanelResize = useCallback(() => {
+    setResizeSignal((prev) => prev + 1);
+  }, []);
   
   const [forecast, setForecast] = useState(null);
   const [roadsGeojson, setRoadsGeojson] = useState(null);
@@ -945,6 +997,9 @@ function App() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
+            {/* Map resizer for forecast panel collapse/resize events */}
+            <MapResizer isCollapsed={isForecastCollapsed} panelHeight={forecastPanelHeight} resizeSignal={resizeSignal} />
+
             {/* Map viewport tracker for bbox-based road loading */}
             <MapViewportTracker onBoundsChange={handleBoundsChange} />
 
@@ -984,7 +1039,7 @@ function App() {
                     </div>
                     
                     <div style={{marginTop: 5, fontSize: '0.8rem', color: '#64748b'}}>
-                      <strong>Flood Model:</strong> {props.model_version || 'GRID_HYDROLOGY_V1'} <br/>
+                      <strong>Flood Model:</strong> GRID_HYDROLOGY_V1 <br/>
                       <strong>Calibration:</strong> COMPLETED — OCCURRENCE-BASED <br/>
                       <strong>Drainage Capacity:</strong> UNKNOWN (Data Unavailable) <br/>
                       <strong>Flood Depth Reduction:</strong> NONE (0.0 cm)
@@ -1022,57 +1077,17 @@ function App() {
       </div>
 
       {/* FOOTER TIMELINE */}
-      <footer className="footer-timeline" style={{ height: 'auto', padding: '12px 20px' }}>
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <div>
-            <div className="card-title" style={{margin: 0, color: '#f8fafc', fontWeight: '800', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '8px'}}>
-              MODELLED FLOOD-RISK HORIZON
-            </div>
-            <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '2px' }}>
-              Forecast values are modelled estimates, not independently validated predictions.
-            </div>
-          </div>
-          <span className="tag-simulated" style={{background: '#1d4ed8', border: 'none', color: '#ffffff'}}>MODELLED FORECAST</span>
-        </div>
-
-        <div className="timeline-track" style={{ marginTop: '12px' }}>
-          <div className="timeline-line"></div>
-          {forecast.forecast.map((node, i) => {
-            const color = getStatusColor(node.status);
-            // Derive numeric offset for node (0, 30, 60, 90, 120, 150, 180)
-            const nodeOffset = i * 30;
-            const isSelected = forecastOffset === nodeOffset;
-            
-            return (
-              <div 
-                className="timeline-node" 
-                key={i} 
-                onClick={() => setForecastOffset(nodeOffset)}
-                style={{ 
-                  cursor: 'pointer',
-                  transform: isSelected ? 'scale(1.1)' : 'scale(1)',
-                  transition: 'transform 0.2s'
-                }}
-                title={`Click to set forecast to +${nodeOffset} minutes`}
-              >
-                <div 
-                  className="timeline-dot" 
-                  style={{
-                    borderColor: isSelected ? '#38bdf8' : color, 
-                    backgroundColor: color === '#ffffff' ? '#ffffff' : (isSelected ? '#38bdf8' : undefined),
-                    boxShadow: isSelected ? '0 0 12px #38bdf8' : 'none'
-                  }}
-                ></div>
-                <div style={{fontWeight: isSelected ? 800 : 700, color: isSelected ? '#38bdf8' : color, fontSize: '0.8rem'}}>{node.status}</div>
-                <div className="timeline-label" style={{ fontWeight: isSelected ? 'bold' : 'normal', color: isSelected ? '#ffffff' : '#94a3b8' }}>
-                  {node.time === '0m' ? 'NOW' : node.time}
-                </div>
-                <div className="timeline-label">{node.depth.toFixed(1)} cm</div>
-              </div>
-            );
-          })}
-        </div>
-      </footer>
+      <ForecastHorizon
+        forecast={forecast}
+        forecastOffset={forecastOffset}
+        setForecastOffset={setForecastOffset}
+        getStatusColor={getStatusColor}
+        isCollapsed={isForecastCollapsed}
+        setIsCollapsed={setIsForecastCollapsed}
+        panelHeight={forecastPanelHeight}
+        setPanelHeight={setForecastPanelHeight}
+        onResize={handlePanelResize}
+      />
         </>
       )}
 

@@ -196,38 +196,75 @@ class ValidationService:
         }
 
     def get_temporal_gauge_validation(self) -> Dict[str, Any]:
-        """Return dynamic temporal gauge validation audit and verified CAG reservoir dataset metrics."""
-        from app.services.temporal_observation_service import TemporalObservationService
-        temporal_svc = TemporalObservationService()
-        audit_summary = temporal_svc.get_temporal_audit_summary()
-        stats = audit_summary.get("reservoir_statistics", {})
-        
+        """Return dynamic temporal validation separated into reservoir and urban gates."""
+        from app.services.temporal_reservoir_validation import TemporalReservoirValidationEngine
+        from app.services.urban_flood_temporal_validation import run_urban_flood_temporal_validation
+
+        res_engine = TemporalReservoirValidationEngine()
+        res_data = res_engine.run_validation()
+        urban_data = run_urban_flood_temporal_validation()
+
+        reservoir_gate = {
+            "status": res_data.get("scientific_status", "VALIDATED — TEMPORAL HOLDOUT"),
+            "dataset": res_data.get("dataset"),
+            "source_agency": res_data.get("source_agency"),
+            "source_document": res_data.get("source_document"),
+            "source_section": res_data.get("source_section"),
+            "source_url": res_data.get("source_url"),
+            "observation_count": res_data.get("observation_count", 23),
+            "calibration_observations": res_data.get("calibration_count", 16),
+            "validation_observations": res_data.get("validation_count", 7),
+            "observational": res_data.get("observational", True),
+            "synthetic": res_data.get("synthetic", False),
+            "direct_model_comparison": res_data.get("direct_model_comparison", True),
+            "calibrated_parameters": res_data.get("calibrated_parameters", {}),
+            "metrics": res_data.get("holdout_metrics", {}),
+            "simulated_series": res_data.get("simulated_series", [])
+        }
+
+        urban_gate = {
+            "status": urban_data.get("scientific_status", "NOT VALIDATED — Sub-Daily Urban Flood-Depth Time-Series Unavailable"),
+            "short_status": urban_data.get("status", "NOT VALIDATED"),
+            "dataset": urban_data.get("dataset", "N/A (Sub-Daily Urban Depth Time-Series Unavailable)"),
+            "source": urban_data.get("source"),
+            "observations": urban_data.get("observation_count", 0),
+            "matched": urban_data.get("matched_count", 0),
+            "unmatched": urban_data.get("unmatched_count", 0),
+            "calibration_observations": urban_data.get("calibration_count", 0),
+            "holdout_observations": urban_data.get("holdout_count", 0),
+            "holdout_matched_observations": urban_data.get("holdout_matched_count", 0),
+            "metrics": urban_data.get("metrics", {}),
+            "threshold_metrics": urban_data.get("threshold_metrics", {}),
+            "peak_metrics": urban_data.get("peak_metrics", {}),
+            "counts": urban_data.get("counts", {}),
+            "quality_control": urban_data.get("quality_control", {}),
+            "limitations": urban_data.get("limitations", []),
+            "gap_analysis_reference": urban_data.get("gap_analysis_reference", "data/validation/results/urban_flood_depth_temporal_gap_analysis.md"),
+            "reason": urban_data.get("reason")
+        }
+
         return {
-            "status": "PARTIALLY_VALIDATED",
-            "temporal_hydrological_observations": "AVAILABLE",
+            "temporal_reservoir_gauge_gate": reservoir_gate,
+            "urban_flood_depth_temporal_gate": urban_gate,
+            "status": res_data.get("status"),
+            "validation_type": res_data.get("validation_type"),
+            "scientific_status": res_data.get("scientific_status"),
+            "dataset": res_data.get("dataset"),
+            "source": res_data.get("source_agency"),
+            "source_agency": res_data.get("source_agency"),
+            "observation_count": res_data.get("observation_count"),
+            "calibration_observations": res_data.get("calibration_count"),
+            "validation_observations": res_data.get("validation_count"),
+            "observational": res_data.get("observational"),
+            "synthetic": res_data.get("synthetic"),
+            "direct_model_comparison": res_data.get("direct_model_comparison", True),
+            "metrics": res_data.get("holdout_metrics"),
+            "scope": res_data.get("scope"),
             "urban_flood_depth_temporal_validation": "NOT_VALIDATED",
-            "adyar_river_gauge_validation": "NOT_VALIDATED",
-            "street_flood_depth_validation": "NOT_VALIDATED",
-            "reservoir_temporal_validation": "AVAILABLE",
-            "dataset": "Chembarambakkam Tank — Dec 1–2, 2015",
-            "observation_count": audit_summary.get("observation_count", 10),
-            "source_type": "GOVERNMENT_REPORT",
-            "source_agency": "CAG / WRD",
-            "observational": True,
-            "synthetic": False,
-            "direct_model_comparison": False,
-            "reservoir_metrics": {
-                "observed_peak_water_level_ft": stats.get("observed_peak_water_level_ft", 23.40),
-                "observed_peak_timestamps": stats.get("observed_peak_timestamps", ["2015-12-01T20:00:00Z", "2015-12-02T00:00:00Z"]),
-                "minimum_water_level_ft": stats.get("minimum_water_level_ft", 22.08),
-                "water_level_rise_ft": stats.get("water_level_rise_ft", 1.32),
-                "maximum_inflow_cusec": stats.get("maximum_inflow_cusec", 31000),
-                "maximum_outflow_cusec": stats.get("maximum_outflow_cusec", 29000)
-            },
-            "provenance_classifications": audit_summary.get("provenance_classifications", {}),
-            "observations": temporal_svc.get_observations(),
-            "reason": "Verified timestamped reservoir observations exist (CAG / WRD Report), but they are not direct urban flood-depth gauge observations.",
+            "reason": res_data.get("reason"),
+            "simulated_series": res_data.get("simulated_series"),
             "data_audit_reference": "docs/temporal_gauge_data_audit.md"
         }
+
 
 

@@ -1,0 +1,48 @@
+{
+  "status": "NOT_VALIDATED",
+  "reason": "Exhaustive research confirms no legitimate sub-daily flood-depth gauge time-series observations are publicly available for the Chennai 2015 storm event.",
+  "dataset": "N/A (Public Sub-Daily Depth Gauge Time-Series Unavailable)",
+  "source": "Exhaustive Data Audit (GCC, WRD, TNSDMA, CMWSSB, data.gov.in, IMD, CWC, IIT Madras, Zenodo, HydroShare)",
+  "stations": 0,
+  "observations": 0,
+  "events": 0,
+  "native_timestep_minutes": null,
+  "time_start": null,
+  "time_end": null,
+  "calibration_observations": 0,
+  "validation_observations": 0,
+  "independent_events": 0,
+  "metrics": {
+    "mae_cm": null,
+    "rmse_cm": null,
+    "bias_cm": null,
+    "median_ae_cm": null,
+    "r2_score": null,
+    "pearson_r": null,
+    "spearman_rho": null,
+    "nse": null,
+    "kge": null,
+    "peak_observed_cm": null,
+    "peak_predicted_cm": null,
+    "peak_depth_error_cm": null,
+    "peak_timing_error_hours": null,
+    "underprediction_rate_pct": null,
+    "overprediction_rate_pct": null
+  },
+  "horizon_metrics": {},
+  "threshold_metrics": {},
+  "quality_control": {
+    "missing_timestamps": 0,
+    "duplicate_timestamps": 0,
+    "negative_depths": 0,
+    "impossible_depths": 0,
+    "outliers_flagged": 0
+  },
+  "limitations": [
+    "No public sub-daily urban flood depth gauge time-series dataset exists for the Chennai 2015 event.",
+    "OpenCity 192 spatial depth points lack sub-daily timestamps and serve exclusively as spatial numerical depth validation.",
+    "Reservoir level and rainfall time-series cannot be substituted for street flood-depth gauge observations.",
+    "Synthetic data generation and conversion of hydrodynamic model outputs to observations are strictly prohibited."
+  ],
+  "data_audit_reference": "docs/temporal_gauge_data_audit.md"
+}

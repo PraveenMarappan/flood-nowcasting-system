@@ -2,7 +2,7 @@
 --- /api/health ---
 {
   "status": "Running",
-  "uptime_seconds": 83,
+  "uptime_seconds": 344,
   "service": "Chennai Flood Nowcast API"
 }
 
@@ -55,14 +55,14 @@
   "unit": "mm/hr",
   "latitude": 13.0827,
   "longitude": 80.2707,
-  "data_timestamp": "2026-09-26T00:30:00.000Z",
-  "retrieved_at": "2026-09-26T06:05:13.446043Z"
+  "data_timestamp": "2026-09-28T06:30:00.000Z",
+  "retrieved_at": "2026-09-28T12:13:19.558809Z"
 }
 
 --- /api/data-status ---
 {
   "overall_health": "OK",
-  "data_confidence": "MEDIUM",
+  "data_confidence": "HIGH",
   "sources": {
     "rainfall": {
       "status": "REAL",
@@ -73,18 +73,18 @@
       "source": "USGS SRTM 1 Arc-Second Global (~30m)"
     },
     "drainage": {
-      "status": "PARTIAL / NOT VERIFIED",
+      "status": "UNAVAILABLE",
       "geometry_available": true,
       "hydraulic_data_available": false,
-      "used_in_flood_model": false,
-      "drainage_mode": "GEOMETRIC_ONLY"
+      "used_in_flood_model": true,
+      "drainage_mode": "GEOMETRIC_PROXIMITY_DIAGNOSTIC"
     },
     "flood_depth": {
       "status": "MODELLED",
       "model_version": "GRID_HYDROLOGY_V1",
       "model_type": "GRID-BASED HYDROLOGICAL FLOOD-RISK ESTIMATE",
-      "calibration_status": "NOT_CALIBRATED",
-      "validation_status": "NOT_VALIDATED"
+      "calibration_status": "COMPLETED \u2014 OCCURRENCE-BASED",
+      "validation_status": "IMPLEMENTED \u2014 PARTIALLY VALIDATED"
     },
     "forecast": {
       "status": "MODELLED",
@@ -99,9 +99,9 @@
   "status": "MODELLED",
   "source": "Grid-Based Hydrological Flood Model",
   "model_version": "GRID_HYDROLOGY_V1",
-  "calibration_status": "NOT_CALIBRATED",
+  "calibration_status": "COMPLETED \u2014 OCCURRENCE-BASED",
   "validation_status": "NOT_VALIDATED",
-  "timestamp": "2026-09-26T06:05:37.179028Z",
+  "timestamp": "2026-09-28T12:13:29.813028Z",
   "location": {
     "latitude": 13.0827,
     "longitude": 80.2707
@@ -119,14 +119,17 @@
   "risk_level": "NORMAL",
   "drainage_used": false,
   "drainage": {
-    "status": "PARTIAL",
-    "capacity_status": "UNAVAILABLE",
+    "status": "AVAILABLE",
+    "full_network_mode": "GEOMETRIC_ONLY",
+    "pilot_hydraulic_mode": "HYDRAULIC MODEL IMPLEMENTED \u2014 NOT VALIDATED",
+    "capacity_status": "MODELLED_DIAGNOSTIC",
     "engineering_parameters_available": false,
     "numerical_influence": "NOT_COMPUTABLE",
     "proxy_mode_enabled": false,
     "drainage_used": false,
     "hydraulic_coupling": "UNAVAILABLE",
-    "engineering_parameters": "UNAVAILABLE"
+    "engineering_parameters": "UNAVAILABLE",
+    "drainage_effect_on_flood_depth": 0.0
   },
   "provenance": {
     "model_version": "GRID_HYDROLOGY_V1",
@@ -143,7 +146,7 @@
     "drainage_mode": "GEOMETRIC_ONLY",
     "hydraulic_coupling": "UNAVAILABLE",
     "validation_status": "NOT_VALIDATED",
-    "calibration_status": "NOT_CALIBRATED",
+    "calibration_status": "COMPLETED \u2014 OCCURRENCE-BASED",
     "forcing_status": "REAL",
     "is_simulated": false,
     "provenance_map": {
@@ -151,9 +154,9 @@
       "dem_elevation": "REAL",
       "flow_direction": "DERIVED",
       "flow_accumulation": "DERIVED",
-      "runoff_coefficients": "ASSUMED",
+      "runoff_coefficients": "CALIBRATED",
       "drainage_capacity": "UNKNOWN",
-      "flood_depth_calibration": "NOT_CALIBRATED",
+      "flood_depth_calibration": "COMPLETED \u2014 OCCURRENCE-BASED",
       "historical_event_validation": "NOT_VALIDATED"
     }
   }
@@ -207,26 +210,58 @@
   "is_simulated": true,
   "rainfall_input_mm": 0.0,
   "drainage": {
-    "status": "PARTIAL",
-    "capacity_status": "UNAVAILABLE",
+    "status": "AVAILABLE",
+    "full_network_mode": "GEOMETRIC_ONLY",
+    "pilot_hydraulic_mode": "HYDRAULIC MODEL IMPLEMENTED \u2014 NOT VALIDATED",
+    "capacity_status": "MODELLED_DIAGNOSTIC",
     "engineering_parameters_available": false,
     "numerical_influence": "NOT_COMPUTABLE",
     "proxy_mode_enabled": false,
     "drainage_used": false,
     "hydraulic_coupling": "UNAVAILABLE",
-    "engineering_parameters": "UNAVAILABLE"
+    "engineering_parameters": "UNAVAILABLE",
+    "drainage_effect_on_flood_depth": 0.0
   },
   "validation_status": "NOT_VALIDATED"
 }
 
 --- /api/drainage/status ---
 {
-  "status": "PARTIAL",
-  "geometry_available": true,
-  "hydraulic_data_available": false,
-  "engineering_parameters_available": false,
-  "used_in_flood_model": false,
-  "source": "OpenCity / Greater Chennai Corporation",
-  "dataset": "Chennai Storm Water Drains - SWD - Map 2023",
-  "feature_count": 10255
+  "status": "HYDRAULIC MODEL IMPLEMENTED \u2014 NOT VALIDATED",
+  "mode": "PILOT_HYDRAULIC_COUPLING",
+  "network_features": 10255,
+  "full_network_mode": "GEOMETRIC_ONLY",
+  "pilot_mode": "HYDRAULIC_MODEL",
+  "pilot_catchment": {
+    "name": "Adyar / Zone 10 Pilot Catchment",
+    "feature_count": 725,
+    "bbox": [
+      80.2,
+      13.0,
+      80.26,
+      13.04
+    ]
+  },
+  "engineering_data": {
+    "measured": false,
+    "assumed": true,
+    "provenance": "ASSUMED_DESIGN_STANDARD"
+  },
+  "hydraulic_model": "MANNING_OPEN_CHANNEL_BOX_CULVERT",
+  "hydraulic_validation": "NOT_VALIDATED",
+  "parameters": {
+    "width_m": 0.6,
+    "height_m": 0.75,
+    "manning_n": 0.015,
+    "default_slope": 0.001
+  },
+  "parameter_provenance": "ASSUMED_DESIGN_STANDARD",
+  "slope_provenance": "DERIVED_FROM_DEM",
+  "limitations": [
+    "Full 10,255 line network lacks measured invert elevations, conduit cross-sections, and Manning roughness.",
+    "Pilot catchment uses assumed GCC engineering design standards (0.60m x 0.75m RC box culvert, n=0.015).",
+    "Slope is derived from DEM surface elevation gradients, not measured pipe invert slopes.",
+    "Zero in-drain flow velocity or water level gauge observations exist for hydraulic validation.",
+    "Proximity to drains does not artificially reduce surface flood depth."
+  ]
 }

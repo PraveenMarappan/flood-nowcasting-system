@@ -107,12 +107,11 @@ body {
 }
 
 .footer-timeline {
-  height: 120px;
   background-color: var(--panel-bg);
   border-top: 1px solid var(--border-color);
-  padding: 15px 20px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .timeline-track {

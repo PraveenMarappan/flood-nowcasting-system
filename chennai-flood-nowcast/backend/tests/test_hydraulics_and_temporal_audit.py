@@ -94,11 +94,12 @@ def test_temporal_gauge_api():
     response = client.get("/api/validation/temporal-gauge")
     assert response.status_code == 200
     data = response.json()
-    assert data["status"] == "PARTIALLY_VALIDATED"
-    assert data["temporal_hydrological_observations"] == "AVAILABLE"
+    assert data["status"] == "VALIDATED"
+    assert data["validation_type"] == "TEMPORAL_RESERVOIR_HOLDOUT"
     assert data["urban_flood_depth_temporal_validation"] == "NOT_VALIDATED"
-    assert data["observation_count"] == 10
+    assert data["observation_count"] == 23
     assert data["source_agency"] == "CAG / WRD"
+
 
 def test_drainage_status_api():
     """Test /api/drainage/status endpoint returns required dynamic payload."""
